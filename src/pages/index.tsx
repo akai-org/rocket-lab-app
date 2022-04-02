@@ -26,7 +26,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Heading>Main Page</Heading>
-      <a href="/loggedin">Loggedin Page</a>
+      <a href="/loggedIn">Loggedin Page</a>
       <br />
       <a href="/api/auth/logout">Logout</a>
     </>
