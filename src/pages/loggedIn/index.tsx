@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import { Heading, Text, Container } from '@chakra-ui/react'
-import { Fragment } from 'react'
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
 
 interface Props {
