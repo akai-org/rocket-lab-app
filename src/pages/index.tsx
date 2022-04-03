@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { connectDB } from '../../mongo/db'
-import { Item } from '../../mongo/models/item'
+import { ItemModel } from '../../mongo/models/item'
 
 const Home: NextPage = () => {
   return (
@@ -72,17 +72,3 @@ const Home: NextPage = () => {
 }
 
 export default Home
-
-export async function getServerSideProps() {
-  await connectDB()
-
-  const item = await Item.create({
-    name: 'Piwko',
-    imageUrl: 'jakis',
-    description: 'zimniutkie, pyszniutkie',
-  })
-  console.log(item)
-  return {
-    props: {},
-  }
-}
