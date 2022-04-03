@@ -1,5 +1,20 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Environment variables
+
+For the app to run correctly, specify proper environment variables you must. 
+```dotenv
+# mogodb credentials
+MONGODB_URI=<You mongodb connection string>
+
+# Auth0 credentials
+AUTH0_SECRET=<You Auth0 secret>
+AUTH0_BASE_URL=<You Auth0 base url>
+AUTH0_ISSUER_BASE_URL=<You Auth0 issuer base url>
+AUTH0_CLIENT_ID=<You Auth0 client id>
+AUTH0_CLIENT_SECRET=<You Auth0 client secret>
+```
+
 ## Getting Started
 
 First, run the development server:
