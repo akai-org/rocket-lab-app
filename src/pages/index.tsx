@@ -5,8 +5,6 @@ import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
 const Home: NextPage = () => {
   const { user, error, isLoading } = useUser()
 
-  console.log(user)
-
   if (isLoading) {
     return <Text>Loading spinner ....</Text>
   }
@@ -23,6 +21,7 @@ const Home: NextPage = () => {
       </>
     )
   }
+
   return (
     <>
       <Heading>Main Page</Heading>
@@ -35,4 +34,4 @@ const Home: NextPage = () => {
 
 export default Home
 
-// export const getServerSideProps = withPageAuthRequired()
+export const getServerSideProps = withPageAuthRequired()
