@@ -1,10 +1,9 @@
 import {
-  getSession,
   withPageAuthRequired,
   WithPageAuthRequiredOptions,
 } from '@auth0/nextjs-auth0'
 import { Box, ListItem, UnorderedList } from '@chakra-ui/react'
-import { NextPage, GetServerSideProps } from 'next'
+import { NextPage } from 'next'
 import { connectDB } from '../../../mongo/db'
 import { User, userModel } from '../../../mongo/models/user'
 

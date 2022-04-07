@@ -18,7 +18,7 @@ const Home: NextPage = () => {
     return (
       <>
         <Text>Your are at MainPage but not authenticated. Please login.</Text>
-        <a href="/api/auth/login">Login</a>
+        <Link href="/api/auth/login">Login</Link>
       </>
     )
   }
@@ -26,9 +26,9 @@ const Home: NextPage = () => {
   return (
     <>
       <Heading>Main Page</Heading>
-      <a href="/loggedIn">Loggedin Page</a>
+      <Link href="/loggedIn">Loggedin Page</Link>
       <br />
-      <a href="/api/auth/logout">Logout</a>
+      <Link href="/api/auth/logout">Logout</Link>
       <Link href="/management">Management</Link>
     </>
   )

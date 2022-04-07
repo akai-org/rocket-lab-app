@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import { Heading, Text, Container } from '@chakra-ui/react'
-import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
+import { useUser } from '@auth0/nextjs-auth0'
+import Link from 'next/link'
 
 interface Props {
   exampleData: {
@@ -26,7 +27,7 @@ const LoggedIn: NextPage<Props> = ({ exampleData }) => {
         <Text>
           Your are at Loggedin Page but not authenticated. Please login.
         </Text>
-        <a href="/api/auth/login">Login</a>
+        <Link href="/api/auth/login">Login</Link>
       </>
     )
   }
@@ -40,7 +41,7 @@ const LoggedIn: NextPage<Props> = ({ exampleData }) => {
           <Text>
             Id: {element.id}, Str: {element.str}
           </Text>
-          <a href="/api/auth/logout">Logout</a>
+          <Link href="/api/auth/logout">Logout</Link>
         </>
       ))}
     </Container>
