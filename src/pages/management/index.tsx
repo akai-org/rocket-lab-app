@@ -1,3 +1,8 @@
+import {
+  getSession,
+  withPageAuthRequired,
+  WithPageAuthRequiredOptions,
+} from '@auth0/nextjs-auth0'
 import { Box, ListItem, UnorderedList } from '@chakra-ui/react'
 import { NextPage, GetServerSideProps } from 'next'
 import { connectDB } from '../../../mongo/db'
@@ -28,22 +33,24 @@ const ManagementHome: NextPage<Props> = ({ users, error }) => {
 
 export default ManagementHome
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  try {
-    await connectDB()
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps() {
+    try {
+      await connectDB()
 
-    const users = await userModel.find({}).limit(15)
+      const users = await userModel.find({}).limit(15)
 
-    return {
-      props: {
-        users: JSON.parse(JSON.stringify(users)),
-      },
+      return {
+        props: {
+          users: JSON.parse(JSON.stringify(users)),
+        },
+      }
+    } catch (error) {
+      console.log(error)
+      const errorMessage = error as Error
+      return {
+        props: { error: { message: errorMessage } },
+      }
     }
-  } catch (error) {
-    console.log(error)
-    const errorMessage = error as Error
-    return {
-      props: { error: { message: errorMessage } },
-    }
-  }
-}
+  },
+} as WithPageAuthRequiredOptions)
