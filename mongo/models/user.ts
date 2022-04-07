@@ -8,7 +8,7 @@ export interface User {
 const userSchema = new Schema<User>(
   {
     _id: { type: String, required: [true, 'Auth0 user id must be specified'] },
-    role: { default: 'reader' },
+    role: { type: String, default: 'reader' },
   },
   { _id: false }
 )
