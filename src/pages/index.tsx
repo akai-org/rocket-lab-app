@@ -4,7 +4,7 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import Link from 'next/link'
 
 const Home: NextPage = () => {
-
+  console.log('Main Page rendered')
   return (
     <>
       <Heading>Main Page</Heading>

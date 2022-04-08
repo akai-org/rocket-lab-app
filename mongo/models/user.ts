@@ -2,8 +2,10 @@ import { Schema, Model, models, model } from 'mongoose'
 
 export interface User {
   _id: string
-  role: 'reader' | 'editor' | 'admin'
+  role: Role
 }
+
+export type Role = 'reader' | 'editor' | 'admin'
 
 const userSchema = new Schema<User>(
   {
