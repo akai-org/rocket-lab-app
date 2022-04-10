@@ -6,9 +6,9 @@ import {
 import { Box } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { useState } from 'react'
-import { connectDB } from '../../../mongo/db'
-import { User, userModel } from '../../../mongo/models/user'
 import { UsersList } from '../../components/Management/usersList'
+import { connectDB } from '../../mongo/db'
+import { User, userModel } from '../../mongo/models/user'
 
 export interface Error {
   message: string

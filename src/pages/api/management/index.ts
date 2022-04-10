@@ -1,5 +1,5 @@
 import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0'
-import { User, userModel } from '../../../../mongo/models/user'
+import { userModel, User } from '../../../mongo/models/user'
 
 const neededRole = 'admin'
 
