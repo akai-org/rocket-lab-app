@@ -10,18 +10,25 @@ interface Props {
 export const UsersList: React.FC<Props> = ({ users }) => {
   const [formUsers, setFormUsers] = useState(users)
 
-  const handleSelectorChange = (id: string, value: Role) => {
+  const handleSelectorChange = (id: string, role: Role) => {
     const userIndex = formUsers.findIndex((user) => user._id === id)
     const copiedUsers = [...formUsers]
-    const userToUpdate = { ...copiedUsers.splice(userIndex, 1)[0] }
-    userToUpdate.role = value
+    const userToUpdate = { ...copiedUsers.splice(userIndex, 1)[0], role }
     copiedUsers.splice(userIndex, 0, userToUpdate)
     setFormUsers([...copiedUsers])
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+  }
 
+  const updatedUsers: User[] = []
+
+  for (const user of formUsers) {
+    const originalUser = users.find(({ _id }) => _id === user._id)
+    if (originalUser && originalUser.role !== user.role) {
+      updatedUsers.push(user)
+    }
   }
 
   const displayUsers = formUsers.map((user) => (
@@ -31,7 +38,9 @@ export const UsersList: React.FC<Props> = ({ users }) => {
   return (
     <form onSubmit={handleSubmit}>
       <UnorderedList>{displayUsers}</UnorderedList>
-      <Button type="submit">Save changes</Button>
+      <Button disabled={updatedUsers.length === 0 ? true : false} type="submit">
+        Save changes
+      </Button>
     </form>
   )
 }
