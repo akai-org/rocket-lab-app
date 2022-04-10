@@ -6,9 +6,10 @@ import { UserItem } from './userItem'
 
 interface Props {
   users: User[]
+  updateUsers: (users: User[]) => void
 }
 
-export const UsersList: React.FC<Props> = ({ users }) => {
+export const UsersList: React.FC<Props> = ({ users, updateUsers }) => {
   const [formUsers, setFormUsers] = useState(users)
 
   const handleSelectorChange = (id: string, role: Role) => {
@@ -23,11 +24,11 @@ export const UsersList: React.FC<Props> = ({ users }) => {
     console.log(updatedUsers)
     e.preventDefault()
     try {
-      const response = await fetcher('http://localhost:3000/api/management', {
+      await fetcher('http://localhost:3000/api/management', {
         method: 'PATCH',
         body: JSON.stringify(updatedUsers),
       })
-      console.log(response)
+      updateUsers(formUsers)
     } catch (error) {
       console.log(error)
     }

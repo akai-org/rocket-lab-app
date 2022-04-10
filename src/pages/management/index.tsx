@@ -2,8 +2,9 @@ import {
   withPageAuthRequired,
   WithPageAuthRequiredOptions,
 } from '@auth0/nextjs-auth0'
-import { Box, ListItem, Select, UnorderedList } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { NextPage } from 'next'
+import { useState } from 'react'
 import { connectDB } from '../../../mongo/db'
 import { User, userModel } from '../../../mongo/models/user'
 import { UsersList } from '../../components/Management/usersList'
@@ -17,12 +18,16 @@ interface Props {
   error?: Error
 }
 
+const ManagementHome: NextPage<Props> = ({ users: propsUsers, error }) => {
+  const [users, setUsers] = useState(propsUsers)
 
-const ManagementHome: NextPage<Props> = ({ users, error }) => {
+  const updateUsers = (users: User[]) => {
+    setUsers(users)
+  }
 
   return !error && users ? (
     <Box>
-      <UsersList users={users} />
+      <UsersList updateUsers={updateUsers} users={users} />
     </Box>
   ) : (
     <div>error</div>
