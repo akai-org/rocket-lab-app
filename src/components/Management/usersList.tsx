@@ -1,6 +1,7 @@
 import { Button, UnorderedList } from '@chakra-ui/react'
 import { FormEvent, useState } from 'react'
 import { Role, User } from '../../../mongo/models/user'
+import { fetcher } from '../../utils/requests'
 import { UserItem } from './userItem'
 
 interface Props {
@@ -18,8 +19,18 @@ export const UsersList: React.FC<Props> = ({ users }) => {
     setFormUsers([...copiedUsers])
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    console.log(updatedUsers)
     e.preventDefault()
+    try {
+      const response = await fetcher('http://localhost:3000/api/management', {
+        method: 'PATCH',
+        body: JSON.stringify(updatedUsers),
+      })
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const updatedUsers: User[] = []

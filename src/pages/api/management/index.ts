@@ -13,9 +13,12 @@ export default withApiAuthRequired(async function items(req, res) {
       for (const role of arrayRoles) {
         const roleUsers = users.filter((user) => user.role === role)
         const usersIds = roleUsers.map(({ _id }) => _id)
-        userModel.updateMany({ _id: { $in: usersIds } }, { role })
+        await userModel.updateMany(
+          { _id: { $in: usersIds } },
+          { role }
+        )
       }
-      res.status(200).send({ message: 'Ussers Updated successfully' })
+      res.status(200).send({ message: 'Users Updated successfully' })
     } catch (error) {
       console.log(error)
       res.status(500).send({ error })
