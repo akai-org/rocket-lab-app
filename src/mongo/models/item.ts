@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import { Schema, models, model, Model } from 'mongoose'
 
 export interface Item {
   name: string
@@ -7,7 +7,7 @@ export interface Item {
   toBuy: boolean
 }
 
-const itemSchema = new mongoose.Schema<Item>({
+const itemSchema = new Schema<Item>({
   name: { type: String, required: [true, "You must specify item's name"] },
   imageUrl: {
     type: String,
@@ -20,5 +20,4 @@ const itemSchema = new mongoose.Schema<Item>({
   },
 })
 export const ItemModel =
-  (mongoose.models.Item as mongoose.Model<Item>) ||
-  mongoose.model<Item>('Item', itemSchema)
+  (models.Item as Model<Item>) || model<Item>('Item', itemSchema)
