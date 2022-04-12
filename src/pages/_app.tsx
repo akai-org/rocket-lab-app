@@ -8,9 +8,11 @@ import store from '../store/store'
 import MobileNavigation from '../components/Navigation/MobileNavigation'
 import '../styles/globals.css'
 import { theme } from '../theme/theme'
+import { RouteGuard } from '../components/routeGuard'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const persistor = persistStore(store)
+
   return (
     <UserProvider>
       <Provider store={store}>
@@ -18,6 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ChakraProvider theme={theme}>
             <MobileNavigation />
             <Component {...pageProps} />
+            <RouteGuard>
+              <Component {...pageProps} />
+            </RouteGuard>
           </ChakraProvider>
         </PersistGate>
       </Provider>
