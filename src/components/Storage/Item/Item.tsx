@@ -15,7 +15,7 @@ import {
 const Item: React.FC<{ listType: string }> = (props) => {
   if (props.listType === 'grid') {
     return (
-      <Flex w="50%" flexDirection="column" mt="10px">
+      <Flex flexDirection="column" w="50%" mt="10px">
         <Image src="/item.png" w="80%" m="5px auto" />
         <Box textAlign="center" w="70%" m="0 auto">
           <Text fontSize="16px" fontWeight="500">
@@ -26,26 +26,27 @@ const Item: React.FC<{ listType: string }> = (props) => {
           </Text>
           <Flex flexDirection="row" justifyContent="space-around">
             <NumberInput
+              h="32px"
+              w="84px"
               borderColor="#E2E8F0"
               defaultValue={1}
-              w="84px"
               min={1}
-              h="32px"
             >
-              <NumberInputField />
+              <NumberInputField h="32px" />
               <NumberInputStepper>
                 <NumberIncrementStepper />
                 <NumberDecrementStepper />
               </NumberInputStepper>
             </NumberInput>
             <Button
+              w="32px"
+              pb="5px"
+              size="sm"
               bgColor="#FF7700"
               color="white"
-              w="29px"
-              minH="29px"
               borderRadius="6px"
               fontWeight="400"
-              fontSize="35px"
+              fontSize="30px"
             >
               +
             </Button>
@@ -56,36 +57,37 @@ const Item: React.FC<{ listType: string }> = (props) => {
   } else {
     return (
       <Flex w="95%" m="0 auto" borderBottom="2px solid #D5D5D5">
-        <Image src="/item.png" w="100px" h="100" m="auto" />
-        <Box w="70%" m="0 auto" p="20px" h="100%">
+        <Image src="/item.png" h="100" w="100px" m="auto" />
+        <Box h="100%" w="70%" m="0 auto" p="20px">
           <Text fontSize="16px" fontWeight="500">
             Sprzedam Opla
           </Text>
           <Text fontSize="12px" color="#878585">
             Sprzedam open vectra stan bdb nie gruz
           </Text>
-          <Flex flexDirection="row" mt="20px" justifyContent="space-around">
+          <Flex flexDirection="row" justifyContent="space-around" mt="20px">
             <NumberInput
+              h="32px"
               borderColor="#E2E8F0"
               defaultValue={1}
               min={1}
-              h="32px"
             >
-              <NumberInputField />
+              <NumberInputField h="32px" />
               <NumberInputStepper>
                 <NumberIncrementStepper />
                 <NumberDecrementStepper />
               </NumberInputStepper>
             </NumberInput>
             <Button
+              w="32px"
+              size="sm"
+              ml="20px"
+              pb="5px"
+              borderRadius="6px"
               bgColor="#FF7700"
               color="white"
-              w="29px"
-              minH="29px"
-              borderRadius="6px"
               fontWeight="400"
-              fontSize="35px"
-              ml="20px"
+              fontSize="30px"
             >
               +
             </Button>

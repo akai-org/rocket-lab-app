@@ -2,19 +2,21 @@ import React from 'react'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { Flex, Select, Text, ButtonGroup, Icon } from '@chakra-ui/react'
+import { sortingType } from '../ItemsList/ItemsList'
 
 const Sorting: React.FC<{
-  setListType: (type: string) => void
-  listType: string
+  setListType: (type: sortingType) => void
+  listType: sortingType
 }> = (props) => {
   return (
     <Flex
+      justifyContent="space-between"
       w="100%"
-      color="#D5D5D5"
-      mt="5px"
+      minW="300px"
+      mt="80px"
       mb="20px"
       p="0 10px"
-      justifyContent="space-between"
+      color="#D5D5D5"
     >
       <Flex flexDirection="row">
         <Text>sortuj po:</Text>
@@ -27,18 +29,18 @@ const Sorting: React.FC<{
 
       <ButtonGroup variant="outline" lineHeight="50px">
         <Icon
-          fontSize="20px"
           mr="10px"
           color={props.listType === 'grid' ? 'black' : '#C4C4C4'}
+          fontSize="20px"
           onClick={() => {
             props.setListType('grid')
           }}
           as={BsFillGridFill}
         />
         <Icon
-          fontSize="20px"
           mr="10px"
           color={props.listType === 'list' ? 'black' : '#C4C4C4'}
+          fontSize="20px"
           onClick={() => {
             props.setListType('list')
           }}
