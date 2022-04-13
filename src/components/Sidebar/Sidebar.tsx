@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { Box, Button, Flex, Icon, Link, Text } from '@chakra-ui/react'
+import { Box, Button, calc, Flex, Icon, Link, Text } from '@chakra-ui/react'
 import SidebarList from './SidebarList'
 import { IoIosSettings } from 'react-icons/io'
 
 const Sidebar = () => {
-  const sidebarHeight = Math.round(window.innerHeight) - 75
   const [isStorageActive, setIsStorageActive] = useState(false)
   const [isListActive, setIsListActive] = useState(true)
   return (
@@ -12,7 +11,7 @@ const Sidebar = () => {
       position="fixed"
       top="0"
       right="0"
-      h={sidebarHeight + 'px'}
+      h="calc(100vh - 75px)"
       w="90%"
       mt="75px"
       border="1px solid black"

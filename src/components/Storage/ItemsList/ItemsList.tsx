@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Flex } from '@chakra-ui/react'
 import Filters from '../Filters/Filters'
 import Sorting from '../Sorting/Sorting'
-import Item from '../Item/Item'
+import GridItem from '../Item/GridItem'
+import ListItem from '../Item/ListItem'
 
 export type sortingType = 'grid' | 'list'
 
@@ -17,13 +18,17 @@ const ItemsList = () => {
       mb={isFiltersOpen ? '320px' : '60px'}
     >
       <Sorting setListType={setListType} listType={listType} />
-      <Item listType={listType} />
-      <Item listType={listType} />
-      <Item listType={listType} />
-      <Item listType={listType} />
-      <Item listType={listType} />
-      <Item listType={listType} />
-      <Item listType={listType} />
+      {listType === 'grid' ? <GridItem /> : <ListItem />}
+      {listType === 'grid' ? <GridItem /> : <ListItem />}
+      {listType === 'grid' ? <GridItem /> : <ListItem />}
+      {listType === 'grid' ? <GridItem /> : <ListItem />}
+      {listType === 'grid' ? <GridItem /> : <ListItem />}
+      {listType === 'grid' ? <GridItem /> : <ListItem />}
+      {listType === 'grid' ? <GridItem /> : <ListItem />}
+      {listType === 'grid' ? <GridItem /> : <ListItem />}
+      {listType === 'grid' ? <GridItem /> : <ListItem />}
+      {listType === 'grid' ? <GridItem /> : <ListItem />}
+      {listType === 'grid' ? <GridItem /> : <ListItem />}
       <Filters setIsFiltersOpen={setIsFiltersOpen} />
     </Flex>
   )

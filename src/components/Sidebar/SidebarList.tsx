@@ -16,7 +16,13 @@ const SidebarList: React.FC<{ header: string }> = (props) => {
       borderRadius="5px"
     >
       <Flex justifyContent="space around" w="100%" lineHeight="20px">
-        <Flex w="95%" lineHeight="20px">
+        <Flex
+          w="95%"
+          lineHeight="20px"
+          onClick={() => {
+            setIsVisible(!isVisible)
+          }}
+        >
           <Icon h="16px" as={AiOutlineThunderbolt} />
           <Text ml="10px" fontSize="16px">
             {props.header}
