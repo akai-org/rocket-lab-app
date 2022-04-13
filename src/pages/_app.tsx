@@ -19,7 +19,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <PersistGate loading={null} persistor={persistor}>
           <ChakraProvider theme={theme}>
             <MobileNavigation />
-            <Component {...pageProps} />
             <RouteGuard>
               <Component {...pageProps} />
             </RouteGuard>
