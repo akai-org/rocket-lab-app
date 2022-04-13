@@ -1,4 +1,3 @@
-import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import { UserProvider } from '@auth0/nextjs-auth0'
@@ -6,6 +5,9 @@ import { Provider } from 'react-redux'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import store from '../store/store'
+import MobileNavigation from '../components/Navigation/MobileNavigation'
+import '../styles/globals.css'
+import { theme } from '../theme/theme'
 import { RouteGuard } from '../components/routeGuard'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -15,7 +17,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <UserProvider>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <ChakraProvider>
+          <ChakraProvider theme={theme}>
+            <MobileNavigation />
+            <Component {...pageProps} />
             <RouteGuard>
               <Component {...pageProps} />
             </RouteGuard>

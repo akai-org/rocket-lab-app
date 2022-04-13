@@ -1,19 +1,9 @@
 import type { NextPage } from 'next'
-import { Heading } from '@chakra-ui/react'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
-import Link from 'next/link'
+import ItemsList from '../components/Storage/ItemsList/ItemsList'
 
 const Home: NextPage = () => {
-  console.log('Main Page rendered')
-  return (
-    <>
-      <Heading>Main Page</Heading>
-      <Link href="/loggedIn">Loggedin Page</Link>
-      <br />
-      <Link href="/api/auth/logout">Logout</Link>
-      <Link href="/management">Management</Link>
-    </>
-  )
+  return <ItemsList />
 }
 
 export default Home
