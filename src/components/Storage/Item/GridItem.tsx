@@ -11,16 +11,22 @@ import {
   NumberDecrementStepper,
   Button,
 } from '@chakra-ui/react'
-const GridItem = () => {
+import { ItemProps } from '../ItemsList/ItemsList';
+
+interface Props {
+  item: ItemProps
+}
+
+const GridItem = ({ item }: Props) => {
   return (
     <Flex flexDirection="column" w="50%" mt="10px">
-      <Image src="/item.png" w="80%" m="5px auto" />
+      <Image src={item.imageUrl} w="80%" m="5px auto" alt="" />
       <Box textAlign="center" w="70%" m="0 auto">
         <Text fontSize="16px" fontWeight="500">
-          Sprzedam Opla
+          {item.name}
         </Text>
         <Text fontSize="12px" color="#878585">
-          Sprzedam open vectra stan bdb nie gruz
+          {item.description}
         </Text>
         <Flex flexDirection="row" justifyContent="space-around">
           <NumberInput

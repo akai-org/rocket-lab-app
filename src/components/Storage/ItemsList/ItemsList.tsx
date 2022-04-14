@@ -7,7 +7,18 @@ import ListItem from '../Item/ListItem'
 
 export type sortingType = 'grid' | 'list'
 
-const ItemsList = () => {
+interface Props {
+  items: ItemProps[]
+}
+
+export interface ItemProps {
+  id: string,
+  name: string,
+  description: string,
+  imageUrl: string,
+}
+
+const ItemsList = ( { items }: Props ) => {
   const [listType, setListType] = useState<sortingType>('grid')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
   return (
@@ -18,17 +29,13 @@ const ItemsList = () => {
       mb={isFiltersOpen ? '320px' : '60px'}
     >
       <Sorting setListType={setListType} listType={listType} />
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
+      {
+        items.map(item => {
+          return (listType === 'grid' ? 
+            <GridItem item={item} key={item.id}/> :
+            <ListItem item={item} key={item.id}/>)
+        })
+      }
       <Filters setIsFiltersOpen={setIsFiltersOpen} />
     </Flex>
   )
