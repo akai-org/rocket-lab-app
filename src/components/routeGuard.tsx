@@ -2,6 +2,7 @@ import { useUser } from '@auth0/nextjs-auth0'
 import { useRouter } from 'next/router'
 import { FunctionComponent, ReactNode, useEffect } from 'react'
 import { Text } from '@chakra-ui/react'
+import { preventBackToLogin } from '../utils/undo';
 
 interface Props {
   children?: ReactNode
@@ -11,6 +12,7 @@ export const RouteGuard: FunctionComponent<Props> = ({ children }) => {
   const router = useRouter()
   const { user, isLoading, error } = useUser()
 
+  preventBackToLogin(user);
   useEffect(() => {
     const protectedRouter = ['/management', '/loggedin']
 
