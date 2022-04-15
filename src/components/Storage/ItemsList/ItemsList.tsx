@@ -30,11 +30,10 @@ const ItemsList = ( { items }: Props ) => {
     >
       <Sorting setListType={setListType} listType={listType} />
       {
-        items.map(item => {
-          return (listType === 'grid' ? 
-            <GridItem item={item} key={item.id}/> :
-            <ListItem item={item} key={item.id}/>)
-        })
+        (listType === 'grid' ?
+          items.map(item => <GridItem item={item} key={item.id}/>) :
+          items.map(item => <ListItem item={item} key={item.id}/>)
+        )
       }
       <Filters setIsFiltersOpen={setIsFiltersOpen} />
     </Flex>
