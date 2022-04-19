@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Flex } from '@chakra-ui/react'
-import Filters from '../Filters/Filters'
-import Sorting from '../Sorting/Sorting'
-import GridItem from '../Item/GridItem'
-import ListItem from '../Item/ListItem'
+import Filters from './Filters/Filters'
+import Sorting from './Sorting/Sorting'
+import GridItem from './Item/GridItem'
+import ListItem from './Item/ListItem'
 
 export type sortingType = 'grid' | 'list'
 
-const ItemsList = () => {
+const MobileStorage = () => {
   const [listType, setListType] = useState<sortingType>('grid')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
   return (
@@ -26,12 +26,9 @@ const ItemsList = () => {
       {listType === 'grid' ? <GridItem /> : <ListItem />}
       {listType === 'grid' ? <GridItem /> : <ListItem />}
       {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
-      {listType === 'grid' ? <GridItem /> : <ListItem />}
       <Filters setIsFiltersOpen={setIsFiltersOpen} />
     </Flex>
   )
 }
 
-export default ItemsList
+export default MobileStorage

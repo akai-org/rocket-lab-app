@@ -5,10 +5,10 @@ import { Provider } from 'react-redux'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import store from '../store/store'
-import MobileNavigation from '../components/Navigation/MobileNavigation'
 import '../styles/globals.css'
 import { theme } from '../theme/theme'
 import { RouteGuard } from '../components/routeGuard'
+import Layout from '../components/UI/Layout'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const persistor = persistStore(store)
@@ -18,8 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ChakraProvider theme={theme}>
-            <MobileNavigation />
-            <Component {...pageProps} />
+            <Layout />
             <RouteGuard>
               <Component {...pageProps} />
             </RouteGuard>

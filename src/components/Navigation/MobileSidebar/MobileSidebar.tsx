@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Button, calc, Flex, Icon, Link, Text } from '@chakra-ui/react'
-import SidebarList from './SidebarList'
+import SidebarList from './MobileSidebarList'
 import { IoIosSettings } from 'react-icons/io'
 
 const Sidebar = () => {
