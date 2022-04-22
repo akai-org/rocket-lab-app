@@ -21,6 +21,7 @@ export interface ItemProps {
 const ItemsList = ( { items }: Props ) => {
   const [listType, setListType] = useState<sortingType>('grid')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
+
   return (
     <Flex
       flexWrap="wrap"
