@@ -10,8 +10,8 @@ const StorageSidebarList: React.FC<{ header: string }> = (props) => {
     <Flex
       flexDirection="column"
       w="92%"
-      p="10px"
       m="0 auto 15px auto"
+      p="10px"
       border={isVisible ? '1px solid #E5E5E5' : ''}
       borderRadius="6px"
       color={isVisible ? '#3F3F3F' : '#878585'}

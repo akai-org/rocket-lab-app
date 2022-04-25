@@ -17,37 +17,37 @@ import { AiOutlineSearch } from 'react-icons/ai'
 const Filters = () => {
   return (
     <Flex
+      flexDirection="column"
+      p="20px"
       borderRadius="6px"
       border="1px solid #C4C4C4"
-      p="20px"
-      flexDirection="column"
     >
       <Text fontSize="24px" fontWeight="500" color="#2D3748">
         Wyszukaj części w magazynie
       </Text>
       <Flex
         flexDirection="row"
+        justifyContent="space-between"
+        mt="15px"
         fontSize="16px"
         fontWeight="500"
-        mt="15px"
         color="#2D3748"
-        justifyContent="space-between"
       >
         <Flex flexDirection="column" w="30%">
           <Text>Nazwa</Text>
           <Flex>
             <Input
               h="40px"
+              border="1px solid #D4D4D4"
               fontWeight="400"
               placeholder="Nazwa Produktu"
-              border="1px solid #D4D4D4"
             />
             <Icon ml="10px" fontSize="30px" as={AiOutlineSearch} />
           </Flex>
         </Flex>
         <Flex flexDirection="column" w="30%">
           <Text>Kategoria</Text>
-          <Select h="40px" fontWeight="400" border="1px solid #D4D4D4">
+          <Select h="40px" border="1px solid #D4D4D4" fontWeight="400">
             <option value="materialyEksploatacyjne">
               Materiały eksploatacyjne
             </option>
@@ -67,7 +67,7 @@ const Filters = () => {
         </Flex>
       </Flex>
       <Flex justifyContent="flex-end" p="25px 0 5px 0">
-        <Button bgColor="#FF7700" w="120px" h="40px" color="white">
+        <Button w="120px" h="40px" bgColor="#FF7700" color="white">
           Zapisz
         </Button>
       </Flex>

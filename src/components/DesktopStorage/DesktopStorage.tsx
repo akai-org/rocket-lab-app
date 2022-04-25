@@ -1,14 +1,13 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import Filters from './Filters/Filters'
 import DesktopItemsList from './DesktopItemsList/DesktopItemsList'
 import StorageSidebar from './StorageSidebar/StorageSidebar'
 
-
 const DesktopStorage = () => {
   return (
-    <Flex maxW="2000px" flexDirection="row" w="100vw" m="100px auto 0 auto">
+    <Flex flexDirection="row" w="100vw" maxW="2000px" m="80px auto 0 auto">
       <StorageSidebar />
-      <Flex flexDirection="column" w="95%" p="40px">
+      <Flex w="95%" flexDirection="column" p="40px">
         <Filters />
         <DesktopItemsList />
       </Flex>

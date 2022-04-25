@@ -5,11 +5,11 @@ import StorageSidebarList from './StorageSidebarList'
 const StorageSidebar = () => {
   return (
     <Flex
-      boxShadow="0 0 10px 0.2px #DDDDDD"
-      minH="calc(100vh - 100px)"
       flexDirection="column"
       w="223px"
+      minH="calc(100vh - 80px)"
       pt="20px"
+      boxShadow="0 0 10px 0.2px #DDDDDD"
     >
       <StorageSidebarList header="Dashboard" />
       <StorageSidebarList header="Części" />

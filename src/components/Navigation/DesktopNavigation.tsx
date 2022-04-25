@@ -17,9 +17,9 @@ const DesktopNavigation = () => {
       zIndex="1"
     >
       <Flex
-        h="100px"
-        maxW="2000px"
         w="100%"
+        maxW="2000px"
+        h="80px"
         m="0 auto"
         p="0 40px"
         justifyContent="space-between"
@@ -49,13 +49,13 @@ const DesktopNavigation = () => {
         </Flex>
         <Flex alignItems="center">
           <Button
+            variant="outline"
+            h="39px"
             border={isStorageActive ? 'none' : '1px solid black'}
             borderRadius="0"
-            h="39px"
             colorScheme="black"
             fontSize="16px"
             fontWeight="normal"
-            variant="outline"
             onClick={() => {
               setIsListActive(false)
               setIsStorageActive(true)
@@ -64,15 +64,15 @@ const DesktopNavigation = () => {
             Magazyn
           </Button>
           <Button
-            border={isListActive ? 'none' : '1px solid black'}
-            borderRadius="0"
+            variant="outline"
             h="39px"
             ml="30px"
             mr="50px"
+            border={isListActive ? 'none' : '1px solid black'}
+            borderRadius="0"
             fontWeight="normal"
-            colorScheme="black"
-            variant="outline"
             fontSize="16px"
+            colorScheme="black"
             onClick={() => {
               setIsListActive(true)
               setIsStorageActive(false)
@@ -80,7 +80,7 @@ const DesktopNavigation = () => {
           >
             Lista Zakupów
           </Button>
-          <Icon fontSize="40px" mr="10px" as={FaUserCircle} />
+          <Icon as={FaUserCircle} mr="10px" fontSize="40px" />
         </Flex>
       </Flex>
     </Box>

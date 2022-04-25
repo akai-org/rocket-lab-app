@@ -57,11 +57,11 @@ const ListItem: React.FC<{
               w="27px"
               pb="5px"
               size="sm"
-              bgColor="#FF7700"
-              color="white"
               borderRadius="6px"
               fontWeight="400"
               fontSize="30px"
+              bgColor="#FF7700"
+              color="white"
             >
               +
             </Button>
@@ -71,11 +71,11 @@ const ListItem: React.FC<{
             <Button
               h="32px"
               w="120px"
-              bgColor="#FF7700"
-              color="white"
               borderRadius="6px"
               fontWeight="600"
               fontSize="14px"
+              color="white"
+              bgColor="#FF7700"
             >
               Dodaj do listy
             </Button>

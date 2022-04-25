@@ -39,11 +39,11 @@ const GridItem = () => {
           <Button
             w="32px"
             size="sm"
-            bgColor="#FF7700"
-            color="white"
             borderRadius="6px"
             fontWeight="400"
             fontSize="30px"
+            color="white"
+            bgColor="#FF7700"
           >
             +
           </Button>
