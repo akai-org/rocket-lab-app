@@ -13,6 +13,7 @@ export default withApiAuthRequired(async function items(req, res) {
     try {
       await connectDB()
 
+    
       const models = await ItemModel.find()
         .skip(+params.skip)
         .limit(+!process.env.API_MONGODB_LIMIT)

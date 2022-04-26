@@ -2,7 +2,7 @@ import { Box, Flex, Icon, Text } from '@chakra-ui/react'
 import { AiOutlineThunderbolt } from 'react-icons/ai'
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
 import { useState } from 'react'
-import SidebarListItem from './SidebarListItem'
+import SidebarListItem from './MobileSidebarListItem'
 
 const SidebarList: React.FC<{ header: string }> = (props) => {
   const [isVisible, setIsVisible] = useState(false)
@@ -14,6 +14,7 @@ const SidebarList: React.FC<{ header: string }> = (props) => {
       p="10px"
       border={isVisible ? '1px solid black' : ''}
       borderRadius="5px"
+      color={isVisible ? '#3F3F3F' : '#878585'}
     >
       <Flex justifyContent="space around" w="100%" lineHeight="20px">
         <Flex

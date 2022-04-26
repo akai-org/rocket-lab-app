@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Flex,
   Image,
@@ -11,7 +10,7 @@ import {
   NumberDecrementStepper,
   Button,
 } from '@chakra-ui/react'
-import { ItemProps } from '../ItemsList/ItemsList';
+import { ItemProps } from '../../../../utils/types/ItemProps'
 
 interface Props {
   item: ItemProps
@@ -19,10 +18,10 @@ interface Props {
 
 const GridItem = ({ item }: Props) => {
   return (
-    <Flex flexDirection="column" w="50%" mt="10px">
-      <Image src={item.imageUrl} w="80%" m="5px auto" alt="" />
+    <Flex flexDirection="column" maxW="190px" m="10px auto 0 auto">
+      <Image src={item.imageUrl} w="154px" m="5px auto" />
       <Box textAlign="center" w="70%" m="0 auto">
-        <Text fontSize="16px" fontWeight="500">
+        <Text fontSize="16px" fontWeight="400">
           {item.name}
         </Text>
         <Text fontSize="12px" color="#878585">
@@ -44,13 +43,12 @@ const GridItem = ({ item }: Props) => {
           </NumberInput>
           <Button
             w="32px"
-            pb="5px"
             size="sm"
-            bgColor="#FF7700"
-            color="white"
             borderRadius="6px"
             fontWeight="400"
             fontSize="30px"
+            color="white"
+            bgColor="#FF7700"
           >
             +
           </Button>

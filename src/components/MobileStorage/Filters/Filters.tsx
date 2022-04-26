@@ -115,7 +115,6 @@ const Filters: React.FC<{ setIsFiltersOpen: (isOpen: boolean) => void }> = (
             h="32px"
             m="auto"
             mr="0"
-            pb="5px"
             bgColor="#FF7700"
             color="white"
             fontSize="14px"
