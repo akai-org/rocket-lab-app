@@ -3,7 +3,6 @@ import { connectDB } from '../../../mongo/db'
 import { ItemModel } from '../../../mongo/models/item'
 
 export default withApiAuthRequired(async function items(req, res) {
-  console.log('Firing API method')
   if (req.method === 'GET') {
     if (!process.env.API_MONGODB_LIMIT) {
       throw new Error('No API_MONGODB_LIMIT env specified')

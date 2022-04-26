@@ -1,6 +1,7 @@
 import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0'
 import { connectDB } from '../../../mongo/db'
 import { userModel as UserModel, User } from '../../../mongo/models/user'
+import { Credentials } from '../../../utils/credentials'
 
 const neededRole = 'admin'
 
@@ -9,16 +10,7 @@ const neededRole = 'admin'
 export default withApiAuthRequired(async function items(req, res) {
   if (req.method === 'PATCH') {
     try {
-      const session = getSession(req, res)
-      if (!session) {
-        throw new Error('Unauthorized access')
-      }
-
-      // Getting user info
-      const validId = (session.user.sub as string).split('|')[1]
-      const user = await UserModel.findById<User>(validId)
-      if (user?.role !== neededRole) throw new Error('Unauthorized access')
-
+      await Credentials.withAdmin(req, res)
       // updating users
       const users = JSON.parse(req.body) as User[]
       const roles = new Set()
