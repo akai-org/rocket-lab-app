@@ -1,34 +1,40 @@
 import {
-  Box,
-  Button,
   Flex,
   Image,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
+  Text,
+  Box,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  Text,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Button,
 } from '@chakra-ui/react'
-import { ItemProps } from '../ItemsList/ItemsList';
+import {ItemProps} from '../../../utils/types/ItemProps'
 
 interface Props {
   item: ItemProps
 }
 
-const ListItem = ({ item }: Props) => {
+const GridItem = ({ item }: Props) => {
   return (
-    <Flex w="95%" m="0 auto" borderBottom="2px solid #D5D5D5">
-      <Image src={item.imageUrl} h="100" w="100px" m="auto" alt="" />
-      <Box h="100%" w="70%" m="0 auto" p="20px">
+    <Flex flexDirection="column" w="50%" maxW="200px" m="10px auto 0 auto">
+      <Image src={item.imageUrl} w="80%" m="5px auto" alt="" />
+      <Box textAlign="center" w="70%" m="0 auto">
         <Text fontSize="16px" fontWeight="500">
           {item.name}
         </Text>
         <Text fontSize="12px" color="#878585">
           {item.description}
         </Text>
-        <Flex flexDirection="row" justifyContent="space-around" mt="20px">
-          <NumberInput h="32px" borderColor="#E2E8F0" defaultValue={1} min={1}>
+        <Flex flexDirection="row" justifyContent="space-around">
+          <NumberInput
+            h="32px"
+            w="84px"
+            borderColor="#E2E8F0"
+            defaultValue={1}
+            min={1}
+          >
             <NumberInputField h="32px" />
             <NumberInputStepper>
               <NumberIncrementStepper />
@@ -37,12 +43,11 @@ const ListItem = ({ item }: Props) => {
           </NumberInput>
           <Button
             w="32px"
-            size="sm"
-            ml="20px"
             pb="5px"
-            borderRadius="6px"
+            size="sm"
             bgColor="#FF7700"
             color="white"
+            borderRadius="6px"
             fontWeight="400"
             fontSize="30px"
           >
@@ -54,4 +59,4 @@ const ListItem = ({ item }: Props) => {
   )
 }
 
-export default ListItem
+export default GridItem
