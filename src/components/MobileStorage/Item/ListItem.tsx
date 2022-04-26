@@ -10,7 +10,7 @@ import {
   NumberInputStepper,
   Text,
 } from '@chakra-ui/react'
-import { ItemProps } from '../MobileStorage';
+import { ItemProps } from '../../../utils/types/ItemProps'
 
 interface Props {
   item: ItemProps

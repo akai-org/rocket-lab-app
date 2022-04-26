@@ -4,21 +4,14 @@ import Filters from './Filters/Filters'
 import Sorting from './Sorting/Sorting'
 import GridItem from './Item/GridItem'
 import ListItem from './Item/ListItem'
-
-export type sortingType = 'grid' | 'list'
+import { ItemProps } from '../../utils/types/ItemProps'
+import { sortingType } from '../../utils/types/Sorting'
 
 interface Props {
   items: ItemProps[]
 }
 
-export interface ItemProps {
-  id: string,
-  name: string,
-  description: string,
-  imageUrl: string,
-}
-
-const MobileStorage = ( { items }: Props ) => {
+const MobileStorage = ({ items }: Props) => {
   const [listType, setListType] = useState<sortingType>('grid')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
 
@@ -30,12 +23,9 @@ const MobileStorage = ( { items }: Props ) => {
       mb={isFiltersOpen ? '320px' : '60px'}
     >
       <Sorting setListType={setListType} listType={listType} />
-      {
-        (listType === 'grid' ?
-          items.map(item => <GridItem item={item} key={item.id}/>) :
-          items.map(item => <ListItem item={item} key={item.id}/>)
-        )
-      }
+      {listType === 'grid'
+        ? items.map((item) => <GridItem item={item} key={item.id} />)
+        : items.map((item) => <ListItem item={item} key={item.id} />)}
       <Filters setIsFiltersOpen={setIsFiltersOpen} />
     </Flex>
   )

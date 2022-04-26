@@ -11,33 +11,35 @@ import {
   NumberDecrementStepper,
   Button,
 } from '@chakra-ui/react'
+import { useState } from 'react'
+import { ItemProps } from '../../../../utils/types/ItemProps'
 
-const ListItem: React.FC<{
-  quantity: number
-  description: string
-  name: string
-  url: string
-}> = (props) => {
+interface Props {
+  item: ItemProps
+}
+
+const ListItem = ({ item }: Props) => {
+  const [quantity, setQuantity] = useState(0)
   return (
     <Tr fontSize="14px" h="40px">
       <Td>
         <Flex justifyContent="flex-start">
-          <Image src={props.url} w="40px" h="40px" />
+          <Image src={item.imageUrl} w="40px" h="40px" />
           <Text lineHeight="40px" ml="10px">
-            {props.name}
+            {item.name}
           </Text>
         </Flex>
       </Td>
       <Td>
-        <Text>{props.description}</Text>
+        <Text>{item.description}</Text>
       </Td>
       <Td textAlign="right">
-        <Text color={props.quantity ? 'inherit' : 'red.500'}>
-          {props.quantity ? props.quantity : 'brak w magazynie'}
+        <Text color={quantity ? 'inherit' : 'red.500'}>
+          {quantity ? quantity : 'brak w magazynie'}
         </Text>
       </Td>
       <Td>
-        {props.quantity ? (
+        {quantity ? (
           <Flex flexDirection="row" justifyContent="flex-end">
             <NumberInput
               h="32px"

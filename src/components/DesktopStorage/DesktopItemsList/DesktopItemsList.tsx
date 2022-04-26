@@ -3,9 +3,14 @@ import React, { useState } from 'react'
 import ListItem from './Item/ListItem'
 import GridItem from './Item/GridItem'
 import Sorting from './Sorting/Sorting'
-export type sortingType = 'grid' | 'list'
+import { sortingType } from '../../../utils/types/Sorting'
+import { ItemProps } from '../../../utils/types/ItemProps'
 
-const DesktopItemsList = () => {
+interface Props {
+  items: ItemProps[]
+}
+
+const DesktopItemsList = ({ items }: Props) => {
   const [listType, setListType] = useState<sortingType>('grid')
   return (
     <Box
@@ -22,59 +27,24 @@ const DesktopItemsList = () => {
               <Tr fontSize="16px" fontWeight="700">
                 <Th minW="300px">NAZWA</Th>
                 <Th w="100%">OPIS</Th>
-                <Th textAlign="right" minW="170px">ILOŚĆ SZTUK</Th>
+                <Th textAlign="right" minW="170px">
+                  ILOŚĆ SZTUK
+                </Th>
                 <Th></Th>
               </Tr>
             </Thead>
             <Tbody>
-              <ListItem
-                quantity={2}
-                description="Super mocny silnik odrzutowy"
-                name="Silnik odrzutowy Fiat 126p"
-                url="/item.png"
-              />
-              <ListItem
-                quantity={0}
-                description="Super mocny silnik odrzutowy"
-                name="Silnik odrzutowy Fiat 126p"
-                url="/item.png"
-              />
-              <ListItem
-                quantity={2}
-                description="Super mocny silnik odrzutowy"
-                name="Silnik odrzutowy Fiat 126p"
-                url="/item.png"
-              />
-              <ListItem
-                quantity={2}
-                description="Super mocny silnik odrzutowy"
-                name="Silnik odrzutowy Fiat 126p"
-                url="/item.png"
-              />
-              <ListItem
-                quantity={2}
-                description="Super mocny silnik odrzutowy"
-                name="Silnik odrzutowy Fiat 126p"
-                url="/item.png"
-              />
+              {items.map((item) => (
+                <ListItem item={item} key={item.id} />
+              ))}
             </Tbody>
           </Table>
         </Flex>
       ) : (
         <Flex flexWrap="wrap" p="20px">
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
+          {items.map((item) => (
+            <GridItem item={item} key={item.id} />
+          ))}
         </Flex>
       )}
     </Box>
