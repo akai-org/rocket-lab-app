@@ -1,5 +1,4 @@
 import {
-  getSession,
   withPageAuthRequired,
   WithPageAuthRequiredOptions,
 } from '@auth0/nextjs-auth0'
@@ -9,6 +8,7 @@ import { useState } from 'react'
 import { UsersList } from '../../components/Management/usersList'
 import { connectDB } from '../../mongo/db'
 import { User, userModel } from '../../mongo/models/user'
+import { Credentials } from '../../utils/credentials'
 
 export interface Error {
   message: string
@@ -37,22 +37,12 @@ const ManagementHome: NextPage<Props> = ({ users: propsUsers, error }) => {
 
 export default ManagementHome
 
-const neededRole = 'admin'
-
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps({ req, res }) {
     try {
       await connectDB()
 
-      const session = getSession(req, res)
-
-      if (!session) throw new Error('Unauthorized access')
-
-      const user = await userModel.findById(
-        (session.user.sub as string).split('|')[1]
-      )
-
-      if (user?.role !== neededRole) throw new Error('Unauthorized access')
+      await Credentials.withAdmin(req, res)
 
       const users = await userModel.find({}).limit(15)
 

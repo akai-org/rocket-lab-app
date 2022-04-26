@@ -53,7 +53,7 @@ export default withApiAuthRequired(async function items(req, res) {
 
       res.status(200).send(users)
     } catch (error) {
-      console.log(error)
+      console.log('error found ' + error)
       res.status(400).send(error)
     }
   }

@@ -1,5 +1,6 @@
 import { getSession } from '@auth0/nextjs-auth0'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { IncomingMessage, ServerResponse } from 'http'
+import { NextApiRequestCookies } from 'next/dist/server/api-utils'
 import { User, userModel as UserModel } from '../mongo/models/user'
 
 export enum Permissions {
@@ -17,7 +18,25 @@ export class Credentials {
     ['editor', Permissions.editor],
   ])
 
-  static async withAdmin(req: NextApiRequest, res: NextApiResponse) {
+  static async withAdmin(
+    req: IncomingMessage & {
+      cookies: NextApiRequestCookies
+    },
+    res: ServerResponse
+  ) {
+      const userRole = await this.parseUserData(req, res)
+
+      const permission = this.parseUserRole(userRole)
+
+      this.checkPermission(permission, Permissions.admin)
+  }
+
+  private static async parseUserData(
+    req: IncomingMessage & {
+      cookies: NextApiRequestCookies
+    },
+    res: ServerResponse
+  ): Promise<adminRoles> {
     const session = getSession(req, res)
     if (!session) {
       throw new Error('Unauthorized access')
@@ -27,20 +46,25 @@ export class Credentials {
     const validId = (session.user.sub as string).split('|')[1]
     const user = await UserModel.findById<User>(validId)
 
-    if(!user?.role){
-        throw new Error('Unauthorized access/ User role is not defined properly')
+    if (!user?.role) {
+      throw new Error('Unauthorized access/ User role is not defined properly')
     }
-
-    const permission = this.parseUser(user.role)
-
-    if(!permission){
-        throw new Error('Unauthorized access. User permission is not valid')
-    }
-
-    if (permission < Permissions.admin) throw new Error('Unauthorized access')
+    console.log(user.role)
+    return user.role
   }
 
-  private static parseUser(userRole: adminRoles) {
+  private static parseUserRole(userRole: adminRoles) {
     return this.enumToUsersMap.get(userRole)
+  }
+
+  private static checkPermission(
+    userPermission: Permissions | undefined,
+    demandedPermission: Permissions
+  ) {
+    if (!userPermission)
+      throw new Error('Unauthorized access. User permission is not valid')
+
+    if (userPermission < demandedPermission)
+      throw new Error('Unauthorized access')
   }
 }
