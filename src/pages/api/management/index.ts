@@ -1,16 +1,13 @@
-import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0'
-import { connectDB } from '../../../mongo/db'
+import { withApiAuthRequired } from '@auth0/nextjs-auth0'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { userModel as UserModel, User } from '../../../mongo/models/user'
-import { Credentials } from '../../../utils/credentials'
-
-const neededRole = 'admin'
+import { withMiddleware } from '../../../utils/middlewares'
 
 // TODO: Refactor needed
 
-export default withApiAuthRequired(async function items(req, res) {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'PATCH') {
     try {
-      await Credentials.withAdmin(req, res)
       // updating users
       const users = JSON.parse(req.body) as User[]
       const roles = new Set()
@@ -29,32 +26,20 @@ export default withApiAuthRequired(async function items(req, res) {
       res.status(500).send({ error: (error as string).toString() })
     }
   } else if (req.method === 'GET') {
-    const session = getSession(req, res)
-    if (!session) {
-      throw new Error('Unauthorized access')
-    }
-
-    if (!process.env.API_MONGODB_LIMIT)
-      throw new Error('No API_MONGODB_LIMIT env specified')
-
-    // Getting user info
-    const validId = (session.user.sub as string).split('|')[1]
-    const user = await UserModel.findById<User>(validId)
-    if (user?.role !== neededRole) throw new Error('Unauthorized access')
 
     const params = req.query
 
     try {
-      await connectDB()
 
       const users = await UserModel.find()
         .skip(+params.skip)
-        .limit(+process.env.API_MONGODB_LIMIT)
+        .limit(+(process.env.API_MONGODB_LIMIT ?? 15))
 
       res.status(200).send(users)
     } catch (error) {
       console.log('error found ' + error)
       res.status(400).send(error)
     }
-  }
-})
+  }}
+
+export default withApiAuthRequired(withMiddleware('withAdmin')(handler))

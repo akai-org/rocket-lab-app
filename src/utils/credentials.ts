@@ -2,7 +2,6 @@ import { getSession } from '@auth0/nextjs-auth0'
 import { IncomingMessage, ServerResponse } from 'http'
 import { NextApiRequestCookies } from 'next/dist/server/api-utils'
 import { User, userModel as UserModel } from '../mongo/models/user'
-
 export enum Permissions {
   reader,
   editor,
@@ -18,24 +17,29 @@ export class Credentials {
     ['editor', Permissions.editor],
   ])
 
-  static async withAdmin(
+  static withAdmin = async (
     req: IncomingMessage & {
       cookies: NextApiRequestCookies
     },
-    res: ServerResponse
-  ) {
+    res: ServerResponse, next?: () => Promise<void>
+  ) => {
+      console.log(this)
       const userRole = await this.parseUserData(req, res)
 
       const permission = this.parseUserRole(userRole)
 
       this.checkPermission(permission, Permissions.admin)
+
+      if(next){
+        await next()
+      }
   }
 
   private static async parseUserData(
     req: IncomingMessage & {
       cookies: NextApiRequestCookies
     },
-    res: ServerResponse
+    res: ServerResponse 
   ): Promise<adminRoles> {
     const session = getSession(req, res)
     if (!session) {

@@ -4,11 +4,12 @@ import {
 } from '@auth0/nextjs-auth0'
 import { Box } from '@chakra-ui/react'
 import { NextPage } from 'next'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { UsersList } from '../../components/Management/usersList'
 import { connectDB } from '../../mongo/db'
 import { User, userModel } from '../../mongo/models/user'
 import { Credentials } from '../../utils/credentials'
+import { fetcher } from '../../utils/requests'
 
 export interface Error {
   message: string
@@ -25,6 +26,12 @@ const ManagementHome: NextPage<Props> = ({ users: propsUsers, error }) => {
   const updateUsers = (users: User[]) => {
     setUsers(users)
   }
+
+  useEffect(() => {
+    fetcher('http://localhost:3000/api/management?skip=0')
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error))
+  })
 
   return !error && users ? (
     <Box>
