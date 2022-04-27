@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
-import { ItemProps } from '../utils/types/ItemProps'
+import { ItemProps } from '../utils/types/frontendGeneral'
 import MobileStorage from '../components/MobileStorage/MobileStorage'
 import { useMediaQuery } from '@chakra-ui/react'
 import DesktopStorage from '../components/DesktopStorage/DesktopStorage'
@@ -29,8 +29,6 @@ export default Home
 
 export const getServerSideProps = withPageAuthRequired({
   getServerSideProps: async (): Promise<{ props: Props }> => {
-    // Fetch the items we already have in the DB
-    // For now it's not wrapped into any specific function
     try {
       await connectDB()
       const items = await ItemModel.find()

@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import ListItem from './Item/ListItem'
 import GridItem from './Item/GridItem'
 import Sorting from './Sorting/Sorting'
-import { sortingType } from '../../../utils/types/Sorting'
-import { ItemProps } from '../../../utils/types/ItemProps'
+import { sortingType } from '../../../utils/types/frontendGeneral'
+import { ItemProps } from '../../../utils/types/frontendGeneral'
 
 interface Props {
   items: ItemProps[]

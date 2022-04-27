@@ -1,6 +1,7 @@
 import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { userModel as UserModel, User } from '../../../mongo/models/user'
+import { QUERY_LIMIT } from '../../../utils/constants'
 import { withMiddleware } from '../../../utils/middlewares'
 
 // TODO: Refactor needed
@@ -33,7 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const users = await UserModel.find()
         .skip(+params.skip)
-        .limit(+(process.env.API_MONGODB_LIMIT ?? 15))
+        .limit(+(process.env.API_MONGODB_LIMIT ?? QUERY_LIMIT))
 
       res.status(200).send(users)
     } catch (error) {

@@ -4,8 +4,8 @@ import Filters from './Filters/Filters'
 import Sorting from './Sorting/Sorting'
 import GridItem from './Item/GridItem'
 import ListItem from './Item/ListItem'
-import { ItemProps } from '../../utils/types/ItemProps'
-import { sortingType } from '../../utils/types/Sorting'
+import { ItemProps } from '../../utils/types/frontendGeneral'
+import { sortingType } from '../../utils/types/frontendGeneral'
 
 interface Props {
   items: ItemProps[]
