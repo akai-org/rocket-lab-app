@@ -4,12 +4,12 @@ import {
 } from '@auth0/nextjs-auth0'
 import { Box } from '@chakra-ui/react'
 import { NextPage } from 'next'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { UsersList } from '../../components/Management/usersList'
 import { connectDB } from '../../mongo/db'
-import { User, userModel } from '../../mongo/models/user'
+import { User } from '../../mongo/models/user'
 import { Credentials } from '../../utils/credentials'
-import { fetcher } from '../../utils/requests'
+import * as userService from '../../services/userService'
 
 export interface Error {
   message: string
@@ -26,12 +26,6 @@ const ManagementHome: NextPage<Props> = ({ users: propsUsers, error }) => {
   const updateUsers = (users: User[]) => {
     setUsers(users)
   }
-
-  useEffect(() => {
-    fetcher('http://localhost:3000/api/management?skip=0')
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error))
-  })
 
   return !error && users ? (
     <Box>
@@ -51,7 +45,7 @@ export const getServerSideProps = withPageAuthRequired({
 
       await Credentials.withAdmin(req, res)
 
-      const users = await userModel.find({}).limit(15)
+      const users = await userService.fetchUsers(0)
 
       return {
         props: {
