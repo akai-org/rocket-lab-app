@@ -2,13 +2,12 @@ import { getSession } from '@auth0/nextjs-auth0'
 import { IncomingMessage, ServerResponse } from 'http'
 import { NextApiRequestCookies } from 'next/dist/server/api-utils'
 import { User, userModel as UserModel } from '../mongo/models/user'
-export enum Permissions {
-  reader,
-  editor,
-  admin,
-}
-
-type adminRoles = 'admin' | 'editor' | 'reader'
+import {
+  adminRoles,
+  CredentialsReq,
+  CredentialsRes,
+  Permissions,
+} from './types/backendGeneral'
 
 export class Credentials {
   private static enumToUsersMap = new Map<adminRoles, Permissions>([
@@ -17,29 +16,52 @@ export class Credentials {
     ['editor', Permissions.editor],
   ])
 
-  static withAdmin = async (
-    req: IncomingMessage & {
-      cookies: NextApiRequestCookies
-    },
-    res: ServerResponse, next?: () => Promise<void>
-  ) => {
-      console.log(this)
-      const userRole = await this.parseUserData(req, res)
+  static async withAdmin(
+    req: CredentialsReq,
+    res: CredentialsRes,
+    next?: () => Promise<void>
+  ) {
+    await Credentials.handeAuthorizationFlow(Permissions.admin, req, res, next)
+  }
 
-      const permission = this.parseUserRole(userRole)
+  static async withEditor(
+    req: CredentialsReq,
+    res: CredentialsRes,
+    next?: () => Promise<void>
+  ) {
+    await Credentials.handeAuthorizationFlow(Permissions.editor, req, res, next)
+  }
 
-      this.checkPermission(permission, Permissions.admin)
+  static async withReader(
+    req: CredentialsReq,
+    res: CredentialsRes,
+    next?: () => Promise<void>
+  ) {
+    await Credentials.handeAuthorizationFlow(Permissions.reader, req, res, next)
+  }
 
-      if(next){
-        await next()
-      }
+  private static async handeAuthorizationFlow(
+    requiredPermission: Permissions,
+    req: CredentialsReq,
+    res: CredentialsRes,
+    next: (() => Promise<void>) | undefined
+  ) {
+    const userRole = await Credentials.parseUserData(req, res)
+
+    const permission = Credentials.parseUserRole(userRole)
+
+    this.checkPermission(permission, requiredPermission)
+
+    if (next) {
+      await next()
+    }
   }
 
   private static async parseUserData(
     req: IncomingMessage & {
       cookies: NextApiRequestCookies
     },
-    res: ServerResponse 
+    res: ServerResponse
   ): Promise<adminRoles> {
     const session = getSession(req, res)
     if (!session) {
@@ -58,7 +80,7 @@ export class Credentials {
   }
 
   private static parseUserRole(userRole: adminRoles) {
-    return this.enumToUsersMap.get(userRole)
+    return Credentials.enumToUsersMap.get(userRole)
   }
 
   private static checkPermission(
