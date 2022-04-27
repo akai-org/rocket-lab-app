@@ -5,8 +5,9 @@ import MobileStorage from '../components/MobileStorage/MobileStorage'
 import { useMediaQuery } from '@chakra-ui/react'
 import DesktopStorage from '../components/DesktopStorage/DesktopStorage'
 import { connectDB } from '../mongo/db'
-import { ItemModel } from '../mongo/models/item'
 import { Text } from '@chakra-ui/react'
+import * as itemsService from '../services/itemsService'
+import { Credentials } from '../utils/credentials'
 
 interface Props {
   items?: ItemProps[]
@@ -28,23 +29,15 @@ const Home: NextPage<Props> = ({ items, error }) => {
 export default Home
 
 export const getServerSideProps = withPageAuthRequired({
-  getServerSideProps: async (): Promise<{ props: Props }> => {
+  getServerSideProps: async ({ req, res }): Promise<{ props: Props }> => {
     try {
       await connectDB()
-      const items = await ItemModel.find()
-
-      const itemData = items.map((item) => {
-        return {
-          id: item.id,
-          name: item.name,
-          description: item.description,
-          imageUrl: item.imageUrl,
-        }
-      })
+      await Credentials.withReader(req, res)
+      const items = await itemsService.fetchItems(0)
 
       return {
         props: {
-          items: itemData,
+          items: JSON.parse(JSON.stringify(items)),
         },
       }
     } catch (e) {

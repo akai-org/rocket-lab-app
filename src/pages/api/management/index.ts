@@ -17,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } else if (req.method === 'GET') {
     try {
-      const users = await userService.fetchUsers(+req.query)
+      const users = await userService.fetchUsers(+req.query.skip)
       res.status(200).send(users)
     } catch (error) {
       console.log('error found ' + error)
