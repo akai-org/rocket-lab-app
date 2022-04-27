@@ -1,13 +1,12 @@
 import { Schema, Model, models, model } from 'mongoose'
+import { adminRoles as userRoles } from '../../utils/types/backendGeneral'
 
 export interface User {
   _id: string
-  role: 'reader' | 'editor' | 'admin'
+  role: userRoles
   email: string
   name: string
 }
-
-export type Role = 'reader' | 'editor' | 'admin'
 
 const userSchema = new Schema<User>(
   {

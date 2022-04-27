@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { Flex, Select, Text, ButtonGroup, Icon } from '@chakra-ui/react'
-import { sortingType } from '../MobileStorage'
+import { sortingType } from '../../../utils/types/frontendGeneral'
 
 const Sorting: React.FC<{
   setListType: (type: sortingType) => void

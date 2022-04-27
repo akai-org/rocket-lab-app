@@ -10,7 +10,7 @@ import {
   NumberDecrementStepper,
   Button,
 } from '@chakra-ui/react'
-import { ItemProps } from '../../../../utils/types/ItemProps'
+import { ItemProps } from '../../../../utils/types/frontendGeneral'
 
 interface Props {
   item: ItemProps

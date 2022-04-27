@@ -2,7 +2,7 @@ import { Flex } from '@chakra-ui/react'
 import Filters from './Filters/Filters'
 import DesktopItemsList from './DesktopItemsList/DesktopItemsList'
 import StorageSidebar from './StorageSidebar/StorageSidebar'
-import { ItemProps } from '../../utils/types/ItemProps'
+import { ItemProps } from '../../utils/types/frontendGeneral'
 
 interface Props {
   items: ItemProps[]

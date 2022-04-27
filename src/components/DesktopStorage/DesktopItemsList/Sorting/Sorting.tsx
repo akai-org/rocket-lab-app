@@ -1,10 +1,10 @@
-import { Box, Flex, Icon, Select, Text } from '@chakra-ui/react'
+import { Flex, Icon, Select, Text } from '@chakra-ui/react'
 import React from 'react'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
-import { sortingType } from '../DesktopItemsList'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
+import { sortingType } from '../../../../utils/types/frontendGeneral'
 
 const Sorting: React.FC<{
   setListType: (type: sortingType) => void
