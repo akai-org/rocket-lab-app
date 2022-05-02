@@ -6,3 +6,7 @@ export interface ItemProps {
 }
 
 export type sortingType = 'grid' | 'list'
+
+export interface ItemsQueryParams {
+  page: number
+}

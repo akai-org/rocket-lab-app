@@ -29,11 +29,18 @@ const Home: NextPage<Props> = ({ items, error }) => {
 export default Home
 
 export const getServerSideProps = withPageAuthRequired({
-  getServerSideProps: async ({ req, res }): Promise<{ props: Props }> => {
+  getServerSideProps: async ({
+    req,
+    res,
+    query,
+  }): Promise<{ props: Props }> => {
     try {
+      console.log(query)
       await connectDB()
       await Credentials.withReader(req, res)
-      const items = await itemsService.fetchItems(0)
+      const items = await itemsService.fetchItems(
+        query.page ? (parseInt(query.page as string, 10) - 1) * 4 : 0
+      )
 
       return {
         props: {

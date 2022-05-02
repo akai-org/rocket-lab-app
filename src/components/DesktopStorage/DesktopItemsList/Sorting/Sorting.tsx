@@ -5,11 +5,22 @@ import { FaThList } from 'react-icons/fa'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
 import { sortingType } from '../../../../utils/types/frontendGeneral'
+import { useRouter } from 'next/router'
+import NextLink from 'next/link'
 
 const Sorting: React.FC<{
   setListType: (type: sortingType) => void
   listType: sortingType
 }> = (props) => {
+  const router = useRouter()
+
+  const query = router.query
+
+  const currentPage = query.page ? +(query.page as string) : 0
+
+  const nextPage = currentPage + 1
+  const previousPage = currentPage - 1
+
   return (
     <Flex
       justifyContent="space-between"
@@ -28,28 +39,34 @@ const Sorting: React.FC<{
         </Flex>
         <Text m="0 40px">1 - 5 of 20</Text>
         <Flex fontSize="20px" w="120px" justifyContent="space-around">
-          <Icon
-            cursor="pointer"
-            _hover={{
-              color: 'black',
-            }}
-            as={BiArrowToLeft}
-          />
-          <Icon
-            cursor="pointer"
-            _hover={{
-              color: 'black',
-            }}
-            as={IoIosArrowBack}
-          />
+          <NextLink href={{ query: { page: 1 } }} passHref>
+            <Icon
+              cursor="pointer"
+              _hover={{
+                color: 'black',
+              }}
+              as={BiArrowToLeft}
+            />
+          </NextLink>
+          <NextLink href={{ query: { page: previousPage } }} passHref>
+            <Icon
+              cursor="pointer"
+              _hover={{
+                color: 'black',
+              }}
+              as={IoIosArrowBack}
+            />
+          </NextLink>
 
-          <Icon
-            cursor="pointer"
-            _hover={{
-              color: 'black',
-            }}
-            as={IoIosArrowForward}
-          />
+          <NextLink href={{ query: { page: nextPage } }} passHref>
+            <Icon
+              cursor="pointer"
+              _hover={{
+                color: 'black',
+              }}
+              as={IoIosArrowForward}
+            />
+          </NextLink>
 
           <Icon
             cursor="pointer"
