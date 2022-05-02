@@ -7,10 +7,12 @@ import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
 import { sortingType } from '../../../../utils/types/frontendGeneral'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
+import { ITEMS_QUERY_LIMIT } from '../../../../utils/constants'
 
 const Sorting: React.FC<{
   setListType: (type: sortingType) => void
   listType: sortingType
+  itemsCount: number | undefined
 }> = (props) => {
   const router = useRouter()
 
@@ -18,8 +20,17 @@ const Sorting: React.FC<{
 
   const currentPage = query.page ? +(query.page as string) : 0
 
-  const nextPage = currentPage + 1
-  const previousPage = currentPage - 1
+  const itemsCount = props.itemsCount ?? 0
+
+  const presumedNextPage = currentPage + 1
+  const presumedPreviousPage = currentPage - 1
+
+  const minPage = 1
+  const maxPage = Math.ceil(itemsCount / 4)
+
+  const nextPage = presumedNextPage <= maxPage ? presumedNextPage : maxPage
+  const previousPage =
+    presumedPreviousPage >= minPage ? presumedPreviousPage : minPage
 
   return (
     <Flex
@@ -39,7 +50,7 @@ const Sorting: React.FC<{
         </Flex>
         <Text m="0 40px">1 - 5 of 20</Text>
         <Flex fontSize="20px" w="120px" justifyContent="space-around">
-          <NextLink href={{ query: { page: 1 } }} passHref>
+          <NextLink href={{ query: { page: minPage } }} passHref>
             <Icon
               cursor="pointer"
               _hover={{
@@ -68,13 +79,15 @@ const Sorting: React.FC<{
             />
           </NextLink>
 
-          <Icon
-            cursor="pointer"
-            _hover={{
-              color: 'black',
-            }}
-            as={BiArrowToRight}
-          />
+          <NextLink href={{ query: { page: maxPage } }} passHref>
+            <Icon
+              cursor="pointer"
+              _hover={{
+                color: 'black',
+              }}
+              as={BiArrowToRight}
+            />
+          </NextLink>
         </Flex>
       </Flex>
       <Flex>
