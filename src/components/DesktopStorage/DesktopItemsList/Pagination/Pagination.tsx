@@ -3,8 +3,8 @@ import React from 'react'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { sortingType } from '../../../../utils/types/frontendGeneral'
-import { Pagination } from '../../../UI/pagination/Pagination'
-import { SortingMechanism } from '../../../UI/sortingMechanism/SortingMechanism'
+import { PaginationGeneral } from '../../../UI/PaginationGeneral/PaginationGeneral'
+import { SortingMechanism } from './PaginationDisplay'
 
 export const Sorting: React.FC<{
   setListType: (type: sortingType) => void
@@ -13,7 +13,7 @@ export const Sorting: React.FC<{
 }> = (props) => {
   return (
     <>
-      <Pagination display={SortingMechanism} itemsCount={props.itemsCount} />
+      <PaginationGeneral paginationSettings={SortingMechanism} itemsCount={props.itemsCount} />
       <Flex>
         <Icon
           cursor="pointer"

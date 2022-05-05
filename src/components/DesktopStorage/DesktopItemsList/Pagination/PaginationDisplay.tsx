@@ -2,9 +2,9 @@ import { Flex, Select, Icon, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
-import { Display } from '../pagination/Pagination'
+import { PaginationSettings } from '../../../UI/PaginationGeneral/PaginationGeneral'
 
-export const SortingMechanism: React.FC<Display> = ({
+export const SortingMechanism: React.FC<PaginationSettings> = ({
   handleOnChangeQuantity,
   maxPage,
   minPage,

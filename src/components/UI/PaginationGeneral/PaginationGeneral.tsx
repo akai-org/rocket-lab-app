@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, FC } from 'react'
 import { ITEMS_QUERY_LIMIT, FIRST_PAGE } from '../../../utils/constants'
 
-export interface Display {
+export interface PaginationSettings {
   handleOnChangeQuantity: (e: ChangeEvent<HTMLSelectElement>) => void
   minPage: number
   maxPage: number
@@ -13,11 +13,22 @@ export interface Display {
 
 interface Props {
   itemsCount?: number
-  display: React.FC<Display>
+  paginationSettings: React.FC<PaginationSettings>
 }
 
-export const Pagination = (props: Props) => {
-  const Display = props.display
+export const PaginationGeneral: FC<Props> = (props) => {
+  const sanitizePage = (toDisplay: number, page: number) => {
+    const maxPage = Math.ceil(itemsCount / toDisplay)
+    let sanitizedPage = page
+    if (page < FIRST_PAGE) {
+      sanitizedPage = FIRST_PAGE
+    } else if (page > maxPage) {
+      sanitizedPage = maxPage
+    }
+    return sanitizedPage
+  }
+
+  const Display = props.paginationSettings
 
   const router = useRouter()
   const query = router.query
@@ -36,9 +47,8 @@ export const Pagination = (props: Props) => {
   const minPage = FIRST_PAGE
   const maxPage = Math.ceil(itemsCount / toDisplay)
 
-  const nextPage = presumedNextPage <= maxPage ? presumedNextPage : maxPage
-  const previousPage =
-    presumedPreviousPage >= minPage ? presumedPreviousPage : minPage
+  const nextPage = sanitizePage(presumedNextPage, toDisplay)
+  const previousPage = sanitizePage(presumedPreviousPage, toDisplay)
 
   const onToDisplayChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newToDisplay = +e.target.value
@@ -50,7 +60,7 @@ export const Pagination = (props: Props) => {
       const toPassedItems = passedItems - toDisplay + newToDisplay
       page = Math.round(toPassedItems / newToDisplay)
     }
-
+    page = sanitizePage(newToDisplay, page)
     router.push({ query: { page, toDisplay: newToDisplay } })
   }
 
