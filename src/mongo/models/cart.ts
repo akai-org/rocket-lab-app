@@ -1,6 +1,7 @@
 import { Schema, Model, models, model } from 'mongoose'
 
 export interface CartItem {
+  id: string
   quantity: number
   item: Schema.Types.ObjectId
 }
