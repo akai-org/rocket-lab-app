@@ -8,6 +8,7 @@ import { connectDB } from '../mongo/db'
 import { Text } from '@chakra-ui/react'
 import * as itemsService from '../services/itemsService'
 import { Credentials } from '../utils/credentials'
+import { FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../utils/constants'
 
 interface Props extends MainViewProps {
   error?: Error
@@ -36,18 +37,20 @@ export const getServerSideProps = withPageAuthRequired({
     try {
       await connectDB()
       await Credentials.withReader(req, res)
-      const items = await itemsService.fetchItems(
-        // that strange calculations are to get specified amount of items per page, #FIXME: 
-        query.page ? (parseInt(query.page as string, 10) - 1) * 4 : 0
-      )
 
-      
+      const page = query.page ? +query.page : FIRST_PAGE
+      const toDisplay = query.toDisplay ? +query.toDisplay : ITEMS_QUERY_LIMIT
+
+      const skip = (page - FIRST_PAGE) * toDisplay
+
+      const items = await itemsService.fetchItems(skip, toDisplay)
+
       const itemsCount = await itemsService.fetchItemsCount()
 
       return {
         props: {
           items: JSON.parse(JSON.stringify(items)),
-          itemsCount: JSON.parse(JSON.stringify(itemsCount))
+          itemsCount: JSON.parse(JSON.stringify(itemsCount)),
         },
       }
     } catch (e) {
@@ -55,7 +58,7 @@ export const getServerSideProps = withPageAuthRequired({
       return {
         props: {
           error: JSON.parse(JSON.stringify(e)),
-          itemsCount: undefined
+          itemsCount: undefined,
         },
       }
     }
