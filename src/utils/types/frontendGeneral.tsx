@@ -1,9 +1,4 @@
-export interface ItemProps {
-  id: string
-  name: string
-  description: string
-  imageUrl: string
-}
+import { Item } from "../../mongo/models/item"
 
 export type sortingType = 'grid' | 'list'
 
@@ -12,6 +7,6 @@ export interface ItemsQueryParams {
 }
 
 export interface MainViewProps {
-  items?: ItemProps[]
+  items?: Item[]
   itemsCount: number | undefined
 }

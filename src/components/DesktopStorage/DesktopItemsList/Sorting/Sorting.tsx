@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import { FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../../../../utils/constants'
 
-const Sorting: React.FC<{
+export const Sorting: React.FC<{
   setListType: (type: sortingType) => void
   listType: sortingType
   itemsCount: number | undefined
@@ -143,5 +143,3 @@ const Sorting: React.FC<{
     </Flex>
   )
 }
-
-export default Sorting

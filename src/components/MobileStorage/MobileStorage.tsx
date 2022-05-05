@@ -19,8 +19,8 @@ const MobileStorage = ({ items }: MainViewProps) => {
     >
       <Sorting setListType={setListType} listType={listType} />
       {listType === 'grid'
-        ? items.map((item) => <GridItem item={item} key={item.id} />)
-        : items.map((item) => <ListItem item={item} key={item.id} />)}
+        ? items && items.map((item) => <GridItem item={item} key={item.id} />)
+        : items && items.map((item) => <ListItem item={item} key={item.id} />)}
       <Filters setIsFiltersOpen={setIsFiltersOpen} />
     </Flex>
   )
