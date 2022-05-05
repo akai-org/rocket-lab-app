@@ -11,7 +11,11 @@ export const SortingMechanism: React.FC<PaginationSettings> = ({
   nextPage,
   previousPage,
   toDisplay,
+  itemsCount,
 }) => {
+  console.log(previousPage)
+  const rangeBeginning = previousPage * toDisplay
+
   return (
     <Flex
       justifyContent="space-between"
@@ -34,7 +38,9 @@ export const SortingMechanism: React.FC<PaginationSettings> = ({
             <option value="117">117</option>
           </Select>
         </Flex>
-        <Text m="0 40px">1 - 5 of 20</Text>
+        <Text m="0 40px">
+          {rangeBeginning} - 5 of {itemsCount}
+        </Text>
         <Flex fontSize="20px" w="120px" justifyContent="space-around">
           <Link href={{ query: { page: minPage, toDisplay } }} passHref>
             <Icon
