@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { Box, Image, Flex, Heading, Icon, Button } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
+import DesktopSidebar from './DesktopSidebar/DesktopSidebar'
 
 const DesktopNavigation = () => {
-  const [isStorageActive, setIsStorageActive] = useState(false)
-  const [isListActive, setIsListActive] = useState(true)
   return (
     <Box
       position="fixed"
@@ -48,38 +47,6 @@ const DesktopNavigation = () => {
           </Box>
         </Flex>
         <Flex alignItems="center">
-          <Button
-            variant="outline"
-            h="39px"
-            border={isStorageActive ? 'none' : '1px solid black'}
-            borderRadius="0"
-            colorScheme="black"
-            fontSize="16px"
-            fontWeight="normal"
-            onClick={() => {
-              setIsListActive(false)
-              setIsStorageActive(true)
-            }}
-          >
-            Magazyn
-          </Button>
-          <Button
-            variant="outline"
-            h="39px"
-            ml="30px"
-            mr="50px"
-            border={isListActive ? 'none' : '1px solid black'}
-            borderRadius="0"
-            fontWeight="normal"
-            fontSize="16px"
-            colorScheme="black"
-            onClick={() => {
-              setIsListActive(true)
-              setIsStorageActive(false)
-            }}
-          >
-            Lista Zakupów
-          </Button>
           <Icon as={FaUserCircle} mr="10px" fontSize="40px" />
         </Flex>
       </Flex>

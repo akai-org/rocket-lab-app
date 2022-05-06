@@ -6,6 +6,7 @@ const Sidebar = () => {
   const [isStorageActive, setIsStorageActive] = useState(true)
   const [isListActive, setIsListActive] = useState(false)
   const [isHistoryActive, setIsHistoryActive] = useState(false)
+  const [isSchemesActive, setIsSchemesActive] = useState(false)
   return (
     <Box
       position="fixed"
@@ -35,6 +36,7 @@ const Sidebar = () => {
               setIsListActive(false)
               setIsStorageActive(true)
               setIsHistoryActive(false)
+              setIsSchemesActive(false)
             }}
           >
             Magazyn
@@ -54,6 +56,7 @@ const Sidebar = () => {
               setIsListActive(true)
               setIsStorageActive(false)
               setIsHistoryActive(false)
+              setIsSchemesActive(false)
             }}
           >
             Lista Zakupów
@@ -73,9 +76,30 @@ const Sidebar = () => {
               setIsListActive(false)
               setIsStorageActive(false)
               setIsHistoryActive(true)
+              setIsSchemesActive(false)
             }}
           >
             Historia
+          </Button>
+          <Button
+            variant="outline"
+            h="50px"
+            w="90%"
+            maxW="400px"
+            mb="30px"
+            border={isSchemesActive ? 'none' : '1px solid black'}
+            borderRadius="0"
+            colorScheme="black"
+            fontSize="20px"
+            fontWeight="normal"
+            onClick={() => {
+              setIsListActive(false)
+              setIsStorageActive(false)
+              setIsHistoryActive(false)
+              setIsSchemesActive(true)
+            }}
+          >
+            Schematy
           </Button>
         </Flex>
         <Flex flexDirection="column" mt="auto" mr="20px">
