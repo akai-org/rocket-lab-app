@@ -5,6 +5,7 @@ export interface Item {
   imageUrl: string
   description: string
   toBuy: boolean
+  id: string
 }
 
 const itemSchema = new Schema<Item>({
@@ -19,5 +20,6 @@ const itemSchema = new Schema<Item>({
     default: false,
   },
 })
+
 export const ItemModel =
   (models.Item as Model<Item>) || model<Item>('Item', itemSchema)

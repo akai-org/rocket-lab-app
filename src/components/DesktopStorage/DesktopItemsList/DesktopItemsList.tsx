@@ -2,15 +2,17 @@ import { Box, Flex, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import ListItem from './Item/ListItem'
 import GridItem from './Item/GridItem'
-import Sorting from './Sorting/Sorting'
-import { sortingType } from '../../../utils/types/frontendGeneral'
-import { ItemProps } from '../../../utils/types/frontendGeneral'
+import { Sorting } from './Pagination/Pagination'
+import {
+  MainViewProps,
+  sortingType,
+} from '../../../utils/types/frontendGeneral'
+import { Item } from '../../../mongo/models/item'
 
-interface Props {
-  items: ItemProps[]
-}
-
-const DesktopItemsList = ({ items }: Props) => {
+const DesktopItemsList = ({ items, itemsCount }: MainViewProps) => {
+  for(const item of items as Item[]){
+    console.log(item.id)
+  }
   const [listType, setListType] = useState<sortingType>('grid')
   return (
     <Box
@@ -19,7 +21,11 @@ const DesktopItemsList = ({ items }: Props) => {
       border="1px solid #C4C4C4"
       mt="20px"
     >
-      <Sorting listType={listType} setListType={setListType} />
+      <Sorting
+        itemsCount={itemsCount}
+        listType={listType}
+        setListType={setListType}
+      />
       {listType === 'list' ? (
         <Flex flexWrap="wrap" p="20px">
           <Table p="20px">
@@ -34,7 +40,7 @@ const DesktopItemsList = ({ items }: Props) => {
               </Tr>
             </Thead>
             <Tbody>
-              {items.map((item) => (
+              {items && items.map((item) => (
                 <ListItem item={item} key={item.id} />
               ))}
             </Tbody>
@@ -42,7 +48,7 @@ const DesktopItemsList = ({ items }: Props) => {
         </Flex>
       ) : (
         <Flex flexWrap="wrap" p="20px">
-          {items.map((item) => (
+          {items && items.map((item) => (
             <GridItem item={item} key={item.id} />
           ))}
         </Flex>

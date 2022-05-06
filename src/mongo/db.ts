@@ -23,9 +23,10 @@ export async function connectDB() {
   if (!cached.promise) {
     const opts = {} as ConnectOptions
 
-    cached.promise = mongoose
-      .connect(MONGODB_URI, opts)
-      .then((mongoose) => mongoose)
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+      mongoose.set('toJSON', { virtuals: true })
+      return mongoose
+    })
   }
   cached.conn = await cached.promise
   return cached.conn
