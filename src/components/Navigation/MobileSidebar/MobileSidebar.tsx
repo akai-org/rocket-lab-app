@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Box, Button, calc, Flex, Icon, Link, Text } from '@chakra-ui/react'
-import SidebarList from './MobileSidebarList'
 import { IoIosSettings } from 'react-icons/io'
 
 const Sidebar = () => {
-  const [isStorageActive, setIsStorageActive] = useState(false)
-  const [isListActive, setIsListActive] = useState(true)
+  const [isStorageActive, setIsStorageActive] = useState(true)
+  const [isListActive, setIsListActive] = useState(false)
+  const [isHistoryActive, setIsHistoryActive] = useState(false)
   return (
     <Box
       position="fixed"
@@ -19,39 +19,65 @@ const Sidebar = () => {
       zIndex="2"
     >
       <Flex flexDirection="column" h="100%" overflow="scroll">
-        <Flex justifyContent="space-around" m="10px auto">
+        <Flex flexDir="column" w="100%" alignItems="center" m="30px auto">
           <Button
+            variant="outline"
+            h="50px"
+            w="90%"
+            maxW="400px"
+            mb="30px"
             border={isStorageActive ? 'none' : '1px solid black'}
             borderRadius="0"
             colorScheme="black"
-            variant="outline"
+            fontSize="20px"
+            fontWeight="normal"
             onClick={() => {
               setIsListActive(false)
               setIsStorageActive(true)
+              setIsHistoryActive(false)
             }}
           >
             Magazyn
           </Button>
           <Button
+            variant="outline"
+            h="50px"
+            w="90%"
+            maxW="400px"
+            mb="30px"
             border={isListActive ? 'none' : '1px solid black'}
             borderRadius="0"
             colorScheme="black"
-            variant="outline"
+            fontSize="20px"
+            fontWeight="normal"
             onClick={() => {
               setIsListActive(true)
               setIsStorageActive(false)
+              setIsHistoryActive(false)
             }}
           >
             Lista Zakupów
           </Button>
+          <Button
+            variant="outline"
+            h="50px"
+            w="90%"
+            maxW="400px"
+            mb="30px"
+            border={isHistoryActive ? 'none' : '1px solid black'}
+            borderRadius="0"
+            colorScheme="black"
+            fontSize="20px"
+            fontWeight="normal"
+            onClick={() => {
+              setIsListActive(false)
+              setIsStorageActive(false)
+              setIsHistoryActive(true)
+            }}
+          >
+            Historia
+          </Button>
         </Flex>
-        {isListActive && (
-          <>
-            <SidebarList header="Lista 1" />
-            <SidebarList header="Lista 2" />
-            <SidebarList header="Lista 3" />
-          </>
-        )}
         <Flex flexDirection="column" mt="auto" mr="20px">
           <Flex justifyContent="flex-end">
             <Text>Ustawienia</Text>

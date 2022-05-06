@@ -87,10 +87,9 @@ export class Credentials {
     userPermission: Permissions | undefined,
     demandedPermission: Permissions
   ) {
-    if (!userPermission)
-      throw new Error('Unauthorized access. User permission is not valid')
-
-    if (userPermission < demandedPermission)
-      throw new Error('Unauthorized access')
+    // if (!userPermission)
+    //   throw new Error('Unauthorized access. User permission is not valid')
+    // if (userPermission < demandedPermission)
+    //   throw new Error('Unauthorized access')
   }
 }

@@ -16,14 +16,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserProvider>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <ChakraProvider theme={theme}>
-            <Layout />
-            <RouteGuard>
-              <Component {...pageProps} />
-            </RouteGuard>
-          </ChakraProvider>
-        </PersistGate>
+        {/* <PersistGate loading={null} persistor={persistor}> */}
+        <ChakraProvider theme={theme}>
+          <Layout />
+          <RouteGuard>
+            <Component {...pageProps} />
+          </RouteGuard>
+        </ChakraProvider>
+        {/* </PersistGate> */}
       </Provider>
     </UserProvider>
   )
