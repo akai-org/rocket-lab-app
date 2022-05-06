@@ -9,6 +9,7 @@ export interface PaginationSettings {
   nextPage: number
   previousPage: number
   toDisplay: number
+  itemsCount: number
 }
 
 interface Props {
@@ -17,7 +18,11 @@ interface Props {
 }
 
 export const PaginationGeneral: FC<Props> = (props) => {
-  const sanitizePage = (toDisplay: number, page: number) => {
+  const sanitizePage = (
+    page: number,
+    toDisplay: number,
+    itemsCount: number
+  ) => {
     const maxPage = Math.ceil(itemsCount / toDisplay)
     let sanitizedPage = page
     if (page < FIRST_PAGE) {
@@ -37,9 +42,9 @@ export const PaginationGeneral: FC<Props> = (props) => {
 
   const toDisplay = presumedToDisplay ? +presumedToDisplay : ITEMS_QUERY_LIMIT
 
-  const currentPage = query.page ? +(query.page as string) : FIRST_PAGE
+  const currentPage = query.page ? +query.page : FIRST_PAGE
 
-  const itemsCount = props.itemsCount ?? 0
+  const itemsCount = props.itemsCount ?? 1
 
   const presumedNextPage = currentPage + FIRST_PAGE
   const presumedPreviousPage = currentPage - FIRST_PAGE
@@ -47,8 +52,8 @@ export const PaginationGeneral: FC<Props> = (props) => {
   const minPage = FIRST_PAGE
   const maxPage = Math.ceil(itemsCount / toDisplay)
 
-  const nextPage = sanitizePage(presumedNextPage, toDisplay)
-  const previousPage = sanitizePage(presumedPreviousPage, toDisplay)
+  const nextPage = sanitizePage(presumedNextPage, toDisplay, itemsCount)
+  const previousPage = sanitizePage(presumedPreviousPage, toDisplay, itemsCount)
 
   const onToDisplayChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newToDisplay = +e.target.value
@@ -60,7 +65,7 @@ export const PaginationGeneral: FC<Props> = (props) => {
       const toPassedItems = passedItems - toDisplay + newToDisplay
       page = Math.round(toPassedItems / newToDisplay)
     }
-    page = sanitizePage(newToDisplay, page)
+    page = sanitizePage(page, newToDisplay, itemsCount)
     router.push({ query: { page, toDisplay: newToDisplay } })
   }
 
@@ -72,6 +77,7 @@ export const PaginationGeneral: FC<Props> = (props) => {
       nextPage={nextPage}
       previousPage={previousPage}
       toDisplay={toDisplay}
+      itemsCount={itemsCount}
     />
   )
 }
