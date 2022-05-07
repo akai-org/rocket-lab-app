@@ -89,7 +89,6 @@ export class Credentials {
   ) {
     if (!userPermission)
       throw new Error('Unauthorized access. User permission is not valid')
-
     if (userPermission < demandedPermission)
       throw new Error('Unauthorized access')
   }

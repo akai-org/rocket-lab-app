@@ -4,7 +4,10 @@ import Filters from './Filters/Filters'
 import Sorting from './Sorting/Sorting'
 import GridItem from './Item/GridItem'
 import ListItem from './Item/ListItem'
-import { MainViewProps, sortingType } from '../../utils/types/frontendGeneral'
+import {
+  MainViewProps,
+  sortingType,
+} from '../../../utils/types/frontendGeneral'
 
 const MobileStorage = ({ items }: MainViewProps) => {
   const [listType, setListType] = useState<sortingType>('grid')
