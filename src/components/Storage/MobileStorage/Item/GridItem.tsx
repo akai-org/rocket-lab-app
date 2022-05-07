@@ -27,13 +27,6 @@ const GridItem = ({ item }: Props) => {
         <Text fontSize="16px" fontWeight="500">
           {item.name}
         </Text>
-        <Box h="100%" maxH="42px">
-          <Text fontSize="12px" color="#878585">
-            {item.description.length > 40
-              ? item.description.substring(0, 40) + '...'
-              : item.description}
-          </Text>
-        </Box>
         <Box w="100%" mb="5px">
           <Text fontSize="14px" fontWeight="400">
             {/* Warunkowe wyświetlanie ilości: jeżeli ilość===0 to napis brak w magazynie */}
@@ -47,8 +40,7 @@ const GridItem = ({ item }: Props) => {
         >
           {!isEdit ? (
             <ProductButton
-              device="desktop"
-              w="80px"
+              w="120px"
               onClick={() => {
                 setIsEdit(true)
               }}
@@ -73,7 +65,6 @@ const GridItem = ({ item }: Props) => {
               </NumberInput>
               <ButtonGroup isAttached mt="10px">
                 <ProductButton
-                  device="desktop"
                   size="sm"
                   pb="5px"
                   onClick={() => {
@@ -83,7 +74,6 @@ const GridItem = ({ item }: Props) => {
                   +
                 </ProductButton>
                 <ProductButton
-                  device="desktop"
                   size="sm"
                   pb="5px"
                   onClick={() => {
@@ -96,7 +86,6 @@ const GridItem = ({ item }: Props) => {
             </>
           )}
           <ProductButton
-            device="desktop"
             mt="5px"
             mb="25px"
             w="120px"

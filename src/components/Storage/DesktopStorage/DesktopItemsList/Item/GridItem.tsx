@@ -48,7 +48,6 @@ const GridItem = ({ item }: Props) => {
         >
           {!isEdit ? (
             <ProductButton
-              device="desktop"
               w="80px"
               onClick={() => {
                 setIsEdit(true)
@@ -74,7 +73,6 @@ const GridItem = ({ item }: Props) => {
               </NumberInput>
               <ButtonGroup isAttached mt="10px">
                 <ProductButton
-                  device="desktop"
                   size="sm"
                   pb="5px"
                   onClick={() => {
@@ -84,7 +82,6 @@ const GridItem = ({ item }: Props) => {
                   +
                 </ProductButton>
                 <ProductButton
-                  device="desktop"
                   size="sm"
                   pb="5px"
                   onClick={() => {
@@ -97,7 +94,6 @@ const GridItem = ({ item }: Props) => {
             </>
           )}
           <ProductButton
-            device="desktop"
             mt="5px"
             mb="15px"
             w="120px"

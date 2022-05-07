@@ -1,20 +1,14 @@
 import { Button, ButtonProps } from '@chakra-ui/react'
 import React from 'react'
 
-export type Device = 'desktop' | 'mobile'
-
-export type Operation = '+' | '-'
-
 export interface ProductButtonProps extends ButtonProps {
-  device: Device
-  onClick: () => void
+  onClick?: () => void
   fontSize?: string
   h?: string
   w?: string
 }
 
 const ProductButton = ({
-  device,
   fontSize = '30px',
   w = '32px',
   h = '32px',

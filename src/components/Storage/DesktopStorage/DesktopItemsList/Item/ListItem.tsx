@@ -79,7 +79,6 @@ const ListItem = ({ item }: Props) => {
           <Flex justifyContent="flex-end">
             {!isEdit ? (
               <ProductButton
-                device="desktop"
                 w="80px"
                 onClick={() => {
                   setIsEdit(true)
@@ -106,7 +105,6 @@ const ListItem = ({ item }: Props) => {
                 </NumberInput>
                 <ButtonGroup isAttached mx="5px">
                   <ProductButton
-                    device="desktop"
                     size="sm"
                     pb="5px"
                     onClick={() => {
@@ -116,7 +114,6 @@ const ListItem = ({ item }: Props) => {
                     +
                   </ProductButton>
                   <ProductButton
-                    device="desktop"
                     size="sm"
                     pb="5px"
                     onClick={() => {
@@ -129,7 +126,6 @@ const ListItem = ({ item }: Props) => {
               </>
             )}
             <ProductButton
-              device="desktop"
               w="120px"
               onClick={() => {}}
               fontSize="16px"
