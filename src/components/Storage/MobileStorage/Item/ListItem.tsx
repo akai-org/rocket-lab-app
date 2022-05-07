@@ -12,7 +12,7 @@ import {
   ButtonGroup,
 } from '@chakra-ui/react'
 import { Item } from '../../../../mongo/models/item'
-import ProductButton from '../../../Overridden/ProductButton/ProductButton'
+import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 import { useState } from 'react'
 
 interface Props {

@@ -1,7 +1,7 @@
 import { Button, Flex, Icon, Text, Link } from '@chakra-ui/react'
 import { useState } from 'react'
 import { IoIosSettings } from 'react-icons/io'
-import NavButton from '../../../Overridden/NavButton/NavButton'
+import NavButton from '../../../UI/Custom Buttons/NavButton/NavButton'
 
 const DesktopSidebar = () => {
   const [isStorageActive, setIsStorageActive] = useState(true)
