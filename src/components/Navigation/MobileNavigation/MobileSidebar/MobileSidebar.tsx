@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
-import { Box, Button, calc, Flex, Icon, Link, Text } from '@chakra-ui/react'
+import React from 'react'
+import { Box, Button, Flex, Icon, Link, Text } from '@chakra-ui/react'
 import { IoIosSettings } from 'react-icons/io'
 import NavButton from '../../../UI/Custom Buttons/NavButton/NavButton'
+import { useRouter } from 'next/router'
 
 const Sidebar = () => {
-  const [isStorageActive, setIsStorageActive] = useState(true)
-  const [isListActive, setIsListActive] = useState(false)
-  const [isHistoryActive, setIsHistoryActive] = useState(false)
-  const [isSchemesActive, setIsSchemesActive] = useState(false)
+  const router = useRouter()
   return (
     <Box
       position="fixed"
@@ -23,12 +21,10 @@ const Sidebar = () => {
       <Flex flexDirection="column" h="100%" overflow="scroll">
         <Flex flexDir="column" w="100%" alignItems="center" m="30px auto">
           <NavButton
-            setIsHistoryActive={setIsHistoryActive}
-            setIsSchemesActive={setIsSchemesActive}
-            setIsListActive={setIsListActive}
-            setIsStorageActive={setIsStorageActive}
-            setCurrentActive={setIsStorageActive}
-            isItemActive={isStorageActive}
+            isItemActive={router.asPath === '/'}
+            onClick={() => {
+              router.push('/')
+            }}
             fontSize="20px"
             h="50px"
             w="90%"
@@ -37,12 +33,10 @@ const Sidebar = () => {
             Magazyn
           </NavButton>
           <NavButton
-            setIsHistoryActive={setIsHistoryActive}
-            setIsSchemesActive={setIsSchemesActive}
-            setIsListActive={setIsListActive}
-            setIsStorageActive={setIsStorageActive}
-            setCurrentActive={setIsListActive}
-            isItemActive={isListActive}
+            isItemActive={router.asPath === '/list'}
+            onClick={() => {
+              router.push('/list')
+            }}
             fontSize="20px"
             h="50px"
             w="90%"
@@ -51,12 +45,7 @@ const Sidebar = () => {
             Lista Zakupów
           </NavButton>
           <NavButton
-            setIsHistoryActive={setIsHistoryActive}
-            setIsSchemesActive={setIsSchemesActive}
-            setIsListActive={setIsListActive}
-            setIsStorageActive={setIsStorageActive}
-            setCurrentActive={setIsHistoryActive}
-            isItemActive={isHistoryActive}
+            isItemActive={router.asPath === '/history'}
             fontSize="20px"
             h="50px"
             w="90%"
@@ -65,12 +54,7 @@ const Sidebar = () => {
             Historia
           </NavButton>
           <NavButton
-            setIsHistoryActive={setIsHistoryActive}
-            setIsSchemesActive={setIsSchemesActive}
-            setIsListActive={setIsListActive}
-            setIsStorageActive={setIsStorageActive}
-            setCurrentActive={setIsSchemesActive}
-            isItemActive={isSchemesActive}
+            isItemActive={router.asPath === '/schemes'}
             fontSize="20px"
             h="50px"
             w="90%"

@@ -3,22 +3,12 @@ import { Dispatch, SetStateAction } from 'react'
 
 export interface NavButtonProps extends ButtonProps {
   isItemActive: boolean
-  setIsListActive: Dispatch<SetStateAction<boolean>>
-  setIsStorageActive: Dispatch<SetStateAction<boolean>>
-  setIsHistoryActive: Dispatch<SetStateAction<boolean>>
-  setIsSchemesActive: Dispatch<SetStateAction<boolean>>
-  setCurrentActive: Dispatch<SetStateAction<boolean>>
   fontSize?: string
   h?: string
   w?: string
 }
 
 const NavButton = ({
-  setIsHistoryActive,
-  setIsStorageActive,
-  setIsListActive,
-  setIsSchemesActive,
-  setCurrentActive,
   isItemActive,
   name,
   children,
@@ -39,13 +29,6 @@ const NavButton = ({
       colorScheme="black"
       color="black"
       fontWeight="normal"
-      onClick={() => {
-        setIsListActive(false)
-        setIsStorageActive(false)
-        setIsHistoryActive(false)
-        setIsSchemesActive(false)
-        setCurrentActive(true)
-      }}
       {...restProps}
     >
       {children}

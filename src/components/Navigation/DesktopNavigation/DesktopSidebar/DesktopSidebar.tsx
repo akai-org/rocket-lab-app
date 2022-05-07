@@ -1,13 +1,10 @@
 import { Button, Flex, Icon, Text, Link } from '@chakra-ui/react'
-import { useState } from 'react'
 import { IoIosSettings } from 'react-icons/io'
 import NavButton from '../../../UI/Custom Buttons/NavButton/NavButton'
+import { useRouter } from 'next/router'
 
 const DesktopSidebar = () => {
-  const [isStorageActive, setIsStorageActive] = useState(true)
-  const [isListActive, setIsListActive] = useState(false)
-  const [isHistoryActive, setIsHistoryActive] = useState(false)
-  const [isSchemesActive, setIsSchemesActive] = useState(false)
+  const router = useRouter()
   return (
     <Flex
       position="absolute"
@@ -25,48 +22,28 @@ const DesktopSidebar = () => {
     >
       <Flex flexDirection="column" w="100%" alignItems="center">
         <NavButton
-          setIsHistoryActive={setIsHistoryActive}
-          setIsSchemesActive={setIsSchemesActive}
-          setIsListActive={setIsListActive}
-          setIsStorageActive={setIsStorageActive}
-          setCurrentActive={setIsStorageActive}
-          isItemActive={isStorageActive}
+          isItemActive={router.asPath === '/'}
+          onClick={() => {
+            router.push('/')
+          }}
           mt="20px"
           w="80%"
         >
           Magazyn
         </NavButton>
         <NavButton
-          setIsHistoryActive={setIsHistoryActive}
-          setIsSchemesActive={setIsSchemesActive}
-          setIsListActive={setIsListActive}
-          setIsStorageActive={setIsStorageActive}
-          setCurrentActive={setIsListActive}
-          isItemActive={isListActive}
+          isItemActive={router.asPath === '/list'}
+          onClick={() => {
+            router.push('/list')
+          }}
           w="80%"
         >
           Lista Zakupów
         </NavButton>
-        <NavButton
-          setIsHistoryActive={setIsHistoryActive}
-          setIsSchemesActive={setIsSchemesActive}
-          setIsListActive={setIsListActive}
-          setIsStorageActive={setIsStorageActive}
-          setCurrentActive={setIsHistoryActive}
-          isItemActive={isHistoryActive}
-          w="80%"
-        >
+        <NavButton isItemActive={router.asPath === '/history'} w="80%">
           Historia
         </NavButton>
-        <NavButton
-          setIsHistoryActive={setIsHistoryActive}
-          setIsSchemesActive={setIsSchemesActive}
-          setIsListActive={setIsListActive}
-          setIsStorageActive={setIsStorageActive}
-          setCurrentActive={setIsSchemesActive}
-          isItemActive={isSchemesActive}
-          w="80%"
-        >
+        <NavButton isItemActive={router.asPath === '/schemes'} w="80%">
           Schematy
         </NavButton>
       </Flex>
