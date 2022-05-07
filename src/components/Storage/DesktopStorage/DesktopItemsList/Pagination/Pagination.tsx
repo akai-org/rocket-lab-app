@@ -4,7 +4,7 @@ import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { sortingType } from '../../../../../utils/types/frontendGeneral'
 import { PaginationGeneral } from '../../../../UI/PaginationGeneral/PaginationGeneral'
-import { SortingMechanism } from './PaginationDisplay'
+import { PaginationControlls } from './PaginationControlls'
 
 export const Sorting: React.FC<{
   setListType: (type: sortingType) => void
@@ -20,7 +20,7 @@ export const Sorting: React.FC<{
           h="45px"
           p="12px 20px"
         >
-          <SortingMechanism {...controlls} />
+          <PaginationControlls {...controlls} />
           <Flex>
             <Icon
               cursor="pointer"
