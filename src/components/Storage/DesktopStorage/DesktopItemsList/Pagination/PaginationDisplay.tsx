@@ -17,12 +17,7 @@ export const SortingMechanism: React.FC<PaginationSettings> = ({
   const rangeBeginning = previousPage * toDisplay
 
   return (
-    <Flex
-      justifyContent="space-between"
-      borderBottom="1px solid #C4C4C4"
-      h="45px"
-      p="12px 20px"
-    >
+
       <Flex color="#C4C4C4">
         <Flex>
           <Text w="130px">Items per page:</Text>
@@ -82,6 +77,5 @@ export const SortingMechanism: React.FC<PaginationSettings> = ({
           </Link>
         </Flex>
       </Flex>
-    </Flex>
   )
 }

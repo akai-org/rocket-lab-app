@@ -12,32 +12,38 @@ export const Sorting: React.FC<{
   itemsCount?: number
 }> = (props) => {
   return (
-    <>
-      <PaginationGeneral
-        paginationSettings={SortingMechanism}
-        itemsCount={props.itemsCount}
-      />
-      <Flex>
-        <Icon
-          cursor="pointer"
-          color={props.listType === 'grid' ? 'black' : '#C4C4C4'}
-          fontSize="20px"
-          mr="10px"
-          onClick={() => {
-            props.setListType('grid')
-          }}
-          as={BsFillGridFill}
-        />
-        <Icon
-          cursor="pointer"
-          color={props.listType === 'list' ? 'black' : '#C4C4C4'}
-          fontSize="20px"
-          onClick={() => {
-            props.setListType('list')
-          }}
-          as={FaThList}
-        />
-      </Flex>
-    </>
+    <PaginationGeneral itemsCount={props.itemsCount}>
+      {(controlls) => (
+        <Flex
+          justifyContent="space-between"
+          borderBottom="1px solid #C4C4C4"
+          h="45px"
+          p="12px 20px"
+        >
+          <SortingMechanism {...controlls} />
+          <Flex>
+            <Icon
+              cursor="pointer"
+              color={props.listType === 'grid' ? 'black' : '#C4C4C4'}
+              fontSize="20px"
+              mr="10px"
+              onClick={() => {
+                props.setListType('grid')
+              }}
+              as={BsFillGridFill}
+            />
+            <Icon
+              cursor="pointer"
+              color={props.listType === 'list' ? 'black' : '#C4C4C4'}
+              fontSize="20px"
+              onClick={() => {
+                props.setListType('list')
+              }}
+              as={FaThList}
+            />
+          </Flex>
+        </Flex>
+      )}
+    </PaginationGeneral>
   )
 }
