@@ -2,17 +2,14 @@ import { Box, Flex, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import ListItem from './Item/ListItem'
 import GridItem from './Item/GridItem'
-import { Sorting } from './Pagination/Pagination'
 import {
   MainViewProps,
   sortingType,
 } from '../../../../utils/types/frontendGeneral'
-import { Item } from '../../../../mongo/models/item'
+import { PaginationGeneral } from '../../../UI/PaginationGeneral/PaginationGeneral'
+import { PaginationControlls } from './Pagination/PaginationControlls'
 
 const DesktopItemsList = ({ items, itemsCount }: MainViewProps) => {
-  for (const item of items as Item[]) {
-    console.log(item.id)
-  }
   const [listType, setListType] = useState<sortingType>('grid')
   return (
     <Box
@@ -21,11 +18,15 @@ const DesktopItemsList = ({ items, itemsCount }: MainViewProps) => {
       border="1px solid #C4C4C4"
       mt="20px"
     >
-      <Sorting
-        itemsCount={itemsCount}
-        listType={listType}
-        setListType={setListType}
-      />
+      <PaginationGeneral itemsCount={itemsCount}>
+        {(controlls) => (
+          <PaginationControlls
+            {...controlls}
+            listType={listType}
+            setListType={setListType}
+          />
+        )}
+      </PaginationGeneral>
       {listType === 'list' ? (
         <Flex flexWrap="wrap" p="20px">
           <Table p="20px">
