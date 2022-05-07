@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { ChangeEvent, FC } from 'react'
+import { ChangeEvent, FC } from 'react'
 import { ITEMS_QUERY_LIMIT, FIRST_PAGE } from '../../../utils/constants'
 
 export interface PaginationSettings {
@@ -14,7 +14,7 @@ export interface PaginationSettings {
 
 interface Props {
   itemsCount?: number
-  paginationSettings: React.FC<PaginationSettings>
+  children: (controls: PaginationSettings) => JSX.Element
 }
 
 export const PaginationGeneral: FC<Props> = (props) => {
@@ -32,8 +32,6 @@ export const PaginationGeneral: FC<Props> = (props) => {
     }
     return sanitizedPage
   }
-
-  const Display = props.paginationSettings
 
   const router = useRouter()
   const query = router.query
@@ -69,15 +67,13 @@ export const PaginationGeneral: FC<Props> = (props) => {
     router.push({ query: { page, toDisplay: newToDisplay } })
   }
 
-  return (
-    <Display
-      handleOnChangeQuantity={onToDisplayChange}
-      maxPage={maxPage}
-      minPage={minPage}
-      nextPage={nextPage}
-      previousPage={previousPage}
-      toDisplay={toDisplay}
-      itemsCount={itemsCount}
-    />
-  )
+  return props.children({
+    handleOnChangeQuantity: onToDisplayChange,
+    itemsCount,
+    maxPage,
+    minPage,
+    nextPage,
+    previousPage,
+    toDisplay,
+  })
 }

@@ -1,10 +1,19 @@
 import { Flex, Select, Icon, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
+import { BsFillGridFill } from 'react-icons/bs'
+import { FaThList } from 'react-icons/fa'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+import { FIRST_PAGE } from '../../../../../utils/constants'
+import { sortingType } from '../../../../../utils/types/frontendGeneral'
 import { PaginationSettings } from '../../../../UI/PaginationGeneral/PaginationGeneral'
 
-export const SortingMechanism: React.FC<PaginationSettings> = ({
+interface Props extends PaginationSettings {
+  setListType: (type: sortingType) => void
+  listType: sortingType
+}
+
+export const PaginationControlls: React.FC<Props> = ({
   handleOnChangeQuantity,
   maxPage,
   minPage,
@@ -12,9 +21,15 @@ export const SortingMechanism: React.FC<PaginationSettings> = ({
   previousPage,
   toDisplay,
   itemsCount,
+  listType,
+  setListType,
 }) => {
-  console.log(previousPage)
-  const rangeBeginning = previousPage * toDisplay
+  const rangeBeginning = previousPage * toDisplay + FIRST_PAGE - toDisplay
+  let rangeEnd = previousPage * toDisplay
+
+  if (rangeEnd > itemsCount) {
+    rangeEnd = itemsCount
+  }
 
   return (
     <Flex
@@ -39,7 +54,7 @@ export const SortingMechanism: React.FC<PaginationSettings> = ({
           </Select>
         </Flex>
         <Text m="0 40px">
-          {rangeBeginning} - 5 of {itemsCount}
+          {rangeBeginning} - {rangeEnd} of {itemsCount}
         </Text>
         <Flex fontSize="20px" w="120px" justifyContent="space-around">
           <Link href={{ query: { page: minPage, toDisplay } }} passHref>
@@ -81,6 +96,27 @@ export const SortingMechanism: React.FC<PaginationSettings> = ({
             />
           </Link>
         </Flex>
+      </Flex>
+      <Flex>
+        <Icon
+          cursor="pointer"
+          color={listType === 'grid' ? 'black' : '#C4C4C4'}
+          fontSize="20px"
+          mr="10px"
+          onClick={() => {
+            setListType('grid')
+          }}
+          as={BsFillGridFill}
+        />
+        <Icon
+          cursor="pointer"
+          color={listType === 'list' ? 'black' : '#C4C4C4'}
+          fontSize="20px"
+          onClick={() => {
+            setListType('list')
+          }}
+          as={FaThList}
+        />
       </Flex>
     </Flex>
   )
