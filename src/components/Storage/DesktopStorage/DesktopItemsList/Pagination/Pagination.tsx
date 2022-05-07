@@ -2,8 +2,8 @@ import { Flex, Icon } from '@chakra-ui/react'
 import React from 'react'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
-import { sortingType } from '../../../../utils/types/frontendGeneral'
-import { PaginationGeneral } from '../../../UI/PaginationGeneral/PaginationGeneral'
+import { sortingType } from '../../../../../utils/types/frontendGeneral'
+import { PaginationGeneral } from '../../../../UI/PaginationGeneral/PaginationGeneral'
 import { SortingMechanism } from './PaginationDisplay'
 
 export const Sorting: React.FC<{
@@ -13,7 +13,10 @@ export const Sorting: React.FC<{
 }> = (props) => {
   return (
     <>
-      <PaginationGeneral paginationSettings={SortingMechanism} itemsCount={props.itemsCount} />
+      <PaginationGeneral
+        paginationSettings={SortingMechanism}
+        itemsCount={props.itemsCount}
+      />
       <Flex>
         <Icon
           cursor="pointer"

@@ -6,11 +6,11 @@ import { Sorting } from './Pagination/Pagination'
 import {
   MainViewProps,
   sortingType,
-} from '../../../utils/types/frontendGeneral'
-import { Item } from '../../../mongo/models/item'
+} from '../../../../utils/types/frontendGeneral'
+import { Item } from '../../../../mongo/models/item'
 
 const DesktopItemsList = ({ items, itemsCount }: MainViewProps) => {
-  for(const item of items as Item[]){
+  for (const item of items as Item[]) {
     console.log(item.id)
   }
   const [listType, setListType] = useState<sortingType>('grid')
@@ -40,17 +40,14 @@ const DesktopItemsList = ({ items, itemsCount }: MainViewProps) => {
               </Tr>
             </Thead>
             <Tbody>
-              {items && items.map((item) => (
-                <ListItem item={item} key={item.id} />
-              ))}
+              {items &&
+                items.map((item) => <ListItem item={item} key={item.id} />)}
             </Tbody>
           </Table>
         </Flex>
       ) : (
         <Flex flexWrap="wrap" p="20px">
-          {items && items.map((item) => (
-            <GridItem item={item} key={item.id} />
-          ))}
+          {items && items.map((item) => <GridItem item={item} key={item.id} />)}
         </Flex>
       )}
     </Box>

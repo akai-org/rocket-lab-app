@@ -1,6 +1,6 @@
 import { useMediaQuery } from '@chakra-ui/react'
-import DesktopNavigation from '../Navigation/DesktopNavigation'
-import MobileNavigation from '../Navigation/MobileNavigation'
+import DesktopNavigation from '../Navigation/DesktopNavigation/DesktopNavigation'
+import MobileNavigation from '../Navigation/MobileNavigation/MobileNavigation'
 
 const Layout = () => {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
