@@ -4,7 +4,6 @@ import MobileNavigation from '../Navigation/MobileNavigation/MobileNavigation'
 
 const Layout = () => {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
-
   return <>{isDesktop ? <DesktopNavigation /> : <MobileNavigation />}</>
 }
 
