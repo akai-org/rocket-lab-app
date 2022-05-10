@@ -122,7 +122,7 @@ const AddItem = () => {
               </Flex>
             </Flex>
           ) : (
-            <Flex flexDirection="column" w="100%">
+            <Flex flexDirection="column" pt="8px" w="100%">
               <Flex>
                 {/* TO DO wychwytywanie na podstawie wpisanej wartości produktów z magazynu */}
                 <BsSearch size={25} />
