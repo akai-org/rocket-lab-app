@@ -50,12 +50,11 @@ export const getServerSideProps = withPageAuthRequired({
 
       const categories = await fetchCategories()
 
-      console.log({categories})
-
       return {
         props: {
           items: JSON.parse(JSON.stringify(items)),
           itemsCount: JSON.parse(JSON.stringify(itemsCount)),
+          categories: JSON.parse(JSON.stringify(categories)),
         },
       }
     } catch (e) {

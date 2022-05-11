@@ -7,7 +7,7 @@ export interface CartItem {
 }
 
 const cartItemSchema = new Schema<CartItem>({
-  quantity: { type: Number, default: 1, min: 1 },
+  quantity: { type: Number, default: 1, min: 1, max: 1000000 },
   item: {
     type: Schema.Types.ObjectId,
     ref: 'Item',

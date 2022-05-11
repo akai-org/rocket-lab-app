@@ -6,7 +6,8 @@ export interface Item {
   description: string
   toBuy: boolean
   id: Schema.Types.ObjectId
-  categories: string[]
+  categories: Schema.Types.ObjectId[]
+  quantity: number
 }
 
 const itemSchema = new Schema<Item>({
@@ -20,6 +21,8 @@ const itemSchema = new Schema<Item>({
     type: Boolean,
     default: false,
   },
+  quantity: {type: Number, default: 1, min: 1, max: 1000000},
+  categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
 })
 
 export const ItemModel =
