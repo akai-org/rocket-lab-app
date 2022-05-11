@@ -9,6 +9,7 @@ import { Text } from '@chakra-ui/react'
 import * as itemsService from '../services/itemsService'
 import { Credentials } from '../utils/credentials'
 import { FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../utils/constants'
+import { fetchCategories } from '../services/categoryService'
 
 interface Props extends MainViewProps {
   error?: Error
@@ -46,6 +47,10 @@ export const getServerSideProps = withPageAuthRequired({
       const items = await itemsService.fetchItems(skip, toDisplay)
 
       const itemsCount = await itemsService.fetchItemsCount()
+
+      const categories = await fetchCategories()
+
+      console.log({categories})
 
       return {
         props: {

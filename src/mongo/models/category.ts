@@ -10,4 +10,4 @@ const categorySchema = new Schema<Category>({
 })
 
 export const CategoryModel =
-  (models.category as Model<Category>) || model('CartItem', categorySchema)
+  (models.Category as Model<Category>) || model('Category', categorySchema)

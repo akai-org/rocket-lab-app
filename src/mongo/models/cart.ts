@@ -16,4 +16,4 @@ const cartItemSchema = new Schema<CartItem>({
 })
 
 export const CartItemModel =
-  (models.cartItem as Model<CartItem>) || model('CartItem', cartItemSchema)
+  (models.CartItem as Model<CartItem>) || model('CartItem', cartItemSchema)
