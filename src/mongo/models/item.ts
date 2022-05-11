@@ -5,7 +5,8 @@ export interface Item {
   imageUrl: string
   description: string
   toBuy: boolean
-  id: string
+  id: Schema.Types.ObjectId
+  categories: string[]
 }
 
 const itemSchema = new Schema<Item>({
