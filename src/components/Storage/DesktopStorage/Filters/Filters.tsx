@@ -11,10 +11,20 @@ import {
   Select,
   Text,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
+import { Category } from '../../../../mongo/models/category'
+import { fetcher } from '../../../../utils/requests'
 
 const Filters = () => {
+  const [categories, setCategories] = useState<Category[]>([])
+
+  useEffect(() => {
+    fetcher('http://localhost:3000/api/categories').then((newCategories) =>
+      setCategories(newCategories)
+    ).catch(error => console.log(error))
+  }, [])
+
   return (
     <Flex
       flexDirection="column"
@@ -48,11 +58,11 @@ const Filters = () => {
         <Flex flexDirection="column" w="30%">
           <Text>Kategoria</Text>
           <Select h="40px" border="1px solid #D4D4D4" fontWeight="400">
-            <option value="materialyEksploatacyjne">
-              Materiały eksploatacyjne
-            </option>
-            <option value="narzedzia">Narzędzia</option>
-            <option value="kolejnaKategoria">Kolejna kategoria</option>
+            {categories.map(({ name, id }) => (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            ))}
           </Select>
         </Flex>
         <Flex flexDirection="column" w="30%">

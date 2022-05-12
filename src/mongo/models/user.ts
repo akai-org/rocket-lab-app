@@ -2,7 +2,7 @@ import { Schema, Model, models, model } from 'mongoose'
 import { adminRoles as userRoles } from '../../utils/types/backendGeneral'
 
 export interface User {
-  id: Schema.Types.ObjectId
+  id: string
   _id: Schema.Types.ObjectId
   role: userRoles
   email: string

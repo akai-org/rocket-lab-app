@@ -5,8 +5,8 @@ export interface Item {
   imageUrl: string
   description: string
   toBuy: boolean
-  id: Schema.Types.ObjectId
-  categories: Schema.Types.ObjectId[]
+  id: string
+  categories: string[]
   quantity: number
 }
 

@@ -1,7 +1,7 @@
 import { Schema, Model, models, model } from 'mongoose'
 
 export interface Category {
-  id: Schema.Types.ObjectId
+  id: string
   name: string
 }
 
