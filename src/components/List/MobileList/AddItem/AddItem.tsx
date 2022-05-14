@@ -1,5 +1,6 @@
 import {
   Flex,
+  Heading,
   Input,
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -12,11 +13,12 @@ import {
 import { useState } from 'react'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 import { BsSearch } from 'react-icons/bs'
+import { listAddItem } from '../../../../utils/types/frontendGeneral'
 
 export type item = 'custom' | 'existing'
 
 const AddItem = () => {
-  const [itemType, setItemType] = useState<item>()
+  const [itemType, setItemType] = useState<listAddItem>()
   const [isTypeChosen, setIsTypeChosen] = useState(false)
   const [quantity, setQuantity] = useState(1)
   return (
@@ -29,11 +31,11 @@ const AddItem = () => {
       p="10px"
       alignItems="center"
     >
+      <Heading fontSize="18px" fontWeight="300" mb="5px">
+        Dodaj do listy
+      </Heading>
       {!isTypeChosen ? (
         <>
-          <Text fontSize="18px " mb="5px">
-            Dodaj do listy
-          </Text>
           <Flex mb="5px">
             <ProductButton
               onClick={() => {
@@ -90,7 +92,7 @@ const AddItem = () => {
                   <NumberDecrementStepper />
                 </NumberInputStepper>
               </NumberInput>
-              {/* TO DO fetchowanie listy list */}
+              {/* TODO: fetchowanie listy list */}
               <Text mt="10px">Dodaj do listy</Text>
               <Select h="32px" borderColor="#D5D5D5">
                 <option value="list1">Lista 1</option>
@@ -124,12 +126,12 @@ const AddItem = () => {
           ) : (
             <Flex flexDirection="column" pt="8px" w="100%">
               <Flex>
-                {/* TO DO wychwytywanie na podstawie wpisanej wartości produktów z magazynu */}
+                {/* TODO: wychwytywanie na podstawie wpisanej wartości produktów z magazynu */}
                 <BsSearch size={25} />
                 <Input h="32px" ml="10px" borderColor="#D5D5D5" />
               </Flex>
               <Text mt="10px">Dodaj do listy</Text>
-              {/* TO DO fetchowanie listy list */}
+              {/* TODO: fetchowanie listy list */}
               <Select h="32px" borderColor="#D5D5D5">
                 <option value="list1">Lista 1</option>
                 <option value="list2">Lista 2</option>

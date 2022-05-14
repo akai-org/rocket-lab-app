@@ -46,94 +46,59 @@ const ListItem = ({ item }: Props) => {
         </Text>
       </Td>
       <Td>
-        {quantity ? (
-          <Flex flexDirection="row" justifyContent="flex-end">
-            <NumberInput
-              h="32px"
-              w="84px"
-              borderColor="#E2E8F0"
-              defaultValue={1}
-              min={1}
-              mr="10px"
-            >
-              <NumberInputField h="32px" />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-            <Button
-              w="27px"
-              pb="5px"
-              size="sm"
-              borderRadius="6px"
-              fontWeight="400"
-              fontSize="30px"
-              bgColor="#FF7700"
-              color="white"
-            >
-              +
-            </Button>
-          </Flex>
-        ) : (
-          <Flex justifyContent="flex-end">
-            {!isEdit ? (
-              <ProductButton
-                w="80px"
-                onClick={() => {
-                  setIsEdit(true)
-                }}
-                fontSize="16px"
-                mx="5px"
-              >
-                Edytuj
-              </ProductButton>
-            ) : (
-              <>
-                <NumberInput
-                  h="32px"
-                  w="84px"
-                  borderColor="#E2E8F0"
-                  defaultValue={1}
-                  min={1}
-                >
-                  <NumberInputField h="32px" />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-                <ButtonGroup isAttached mx="5px">
-                  <ProductButton
-                    size="sm"
-                    pb="5px"
-                    onClick={() => {
-                      setIsEdit(false)
-                    }}
-                  >
-                    +
-                  </ProductButton>
-                  <ProductButton
-                    size="sm"
-                    pb="5px"
-                    onClick={() => {
-                      setIsEdit(false)
-                    }}
-                  >
-                    -
-                  </ProductButton>
-                </ButtonGroup>
-              </>
-            )}
+        <Flex justifyContent="flex-end">
+          {!isEdit ? (
             <ProductButton
-              w="120px"
-              onClick={() => {}}
+              w="80px"
+              onClick={() => {
+                setIsEdit(true)
+              }}
               fontSize="16px"
+              mx="5px"
             >
-              Dodaj do listy
+              Edytuj
             </ProductButton>
-          </Flex>
-        )}
+          ) : (
+            <>
+              <NumberInput
+                h="32px"
+                w="84px"
+                borderColor="#E2E8F0"
+                defaultValue={1}
+                min={1}
+              >
+                <NumberInputField h="32px" />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+              <ButtonGroup isAttached mx="5px">
+                <ProductButton
+                  size="sm"
+                  pb="5px"
+                  onClick={() => {
+                    setIsEdit(false)
+                  }}
+                >
+                  +
+                </ProductButton>
+                <ProductButton
+                  size="sm"
+                  pb="5px"
+                  onClick={() => {
+                    setIsEdit(false)
+                  }}
+                >
+                  -
+                </ProductButton>
+              </ButtonGroup>
+            </>
+          )}
+          <ProductButton w="120px" onClick={() => {}} fontSize="16px">
+            Dodaj do listy
+          </ProductButton>
+        </Flex>
       </Td>
     </Tr>
   )
