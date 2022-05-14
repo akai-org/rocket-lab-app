@@ -1,16 +1,4 @@
-import {
-  Button,
-  Flex,
-  Icon,
-  Input,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Select,
-  Text,
-} from '@chakra-ui/react'
+import { Button, Flex, Icon, Input, Select, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -28,12 +16,14 @@ const Filters = () => {
   const [category, setCategory] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
 
-  const router = useRouter()
-
   let query: Query = {}
 
   if (category) {
     query.category = category
+  }
+
+  if (category === 'all') {
+    delete query.category
   }
 
   if (searchTerm) {
@@ -42,7 +32,9 @@ const Filters = () => {
 
   useEffect(() => {
     fetcher('http://localhost:3000/api/categories')
-      .then((newCategories) => setCategories(newCategories))
+      .then((newCategories) => {
+        setCategories(newCategories)
+      })
       .catch((error) => console.log(error))
   }, [])
 
@@ -86,6 +78,7 @@ const Filters = () => {
             fontWeight="400"
             onChange={(e) => setCategory(e.target.value)}
           >
+            <option value="all">Wszystkie</option>
             {categories.map(({ name, id }) => (
               <option key={id} value={name}>
                 {name}
@@ -95,7 +88,7 @@ const Filters = () => {
         </Flex>
       </Flex>
       <Flex justifyContent="flex-end" p="25px 0 5px 0">
-        <Link href={{ query: {...query} }}>
+        <Link href={{ query: { ...query } }}>
           <Button w="120px" h="40px" bgColor="#FF7700" color="white">
             Wyszukaj
           </Button>

@@ -41,10 +41,15 @@ export const getServerSideProps = withPageAuthRequired({
 
       const page = query.page ? +query.page : FIRST_PAGE
       const toDisplay = query.toDisplay ? +query.toDisplay : ITEMS_QUERY_LIMIT
+      const category = query.category
 
       const skip = (page - FIRST_PAGE) * toDisplay
 
-      const items = await itemsService.fetchItems(skip, toDisplay)
+      const items = await itemsService.fetchItems(
+        skip,
+        toDisplay,
+        category as string | undefined
+      )
 
       const itemsCount = await itemsService.fetchItemsCount()
 
@@ -62,7 +67,6 @@ export const getServerSideProps = withPageAuthRequired({
       return {
         props: {
           error: JSON.parse(JSON.stringify(e)),
-          itemsCount: undefined,
         },
       }
     }
