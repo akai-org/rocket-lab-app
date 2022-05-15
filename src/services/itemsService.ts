@@ -1,39 +1,63 @@
 import { Item, ItemModel } from '../mongo/models/item'
 import { ITEMS_QUERY_LIMIT } from '../utils/constants'
-import { FilterQuery } from 'mongoose'
 
 export async function fetchItems(
   skip = 0,
   limit: number = ITEMS_QUERY_LIMIT,
-  category?: string
+  filterOptions?: { category?: string; searchTerm?: string }
 ): Promise<Item[]> {
-  if (category) {
-    return await ItemModel.aggregate([
-      {
-        $lookup: {
-          from: 'categories',
-          localField: 'categories',
-          foreignField: '_id',
-          as: 'searchedCategory',
-        },
-      },
-      { $unwind: '$searchedCategory' },
-      {
-        $match: {
-          'searchedCategory.name': category,
-        },
-      },
-      {
-        $addFields: {
-          id: '$_id',
-        },
-      },
-    ])
-      .skip(skip)
-      .limit(limit)
-  } else {
-    return await ItemModel.find().skip(skip).limit(limit)
+  let items
+  const match: {
+    'searchedCategory.name'?: string
+    $or: object[] 
+  } = { $or: []  }
+  if (filterOptions?.category) {
+    match['searchedCategory.name'] = filterOptions.category
   }
+
+  if (filterOptions?.searchTerm) {
+    const regex = new RegExp(filterOptions.searchTerm)
+    match.$or.push({ name: { $regex: regex } })
+    match.$or.push({ description: { $regex: regex } })
+  }
+
+  const parseCategory = [
+    {
+      $lookup: {
+        from: 'categories',
+        localField: 'categories',
+        foreignField: '_id',
+        as: 'searchedCategory',
+      },
+    },
+    { $unwind: '$searchedCategory' },
+  ]
+
+  const queryBody = [
+    {
+      $match: match,
+    },
+    {
+      $addFields: {
+        id: '$_id',
+      },
+    },
+  ]
+
+  const filterAlwaysByCategory =
+    (filterOptions?.category && filterOptions?.searchTerm) ||
+    filterOptions?.category
+
+  const filterBySearch = filterOptions?.searchTerm
+
+  if (filterAlwaysByCategory) {
+    items = ItemModel.aggregate([...parseCategory, ...queryBody])
+  } else if (filterBySearch) {
+    items = ItemModel.aggregate([...queryBody])
+  } else {
+    items = ItemModel.find()
+  }
+  return await items.skip(skip).limit(limit)
 }
 
 export async function fetchItemsCount(): Promise<number> {

@@ -12,14 +12,24 @@ interface Query {
 }
 
 const Filters = () => {
+  const router = useRouter()
+
+  const queryCategory = router.query.category as string | undefined
+
   const [categories, setCategories] = useState<Category[]>([])
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState(
+    queryCategory ? queryCategory : 'all'
+  )
   const [searchTerm, setSearchTerm] = useState('')
 
   let query: Query = {}
 
   if (category) {
     query.category = category
+  }
+
+  if (searchTerm) {
+    query.searchTerm = searchTerm
   }
 
   if (category === 'all') {
@@ -76,6 +86,7 @@ const Filters = () => {
             h="40px"
             border="1px solid #D4D4D4"
             fontWeight="400"
+            value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="all">Wszystkie</option>
