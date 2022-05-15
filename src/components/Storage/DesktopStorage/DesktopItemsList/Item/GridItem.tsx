@@ -28,16 +28,9 @@ const GridItem = ({ item }: Props) => {
         <Text fontSize="16px" fontWeight="400">
           {item.name}
         </Text>
-        <Box h="100%" maxH="42px">
-          <Text fontSize="12px" color="#878585">
-            {item.description.length > 40
-              ? item.description.substring(0, 40) + '...'
-              : item.description}
-          </Text>
-        </Box>
         <Box w="100%" mb="5px">
           <Text fontSize="14px" fontWeight="400">
-            {/* Warunkowe wyświetlanie ilości: jeżeli ilość===0 to napis brak w magazynie */}
+            {/* TODO: Warunkowe wyświetlanie ilości: jeżeli ilość===0 to napis brak w magazynie */}
             Ilość: 58
           </Text>
         </Box>
@@ -48,7 +41,7 @@ const GridItem = ({ item }: Props) => {
         >
           {!isEdit ? (
             <ProductButton
-              w="80px"
+              w="120px"
               onClick={() => {
                 setIsEdit(true)
               }}
