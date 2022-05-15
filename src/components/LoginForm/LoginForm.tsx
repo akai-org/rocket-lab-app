@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, SyntheticEvent, useRef } from 'react'
 import {
   Flex,
   Heading,
@@ -15,15 +15,39 @@ import {
   FormHelperText,
   InputRightElement,
 } from '@chakra-ui/react'
-import { EmailIcon, LockIcon } from '@chakra-ui/icons'
+import { IoIosAt, IoIosLock } from 'react-icons/io'
 import { FcGoogle } from 'react-icons/fc'
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [logIn, setLogIn] = useState(false)
+  const [emailIsCorrect, setEmailIsCorrect] = useState(true)
+  const [passwordIsCorrect, setPasswordIsCorrect] = useState(true)
 
-  const handleShowClick = () => setShowPassword(!showPassword)
-  const handleLogOrSignClick = () => setLogIn(!logIn)
+  const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>
+  const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>
+
+  const formSubmitHandler = (e: SyntheticEvent) => {
+    e.preventDefault()
+    const password = passwordRef.current.value
+
+    setEmailIsCorrect(true)
+    setPasswordIsCorrect(true)
+
+    if (!validateEmail(emailRef.current.value)) {
+      setEmailIsCorrect(false)
+    } else if (password === '' || password.length <= 7) {
+      setPasswordIsCorrect(false)
+    }
+  }
+
+  const validateEmail = (email: string) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+  }
 
   return (
     <Flex
@@ -47,7 +71,7 @@ const LoginForm = () => {
           Its-not-rocket-science
         </Heading>
         <Box minW="370px">
-          <form>
+          <form onSubmit={formSubmitHandler}>
             <Stack
               spacing={4}
               p="1rem"
@@ -59,24 +83,38 @@ const LoginForm = () => {
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents="none"
-                    children={<EmailIcon color="gray.300" />}
+                    children={<IoIosAt color="gray" />}
                   />
-                  <Input type="email" placeholder="email address" />
+                  <Input
+                    type="email"
+                    placeholder="email address"
+                    ref={emailRef}
+                  />
                 </InputGroup>
+                {!emailIsCorrect && (
+                  <FormHelperText textAlign="center" color="red" fontSize="md">
+                    Email is incorrect!
+                  </FormHelperText>
+                )}
               </FormControl>
               <FormControl>
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents="none"
                     color="gray.300"
-                    children={<LockIcon color="gray.300" />}
+                    children={<IoIosLock color="gray.300" />}
                   />
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Password"
+                    ref={passwordRef}
                   />
                   <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleShowClick}>
+                    <Button
+                      h="1.75rem"
+                      size="sm"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
                       {showPassword ? 'Hide' : 'Show'}
                     </Button>
                   </InputRightElement>
@@ -84,6 +122,16 @@ const LoginForm = () => {
                 {logIn && (
                   <FormHelperText textAlign="right">
                     <Link>forgot password?</Link>
+                  </FormHelperText>
+                )}
+                {!passwordIsCorrect && (
+                  <FormHelperText
+                    textAlign="center"
+                    color="red"
+                    fontSize="md"
+                    textDecoration="bold"
+                  >
+                    Password must consist of at least 8 characters!
                   </FormHelperText>
                 )}
               </FormControl>
@@ -112,7 +160,7 @@ const LoginForm = () => {
         </Box>
         <Box color="black">
           {logIn ? 'New to us? ' : 'You already have an account. '}
-          <Link color="#FF7700" href="#" onClick={handleLogOrSignClick}>
+          <Link color="#FF7700" href="#" onClick={() => setLogIn(!logIn)}>
             {logIn ? 'Sign Up' : 'Log In'}
           </Link>
         </Box>
