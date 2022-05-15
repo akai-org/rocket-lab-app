@@ -1,4 +1,5 @@
-import { Item } from "../../mongo/models/item"
+import { Category } from '../../mongo/models/category'
+import { Item } from '../../mongo/models/item'
 
 export type sortingType = 'grid' | 'list'
 
@@ -10,6 +11,7 @@ export interface ItemsQueryParams {
 
 export interface MainViewProps {
   items?: Item[]
-  itemsCount: number | undefined
+  itemsCount?: number
+  categories?: Category[]
 }
 

@@ -9,6 +9,7 @@ import { Text } from '@chakra-ui/react'
 import * as itemsService from '../services/itemsService'
 import { Credentials } from '../utils/credentials'
 import { FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../utils/constants'
+import { fetchCategories } from '../services/categoryService'
 
 interface Props extends MainViewProps {
   error?: Error
@@ -40,17 +41,25 @@ export const getServerSideProps = withPageAuthRequired({
 
       const page = query.page ? +query.page : FIRST_PAGE
       const toDisplay = query.toDisplay ? +query.toDisplay : ITEMS_QUERY_LIMIT
+      const category = query.category
+      const searchTerm = query.searchTerm as string | undefined
 
       const skip = (page - FIRST_PAGE) * toDisplay
 
-      const items = await itemsService.fetchItems(skip, toDisplay)
+      const items = await itemsService.fetchItems(skip, toDisplay, {
+        category: category as string | undefined,
+        searchTerm,
+      })
 
       const itemsCount = await itemsService.fetchItemsCount()
+
+      const categories = await fetchCategories()
 
       return {
         props: {
           items: JSON.parse(JSON.stringify(items)),
           itemsCount: JSON.parse(JSON.stringify(itemsCount)),
+          categories: JSON.parse(JSON.stringify(categories)),
         },
       }
     } catch (e) {
@@ -58,7 +67,6 @@ export const getServerSideProps = withPageAuthRequired({
       return {
         props: {
           error: JSON.parse(JSON.stringify(e)),
-          itemsCount: undefined,
         },
       }
     }
