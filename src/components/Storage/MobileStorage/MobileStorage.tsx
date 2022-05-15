@@ -8,6 +8,7 @@ import {
   MainViewProps,
   sortingType,
 } from '../../../utils/types/frontendGeneral'
+import FiltersGeneral from '../../UI/FiltersGeneral/FiltersGeneral'
 
 const MobileStorage = ({ items }: MainViewProps) => {
   const [listType, setListType] = useState<sortingType>('grid')
@@ -24,7 +25,9 @@ const MobileStorage = ({ items }: MainViewProps) => {
       {listType === 'grid'
         ? items && items.map((item) => <GridItem item={item} key={item.id} />)
         : items && items.map((item) => <ListItem item={item} key={item.id} />)}
-      <Filters setIsFiltersOpen={setIsFiltersOpen} />
+      <FiltersGeneral>
+        {(props) => <Filters {...props} setIsFiltersOpen={setIsFiltersOpen} />}
+      </FiltersGeneral>
     </Flex>
   )
 }

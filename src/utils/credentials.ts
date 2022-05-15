@@ -75,7 +75,6 @@ export class Credentials {
     if (!user?.role) {
       throw new Error('Unauthorized access/ User role is not defined properly')
     }
-    console.log(user.role)
     return user.role
   }
 
