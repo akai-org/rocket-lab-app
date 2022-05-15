@@ -49,7 +49,7 @@ const ListItem = ({ item }: Props) => {
         <Flex justifyContent="flex-end">
           {!isEdit ? (
             <ProductButton
-              w="80px"
+              w="120px"
               onClick={() => {
                 setIsEdit(true)
               }}
