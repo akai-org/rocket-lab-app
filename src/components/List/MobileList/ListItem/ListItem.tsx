@@ -10,6 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { IoIosArrowUp } from 'react-icons/io'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 
 const ListItem = () => {
@@ -84,6 +85,14 @@ const ListItem = () => {
               >
                 Ustaw
               </ProductButton>
+              <Box
+                ml="5px"
+                onClick={() => {
+                  setIsEdit(!isEdit)
+                }}
+              >
+                <IoIosArrowUp size="30px" />
+              </Box>
             </Flex>
           </>
         ) : (

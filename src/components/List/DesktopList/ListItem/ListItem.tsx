@@ -24,12 +24,12 @@ const ListItem = () => {
         <Flex justifyContent="flex-start">
           <Image src="item.png" w="40px" h="40px" />
           <Text lineHeight="40px" ml="10px">
-            Nazwa{' '}
+            Harnaś
           </Text>
         </Flex>
       </Td>
       <Td>
-        <Text>opis</Text>
+        <Text>To król gór</Text>
       </Td>
       <Td textAlign="right">
         <Text color={quantity ? 'inherit' : 'red.500'}>

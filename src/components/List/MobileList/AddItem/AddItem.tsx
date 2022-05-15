@@ -128,7 +128,7 @@ const AddItem = () => {
               <Flex>
                 {/* TODO: wychwytywanie na podstawie wpisanej wartości produktów z magazynu */}
                 <BsSearch size={25} />
-                <Input h="32px" ml="10px" borderColor="#D5D5D5" />
+                <Input h="32px" ml="5px" borderColor="#D5D5D5" />
               </Flex>
               <Text mt="10px">Dodaj do listy</Text>
               {/* TODO: fetchowanie listy list */}
@@ -137,7 +137,7 @@ const AddItem = () => {
                 <option value="list2">Lista 2</option>
                 <option value="list3">Lista 3</option>
               </Select>
-              <Flex justifyContent="flex-end" mt="15px">
+              <Flex justifyContent="flex-end" mt="10px">
                 <ProductButton
                   onClick={() => {
                     setIsTypeChosen(false)

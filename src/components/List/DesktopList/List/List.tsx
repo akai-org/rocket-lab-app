@@ -48,12 +48,12 @@ const List = () => {
         <Table p="20px">
           <Thead>
             <Tr fontSize="16px" fontWeight="700">
-              <Th minW="300px">NAZWA</Th>
+              <Th minW="250px">NAZWA</Th>
               <Th w="100%">OPIS</Th>
               <Th textAlign="right" minW="170px">
                 ILOŚĆ SZTUK
               </Th>
-              <Th></Th>
+              <Th textAlign="right">AKCJE</Th>
             </Tr>
           </Thead>
           <Tbody>
