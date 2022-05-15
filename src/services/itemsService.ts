@@ -9,13 +9,14 @@ export async function fetchItems(
   let items
   const match: {
     'searchedCategory.name'?: string
-    $or: object[] 
-  } = { $or: []  }
+    $or?: object[]
+  } = {}
   if (filterOptions?.category) {
     match['searchedCategory.name'] = filterOptions.category
   }
 
   if (filterOptions?.searchTerm) {
+    match.$or = []
     const regex = new RegExp(filterOptions.searchTerm)
     match.$or.push({ name: { $regex: regex } })
     match.$or.push({ description: { $regex: regex } })
