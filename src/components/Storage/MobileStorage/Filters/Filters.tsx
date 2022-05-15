@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {
+  Box,
   Button,
   Flex,
   Icon,
@@ -25,44 +26,102 @@ const Filters: React.FC<Props> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <Flex
-        justifyContent="space-between"
         flexDirection="column"
         position="fixed"
         left="0"
         bottom="0"
-        h={isFilterVisible ? '320px' : '60px'}
+        h={isFilterVisible ? '230px' : '60px'}
         w="100%"
         minW="300px"
         border="1px solid #D4D4D4"
         borderRadius="6px"
         bgColor="white"
       >
-        <Flex flexDirection="row" justifyContent="space-between" h="60px">
-          <Flex flexDirection="row" alignItems="center" m="auto 10px" h="30px">
-            <Input
-              placeholder="Wyszukaj"
-              h="30px"
-              w="200px"
-              border="1px solid #D4D4D4"
-              value={props.searchTerm}
-              onChange={(e) => props.setSearchTerm(e.target.value)}
-            />
-            <Icon h="6" w="6" ml="5px" as={AiOutlineSearch} />
-          </Flex>
-          <Flex m="auto 10px" lineHeight="20px">
-            {isFilterVisible ? (
-              <Icon
-                h="6"
-                w="6"
-                mr="15px"
-                as={AiOutlineClose}
-                onClick={() => {
-                  setIsFilterVisible(false)
-                  props.setIsFiltersOpen(false)
-                }}
-              />
-            ) : (
-              <>
+        <Flex flexDirection="column" justifyContent="space-between" h="60px">
+          {isFilterVisible ? (
+            <>
+              <Flex my="15px" ml="10px" justifyContent="space-between">
+                <Text fontWeight="500">Filtruj obiekty</Text>
+                <Flex m="auto 10px" lineHeight="20px">
+                  <Icon
+                    h="6"
+                    w="6"
+                    as={AiOutlineClose}
+                    onClick={() => {
+                      setIsFilterVisible(false)
+                      props.setIsFiltersOpen(false)
+                    }}
+                  />
+                </Flex>
+              </Flex>
+              <Flex
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="flex-start"
+                mx="10px"
+                h="30px"
+              >
+                <Input
+                  placeholder="Wyszukaj"
+                  h="30px"
+                  w="100%"
+                  border="1px solid #D4D4D4"
+                  value={props.searchTerm}
+                  onChange={(e) => props.setSearchTerm(e.target.value)}
+                />
+                <Icon h="6" w="6" ml="5px" mr="20px" as={AiOutlineSearch} />
+              </Flex>
+              <Flex flexDirection="column" p="0 30px 0 10px" fontSize="16px">
+                <Text m="7px 0" fontWeight="500">
+                  Kategoria
+                </Text>
+                <Select
+                  onChange={(e) => props.setCategory(e.target.value)}
+                  value={props.category}
+                  fontSize="14px"
+                  h="32px"
+                >
+                  <option value="all">Wszystkie</option>
+                  {props.categories.map(({ name, id }) => (
+                    <option key={id} value={name}>
+                      {name}
+                    </option>
+                  ))}
+                </Select>
+                <Button
+                  h="32px"
+                  ml="auto"
+                  mt="20px"
+                  bgColor="#FF7700"
+                  color="white"
+                  fontSize="14px"
+                  fontWeight="600"
+                  lineHeight="32px"
+                  type="submit"
+                >
+                  Zapisz
+                </Button>
+              </Flex>
+            </>
+          ) : (
+            <Flex
+              mx="10px"
+              my="auto"
+              justifyContent="space-between"
+              lineHeight="20px"
+            >
+              <Flex flexDirection="row" alignItems="center" h="30px">
+                <Input
+                  placeholder="Wyszukaj"
+                  h="30px"
+                  w="200px"
+                  border="1px solid #D4D4D4"
+                  value={props.searchTerm}
+                  onChange={(e) => props.setSearchTerm(e.target.value)}
+                />
+                <Icon h="6" w="6" ml="5px" as={AiOutlineSearch} />
+              </Flex>
+              <Flex pt="5px">
                 <Text
                   mr="5px"
                   fontSize="16px"
@@ -82,49 +141,10 @@ const Filters: React.FC<Props> = (props) => {
                     props.setIsFiltersOpen(true)
                   }}
                 />
-              </>
-            )}
-          </Flex>
+              </Flex>
+            </Flex>
+          )}
         </Flex>
-        {isFilterVisible && (
-          <Flex
-            flexDirection="column"
-            h="260px"
-            p="0 30px 0 10px"
-            fontSize="16px"
-          >
-            <Text>Filtruj obiekty</Text>
-            <Text m="7px 0" fontWeight="bold">
-              Kategoria
-            </Text>
-            <Select
-              onChange={(e) => props.setCategory(e.target.value)}
-              value={props.category}
-              fontSize="14px"
-              h="32px"
-            >
-              <option value="all">Wszystkie</option>
-              {props.categories.map(({ name, id }) => (
-                <option key={id} value={name}>
-                  {name}
-                </option>
-              ))}
-            </Select>
-            <Button
-              h="32px"
-              m="auto"
-              mr="0"
-              bgColor="#FF7700"
-              color="white"
-              fontSize="14px"
-              fontWeight="600"
-              lineHeight="32px"
-              type="submit"
-            >
-              Wyszukaj
-            </Button>
-          </Flex>
-        )}
       </Flex>
     </form>
   )

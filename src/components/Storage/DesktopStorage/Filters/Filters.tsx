@@ -28,7 +28,7 @@ const Filters: FC<FiltersControllsProps> = ({
         </Text>
         <Flex
           flexDirection="row"
-          justifyContent="space-around"
+          justifyContent="flex-start"
           mt="15px"
           fontSize="16px"
           fontWeight="500"
@@ -45,10 +45,10 @@ const Filters: FC<FiltersControllsProps> = ({
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <Icon ml="10px" fontSize="30px" as={AiOutlineSearch} />
+              <Icon ml="3px" fontSize="30px" as={AiOutlineSearch} />
             </Flex>
           </Flex>
-          <Flex flexDirection="column" w="30%">
+          <Flex flexDirection="column" ml="20px" w="30%">
             <Text>Kategoria</Text>
             <Select
               h="40px"
