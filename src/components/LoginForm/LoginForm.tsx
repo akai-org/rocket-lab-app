@@ -49,10 +49,16 @@ const LoginForm = () => {
       )
   }
 
+  const logOrSignHandler = () => {
+    setLogIn(!logIn)
+    emailRef.current.value = ''
+    passwordRef.current.value = ''
+  }
+
   return (
     <Flex
       flexDirection="column"
-      width="100wh"
+      width="100%"
       height="100vh"
       backgroundColor="rgb(61, 61, 69)"
       justifyContent="center"
@@ -70,7 +76,10 @@ const LoginForm = () => {
         <Heading color="#FF7700" size="lg">
           Its-not-rocket-science
         </Heading>
-        <Box minW="370px">
+        <Box
+          minW="370px"
+          h={{ base: 'auto', xl: '75vh', md: '85vh', lg: '80vh', sm: '75vh' }}
+        >
           <form onSubmit={formSubmitHandler}>
             <Stack
               spacing={4}
@@ -160,7 +169,7 @@ const LoginForm = () => {
         </Box>
         <Box color="black">
           {logIn ? 'New to us? ' : 'You already have an account. '}
-          <Link color="#FF7700" href="#" onClick={() => setLogIn(!logIn)}>
+          <Link color="#FF7700" href="#" onClick={logOrSignHandler}>
             {logIn ? 'Sign Up' : 'Log In'}
           </Link>
         </Box>
