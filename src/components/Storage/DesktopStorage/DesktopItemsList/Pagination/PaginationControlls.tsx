@@ -7,6 +7,7 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { FIRST_PAGE } from '../../../../../utils/constants'
 import { sortingType } from '../../../../../utils/types/frontendGeneral'
 import { PaginationSettings } from '../../../../UI/PaginationGeneral/PaginationGeneral'
+import Sorting from '../Sorting/Sorting'
 
 interface Props extends PaginationSettings {
   setListType: (type: sortingType) => void
@@ -53,10 +54,7 @@ export const PaginationControlls: React.FC<Props> = ({
             <option value="117">117</option>
           </Select>
         </Flex>
-        <Text m="0 40px">
-          {rangeBeginning} - {rangeEnd} of {itemsCount}
-        </Text>
-        <Flex fontSize="20px" w="120px" justifyContent="space-around">
+        <Flex fontSize="20px" ml="10px" w="120px" justifyContent="space-around">
           <Link href={{ query: { page: minPage, toDisplay } }} passHref>
             <Icon
               cursor="pointer"
@@ -98,6 +96,7 @@ export const PaginationControlls: React.FC<Props> = ({
         </Flex>
       </Flex>
       <Flex>
+        <Sorting />
         <Icon
           cursor="pointer"
           color={listType === 'grid' ? 'black' : '#C4C4C4'}
