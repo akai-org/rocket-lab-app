@@ -17,7 +17,7 @@ export async function fetchItems(
 
   if (filterOptions?.searchTerm) {
     match.$or = []
-    const regex = new RegExp(filterOptions.searchTerm)
+    const regex = new RegExp(filterOptions.searchTerm, 'i')
     match.$or.push({ name: { $regex: regex } })
     match.$or.push({ description: { $regex: regex } })
   }
