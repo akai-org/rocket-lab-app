@@ -1,12 +1,19 @@
 import { Flex, Select, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { SortType } from '../../../services/itemsService'
+import { validateSortParam } from '../../../utils/dataValidation/validateSortParam'
 
 export const SortingGeneral = () => {
   const router = useRouter()
   const query = router.query
 
-  const sort = query.sort
+  let sort: SortType
+
+  if (!validateSortParam(query.sort as string | undefined)) {
+    sort = 'newest'
+  } else {
+    sort = query.sort as SortType
+  }
 
   delete query.page
 
@@ -26,6 +33,7 @@ export const SortingGeneral = () => {
         w="140px"
         ml="10px"
         color="black"
+        value={sort}
       >
         {/* TODO: Display options smarter */}
         <option value="newest">najnowsze</option>
