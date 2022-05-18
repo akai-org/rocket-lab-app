@@ -58,10 +58,6 @@ export const PaginationGeneral: FC<Props> = (props) => {
 
     let page = currentPage
 
-    const router = useRouter()
-
-    const query = router.query
-
     if (newToDisplay !== toDisplay) {
       const passedItems = toDisplay * page
       const toPassedItems = passedItems - toDisplay + newToDisplay

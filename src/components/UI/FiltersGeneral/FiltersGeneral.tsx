@@ -26,9 +26,10 @@ interface Props {
 
 const FiltersGeneral: React.FC<Props> = ({ children }) => {
   const router = useRouter()
+  const query = router.query
 
-  const queryCategory = router.query.category as string | undefined
-  const querySearchTerm = router.query.searchTerm as string | undefined
+  const queryCategory = query.category as string | undefined
+  const querySearchTerm = query.searchTerm as string | undefined
 
   const [categories, setCategories] = useState<Category[]>([])
   const [category, setCategory] = useState(
@@ -38,18 +39,20 @@ const FiltersGeneral: React.FC<Props> = ({ children }) => {
     querySearchTerm ? querySearchTerm : ''
   )
 
-  let query: Query = {}
+  delete query.page
+
+  let searchQuery: Query = {}
 
   if (category) {
-    query.category = category
+    searchQuery.category = category
   }
 
   if (searchTerm) {
-    query.searchTerm = searchTerm
+    searchQuery.searchTerm = searchTerm
   }
 
   if (category === 'all') {
-    delete query.category
+    delete searchQuery.category
   }
 
   useEffect(() => {
@@ -63,7 +66,7 @@ const FiltersGeneral: React.FC<Props> = ({ children }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    router.push({ query: { ...query } })
+    router.push({ query: { ...query, ...searchQuery } })
   }
 
   return children({
