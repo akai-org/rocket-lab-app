@@ -8,22 +8,27 @@ export interface Item {
   id: string
   categories: string[]
   quantity: number
+  createdAt: Date
+  updatedAt: Date
 }
 
-const itemSchema = new Schema<Item>({
-  name: { type: String, required: [true, "You must specify item's name"] },
-  imageUrl: {
-    type: String,
-    required: [true, 'You must specify imageUrl'],
+const itemSchema = new Schema<Item>(
+  {
+    name: { type: String, required: [true, "You must specify item's name"] },
+    imageUrl: {
+      type: String,
+      required: [true, 'You must specify imageUrl'],
+    },
+    description: { type: String, default: '' },
+    toBuy: {
+      type: Boolean,
+      default: false,
+    },
+    quantity: { type: Number, default: 1, min: 1, max: 1000000 },
+    categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
   },
-  description: { type: String, default: '' },
-  toBuy: {
-    type: Boolean,
-    default: false,
-  },
-  quantity: {type: Number, default: 1, min: 1, max: 1000000},
-  categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
-})
+  { timestamps: true }
+)
 
 export const ItemModel =
   (models.Item as Model<Item>) || model<Item>('Item', itemSchema)
