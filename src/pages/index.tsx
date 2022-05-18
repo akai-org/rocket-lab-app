@@ -10,6 +10,7 @@ import * as itemsService from '../services/itemsService'
 import { Credentials } from '../utils/credentials'
 import { FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../utils/constants'
 import { fetchCategories } from '../services/categoryService'
+import { SortType } from '../services/itemsService'
 
 interface Props extends MainViewProps {
   error?: Error
@@ -46,9 +47,12 @@ export const getServerSideProps = withPageAuthRequired({
 
       const skip = (page - FIRST_PAGE) * toDisplay
 
+      const sort = query.sort as SortType | undefined
+
       const items = await itemsService.fetchItems(skip, toDisplay, {
         category: category as string | undefined,
         searchTerm,
+        sort
       })
 
       const itemsCount = await itemsService.fetchItemsCount()
