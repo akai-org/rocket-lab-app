@@ -24,17 +24,17 @@ const LoginForm = () => {
   const [emailIsCorrect, setEmailIsCorrect] = useState(true)
   const [passwordIsCorrect, setPasswordIsCorrect] = useState(true)
 
-  const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>
-  const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
 
   const formSubmitHandler = (e: SyntheticEvent) => {
     e.preventDefault()
-    const password = passwordRef.current.value
+    const password = passwordRef.current!.value
 
     setEmailIsCorrect(true)
     setPasswordIsCorrect(true)
 
-    if (!validateEmail(emailRef.current.value)) {
+    if (!validateEmail(emailRef.current!.value)) {
       setEmailIsCorrect(false)
     } else if (password === '' || password.length <= 7) {
       setPasswordIsCorrect(false)
@@ -51,8 +51,8 @@ const LoginForm = () => {
 
   const logOrSignHandler = () => {
     setLogIn(!logIn)
-    emailRef.current.value = ''
-    passwordRef.current.value = ''
+    emailRef.current!.value = ''
+    passwordRef.current!.value = ''
   }
 
   return (
@@ -63,6 +63,7 @@ const LoginForm = () => {
       backgroundColor="rgb(61, 61, 69)"
       justifyContent="center"
       alignItems="center"
+      overflowY="hidden" // TODO a pop-up white bar on smaller desktop screens
     >
       <Stack
         flexDir="column"
