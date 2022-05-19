@@ -36,6 +36,7 @@ export async function fetchItems(
   }
 
   if (sortType === 'alphabetically') {
+    // deletes so it sorts only alphabetically
     delete sort.updatedAt
     sort.name = 1
   }
@@ -69,16 +70,14 @@ export async function fetchItems(
 
   const filterBySearch = filterOptions?.searchTerm
 
-  // FIXME: te sorty jakoś by wprowadzić sprytniej, bo duża redundancja
-
   if (filterAlwaysByCategory) {
-    items = ItemModel.aggregate([...parseCategory, ...queryBody]).sort(sort)
+    items = ItemModel.aggregate([...parseCategory, ...queryBody])
   } else if (filterBySearch) {
-    items = ItemModel.aggregate([...queryBody]).sort(sort)
+    items = ItemModel.aggregate([...queryBody])
   } else {
     items = ItemModel.find()
   }
-  return await items.skip(skip).limit(limit).sort(sort)
+  return await items.sort(sort).skip(skip).limit(limit)
 }
 
 export async function fetchItemsCount(): Promise<number> {

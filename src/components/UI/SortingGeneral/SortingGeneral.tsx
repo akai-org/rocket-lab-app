@@ -15,8 +15,6 @@ export const SortingGeneral = () => {
     sort = query.sort as SortType
   }
 
-  delete query.page
-
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value
     if (value !== sort) {
