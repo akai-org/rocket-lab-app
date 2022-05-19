@@ -1,5 +1,6 @@
 import { Flex, Select, Icon, Text } from '@chakra-ui/react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
@@ -25,7 +26,10 @@ export const PaginationControlls: React.FC<Props> = ({
   listType,
   setListType,
 }) => {
-  const rangeBeginning = previousPage * toDisplay + FIRST_PAGE - toDisplay
+  const router = useRouter()
+
+  const query = router.query
+
   let rangeEnd = previousPage * toDisplay
 
   if (rangeEnd > itemsCount) {
@@ -55,7 +59,7 @@ export const PaginationControlls: React.FC<Props> = ({
           </Select>
         </Flex>
         <Flex fontSize="20px" ml="10px" w="120px" justifyContent="space-around">
-          <Link href={{ query: { page: minPage, toDisplay } }} passHref>
+          <Link href={{ query: { ...query, page: minPage, toDisplay } }} passHref>
             <Icon
               cursor="pointer"
               _hover={{
@@ -64,7 +68,7 @@ export const PaginationControlls: React.FC<Props> = ({
               as={BiArrowToLeft}
             />
           </Link>
-          <Link href={{ query: { page: previousPage, toDisplay } }} passHref>
+          <Link href={{ query: { ...query, page: previousPage, toDisplay } }} passHref>
             <Icon
               cursor="pointer"
               _hover={{
@@ -74,7 +78,7 @@ export const PaginationControlls: React.FC<Props> = ({
             />
           </Link>
 
-          <Link href={{ query: { page: nextPage, toDisplay } }} passHref>
+          <Link href={{ query: { ...query, page: nextPage, toDisplay } }} passHref>
             <Icon
               cursor="pointer"
               _hover={{
@@ -84,7 +88,7 @@ export const PaginationControlls: React.FC<Props> = ({
             />
           </Link>
 
-          <Link href={{ query: { page: maxPage, toDisplay } }} passHref>
+          <Link href={{ query: { ...query, page: maxPage, toDisplay } }} passHref>
             <Icon
               cursor="pointer"
               _hover={{

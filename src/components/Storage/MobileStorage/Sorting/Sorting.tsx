@@ -3,6 +3,7 @@ import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { Flex, Select, Text, ButtonGroup, Icon } from '@chakra-ui/react'
 import { sortingType } from '../../../../utils/types/frontendGeneral'
+import { SortingGeneral } from '../../../UI/SortingGeneral/SortingGeneral'
 
 const Sorting: React.FC<{
   setListType: (type: sortingType) => void
@@ -19,12 +20,7 @@ const Sorting: React.FC<{
       color="#D5D5D5"
     >
       <Flex flexDirection="row">
-        <Text>sortuj po:</Text>
-        <Select variant="unstyled" w="130px" ml="10px" color="black">
-          <option value="newest">najnowsze</option>
-          <option value="oldest">najstarsze</option>
-          <option value="alphabetically">alfabetycznie</option>
-        </Select>
+        <SortingGeneral />
       </Flex>
 
       <ButtonGroup variant="outline" lineHeight="50px">
