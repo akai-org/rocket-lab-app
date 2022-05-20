@@ -1,106 +1,65 @@
-import {
-  Flex,
-  Image,
-  Td,
-  Text,
-  Tr,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Button,
-  ButtonGroup,
-} from '@chakra-ui/react'
-import { useState } from 'react'
+import { Flex, Image, Td, Text, Tr, useDisclosure } from '@chakra-ui/react'
 import { Item } from '../../../../../mongo/models/item'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
+import ModalEdit from '../../../../UI/Modals/ModalEdit'
 
 interface Props {
   item: Item
 }
 
 const ListItem = ({ item }: Props) => {
-  const [quantity, setQuantity] = useState(0)
-  const [isEdit, setIsEdit] = useState(false)
+  const {
+    isOpen: isOpenDetails,
+    onOpen: onOpenDetails,
+    onClose: onCloseDetails,
+  } = useDisclosure()
+
   return (
-    <Tr fontSize="14px" h="40px">
-      <Td>
-        <Flex justifyContent="flex-start">
-          <Image src={item.imageUrl} w="40px" h="40px" />
-          <Text lineHeight="40px" ml="10px">
-            {item.name}
+    <>
+      <Tr fontSize="14px" w="100%">
+        <Td minW="250px">
+          <Flex justifyContent="flex-start">
+            <Image src={item.imageUrl} w="40px" h="40px" />
+            <Text isTruncated lineHeight="40px" ml="10px">
+              {item.name}
+            </Text>
+          </Flex>
+        </Td>
+        <Td w="70%" minW="300px" maxW="500px">
+          <Text isTruncated>{item.description}</Text>
+        </Td>
+        <Td textAlign="right" minW="140px">
+          <Text isTruncated color={item.quantity ? 'inherit' : 'red.500'}>
+            {item.quantity ? item.quantity : 'brak w magazynie'}
           </Text>
-        </Flex>
-      </Td>
-      <Td>
-        <Text>
-          {item.description.length > 40
-            ? item.description.substring(0, 40) + '...'
-            : item.description}
-        </Text>
-      </Td>
-      <Td textAlign="right">
-        <Text color={quantity ? 'inherit' : 'red.500'}>
-          {quantity ? quantity : 'brak w magazynie'}
-        </Text>
-      </Td>
-      <Td>
-        <Flex justifyContent="flex-end">
-          {!isEdit ? (
+        </Td>
+        <Td w="10%">
+          <Flex justifyContent="flex-end">
             <ProductButton
               w="120px"
-              onClick={() => {
-                setIsEdit(true)
-              }}
+              onClick={onOpenDetails}
               fontSize="16px"
               mx="5px"
             >
-              Edytuj
+              Szczegóły
             </ProductButton>
-          ) : (
-            <>
-              <NumberInput
-                h="32px"
-                w="84px"
-                borderColor="#E2E8F0"
-                defaultValue={1}
-                min={1}
-              >
-                <NumberInputField h="32px" />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-              <ButtonGroup isAttached mx="5px">
-                <ProductButton
-                  size="sm"
-                  pb="5px"
-                  onClick={() => {
-                    setIsEdit(false)
-                  }}
-                >
-                  +
-                </ProductButton>
-                <ProductButton
-                  size="sm"
-                  pb="5px"
-                  onClick={() => {
-                    setIsEdit(false)
-                  }}
-                >
-                  -
-                </ProductButton>
-              </ButtonGroup>
-            </>
-          )}
-          <ProductButton w="120px" onClick={() => {}} fontSize="16px">
-            Dodaj do listy
-          </ProductButton>
-        </Flex>
-      </Td>
-    </Tr>
+            <ProductButton w="120px" onClick={() => {}} fontSize="16px">
+              Dodaj do listy
+            </ProductButton>
+          </Flex>
+        </Td>
+      </Tr>
+      <ModalEdit
+        id={item.id}
+        name={item.name}
+        description={item.description}
+        imageUrl={item.imageUrl}
+        quantity={item.quantity}
+        onClose={onCloseDetails}
+        isOpen={isOpenDetails}
+        isCentered
+      />
+    </>
   )
 }
 

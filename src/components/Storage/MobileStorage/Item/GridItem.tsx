@@ -1,30 +1,24 @@
-import {
-  Flex,
-  Image,
-  Text,
-  Box,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  ButtonGroup,
-} from '@chakra-ui/react'
-import { useState } from 'react'
+import { Flex, Image, Text, Box, useDisclosure } from '@chakra-ui/react'
 import { Item } from '../../../../mongo/models/item'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
+import ModalEdit from '../../../UI/Modals/ModalEdit'
 
 interface Props {
   item: Item
 }
 
 const GridItem = ({ item }: Props) => {
-  const [isEdit, setIsEdit] = useState(false)
+  const {
+    isOpen: isOpenDetails,
+    onOpen: onOpenDetails,
+    onClose: onCloseDetails,
+  } = useDisclosure()
+
   return (
     <Flex flexDirection="column" w="50%" maxW="200px" m="10px auto 0 auto">
       <Image src={item.imageUrl} w="80%" m="5px auto" alt="" />
-      <Box textAlign="center" w="70%" m="0 auto">
-        <Text fontSize="16px" fontWeight="500">
+      <Box textAlign="center" w="90%" m="0 auto">
+        <Text fontSize="16px" isTruncated fontWeight="500">
           {item.name}
         </Text>
         <Box w="100%" mb="5px">
@@ -38,53 +32,10 @@ const GridItem = ({ item }: Props) => {
           alignItems="center"
           justifyContent="space-around"
         >
-          {!isEdit ? (
-            <ProductButton
-              w="120px"
-              onClick={() => {
-                setIsEdit(true)
-              }}
-              fontSize="16px"
-            >
-              Edytuj
-            </ProductButton>
-          ) : (
-            <>
-              <NumberInput
-                h="32px"
-                w="84px"
-                borderColor="#E2E8F0"
-                defaultValue={1}
-                min={1}
-              >
-                <NumberInputField h="32px" />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-              <ButtonGroup isAttached mt="10px">
-                <ProductButton
-                  size="sm"
-                  pb="5px"
-                  onClick={() => {
-                    setIsEdit(false)
-                  }}
-                >
-                  +
-                </ProductButton>
-                <ProductButton
-                  size="sm"
-                  pb="5px"
-                  onClick={() => {
-                    setIsEdit(false)
-                  }}
-                >
-                  -
-                </ProductButton>
-              </ButtonGroup>
-            </>
-          )}
+          <ProductButton w="120px" onClick={onOpenDetails} fontSize="16px">
+            Szczegóły
+          </ProductButton>
+
           <ProductButton
             mt="5px"
             mb="25px"
@@ -96,6 +47,16 @@ const GridItem = ({ item }: Props) => {
           </ProductButton>
         </Flex>
       </Box>
+      <ModalEdit
+        id={item.id}
+        name={item.name}
+        description={item.description}
+        imageUrl={item.imageUrl}
+        quantity={item.quantity}
+        onClose={onCloseDetails}
+        isOpen={isOpenDetails}
+        isCentered
+      />
     </Flex>
   )
 }
