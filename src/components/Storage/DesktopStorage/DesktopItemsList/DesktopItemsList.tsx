@@ -42,7 +42,7 @@ const DesktopItemsList = ({ items, itemsCount }: MainViewProps) => {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody maxW="1000px">
+            <Tbody>
               {items &&
                 items.map((item) => <ListItem item={item} key={item.id} />)}
             </Tbody>

@@ -17,7 +17,7 @@ const ListItem = ({ item }: Props) => {
   return (
     <>
       <Tr fontSize="14px" w="100%">
-        <Td minW="250px">
+        <Td w="30%" maxW="250px">
           <Flex justifyContent="flex-start">
             <Image src={item.imageUrl} w="40px" h="40px" />
             <Text isTruncated lineHeight="40px" ml="10px">
@@ -25,7 +25,7 @@ const ListItem = ({ item }: Props) => {
             </Text>
           </Flex>
         </Td>
-        <Td w="70%" minW="300px" maxW="500px">
+        <Td w="50%" maxW="500px">
           <Text isTruncated>{item.description}</Text>
         </Td>
         <Td textAlign="right" minW="140px">
