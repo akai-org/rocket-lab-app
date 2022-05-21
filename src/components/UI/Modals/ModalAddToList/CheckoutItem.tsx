@@ -13,14 +13,15 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { Item } from '../../../../../its-not-rocket-science-app/src/mongo/models/item'
+import { FutureCartItem } from '../../../../services/cartService'
+import { CartItem } from '../../../../store/Slices/storageCartSlice'
 import ModalInfo from '../ModalInfo/ModalInfo'
 
 type CheckoutItemProps = {
-  item: Item
+  item: CartItem
 }
 
-const CheckoutItem = ({ item }: CheckoutItemProps) => {
+const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
   const [quantity, setQuantity] = useState(1)
   const {
     isOpen: isOpenInfo,
@@ -32,9 +33,9 @@ const CheckoutItem = ({ item }: CheckoutItemProps) => {
     <Tr fontSize="16px" fontWeight="700">
       <Td w="70%">
         <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
-          <Image src={item.imageUrl} w="40px" />
+          <Image src={cartItem.item.imageUrl} w="40px" />
           <Text ml="10px" fontWeight="400">
-            {item.name}
+            {cartItem.item.name}
           </Text>
         </Flex>
       </Td>
@@ -63,11 +64,11 @@ const CheckoutItem = ({ item }: CheckoutItemProps) => {
         </Flex>
       </Td>
       <ModalInfo
-        id={item.id}
-        name={item.name}
-        description={item.description}
-        imageUrl={item.imageUrl}
-        quantity={item.quantity}
+        id={cartItem.item.id}
+        name={cartItem.item.name}
+        description={cartItem.item.description}
+        imageUrl={cartItem.item.imageUrl}
+        quantity={cartItem.quantity}
         onClose={onCloseInfo}
         isOpen={isOpenInfo}
         isCentered

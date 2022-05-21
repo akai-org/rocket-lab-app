@@ -1,6 +1,6 @@
 import { Schema, Model, models, model } from 'mongoose'
 
-export interface CartItem {
+export interface CartList {
   id: string
   quantity: number
   items: { item: Schema.Types.ObjectId }
@@ -9,7 +9,7 @@ export interface CartItem {
   updatedAt: Date
 }
 
-const cartItemSchema = new Schema<CartItem>(
+const CartListSchema = new Schema<CartList>(
   {
     name: { type: String, required: [true, 'Cart list name must be provided'] },
     items: [
@@ -27,4 +27,4 @@ const cartItemSchema = new Schema<CartItem>(
 )
 
 export const CartItemModel =
-  (models.CartItem as Model<CartItem>) || model('CartItem', cartItemSchema)
+  (models.CartList as Model<CartList>) || model('CartList', CartListSchema)

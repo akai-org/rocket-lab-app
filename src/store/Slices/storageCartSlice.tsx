@@ -1,9 +1,13 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { Item } from '../../mongo/models/item'
+export interface CartItem {
+  item: Item
+  quantity: number
+}
 
 type data = {
-  list: Item[]
+  list: CartItem[]
 }
 
 type initialValues = {
@@ -21,13 +25,17 @@ export const storageCartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Item>) => {
-      if (!state.data.list.some((item) => item.id === action.payload.id)) {
-        state.data.list.push(action.payload)
+      if (
+        !state.data.list.some(
+          (cartItem) => cartItem.item.id === action.payload.id
+        )
+      ) {
+        state.data.list.push({ quantity: 1, item: action.payload })
       }
     },
     removeFromCart: (state, action: PayloadAction<Item>) => {
       state.data.list = state.data.list.filter(
-        (item) => item.id !== action.payload.id
+        (cart) => cart.item.id !== action.payload.id
       )
     },
     clearCart: (state) => {

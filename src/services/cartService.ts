@@ -1,5 +1,4 @@
 import { CartItemModel } from '../mongo/models/cart'
-import { Item } from '../mongo/models/item'
 
 export interface FutureCartItem {
   item: string

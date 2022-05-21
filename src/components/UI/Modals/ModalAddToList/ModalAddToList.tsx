@@ -17,13 +17,14 @@ import {
   Text,
   Select,
 } from '@chakra-ui/react'
-import { Item } from '../../../../../its-not-rocket-science-app/src/mongo/models/item'
+import { Item } from '../../../../mongo/models/item'
+import { FutureCartItem } from '../../../../services/cartService'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeleteListPopover from '../../Popovers/DeleteListPopover'
 import CheckoutItem from './CheckoutItem'
 
 interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
-  items: Item[]
+  items: FutureCartItem[]
 }
 
 const ModalAddToList = (props: ModalAddToListProps) => {
