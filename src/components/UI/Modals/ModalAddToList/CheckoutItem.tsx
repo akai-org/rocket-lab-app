@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux'
 import {
   CartItem,
   changeItemQuantity,
+  removeFromCart,
 } from '../../../../store/Slices/storageCartSlice'
 import ModalInfo from '../ModalInfo/ModalInfo'
 
@@ -63,7 +64,12 @@ const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
         </NumberInput>
       </Td>
       <Td>
-        <Flex justifyContent="flex-end">
+        <Flex
+          justifyContent="flex-end"
+          onClick={(e) => {
+            dispatch(removeFromCart(cartItem.item))
+          }}
+        >
           <AiOutlineClose cursor="pointer" />
         </Flex>
       </Td>

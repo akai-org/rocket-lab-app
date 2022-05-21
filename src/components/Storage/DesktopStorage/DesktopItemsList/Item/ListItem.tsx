@@ -63,7 +63,7 @@ const ListItem = ({ item }: Props) => {
             >
               Edytuj
             </ProductButton>
-            {storageCartData.some((element) => element.id === item.id) ? (
+            {storageCartData.some((element) => element.item.id === item.id) ? (
               <AiOutlineCheck
                 size="25px"
                 onClick={() => {
