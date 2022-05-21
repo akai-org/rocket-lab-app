@@ -10,7 +10,7 @@ import {
   Tr,
 } from '@chakra-ui/react'
 import { AiOutlineClose } from 'react-icons/ai'
-import DeletePopover from '../../../UI/Popovers/DeletePopover'
+import DeletePopover from '../../../UI/Popovers/DeleteListPopover'
 import ListItem from '../ListItem/ListItem'
 
 const List = () => {

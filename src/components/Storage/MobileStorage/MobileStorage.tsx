@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Flex } from '@chakra-ui/react'
+import { Flex, useToast } from '@chakra-ui/react'
 import Filters from './Filters/Filters'
 import Sorting from './Sorting/Sorting'
 import GridItem from './Item/GridItem'
@@ -13,7 +13,8 @@ import FiltersGeneral from '../../UI/FiltersGeneral/FiltersGeneral'
 const MobileStorage = ({ items }: MainViewProps) => {
   const [listType, setListType] = useState<sortingType>('grid')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
-
+  // Temporarily TODO: fix this
+  useToast().closeAll()
   return (
     <Flex
       flexWrap="wrap"
