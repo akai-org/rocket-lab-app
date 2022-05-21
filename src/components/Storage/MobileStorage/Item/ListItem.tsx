@@ -1,18 +1,34 @@
 import { Box, Flex, Image, Text, useDisclosure } from '@chakra-ui/react'
+import { AiOutlineCheck, AiOutlinePlus } from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux'
 import { Item } from '../../../../mongo/models/item'
+import {
+  addToCart,
+  removeFromCart,
+} from '../../../../store/Slices/storageCartSlice'
+import { storageCartInfo } from '../../../../store/store'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
-import ModalEdit from '../../../UI/Modals/ModalEdit'
+import ModalEdit from '../../../UI/Modals/ModalEdit/ModalEdit'
+import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
 
 interface Props {
   item: Item
 }
 
 const ListItem = ({ item }: Props) => {
+  const dispatch = useDispatch()
+  const storageCartData = useSelector(storageCartInfo).list
   const {
     isOpen: isOpenDetails,
     onOpen: onOpenDetails,
     onClose: onCloseDetails,
   } = useDisclosure()
+  const {
+    isOpen: isOpenInfo,
+    onOpen: onOpenInfo,
+    onClose: onCloseInfo,
+  } = useDisclosure()
+
   return (
     <Flex
       w="95%"
@@ -22,6 +38,7 @@ const ListItem = ({ item }: Props) => {
     >
       <Flex m="auto 0 auto 10px">
         <Image
+          onClick={onOpenInfo}
           src={item.imageUrl}
           minH="100px"
           minW="100px"
@@ -30,7 +47,7 @@ const ListItem = ({ item }: Props) => {
         />
       </Flex>
       <Box h="100%" w="80%" m="0 auto 0 0" textAlign="left" p="20px">
-        <Text fontSize="16px" fontWeight="500">
+        <Text onClick={onOpenInfo} fontSize="16px" fontWeight="500">
           {item.name}
         </Text>
 
@@ -38,20 +55,43 @@ const ListItem = ({ item }: Props) => {
         <Flex flexDirection="row" mt="5px">
           <Flex justifyContent="flex-end">
             <ProductButton
-              w="100px"
+              w="70px"
               onClick={onOpenDetails}
               fontSize="16px"
               mr="5px"
             >
-              Szczegóły
+              Edytuj
             </ProductButton>
-
-            <ProductButton w="120px" fontSize="16px">
-              Dodaj do listy
-            </ProductButton>
+            {storageCartData.some((element) => element.id === item.id) ? (
+              <AiOutlineCheck
+                size="25px"
+                onClick={() => {
+                  dispatch(removeFromCart(item))
+                }}
+                cursor="pointer"
+              />
+            ) : (
+              <AiOutlinePlus
+                size="25px"
+                cursor="pointer"
+                onClick={() => {
+                  dispatch(addToCart(item))
+                }}
+              />
+            )}
           </Flex>
         </Flex>
       </Box>
+      <ModalInfo
+        id={item.id}
+        name={item.name}
+        description={item.description}
+        imageUrl={item.imageUrl}
+        quantity={item.quantity}
+        onClose={onCloseInfo}
+        isOpen={isOpenInfo}
+        isCentered
+      />
       <ModalEdit
         id={item.id}
         name={item.name}

@@ -16,11 +16,11 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { Box } from '@chakra-ui/react'
 import ProductButton from '../Custom Buttons/ProductButton/ProductButton'
 
-interface DeletePopoverProps extends PopoverProps {
+interface DeleteListPopoverProps extends PopoverProps {
   onClick: () => void
 }
 
-const DeletePopover = (props: DeletePopoverProps) => {
+const DeleteListPopover = (props: DeleteListPopoverProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const open = () => setIsOpen(!isOpen)
   const close = () => setIsOpen(false)
@@ -64,4 +64,4 @@ const DeletePopover = (props: DeletePopoverProps) => {
   )
 }
 
-export default DeletePopover
+export default DeleteListPopover
