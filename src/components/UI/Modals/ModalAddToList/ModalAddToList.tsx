@@ -19,12 +19,13 @@ import {
 } from '@chakra-ui/react'
 import { Item } from '../../../../mongo/models/item'
 import { FutureCartItem } from '../../../../services/cartService'
+import { CartItem } from '../../../../store/Slices/storageCartSlice'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeleteListPopover from '../../Popovers/DeleteListPopover'
 import CheckoutItem from './CheckoutItem'
 
 interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
-  items: FutureCartItem[]
+  items: CartItem[]
 }
 
 const ModalAddToList = (props: ModalAddToListProps) => {
@@ -46,7 +47,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
               </Thead>
               <Tbody>
                 {props.items.map((item) => (
-                  <CheckoutItem item={item} />
+                  <CheckoutItem key={item.item.id} item={item} />
                 ))}
               </Tbody>
             </Table>

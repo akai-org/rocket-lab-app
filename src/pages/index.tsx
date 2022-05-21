@@ -11,6 +11,8 @@ import { Credentials } from '../utils/credentials'
 import { FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../utils/constants'
 import { fetchCategories } from '../services/categoryService'
 import { SortType } from '../services/itemsService'
+import { useEffect } from 'react'
+import { clearCart } from '../store/Slices/storageCartSlice'
 
 interface Props extends MainViewProps {
   error?: Error
@@ -18,6 +20,7 @@ interface Props extends MainViewProps {
 
 const Home: NextPage<Props> = ({ items, error, itemsCount }) => {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
+
   const Storage = isDesktop ? (
     <DesktopStorage itemsCount={itemsCount} items={items ?? []} />
   ) : (

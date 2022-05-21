@@ -60,7 +60,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         isClosable: false,
       })
     }
-  }, [storageCartData.list, isOpenDetails])
+  }, [storageCartData.list.length, isOpenDetails])
 
   return (
     <Flex flexDirection="row" w="100vw" maxW="2000px" m="75px auto 0 auto">

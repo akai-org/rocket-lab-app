@@ -38,6 +38,20 @@ export const storageCartSlice = createSlice({
         (cart) => cart.item.id !== action.payload.id
       )
     },
+    changeItemQuantity: (
+      state,
+      action: PayloadAction<{ id: string; quantity: number }>
+    ) => {
+      const oldCartItemIndex = state.data.list.findIndex(
+        (cartItem) => cartItem.item.id === action.payload.id
+      )
+      const newCartItem = {
+        ...state.data.list[oldCartItemIndex],
+        quantity: action.payload.quantity,
+      }
+      state.data.list.splice(oldCartItemIndex, 1, newCartItem)
+      state.data.list = [...state.data.list]
+    },
     clearCart: (state) => {
       state.data.list = []
     },
@@ -46,4 +60,5 @@ export const storageCartSlice = createSlice({
 
 export const storageCartReducer = storageCartSlice.reducer
 
-export const { addToCart, removeFromCart, clearCart } = storageCartSlice.actions
+export const { addToCart, removeFromCart, clearCart, changeItemQuantity } =
+  storageCartSlice.actions

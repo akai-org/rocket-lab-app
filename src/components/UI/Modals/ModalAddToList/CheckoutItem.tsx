@@ -13,8 +13,11 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { FutureCartItem } from '../../../../services/cartService'
-import { CartItem } from '../../../../store/Slices/storageCartSlice'
+import { useDispatch } from 'react-redux'
+import {
+  CartItem,
+  changeItemQuantity,
+} from '../../../../store/Slices/storageCartSlice'
 import ModalInfo from '../ModalInfo/ModalInfo'
 
 type CheckoutItemProps = {
@@ -22,12 +25,13 @@ type CheckoutItemProps = {
 }
 
 const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
-  const [quantity, setQuantity] = useState(1)
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,
     onClose: onCloseInfo,
   } = useDisclosure()
+
+  const dispatch = useDispatch()
 
   return (
     <Tr fontSize="16px" fontWeight="700">
@@ -45,9 +49,9 @@ const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
           h="30px"
           fontSize="16px"
           borderColor="#E2E8F0"
-          defaultValue={quantity}
+          defaultValue={cartItem.quantity}
           onChange={(e) => {
-            setQuantity(parseInt(e))
+            dispatch(changeItemQuantity({ id: cartItem.item.id, quantity: +e }))
           }}
           min={1}
         >
