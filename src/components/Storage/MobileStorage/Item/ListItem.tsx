@@ -1,25 +1,18 @@
-import {
-  Box,
-  Flex,
-  Image,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Text,
-  ButtonGroup,
-} from '@chakra-ui/react'
+import { Box, Flex, Image, Text, useDisclosure } from '@chakra-ui/react'
 import { Item } from '../../../../mongo/models/item'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
-import { useState } from 'react'
+import ModalEdit from '../../../UI/Modals/ModalEdit'
 
 interface Props {
   item: Item
 }
 
 const ListItem = ({ item }: Props) => {
-  const [isEdit, setIsEdit] = useState(false)
+  const {
+    isOpen: isOpenDetails,
+    onOpen: onOpenDetails,
+    onClose: onCloseDetails,
+  } = useDisclosure()
   return (
     <Flex
       w="95%"
@@ -40,66 +33,35 @@ const ListItem = ({ item }: Props) => {
         <Text fontSize="16px" fontWeight="500">
           {item.name}
         </Text>
-        <Text fontSize="12px" color="#878585">
-          {item.description}
-        </Text>
+
         <Text fontSize="16px">Ilość: 58</Text>
         <Flex flexDirection="row" mt="5px">
           <Flex justifyContent="flex-end">
-            {!isEdit ? (
-              <ProductButton
-                w="80px"
-                onClick={() => {
-                  setIsEdit(true)
-                }}
-                fontSize="16px"
-                mr="5px"
-              >
-                Edytuj
-              </ProductButton>
-            ) : (
-              <>
-                <NumberInput
-                  h="32px"
-                  w="70px"
-                  borderColor="#E2E8F0"
-                  defaultValue={1}
-                  min={1}
-                >
-                  <NumberInputField h="32px" />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-                <ButtonGroup isAttached mx="5px">
-                  <ProductButton
-                    size="sm"
-                    pb="5px"
-                    onClick={() => {
-                      setIsEdit(false)
-                    }}
-                  >
-                    +
-                  </ProductButton>
-                  <ProductButton
-                    size="sm"
-                    pb="5px"
-                    onClick={() => {
-                      setIsEdit(false)
-                    }}
-                  >
-                    -
-                  </ProductButton>
-                </ButtonGroup>
-              </>
-            )}
-            <ProductButton w="120px" onClick={() => {}} fontSize="16px">
+            <ProductButton
+              w="100px"
+              onClick={onOpenDetails}
+              fontSize="16px"
+              mr="5px"
+            >
+              Szczegóły
+            </ProductButton>
+
+            <ProductButton w="120px" fontSize="16px">
               Dodaj do listy
             </ProductButton>
           </Flex>
         </Flex>
       </Box>
+      <ModalEdit
+        id={item.id}
+        name={item.name}
+        description={item.description}
+        imageUrl={item.imageUrl}
+        quantity={item.quantity}
+        onClose={onCloseDetails}
+        isOpen={isOpenDetails}
+        isCentered
+      />
     </Flex>
   )
 }

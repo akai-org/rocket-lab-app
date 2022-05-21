@@ -10,6 +10,7 @@ import {
   Tr,
 } from '@chakra-ui/react'
 import { AiOutlineClose } from 'react-icons/ai'
+import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
 
 const List = () => {
@@ -35,14 +36,7 @@ const List = () => {
             Lista 1
           </Heading>
           <Box pt="5px">
-            <AiOutlineClose
-              size={25}
-              style={{ marginRight: '15px', paddingTop: '5px' }}
-              onClick={() => {
-                //   TODO: Delete list
-              }}
-              fontWeight="bold"
-            />
+            <DeletePopover onClick={() => {}} />
           </Box>
         </Flex>
         <Table p="20px">

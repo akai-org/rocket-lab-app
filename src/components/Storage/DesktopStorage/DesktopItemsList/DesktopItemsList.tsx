@@ -32,12 +32,14 @@ const DesktopItemsList = ({ items, itemsCount }: MainViewProps) => {
           <Table p="20px">
             <Thead>
               <Tr fontSize="16px" fontWeight="700">
-                <Th minW="300px">NAZWA</Th>
-                <Th w="100%">OPIS</Th>
-                <Th textAlign="right" minW="170px">
+                <Th>NAZWA</Th>
+                <Th w="50%">OPIS</Th>
+                <Th textAlign="right" w="10%">
                   ILOŚĆ SZTUK
                 </Th>
-                <Th></Th>
+                <Th textAlign="right" w="10%">
+                  Akcje
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
