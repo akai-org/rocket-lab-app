@@ -2,7 +2,10 @@ import { Flex, Image, Text, Box, useDisclosure } from '@chakra-ui/react'
 import { AiOutlineCheck, AiOutlinePlus } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { Item } from '../../../../mongo/models/item'
-import { addToCart, removeFromCart } from '../../../../store/Slices/storageCartSlice'
+import {
+  addToCart,
+  removeFromCart,
+} from '../../../../store/Slices/storageCartSlice'
 import { storageCartInfo } from '../../../../store/store'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 import ModalEdit from '../../../UI/Modals/ModalEdit/ModalEdit'
@@ -28,15 +31,25 @@ const GridItem = ({ item }: Props) => {
 
   return (
     <Flex flexDirection="column" w="50%" maxW="200px" m="10px auto 0 auto">
-      <Image onClick={onOpenInfo} src={item.imageUrl} w="80%" m="5px auto" alt="" />
+      <Image
+        onClick={onOpenInfo}
+        src={item.imageUrl}
+        w="80%"
+        m="5px auto"
+        alt=""
+      />
       <Box textAlign="center" w="90%" m="0 auto">
         <Text onClick={onOpenInfo} fontSize="16px" isTruncated fontWeight="500">
           {item.name}
         </Text>
         <Box w="100%" mb="5px">
-          <Text fontSize="14px" fontWeight="400">
-            {/* Warunkowe wyświetlanie ilości: jeżeli ilość===0 to napis brak w magazynie */}
-            Ilość: 58
+          <Text
+            fontSize="14px"
+            isTruncated
+            fontWeight={item.quantity ? '400' : '500'}
+            color={item.quantity ? 'inherit' : 'red.500'}
+          >
+            {item.quantity ? `Ilość: ${item.quantity}` : 'Brak w magazynie'}
           </Text>
         </Box>
         <Flex flexDirection="row" alignItems="center" justifyContent="center">

@@ -59,7 +59,7 @@ const ModalEdit = (props: ModalEditProps) => {
                 fontSize="19px"
               />
               <Flex lineHeight="30px" mt="5px">
-                <Text>Ilość w magazynie:</Text>
+                <Text>Ilość:</Text>
                 <NumberInput
                   display="inline"
                   h="30px"
@@ -71,7 +71,7 @@ const ModalEdit = (props: ModalEditProps) => {
                   onChange={(e) => {
                     setQuantity(parseInt(e))
                   }}
-                  min={1}
+                  min={0}
                 >
                   <NumberInputField h="32px" />
                   <NumberInputStepper>
