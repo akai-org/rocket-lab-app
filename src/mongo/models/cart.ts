@@ -26,5 +26,5 @@ const CartListSchema = new Schema<CartList>(
   { timestamps: true }
 )
 
-export const CartItemModel =
+export const CartListModel =
   (models.CartList as Model<CartList>) || model('CartList', CartListSchema)

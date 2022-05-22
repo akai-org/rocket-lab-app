@@ -16,7 +16,9 @@ import {
   Tbody,
   Text,
   Select,
+  Input,
 } from '@chakra-ui/react'
+import { useRef, useState } from 'react'
 import { Item } from '../../../../mongo/models/item'
 import { FutureCartItem } from '../../../../services/cartService'
 import { CartItem } from '../../../../store/Slices/storageCartSlice'
@@ -29,6 +31,9 @@ interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
 }
 
 const ModalAddToList = (props: ModalAddToListProps) => {
+  const [selectedList, setSelectedList] = useState('add_new')
+  const [listName, setListName] = useState('')
+
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
@@ -55,11 +60,26 @@ const ModalAddToList = (props: ModalAddToListProps) => {
           <Text mt="20px" mb="5px">
             Wybierz listę:
           </Text>
-          <Select h="30px" w="30%" borderColor="#D5D5D5">
+          <Select
+            h="30px"
+            w="30%"
+            borderColor="#D5D5D5"
+            defaultValue="add_new"
+            onChange={(e) => setSelectedList(e.target.value)}
+          >
+            <option value="add_new">Utwórz nową listę</option>
             <option value="list1">Lista 1</option>
             <option value="list2">Lista 2</option>
             <option value="list3">Lista 3</option>
           </Select>
+          <Input
+            mt="15px"
+            maxW="400px"
+            placeholder="Nazwa listy"
+            value={listName}
+            onChange={(e) => setListName(e.target.value)}
+            visibility={selectedList !== 'add_new' ? 'hidden' : 'visible'}
+          />
         </ModalBody>
         <ModalFooter>
           <ProductButton onClick={() => {}} fontSize="16px" w="120px">
