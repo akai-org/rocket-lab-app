@@ -17,7 +17,7 @@ import React, { useState } from 'react'
 import { Item } from '../../../../mongo/models/item'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 
-const ListItem = (props: Item) => {
+const ListItem = (props: {quantity: number, item: Item}) => {
   const [quantity, setQuantity] = useState(props.quantity)
   const [isEdit, setIsEdit] = useState(false)
   return (
@@ -26,12 +26,12 @@ const ListItem = (props: Item) => {
         <Flex justifyContent="flex-start">
           <Image src="item.png" w="40px" h="40px" />
           <Text lineHeight="40px" ml="10px">
-            {props.name}
+            {props.item.name}
           </Text>
         </Flex>
       </Td>
       <Td>
-          <Text>{props.description}</Text>
+          <Text>{props.item.description}</Text>
       </Td>
       <Td textAlign="right">
         <Text color={quantity ? 'inherit' : 'red.500'}>

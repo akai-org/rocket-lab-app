@@ -15,7 +15,7 @@ import DeletePopover from '../../../UI/Popovers/DeleteListPopover'
 import ListItem from '../ListItem/ListItem'
 
 export interface Props extends Omit<CartList, 'items'> {
-  items: { id: string; item: Item }[]
+  items: { id: string; item: Item, quantity: number }[]
 }
 
 const List = (props: Props) => {
@@ -57,7 +57,7 @@ const List = (props: Props) => {
           </Thead>
           <Tbody>
             {props.items.map((item) => (
-              <ListItem {...item.item} />
+              <ListItem {...item} />
             ))}
           </Tbody>
         </Table>
