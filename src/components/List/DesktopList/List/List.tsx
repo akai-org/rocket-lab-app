@@ -9,11 +9,16 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react'
-import { AiOutlineClose } from 'react-icons/ai'
+import { CartList } from '../../../../mongo/models/cart'
+import { Item } from '../../../../mongo/models/item'
 import DeletePopover from '../../../UI/Popovers/DeleteListPopover'
 import ListItem from '../ListItem/ListItem'
 
-const List = () => {
+export interface Props extends Omit<CartList, 'items'> {
+  items: { id: string; item: Item }[]
+}
+
+const List = (props: Props) => {
   return (
     <Box
       borderRadius="6px"
@@ -33,7 +38,7 @@ const List = () => {
             mb="15px"
             ml="20px"
           >
-            Lista 1
+            {props.name}
           </Heading>
           <Box pt="5px">
             <DeletePopover onClick={() => {}} />
@@ -51,10 +56,9 @@ const List = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <ListItem />
-            <ListItem />
-            <ListItem />
-            <ListItem />
+            {props.items.map((item) => (
+              <ListItem {...item.item} />
+            ))}
           </Tbody>
         </Table>
       </Flex>

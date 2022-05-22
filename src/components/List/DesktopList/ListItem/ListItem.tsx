@@ -11,12 +11,14 @@ import {
   NumberDecrementStepper,
   Button,
   ButtonGroup,
+  Box,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { Item } from '../../../../mongo/models/item'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 
-const ListItem = () => {
-  const [quantity, setQuantity] = useState(50)
+const ListItem = (props: Item) => {
+  const [quantity, setQuantity] = useState(props.quantity)
   const [isEdit, setIsEdit] = useState(false)
   return (
     <Tr fontSize="14px" h="40px">
@@ -24,12 +26,12 @@ const ListItem = () => {
         <Flex justifyContent="flex-start">
           <Image src="item.png" w="40px" h="40px" />
           <Text lineHeight="40px" ml="10px">
-            Harnaś
+            {props.name}
           </Text>
         </Flex>
       </Td>
       <Td>
-        <Text>To król gór</Text>
+          <Text>{props.description}</Text>
       </Td>
       <Td textAlign="right">
         <Text color={quantity ? 'inherit' : 'red.500'}>
@@ -46,7 +48,7 @@ const ListItem = () => {
                   h="32px"
                   w="120px"
                   borderColor="#E2E8F0"
-                  defaultValue={1}
+                  defaultValue={props.quantity}
                   min={1}
                 >
                   <NumberInputField h="32px" />
