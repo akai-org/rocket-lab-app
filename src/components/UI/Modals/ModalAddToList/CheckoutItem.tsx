@@ -36,7 +36,7 @@ const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
 
   return (
     <Tr fontSize="16px" fontWeight="700">
-      <Td w="70%">
+      <Td w="60%">
         <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
           <Image src={cartItem.item.imageUrl} w="40px" />
           <Text ml="10px" fontWeight="400">

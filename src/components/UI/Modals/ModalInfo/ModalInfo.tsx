@@ -36,7 +36,7 @@ const ModalEdit = (props: ModalEditProps) => {
               <Text fontWeight="500" fontSize="19px">
                 {props.name}
               </Text>
-              <Text>Ilość w magazynie: {props.quantity}</Text>
+              <Text>Ilość: {props.quantity}</Text>
             </Box>
           </Flex>
           <Text mt="5px">

@@ -38,7 +38,7 @@ const ListItem = ({ item }: Props) => {
           w="30%"
           maxW="250px"
         >
-          <Flex >
+          <Flex>
             <Image src={item.imageUrl} w="40px" h="40px" />
             <Text isTruncated lineHeight="40px" ml="10px">
               {item.name}
@@ -49,8 +49,13 @@ const ListItem = ({ item }: Props) => {
           <Text isTruncated>{item.description}</Text>
         </Td>
         <Td textAlign="right" minW="140px">
-          <Text isTruncated color={item.quantity ? 'inherit' : 'red.500'}>
-            {item.quantity ? item.quantity : 'brak w magazynie'}
+          <Text
+            fontSize="14px"
+            isTruncated
+            fontWeight={item.quantity ? '400' : '500'}
+            color={item.quantity ? 'inherit' : 'red.500'}
+          >
+            {item.quantity ? item.quantity : 'Brak w magazynie'}
           </Text>
         </Td>
         <Td w="10%">

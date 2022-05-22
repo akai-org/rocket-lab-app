@@ -48,9 +48,13 @@ const GridItem = ({ item }: Props) => {
           {item.name}
         </Text>
         <Box w="100%" mb="5px">
-          <Text fontSize="14px" isTruncated fontWeight="400">
-            {/* TODO: Warunkowe wyświetlanie ilości: jeżeli ilość===0 to napis brak w magazynie */}
-            Ilość: 58
+          <Text
+            fontSize="14px"
+            isTruncated
+            fontWeight={item.quantity ? '400' : '500'}
+            color={item.quantity ? 'inherit' : 'red.500'}
+          >
+            {item.quantity ? `Ilość: ${item.quantity}` : 'Brak w magazynie'}
           </Text>
         </Box>
         <Flex flexDirection="row" alignItems="center" justifyContent="center">

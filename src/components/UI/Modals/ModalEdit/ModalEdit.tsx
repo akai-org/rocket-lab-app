@@ -40,7 +40,7 @@ const ModalEdit = (props: ModalEditProps) => {
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
       <ModalContent maxW="40rem">
-        <ModalHeader>Edycja</ModalHeader>
+        <ModalHeader>Edycja produktu</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Flex>
@@ -59,7 +59,7 @@ const ModalEdit = (props: ModalEditProps) => {
                 fontSize="19px"
               />
               <Flex lineHeight="30px" mt="5px">
-                <Text>Ilość w magazynie:</Text>
+                <Text>Ilość:</Text>
                 <NumberInput
                   display="inline"
                   h="30px"
@@ -71,7 +71,7 @@ const ModalEdit = (props: ModalEditProps) => {
                   onChange={(e) => {
                     setQuantity(parseInt(e))
                   }}
-                  min={1}
+                  min={0}
                 >
                   <NumberInputField h="32px" />
                   <NumberInputStepper>
@@ -115,7 +115,7 @@ const ModalEdit = (props: ModalEditProps) => {
           >
             Zamknij
           </ProductButton>
-            <DeleteItemPopover onClick={() => {}} />
+          <DeleteItemPopover onClick={() => {}} />
         </ModalFooter>
       </ModalContent>
     </Modal>

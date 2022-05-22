@@ -40,7 +40,7 @@ const List = (props: Props) => {
           >
             {props.name}
           </Heading>
-          <Box pt="5px">
+          <Box pt="5px" mr="20px">
             <DeletePopover onClick={() => {}} />
           </Box>
         </Flex>
