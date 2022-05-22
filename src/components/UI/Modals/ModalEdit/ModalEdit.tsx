@@ -40,7 +40,7 @@ const ModalEdit = (props: ModalEditProps) => {
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
       <ModalContent maxW="40rem">
-        <ModalHeader>Edycja</ModalHeader>
+        <ModalHeader>Edycja produktu</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Flex>
@@ -115,7 +115,7 @@ const ModalEdit = (props: ModalEditProps) => {
           >
             Zamknij
           </ProductButton>
-            <DeleteItemPopover onClick={() => {}} />
+          <DeleteItemPopover onClick={() => {}} />
         </ModalFooter>
       </ModalContent>
     </Modal>
