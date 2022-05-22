@@ -53,6 +53,7 @@ export const storageCartSlice = createSlice({
       state.data.list = [...state.data.list]
     },
     clearCart: (state) => {
+      console.log('clearing cart')
       state.data.list = []
     },
   },

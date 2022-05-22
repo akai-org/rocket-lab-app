@@ -11,7 +11,13 @@ const handler: NextApiHandler = async (req, res) => {
   console.log(body)
 
   if (method === 'POST') {
-    createNewCartList(req.body.name, req.body.items)
+    try {
+      const newCartList = await createNewCartList(req.body.name, req.body.items)
+      res.status(200).send(newCartList)
+    } catch (error) {
+      console.log(error)
+      res.status(500).send({ error })
+    }
   }
 }
 

@@ -10,21 +10,39 @@ import FiltersControlls from './Filters/Filters'
 import DesktopItemsList from './DesktopItemsList/DesktopItemsList'
 import { MainViewProps } from '../../../utils/types/frontendGeneral'
 import FiltersGeneral from '../../UI/FiltersGeneral/FiltersGeneral'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { storageCartInfo } from '../../../store/store'
 import { useEffect } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
+import { fetcher } from '../../../utils/requests'
+import { clearCart } from '../../../store/Slices/storageCartSlice'
 
 const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
   const storageCartData = useSelector(storageCartInfo)
+  const dispatch = useDispatch()
   const {
     isOpen: isOpenDetails,
     onOpen: onOpenDetails,
     onClose: onCloseDetails,
   } = useDisclosure()
   const id = 'add-to-list-toast'
+
+  const addNewList = async (name: string) => {
+    try {
+      const newList = await fetcher('http://localhost:3000/api/cart/add', {
+        method: 'POST',
+        body: { name, items: storageCartData.list },
+      })
+      console.log(`added new list: ${newList}`)
+      dispatch(clearCart())
+      onCloseDetails()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     if (!toast.isActive(id) && storageCartData.list.length) {
       toast({
@@ -72,6 +90,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
       </Flex>
       {!storageCartData.list.length && toast.closeAll()}
       <ModalAddToList
+        addNewCartList={addNewList}
         items={storageCartData.list}
         onClose={onCloseDetails}
         isOpen={isOpenDetails}

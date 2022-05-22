@@ -28,6 +28,7 @@ import CheckoutItem from './CheckoutItem'
 
 interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
   items: CartItem[]
+  addNewCartList: (name: string) => Promise<void>
 }
 
 const ModalAddToList = (props: ModalAddToListProps) => {
@@ -82,8 +83,12 @@ const ModalAddToList = (props: ModalAddToListProps) => {
           />
         </ModalBody>
         <ModalFooter>
-          <ProductButton onClick={() => {}} fontSize="16px" w="120px">
-            Dodaj do listy
+          <ProductButton
+            onClick={() => props.addNewCartList(listName)}
+            fontSize="16px"
+            w="120px"
+          >
+            Dodaj listę
           </ProductButton>
           <DeleteListPopover onClick={() => {}} />
           <ProductButton
