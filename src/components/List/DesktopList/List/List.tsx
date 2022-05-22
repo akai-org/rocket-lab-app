@@ -35,7 +35,7 @@ const List = () => {
           >
             Lista 1
           </Heading>
-          <Box pt="5px">
+          <Box pt="5px" mr="20px">
             <DeletePopover onClick={() => {}} />
           </Box>
         </Flex>

@@ -51,7 +51,14 @@ const ListItem = ({ item }: Props) => {
           {item.name}
         </Text>
 
-        <Text fontSize="16px">Ilość: 58</Text>
+        <Text
+          fontSize="15px"
+          isTruncated
+          fontWeight={item.quantity ? '400' : '500'}
+          color={item.quantity ? 'inherit' : 'red.500'}
+        >
+          {item.quantity ? `Ilość: ${item.quantity}` : 'Brak w magazynie'}
+        </Text>
         <Flex flexDirection="row" mt="5px">
           <Flex justifyContent="flex-end">
             <ProductButton

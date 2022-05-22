@@ -30,7 +30,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
-      <ModalContent maxW="60rem">
+      <ModalContent maxW="40rem">
         <ModalHeader>Dodanie do listy</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
