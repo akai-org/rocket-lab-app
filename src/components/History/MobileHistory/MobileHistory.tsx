@@ -4,15 +4,15 @@ import HistoryList from './HistoryList/HistoryList'
 
 const MobileHistory = () => {
   return (
-    <Flex mt="30px" color="black" flexDirection="column">
+    <Flex mt="6rem" color="black" flexDirection="column">
       <Box textAlign="left">
-        <Text fontSize="20px" fontWeight="600" ml="15px">
+        <Text fontSize="25px" fontWeight="600" ml="15px">
           Historia
         </Text>
       </Box>
       <Flex
         flexDirection="row"
-        border="1px solid #D4D4D4"
+        border="3px solid #D4D4D4"
         borderRadius="5px"
         m="5px auto 10px"
         w="95%"
@@ -22,12 +22,21 @@ const MobileHistory = () => {
       >
         <Stack direction="row">
           <Text color="gray">sortuj:</Text>
+          {
+            // TODO: History sorting
+          }
           <Select size="md" variant="unstyled" placeholder="wybierz">
             <option value="najnowsze">najnowsze</option>
             <option value="najstarsze">najstarsze</option>
           </Select>
         </Stack>
-        <Stack direction="row" alignItems="center">
+        <Stack
+          direction="row"
+          alignItems="center"
+          onClick={() => {
+            //   TODO: History filtering
+          }}
+        >
           <Text>Filtry</Text>
           <IoMdFunnel color="black" />
         </Stack>
