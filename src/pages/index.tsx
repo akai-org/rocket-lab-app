@@ -12,13 +12,28 @@ import { FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../utils/constants'
 import { fetchCategories } from '../services/categoryService'
 import { SortType } from '../services/itemsService'
 import { useEffect } from 'react'
-import { clearCart } from '../store/Slices/storageCartSlice'
+import {
+  clearCart,
+  setExistingCartLists,
+} from '../store/Slices/storageCartSlice'
+import { fetcher } from '../utils/requests'
+import { useDispatch } from 'react-redux'
 
 interface Props extends MainViewProps {
   error?: Error
 }
 
 const Home: NextPage<Props> = ({ items, error, itemsCount }) => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    fetcher('http://localhost:3000/api/cart')
+      .then((data) => {
+        dispatch(setExistingCartLists(data))
+      })
+      .catch((error) => console.log(error))
+  }, [])
+
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
 
   const Storage = isDesktop ? (
@@ -55,7 +70,7 @@ export const getServerSideProps = withPageAuthRequired({
       const items = await itemsService.fetchItems(skip, toDisplay, {
         category: category as string | undefined,
         searchTerm,
-        sort
+        sort,
       })
 
       const itemsCount = await itemsService.fetchItemsCount()

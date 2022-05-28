@@ -16,6 +16,10 @@ export interface CartItem {
   item: Item
 }
 
+export interface PopulatedCartList extends Omit<CartList, 'items'> {
+  items: CartItem[]
+}
+
 const CartItemSchema = new Schema<CartItem>({
   quantity: {
     type: Number,

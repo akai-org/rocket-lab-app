@@ -33,7 +33,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
     try {
       const newList = await fetcher('http://localhost:3000/api/cart/add', {
         method: 'POST',
-        body: { name, items: storageCartData.list },
+        body: { name, items: storageCartData.newCartList },
       })
       console.log(`added new list: ${newList}`)
       dispatch(clearCart())
@@ -44,7 +44,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   }
 
   useEffect(() => {
-    if (!toast.isActive(id) && storageCartData.list.length) {
+    if (!toast.isActive(id) && storageCartData.newCartList.length) {
       toast({
         id,
         position: 'top',
@@ -78,7 +78,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         isClosable: false,
       })
     }
-  }, [storageCartData.list.length, isOpenDetails])
+  }, [storageCartData.newCartList.length, isOpenDetails])
 
   return (
     <Flex flexDirection="row" w="100vw" maxW="2000px" m="75px auto 0 auto">
@@ -88,10 +88,10 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         </FiltersGeneral>
         <DesktopItemsList itemsCount={itemsCount} items={items} />
       </Flex>
-      {!storageCartData.list.length && toast.closeAll()}
+      {!storageCartData.newCartList.length && toast.closeAll()}
       <ModalAddToList
         addNewCartList={addNewList}
-        items={storageCartData.list}
+        items={storageCartData.newCartList}
         onClose={onCloseDetails}
         isOpen={isOpenDetails}
         isCentered
