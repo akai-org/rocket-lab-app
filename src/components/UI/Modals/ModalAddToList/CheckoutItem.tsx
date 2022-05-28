@@ -11,7 +11,7 @@ import {
   Tr,
   useDisclosure,
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import {

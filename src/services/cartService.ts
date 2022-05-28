@@ -17,11 +17,21 @@ export async function createNewCartList(
   return newCartItem
 }
 
-export async function fetchCartLists(populated: boolean){
-  const cartListsQuery = CartListModel.find()
+export async function fetchCartLists(populated: boolean) {
+  // const cartListsQuery = CartListModel.find()
 
-  if(populated){
-    return await cartListsQuery.populate('items')
-  }
-  else PageTransitionEvent
+  // if(populated){
+  //   return await cartListsQuery.populate('items')
+  // }
+
+  return await CartListModel.aggregate([
+    {
+      $lookup: {
+        from: 'cartlists',
+        localField: 'items.item',
+        foreignField: '_id',
+        as: 'items',
+      },
+    },
+  ])
 }
