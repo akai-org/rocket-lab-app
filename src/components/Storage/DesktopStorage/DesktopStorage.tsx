@@ -3,17 +3,28 @@ import FiltersControlls from './Filters/Filters'
 import DesktopItemsList from './DesktopItemsList/DesktopItemsList'
 import { MainViewProps } from '../../../utils/types/frontendGeneral'
 import FiltersGeneral from '../../UI/FiltersGeneral/FiltersGeneral'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { storageCartInfo } from '../../../store/store'
 import { useEffect } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
 import Router from 'next/router'
 import StorageEdit from './StorageEdit/StorageEdit'
+import { fetcher } from '../../../utils/requests'
+import {
+  clearCart,
+  updateExistingCartLists,
+} from '../../../store/Slices/storageCartSlice'
+import {
+  CartItem,
+  CartList,
+  PopulatedCartList,
+} from '../../../mongo/models/cart'
 
 const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
   const storageCartData = useSelector(storageCartInfo)
+  const dispatch = useDispatch()
   const {
     isOpen: isOpenDetails,
     onOpen: onOpenDetails,
@@ -24,9 +35,47 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   Router.events.on('beforeHistoryChange', () => {
     toast.closeAll()
   })
+  const addNewList = async (name: string, listToMerge?: PopulatedCartList) => {
+    try {
+      if (!listToMerge) {
+        await fetcher('http://localhost:3000/api/cart/add', {
+          method: 'POST',
+          body: { name, items: storageCartData.newCartList },
+        })
+      } else {
+        const toAddList = [...storageCartData.newCartList]
+        const newList: CartItem[] = []
+        for (const item of listToMerge.items) {
+          const foundCopyindex = toAddList.findIndex(
+            (cartItem) => cartItem.item.id === item.item.id
+          )
+          const changedItem = { ...item }
+          if (toAddList[foundCopyindex]) {
+            changedItem.quantity += toAddList[foundCopyindex].quantity
+
+            toAddList.splice(foundCopyindex, 1)
+          }
+          newList.push(changedItem)
+        }
+        const updatedList = await fetcher(
+          'http://localhost:3000/api/cart/update',
+          {
+            method: 'PUT',
+            body: { id: listToMerge.id, items: [...toAddList, ...newList] },
+          }
+        )
+        console.log(updatedList)
+        dispatch(updateExistingCartLists(updatedList))
+      }
+      dispatch(clearCart())
+      onCloseDetails()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
-    if (!toast.isActive(id) && storageCartData.list.length) {
+    if (!toast.isActive(id) && storageCartData.newCartList.length) {
       toast({
         id,
         position: 'top',
@@ -59,10 +108,10 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         duration: 36000000,
         isClosable: false,
       })
-    } else if (storageCartData.list.length === 0) {
+    } else if (storageCartData.cartLists.length === 0) {
       toast.closeAll()
     }
-  }, [storageCartData.list, isOpenDetails])
+  }, [storageCartData.newCartList.length, isOpenDetails])
 
   return (
     <Flex flexDirection="row" w="100vw" maxW="2000px" m="75px auto 0 auto">
@@ -74,7 +123,8 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         <DesktopItemsList itemsCount={itemsCount} items={items} />
       </Flex>
       <ModalAddToList
-        items={storageCartData.list}
+        addNewCartList={addNewList}
+        items={storageCartData.newCartList}
         onClose={onCloseDetails}
         isOpen={isOpenDetails}
         isCentered

@@ -11,46 +11,16 @@ import {
 } from '@chakra-ui/react'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
+import { CartList } from '../../../../mongo/models/cart'
+import { Item } from '../../../../mongo/models/item'
 import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
 
-const List = () => {
-  // TO DELETE DUMMY CONTENT
-  const items = [
-    {
-      name: 'przedmiot',
-      description: 'jego opis',
-      categories: ['cat1', 'cat2'],
-      imageUrl: 'item.png',
-      quantity: 96,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      toBuy: true,
-      id: 'asdasdasdasID',
-    },
-    {
-      name: 'przedmiot',
-      description: 'jego opis',
-      categories: ['cat1', 'cat2'],
-      imageUrl: 'item.png',
-      quantity: 96,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      toBuy: true,
-      id: 'asdasdasdasID',
-    },
-    {
-      name: 'przedmiot',
-      description: 'jego opis',
-      categories: ['cat1', 'cat2'],
-      imageUrl: 'item.png',
-      quantity: 96,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      toBuy: true,
-      id: 'asdasdasdasID',
-    },
-  ]
+export interface Props extends Omit<CartList, 'items'> {
+  items: { id: string; item: Item; quantity: number }[]
+}
+
+const List = (props: Props) => {
   const {
     isOpen: isOpenEditList,
     onOpen: onOpenEditList,
@@ -75,7 +45,7 @@ const List = () => {
             mb="15px"
             ml="20px"
           >
-            Lista 1
+            {props.name}
           </Heading>
           <Flex pt="5px" mr="20px">
             <ProductButton
@@ -103,15 +73,14 @@ const List = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <ListItem />
-            <ListItem />
-            <ListItem />
-            <ListItem />
+            {props.items.map((item) => (
+              <ListItem {...item} />
+            ))}
           </Tbody>
         </Table>
       </Flex>
       <ModalEditList
-        list={items}
+        list={props.items}
         name="defaultowa lista"
         onClose={onCloseEditList}
         isOpen={isOpenEditList}

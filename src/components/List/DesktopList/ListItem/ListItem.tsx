@@ -3,24 +3,8 @@ import React, { useState } from 'react'
 import { Item } from '../../../../mongo/models/item'
 import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
 
-interface Props {
-  item?: Item
-}
-
-const ListItem = ({
-  item = {
-    name: 'string',
-    imageUrl: 'item.png',
-    description: 'string',
-    toBuy: true,
-    id: 'string',
-    categories: [''],
-    quantity: 69,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-}: Props) => {
-  const [quantity, setQuantity] = useState(50)
+const ListItem = (props: { quantity: number; item: Item }) => {
+  const [quantity, setQuantity] = useState(props.quantity)
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,
@@ -32,12 +16,12 @@ const ListItem = ({
         <Flex justifyContent="flex-start" cursor="pointer" onClick={onOpenInfo}>
           <Image src="item.png" w="40px" h="40px" />
           <Text lineHeight="40px" ml="10px">
-            Harnaś
+            {props.item.name}
           </Text>
         </Flex>
       </Td>
       <Td>
-        <Text>To król gór</Text>
+        <Text>{props.item.description}</Text>
       </Td>
       <Td textAlign="right">
         <Text color={quantity ? 'inherit' : 'red.500'}>
@@ -45,12 +29,12 @@ const ListItem = ({
         </Text>
       </Td>
       <ModalInfo
-        categories={item.categories}
-        id={item.id}
-        name={item.name}
-        description={item.description}
-        imageUrl={item.imageUrl}
-        quantity={item.quantity}
+        categories={props.item.categories}
+        id={props.item.id}
+        name={props.item.name}
+        description={props.item.description}
+        imageUrl={props.item.imageUrl}
+        quantity={props.item.quantity}
         onClose={onCloseInfo}
         isOpen={isOpenInfo}
         isCentered

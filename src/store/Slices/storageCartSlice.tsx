@@ -1,41 +1,85 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
+import { PopulatedCartList } from '../../mongo/models/cart'
 import { Item } from '../../mongo/models/item'
-
-type data = {
-  list: Item[]
+export interface CartItem {
+  item: Item
+  quantity: number
 }
 
-type initialValues = {
-  data: data
+type state = {
+  cartLists: PopulatedCartList[]
+  newCartList: CartItem[]
 }
 
-const initialState: initialValues = {
-  data: {
-    list: [],
-  },
+const initialState: state = {
+  cartLists: [],
+  newCartList: [],
 }
 
 export const storageCartSlice = createSlice({
   name: 'storageCartSlice',
   initialState,
   reducers: {
+    setExistingCartLists: (
+      state,
+      action: PayloadAction<PopulatedCartList[]>
+    ) => {
+      state.cartLists = action.payload
+    },
+    updateExistingCartLists: (
+      state,
+      action: PayloadAction<PopulatedCartList>
+    ) => {
+      const index = state.cartLists.findIndex(
+        ({ id }) => id === action.payload.id
+      )
+      const newList = [...state.cartLists]
+      newList.splice(index, 1, action.payload)
+      state.cartLists = newList
+    },
     addToCart: (state, action: PayloadAction<Item>) => {
-      if (!state.data.list.some((item) => item.id === action.payload.id)) {
-        state.data.list.push(action.payload)
+      if (
+        !state.newCartList.some(
+          (cartItem) => cartItem.item.id === action.payload.id
+        )
+      ) {
+        state.newCartList.push({ quantity: 1, item: action.payload })
       }
     },
     removeFromCart: (state, action: PayloadAction<Item>) => {
-      state.data.list = state.data.list.filter(
-        (item) => item.id !== action.payload.id
+      state.newCartList = state.newCartList.filter(
+        (cart) => cart.item.id !== action.payload.id
       )
     },
+    changeItemQuantity: (
+      state,
+      action: PayloadAction<{ id: string; quantity: number }>
+    ) => {
+      const oldCartItemIndex = state.newCartList.findIndex(
+        (cartItem) => cartItem.item.id === action.payload.id
+      )
+      const newCartItem = {
+        ...state.newCartList[oldCartItemIndex],
+        quantity: action.payload.quantity,
+      }
+      state.newCartList.splice(oldCartItemIndex, 1, newCartItem)
+      state.newCartList = [...state.newCartList]
+    },
     clearCart: (state) => {
-      state.data.list = []
+      console.log('clearing cart')
+      state.newCartList = []
     },
   },
 })
 
 export const storageCartReducer = storageCartSlice.reducer
 
-export const { addToCart, removeFromCart, clearCart } = storageCartSlice.actions
+export const {
+  addToCart,
+  removeFromCart,
+  clearCart,
+  changeItemQuantity,
+  setExistingCartLists,
+  updateExistingCartLists,
+} = storageCartSlice.actions

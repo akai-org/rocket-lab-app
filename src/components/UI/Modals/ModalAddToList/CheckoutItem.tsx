@@ -11,29 +11,35 @@ import {
   Tr,
   useDisclosure,
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { Item } from '../../../../mongo/models/item'
+import { useDispatch } from 'react-redux'
+import {
+  CartItem,
+  changeItemQuantity,
+  removeFromCart,
+} from '../../../../store/Slices/storageCartSlice'
 import ModalInfo from '../ModalInfo/ModalInfo'
 
-type CheckoutItemProps = {
-  item: Item
+export type CheckoutItemProps = {
+  item: CartItem
 }
 
-const CheckoutItem = ({ item }: CheckoutItemProps) => {
-  const [quantity, setQuantity] = useState(1)
+const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,
     onClose: onCloseInfo,
   } = useDisclosure()
 
+  const dispatch = useDispatch()
+
   return (
     <Tr fontSize="16px" fontWeight="700">
       <Td w="60%">
         <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
           <Text fontWeight="500" minW="50px" isTruncated>
-            {item.name}
+            {cartItem.item.name}
           </Text>
         </Flex>
       </Td>
@@ -44,9 +50,9 @@ const CheckoutItem = ({ item }: CheckoutItemProps) => {
           h="30px"
           fontSize="16px"
           borderColor="#E2E8F0"
-          defaultValue={quantity}
+          defaultValue={cartItem.quantity}
           onChange={(e) => {
-            setQuantity(parseInt(e))
+            dispatch(changeItemQuantity({ id: cartItem.item.id, quantity: +e }))
           }}
           min={1}
         >
@@ -58,17 +64,22 @@ const CheckoutItem = ({ item }: CheckoutItemProps) => {
         </NumberInput>
       </Td>
       <Td>
-        <Flex justifyContent="flex-end">
+        <Flex
+          justifyContent="flex-end"
+          onClick={(e) => {
+            dispatch(removeFromCart(cartItem.item))
+          }}
+        >
           <AiOutlineClose cursor="pointer" />
         </Flex>
       </Td>
       <ModalInfo
-        categories={item.categories}
-        id={item.id}
-        name={item.name}
-        description={item.description}
-        imageUrl={item.imageUrl}
-        quantity={item.quantity}
+        id={cartItem.item.id}
+        name={cartItem.item.name}
+        categories={cartItem.item.categories}
+        description={cartItem.item.description}
+        imageUrl={cartItem.item.imageUrl}
+        quantity={cartItem.quantity}
         onClose={onCloseInfo}
         isOpen={isOpenInfo}
         isCentered
