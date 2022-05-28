@@ -1,5 +1,4 @@
 import {
-  Button,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -19,11 +18,9 @@ import {
   Input,
   Heading,
 } from '@chakra-ui/react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PopulatedCartList } from '../../../../mongo/models/cart'
-import { Item } from '../../../../mongo/models/item'
-import { FutureCartItem } from '../../../../services/cartService'
 import { CartItem } from '../../../../store/Slices/storageCartSlice'
 import { storageCartInfo } from '../../../../store/store'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
@@ -33,7 +30,10 @@ import { ExistingCheckoutItem } from './ExistingCheckoutItem'
 
 interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
   items: CartItem[]
-  addNewCartList: (name: string) => Promise<void>
+  addNewCartList: (
+    name: string,
+    listToMerge?: PopulatedCartList
+  ) => Promise<void>
 }
 
 const ModalAddToList = (props: ModalAddToListProps) => {
@@ -127,7 +127,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
         </ModalBody>
         <ModalFooter>
           <ProductButton
-            onClick={() => props.addNewCartList(listName)}
+            onClick={() => props.addNewCartList(listName, exsitingList)}
             fontSize="16px"
             w="120px"
           >

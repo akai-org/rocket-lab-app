@@ -17,6 +17,11 @@ import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
 import { fetcher } from '../../../utils/requests'
 import { clearCart } from '../../../store/Slices/storageCartSlice'
+import {
+  CartItem,
+  CartList,
+  PopulatedCartList,
+} from '../../../mongo/models/cart'
 
 const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
@@ -29,15 +34,32 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   } = useDisclosure()
   const id = 'add-to-list-toast'
 
-  const addNewList = async (name: string) => {
+  const addNewList = async (name: string, listToMerge?: PopulatedCartList) => {
     try {
-      const newList = await fetcher('http://localhost:3000/api/cart/add', {
-        method: 'POST',
-        body: { name, items: storageCartData.newCartList },
-      })
-      console.log(`added new list: ${newList}`)
-      dispatch(clearCart())
-      onCloseDetails()
+      if (!listToMerge) {
+        await fetcher('http://localhost:3000/api/cart/add', {
+          method: 'POST',
+          body: { name, items: storageCartData.newCartList },
+        })
+      } else {
+        const newList: CartItem[] = []
+        for (const item of listToMerge.items) {
+          const foundCopy = storageCartData.newCartList.find(
+            (cartItem) => cartItem.item.id === item.item.id
+          )
+          const changedItem = {...item}
+          if(foundCopy){
+            changedItem.quantity += foundCopy.quantity
+          }
+          newList.push(changedItem)
+        }
+        await fetcher('http://localhost:3000/api/cart/update', {
+          method: 'POST',
+          body: { id: listToMerge.id, items: newList },
+        })
+      }
+      // dispatch(clearCart())
+      // onCloseDetails()
     } catch (error) {
       console.log(error)
     }
