@@ -40,6 +40,7 @@ const MobileStorage = ({ items }: MainViewProps) => {
     toast.closeAll()
   })
 
+  // TODO: The exact same component is used in DesktopStorage.tsx
   const addNewList = async (name: string, listToMerge?: PopulatedCartList) => {
     try {
       if (!listToMerge) {
