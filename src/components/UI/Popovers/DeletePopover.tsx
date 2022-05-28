@@ -21,6 +21,8 @@ interface DeletePopoverProps extends PopoverProps {
   buttonText?: string
   disabled?: boolean
   width?: string
+  height?: string
+  fontSize?: string
 }
 
 const DeletePopover = (props: DeletePopoverProps) => {
@@ -34,9 +36,10 @@ const DeletePopover = (props: DeletePopoverProps) => {
           <Box cursor="pointer">
             <ProductButton
               ml="10px"
-              fontSize="16px"
+              fontSize={props.fontSize ? props.fontSize : '16px'}
               bgColor="red.500"
               w={props.width ? props.width : '80px'}
+              h={props.height ? props.height : '32px'}
               onClick={() => {
                 props.onClick()
                 open()

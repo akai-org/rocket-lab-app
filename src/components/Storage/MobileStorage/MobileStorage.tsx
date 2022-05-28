@@ -14,6 +14,7 @@ import { storageCartInfo } from '../../../store/store'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
 import { Router } from 'next/router'
+import StorageEdit from './StorageEdit/StorageEdit'
 
 const MobileStorage = ({ items }: MainViewProps) => {
   const [listType, setListType] = useState<sortingType>('grid')
@@ -39,7 +40,7 @@ const MobileStorage = ({ items }: MainViewProps) => {
         render: () => (
           <Button
             bgColor="#FF7700"
-            w="300px"
+            w="260px"
             p="15px"
             borderRadius="10px"
             h="60px"
@@ -78,6 +79,7 @@ const MobileStorage = ({ items }: MainViewProps) => {
       mb={isFiltersOpen ? '320px' : '60px'}
     >
       <Sorting setListType={setListType} listType={listType} />
+      <StorageEdit />
       {listType === 'grid'
         ? items && items.map((item) => <GridItem item={item} key={item.id} />)
         : items && items.map((item) => <ListItem item={item} key={item.id} />)}
