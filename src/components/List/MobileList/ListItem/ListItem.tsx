@@ -16,24 +16,9 @@ import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButto
 
 import { Item } from '../../../../mongo/models/item'
 import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
+import { CartItem } from '../../../../mongo/models/cart'
 
-interface Props {
-  item?: Item
-}
-
-const ListItem = ({
-  item = {
-    name: 'string',
-    imageUrl: 'item.png',
-    description: 'string',
-    toBuy: true,
-    id: 'string',
-    categories: [''],
-    quantity: 69,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-}: Props) => {
+const ListItem = (props: CartItem) => {
   const [isEdit, setIsEdit] = useState(false)
   const [quantity, setQuantity] = useState(58)
   const {
@@ -49,23 +34,23 @@ const ListItem = ({
       onClick={onOpenInfo}
     >
       <Flex ml=" 10px" my="auto">
-        <Image src={item.imageUrl} w="50px" h="50px" />
+        <Image src={props.item.imageUrl} w="50px" h="50px" />
       </Flex>
       <Box h="100%" w="80%" m="0 auto 0 0" textAlign="left" p="20px">
         <Text fontSize="16px" fontWeight="600">
-          {item.name}
+          {props.item.name}
         </Text>
         <Text fontSize="14px" fontWeight="500">
           Ilość: {quantity}
         </Text>
       </Box>
       <ModalInfo
-        categories={item.categories}
-        id={item.id}
-        name={item.name}
-        description={item.description}
-        imageUrl={item.imageUrl}
-        quantity={item.quantity}
+        categories={props.item.categories}
+        id={props.item.id}
+        name={props.item.name}
+        description={props.item.description}
+        imageUrl={props.item.imageUrl}
+        quantity={props.item.quantity}
         onClose={onCloseInfo}
         isOpen={isOpenInfo}
         isCentered

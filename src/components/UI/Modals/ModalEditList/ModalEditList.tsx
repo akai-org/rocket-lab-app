@@ -45,7 +45,7 @@ const ModalEditList = (props: ModalEditListProps) => {
               </Thead>
               <Tbody>
                 {props.list.map((item) => (
-                  <ListItem item={item} />
+                  <ListItem key={item.id} item={item} />
                 ))}
               </Tbody>
             </Table>

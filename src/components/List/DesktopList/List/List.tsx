@@ -11,14 +11,16 @@ import {
 } from '@chakra-ui/react'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
-import { CartList } from '../../../../mongo/models/cart'
+import {
+  CartItem,
+  CartList,
+  PopulatedCartList,
+} from '../../../../mongo/models/cart'
 import { Item } from '../../../../mongo/models/item'
 import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
 
-export interface Props extends Omit<CartList, 'items'> {
-  items: { id: string; item: Item; quantity: number }[]
-}
+export interface Props extends PopulatedCartList {}
 
 const List = (props: Props) => {
   const {
@@ -74,7 +76,7 @@ const List = (props: Props) => {
           </Thead>
           <Tbody>
             {props.items.map((item) => (
-              <ListItem {...item} />
+              <ListItem key={item.id} {...item} />
             ))}
           </Tbody>
         </Table>

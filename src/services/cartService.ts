@@ -29,21 +29,12 @@ export async function updateCartList(id: string, items: CartItem[]) {
   ).populate('items.item')
 }
 
-export async function fetchCartLists(populated: boolean) {
-  // const cartListsQuery = CartListModel.find()
-
-  // if(populated){
-  //   return await cartListsQuery.populate('items')
-  // }
-
-  return await CartListModel.aggregate([
-    {
-      $lookup: {
-        from: 'cartlists',
-        localField: 'items.item',
-        foreignField: '_id',
-        as: 'items',
-      },
-    },
-  ])
+export async function fetchCartLists(populate?: boolean) {
+  if (populate) {
+    return await CartListModel.find()
+      .sort({ createdAt: -1 })
+      .populate('items.item')
+  } else {
+    return await CartListModel.find().sort({ createdAt: -1 })
+  }
 }
