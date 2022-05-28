@@ -42,24 +42,27 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
           body: { name, items: storageCartData.newCartList },
         })
       } else {
+        const toAddList = [...storageCartData.newCartList]
         const newList: CartItem[] = []
         for (const item of listToMerge.items) {
-          const foundCopy = storageCartData.newCartList.find(
+          const foundCopyindex = toAddList.findIndex(
             (cartItem) => cartItem.item.id === item.item.id
           )
-          const changedItem = {...item}
-          if(foundCopy){
-            changedItem.quantity += foundCopy.quantity
+          const changedItem = { ...item }
+          if (toAddList[foundCopyindex]) {
+            changedItem.quantity += toAddList[foundCopyindex].quantity
+
+            toAddList.splice(foundCopyindex, 1)
           }
           newList.push(changedItem)
         }
         await fetcher('http://localhost:3000/api/cart/update', {
-          method: 'POST',
-          body: { id: listToMerge.id, items: newList },
+          method: 'PUT',
+          body: { id: listToMerge.id, items: [...toAddList, ...newList] },
         })
       }
-      // dispatch(clearCart())
-      // onCloseDetails()
+      dispatch(clearCart())
+      onCloseDetails()
     } catch (error) {
       console.log(error)
     }

@@ -1,4 +1,4 @@
-import { CartListModel } from '../mongo/models/cart'
+import { CartItem, CartListModel } from '../mongo/models/cart'
 
 export interface FutureCartItem {
   item: string
@@ -15,6 +15,16 @@ export async function createNewCartList(
   })
 
   return newCartItem
+}
+
+export async function updateCartList(id: string, items: CartItem[]) {
+  console.log('chuj')
+  const mappedItems = items.map((item) => ({
+    quantity: item.quantity,
+    item: item.id,
+  }))
+  console.log(mappedItems)
+  return await CartListModel.updateOne({ _id: id }, { items: mappedItems })
 }
 
 export async function fetchCartLists(populated: boolean) {
