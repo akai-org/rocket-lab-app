@@ -1,9 +1,10 @@
 import { Flex, Image, Td, Text, Tr, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { CartItem } from '../../../../mongo/models/cart'
 import { Item } from '../../../../mongo/models/item'
 import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
 
-const ListItem = (props: { quantity: number; item: Item }) => {
+const ListItem = (props: CartItem) => {
   const [quantity, setQuantity] = useState(props.quantity)
   const {
     isOpen: isOpenInfo,
