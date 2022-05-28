@@ -108,6 +108,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
           </ProductButton>
           <ProductButton
             onClick={() => {
+              props.onClose()
               setIsEdit(true)
             }}
             fontSize="16px"
