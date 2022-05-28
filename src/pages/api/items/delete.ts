@@ -4,12 +4,11 @@ import * as itemsService from '../../../services/itemsService'
 import { withMiddleware } from '../../../utils/middlewares'
 
 const handler: NextApiHandler = async (req, res) => {
-  if (req.method === 'PUT') {
+  if (req.method === 'DELETE') {
     const body = req.body
-    console.log(body)
     try {
-      const items = await itemsService.updateItem(body.id, body.item)
-      res.status(200).send(items)
+      const deletedItem = await itemsService.deleteItem(body.id)
+      res.status(200).send(deletedItem)
     } catch (error) {
       console.log(error)
       res.status(400).send(error)

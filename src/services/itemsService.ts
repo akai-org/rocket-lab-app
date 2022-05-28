@@ -1,3 +1,4 @@
+import { CartListModel } from '../mongo/models/cart'
 import { Item, ItemModel } from '../mongo/models/item'
 import { ITEMS_QUERY_LIMIT } from '../utils/constants'
 import { validateSortParam } from '../utils/dataValidation/validateSortParam'
@@ -91,4 +92,18 @@ export async function updateItem(id: string, item: Partial<Item>) {
     { ...item },
     { new: true }
   )
+}
+
+export async function deleteItem(id: string) {
+  await CartListModel.updateMany(
+    {},
+    {
+      $pull: {
+        items: {
+          item: id,
+        },
+      },
+    }
+  )
+  return await ItemModel.deleteOne({ _id: id })
 }
