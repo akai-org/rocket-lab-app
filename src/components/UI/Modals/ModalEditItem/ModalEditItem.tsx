@@ -23,7 +23,7 @@ import { useState } from 'react'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
 
-interface ModalEditProps extends Omit<ModalProps, 'children'> {
+interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
   name: string
   description: string
   imageUrl: string
@@ -31,7 +31,7 @@ interface ModalEditProps extends Omit<ModalProps, 'children'> {
   id: string
 }
 
-const ModalEdit = (props: ModalEditProps) => {
+const ModalEditItem = (props: ModalEditItemProps) => {
   const [isEdit, setIsEdit] = useState(false)
   const [name, setName] = useState(props.name)
   const [description, setDescription] = useState(props.description)
@@ -126,4 +126,4 @@ const ModalEdit = (props: ModalEditProps) => {
   )
 }
 
-export default ModalEdit
+export default ModalEditItem

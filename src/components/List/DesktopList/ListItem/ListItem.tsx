@@ -4,24 +4,39 @@ import {
   Td,
   Text,
   Tr,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Button,
-  ButtonGroup,
+  useDisclosure,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
+import { Item } from '../../../../mongo/models/item'
+import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
 
-const ListItem = () => {
+interface Props {
+  item?: Item
+}
+
+const ListItem = ({
+  item = {
+    name: 'string',
+    imageUrl: 'item.png',
+    description: 'string',
+    toBuy: true,
+    id: 'string',
+    categories: [''],
+    quantity: 69,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+}: Props) => {
   const [quantity, setQuantity] = useState(50)
-  const [isEdit, setIsEdit] = useState(false)
+  const {
+    isOpen: isOpenInfo,
+    onOpen: onOpenInfo,
+    onClose: onCloseInfo,
+  } = useDisclosure()
   return (
     <Tr fontSize="14px" h="40px">
       <Td>
-        <Flex justifyContent="flex-start">
+        <Flex justifyContent="flex-start" cursor="pointer" onClick={onOpenInfo}>
           <Image src="item.png" w="40px" h="40px" />
           <Text lineHeight="40px" ml="10px">
             Harnaś
@@ -36,87 +51,16 @@ const ListItem = () => {
           {quantity ? quantity : 'brak w magazynie'}
         </Text>
       </Td>
-      <Td>
-        <Flex w="100%" justifyContent="flex-end">
-          {isEdit ? (
-            <>
-              <Flex mt="10px" flexDirection="column">
-                <NumberInput
-                  allowMouseWheel
-                  mb="8px"
-                  h="32px"
-                  w="120px"
-                  borderColor="#E2E8F0"
-                  defaultValue={1}
-                  min={1}
-                >
-                  <NumberInputField h="32px" />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-                <ButtonGroup isAttached w="120px" mb="8px">
-                  <ProductButton
-                    size="sm"
-                    pb="5px"
-                    w="60px"
-                    onClick={() => {
-                      setIsEdit(false)
-                    }}
-                  >
-                    +
-                  </ProductButton>
-                  <ProductButton
-                    size="sm"
-                    w="60px"
-                    pb="5px"
-                    onClick={() => {
-                      setIsEdit(false)
-                    }}
-                  >
-                    -
-                  </ProductButton>
-                </ButtonGroup>
-                <ProductButton
-                  size="sm"
-                  w="120px"
-                  mb="8px"
-                  fontSize="16px"
-                  onClick={() => {
-                    setIsEdit(false)
-                  }}
-                >
-                  Usuń z listy
-                </ProductButton>
-                <ProductButton
-                  size="sm"
-                  w="120px"
-                  fontSize="16px"
-                  onClick={() => {
-                    setIsEdit(false)
-                  }}
-                >
-                  Anuluj
-                </ProductButton>
-              </Flex>
-            </>
-          ) : (
-            <>
-              <ProductButton
-                size="sm"
-                w="120px"
-                fontSize="16px"
-                onClick={() => {
-                  setIsEdit(true)
-                }}
-              >
-                Edytuj
-              </ProductButton>
-            </>
-          )}
-        </Flex>
-      </Td>
+      <ModalInfo
+        id={item.id}
+        name={item.name}
+        description={item.description}
+        imageUrl={item.imageUrl}
+        quantity={item.quantity}
+        onClose={onCloseInfo}
+        isOpen={isOpenInfo}
+        isCentered
+      />
     </Tr>
   )
 }
