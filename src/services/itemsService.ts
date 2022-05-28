@@ -84,3 +84,11 @@ export async function fetchItemsCount(): Promise<number> {
   const itemsCount = await ItemModel.count()
   return itemsCount
 }
+
+export async function updateItem(id: string, item: Partial<Item>) {
+  return await ItemModel.findOneAndUpdate(
+    { _id: id },
+    { ...item },
+    { new: true }
+  )
+}

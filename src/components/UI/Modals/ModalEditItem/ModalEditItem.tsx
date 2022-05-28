@@ -20,6 +20,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { useState } from 'react'
+import { fetcher } from '../../../../utils/requests'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
 
@@ -36,6 +37,18 @@ const ModalEditItem = (props: ModalEditItemProps) => {
   const [name, setName] = useState(props.name)
   const [description, setDescription] = useState(props.description)
   const [quantity, setQuantity] = useState(props.quantity)
+
+  const updateItem = async () => {
+    fetcher('http://localhost:3000/api/items/update', {
+      method: 'PUT',
+      body: { id: props.id, item: { name, description, quantity } },
+    })
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((error) => console.log(error))
+  }
+
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
@@ -99,6 +112,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
           <ProductButton
             onClick={() => {
               setIsEdit(false)
+              updateItem()
             }}
             fontSize="16px"
             w="80px"
