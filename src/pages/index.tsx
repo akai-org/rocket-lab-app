@@ -29,6 +29,7 @@ const Home: NextPage<Props> = ({ items, error, itemsCount }) => {
   useEffect(() => {
     fetcher('http://localhost:3000/api/cart')
       .then((data) => {
+        console.log(data)
         dispatch(setExistingCartLists(data))
       })
       .catch((error) => console.log(error))
