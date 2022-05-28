@@ -1,8 +1,52 @@
-import { Flex, Heading, Text } from '@chakra-ui/react'
+import { Box, Flex, Heading, useDisclosure } from '@chakra-ui/react'
 import ListItem from '../ListItem/ListItem'
 import { AiOutlineClose } from 'react-icons/ai'
+import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
+import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
+import DeletePopover from '../../../UI/Popovers/DeletePopover'
 
 const List = () => {
+  // TO DELETE DUMMY CONTENT
+  const items = [
+    {
+      name: 'przedmiot',
+      description: 'jego opis',
+      categories: ['cat1', 'cat2'],
+      imageUrl: 'item.png',
+      quantity: 96,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      toBuy: true,
+      id: 'asdasdasdasID',
+    },
+    {
+      name: 'przedmiot',
+      description: 'jego opis',
+      categories: ['cat1', 'cat2'],
+      imageUrl: 'item.png',
+      quantity: 96,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      toBuy: true,
+      id: 'asdasdasdasID',
+    },
+    {
+      name: 'przedmiot',
+      description: 'jego opis',
+      categories: ['cat1', 'cat2'],
+      imageUrl: 'item.png',
+      quantity: 96,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      toBuy: true,
+      id: 'asdasdasdasID',
+    },
+  ]
+  const {
+    isOpen: isOpenEditList,
+    onOpen: onOpenEditList,
+    onClose: onCloseEditList,
+  } = useDisclosure()
   return (
     <Flex
       flexDir="column"
@@ -22,18 +66,32 @@ const List = () => {
         >
           Lista 1
         </Heading>
-        <AiOutlineClose
-          size={25}
-          style={{ marginRight: '15px', paddingTop: '5px' }}
-          onClick={() => {
-            //   TODO: Delete list
-          }}
-          fontWeight="bold"
-        />
+        <Flex>
+          <ProductButton
+            size="sm"
+            onClick={onOpenEditList}
+            w="80px"
+            fontSize="16px"
+            mr="5px"
+          >
+            Edytuj
+          </ProductButton>
+          <DeletePopover
+            label="Czy na pewno chcesz usunąć tę listę?"
+            onClick={() => {}}
+          />
+        </Flex>
       </Flex>
-      <ListItem />
-      <ListItem />
-      <ListItem />
+      {items.map((item) => (
+        <ListItem item={item} />
+      ))}
+      <ModalEditList
+        list={items}
+        name="defaultowa lista"
+        onClose={onCloseEditList}
+        isOpen={isOpenEditList}
+        isCentered
+      />
     </Flex>
   )
 }

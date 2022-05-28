@@ -32,8 +32,7 @@ const CheckoutItem = ({ item }: CheckoutItemProps) => {
     <Tr fontSize="16px" fontWeight="700">
       <Td w="60%">
         <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
-          <Image src={item.imageUrl} w="40px" />
-          <Text ml="10px" fontWeight="400" minW="50px" isTruncated>
+          <Text fontWeight="500" minW="50px" isTruncated>
             {item.name}
           </Text>
         </Flex>

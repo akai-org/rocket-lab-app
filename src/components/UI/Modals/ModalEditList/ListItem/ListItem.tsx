@@ -1,4 +1,16 @@
-import { Flex, Tr, Td, Image, Text, useDisclosure, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
+import {
+  Flex,
+  Tr,
+  Td,
+  Image,
+  Text,
+  useDisclosure,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+} from '@chakra-ui/react'
 import { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Item } from '../../../../../mongo/models/item'
@@ -19,8 +31,7 @@ const ListItem = ({ item }: ModalEditListProps) => {
     <Tr fontSize="14px" h="40px">
       <Td w="60%">
         <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
-          <Image src={item.imageUrl} w="40px" />
-          <Text ml="10px" fontWeight="400" minW="50px" isTruncated>
+          <Text fontWeight="500" minW="50px" isTruncated>
             {item.name}
           </Text>
         </Flex>
