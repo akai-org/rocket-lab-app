@@ -22,7 +22,7 @@ const Home: NextPage<Props> = ({ cartLists }) => {
   const List = isDesktop ? (
     <DesktopList cartLists={cartLists} />
   ) : (
-    <MobileList />
+    <MobileList cartLists={cartLists} />
   )
   return List
 }

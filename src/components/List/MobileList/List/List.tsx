@@ -4,44 +4,13 @@ import { AiOutlineClose } from 'react-icons/ai'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
 import DeletePopover from '../../../UI/Popovers/DeletePopover'
+import { PopulatedCartList } from '../../../../mongo/models/cart'
 
-const List = () => {
-  // TO DELETE DUMMY CONTENT
-  const items = [
-    {
-      name: 'przedmiot',
-      description: 'jego opis',
-      categories: ['cat1', 'cat2'],
-      imageUrl: 'item.png',
-      quantity: 96,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      toBuy: true,
-      id: 'asdasdasdasID',
-    },
-    {
-      name: 'przedmiot',
-      description: 'jego opis',
-      categories: ['cat1', 'cat2'],
-      imageUrl: 'item.png',
-      quantity: 96,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      toBuy: true,
-      id: 'asdasdasdasID',
-    },
-    {
-      name: 'przedmiot',
-      description: 'jego opis',
-      categories: ['cat1', 'cat2'],
-      imageUrl: 'item.png',
-      quantity: 96,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      toBuy: true,
-      id: 'asdasdasdasID',
-    },
-  ]
+
+export interface Props extends PopulatedCartList {}
+
+const List = (props: Props) => {
+
   const {
     isOpen: isOpenEditList,
     onOpen: onOpenEditList,
@@ -82,11 +51,11 @@ const List = () => {
           />
         </Flex>
       </Flex>
-      {items.map((item) => (
-        <ListItem item={item} />
+      {props.items.map((item) => (
+        <ListItem {...item} />
       ))}
       <ModalEditList
-        list={items}
+        list={props.items}
         name="defaultowa lista"
         onClose={onCloseEditList}
         isOpen={isOpenEditList}

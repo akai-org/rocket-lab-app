@@ -1,13 +1,15 @@
 import { Flex } from '@chakra-ui/react'
+import { CartListsProps } from '../../../pages/list'
 import AddItem from './AddItem/AddItem'
 import List from './List/List'
 
-const MobileList = () => {
+const MobileList = ({cartLists}: CartListsProps) => {
   return (
     <Flex mt="80px" color="#3F3F3F" flexDirection="column">
       <AddItem />
-      <List />
-      <List />
+      {cartLists.map((cartList) => (
+        <List {...cartList} key={cartList.id} />
+      ))}
     </Flex>
   )
 }
