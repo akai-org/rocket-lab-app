@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Text,
-  useDisclosure,
-  useToast,
-} from '@chakra-ui/react'
+import { Button, Flex, Text, useDisclosure, useToast } from '@chakra-ui/react'
 import FiltersControlls from './Filters/Filters'
 import DesktopItemsList from './DesktopItemsList/DesktopItemsList'
 import { MainViewProps } from '../../../utils/types/frontendGeneral'
@@ -15,11 +8,10 @@ import { storageCartInfo } from '../../../store/store'
 import { useEffect } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
-import Router, { useRouter } from 'next/router'
+import Router from 'next/router'
 
 const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
-  const router = useRouter()
   const storageCartData = useSelector(storageCartInfo)
   const {
     isOpen: isOpenDetails,
@@ -66,6 +58,8 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         duration: 36000000,
         isClosable: false,
       })
+    } else if (storageCartData.list.length === 0) {
+      toast.closeAll()
     }
   }, [storageCartData.list, isOpenDetails])
 
@@ -77,7 +71,6 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         </FiltersGeneral>
         <DesktopItemsList itemsCount={itemsCount} items={items} />
       </Flex>
-      {!storageCartData.list.length && toast.closeAll()}
       <ModalAddToList
         items={storageCartData.list}
         onClose={onCloseDetails}

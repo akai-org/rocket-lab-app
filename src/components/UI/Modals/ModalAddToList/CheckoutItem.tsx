@@ -33,7 +33,7 @@ const CheckoutItem = ({ item }: CheckoutItemProps) => {
       <Td w="60%">
         <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
           <Image src={item.imageUrl} w="40px" />
-          <Text ml="10px" fontWeight="400">
+          <Text ml="10px" fontWeight="400" minW="50px" isTruncated>
             {item.name}
           </Text>
         </Flex>
@@ -50,7 +50,7 @@ const CheckoutItem = ({ item }: CheckoutItemProps) => {
           }}
           min={1}
         >
-          <NumberInputField h="30px" />
+          <NumberInputField h="30px" minW="80px" />
           <NumberInputStepper h="30px">
             <NumberIncrementStepper />
             <NumberDecrementStepper />

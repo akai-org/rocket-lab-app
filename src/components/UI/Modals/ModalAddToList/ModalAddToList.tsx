@@ -33,7 +33,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
         <ModalHeader>Dodanie do listy</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Flex flexDirection="column" h="350px" overflowY="scroll" w="100%">
+          <Flex flexDirection="column" maxH="350px" overflowY="scroll" w="100%">
             <Table>
               <Thead>
                 <Tr fontSize="16px" fontWeight="700">
