@@ -15,13 +15,13 @@ import {
   Tbody,
 } from '@chakra-ui/react'
 import { useState } from 'react'
-import { Item } from '../../../../mongo/models/item'
+import { CartItem } from '../../../../mongo/models/cart'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
 import ListItem from './ListItem/ListItem'
 
 interface ModalEditListProps extends Omit<ModalProps, 'children'> {
-  list: Item[]
+  list: CartItem[]
   name: string
 }
 

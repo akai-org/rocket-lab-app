@@ -13,11 +13,11 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { Item } from '../../../../../mongo/models/item'
+import { CartItem } from '../../../../../mongo/models/cart'
 import ModalInfo from '../../ModalInfo/ModalInfo'
 
 interface ModalEditListProps {
-  item: Item
+  item: CartItem
 }
 
 const ListItem = ({ item }: ModalEditListProps) => {
@@ -32,7 +32,7 @@ const ListItem = ({ item }: ModalEditListProps) => {
       <Td w="60%">
         <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
           <Text fontWeight="500" minW="50px" isTruncated>
-            {item.name}
+            {item.item.name}
           </Text>
         </Flex>
       </Td>
@@ -62,12 +62,12 @@ const ListItem = ({ item }: ModalEditListProps) => {
         </Flex>
       </Td>
       <ModalInfo
-        categories={item.categories}
-        id={item.id}
-        name={item.name}
-        description={item.description}
-        imageUrl={item.imageUrl}
-        quantity={item.quantity}
+        categories={item.item.categories}
+        id={item.item.id}
+        name={item.item.name}
+        description={item.item.description}
+        imageUrl={item.item.imageUrl}
+        quantity={item.item.quantity}
         onClose={onCloseInfo}
         isOpen={isOpenInfo}
         isCentered
