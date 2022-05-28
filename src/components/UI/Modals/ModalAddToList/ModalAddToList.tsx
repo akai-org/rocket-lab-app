@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react'
 import { Item } from '../../../../mongo/models/item'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
-import DeleteListPopover from '../../Popovers/DeleteListPopover'
+import DeletePopover from '../../Popovers/DeletePopover'
 import CheckoutItem from './CheckoutItem'
 
 interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
@@ -62,7 +62,10 @@ const ModalAddToList = (props: ModalAddToListProps) => {
           <ProductButton onClick={() => {}} fontSize="16px" w="120px">
             Dodaj do listy
           </ProductButton>
-          <DeleteListPopover onClick={() => {}} />
+          <DeletePopover
+            label="Czy na pewno chcesz usunąć tę listę?"
+            onClick={() => {}}
+          />
           <ProductButton
             fontSize="16px"
             colorScheme="blue"

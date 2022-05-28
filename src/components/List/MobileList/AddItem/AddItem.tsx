@@ -72,6 +72,7 @@ const AddItem = () => {
               <Input h="32px" borderColor="#D5D5D5" />
               <Text mt="10px">Ilość</Text>
               <NumberInput
+                allowMouseWheel
                 h="32px"
                 w="100%"
                 onChange={(e) => {

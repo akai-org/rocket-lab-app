@@ -4,13 +4,11 @@ import {
   Heading,
   Table,
   Tbody,
-  Text,
   Th,
   Thead,
   Tr,
 } from '@chakra-ui/react'
-import { AiOutlineClose } from 'react-icons/ai'
-import DeletePopover from '../../../UI/Popovers/DeleteListPopover'
+import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
 
 const List = () => {
@@ -36,7 +34,10 @@ const List = () => {
             Lista 1
           </Heading>
           <Box pt="5px" mr="20px">
-            <DeletePopover onClick={() => {}} />
+            <DeletePopover
+              label="Czy na pewno chcesz usunąć tę listę?"
+              onClick={() => {}}
+            />
           </Box>
         </Flex>
         <Table p="20px">

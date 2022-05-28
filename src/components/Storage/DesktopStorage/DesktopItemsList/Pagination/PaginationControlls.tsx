@@ -110,7 +110,7 @@ export const PaginationControlls: React.FC<Props> = ({
           </Link>
         </Flex>
         <Text color="black" ml="10px" lineHeight="20px">
-          {'aktualna TODO:'} z {maxPage}
+          {query.page ? query.page : 1} z {maxPage}
         </Text>
       </Flex>
       <Flex>

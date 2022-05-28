@@ -40,6 +40,7 @@ const CheckoutItem = ({ item }: CheckoutItemProps) => {
       </Td>
       <Td>
         <NumberInput
+          allowMouseWheel
           display="inline"
           h="30px"
           fontSize="16px"

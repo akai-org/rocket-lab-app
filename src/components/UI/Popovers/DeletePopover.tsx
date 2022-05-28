@@ -12,15 +12,18 @@ import {
   PopoverProps,
 } from '@chakra-ui/react'
 import { useState } from 'react'
-import { AiOutlineClose } from 'react-icons/ai'
 import { Box } from '@chakra-ui/react'
 import ProductButton from '../Custom Buttons/ProductButton/ProductButton'
 
-interface DeleteListPopoverProps extends PopoverProps {
+interface DeletePopoverProps extends PopoverProps {
   onClick: () => void
+  label: string
+  buttonText?: string
+  disabled?: boolean
+  width?: string
 }
 
-const DeleteListPopover = (props: DeleteListPopoverProps) => {
+const DeletePopover = (props: DeletePopoverProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const open = () => setIsOpen(!isOpen)
   const close = () => setIsOpen(false)
@@ -33,13 +36,14 @@ const DeleteListPopover = (props: DeleteListPopoverProps) => {
               ml="10px"
               fontSize="16px"
               bgColor="red.500"
-              w="80px"
-              onClick={
-                //   TODO: Delete list
-                open
-              }
+              w={props.width ? props.width : '80px'}
+              onClick={() => {
+                props.onClick()
+                open()
+              }}
+              disabled={props.disabled}
             >
-              Usuń
+              {props.buttonText ? props.buttonText : 'Usuń'}
             </ProductButton>
           </Box>
         </PopoverTrigger>
@@ -47,7 +51,7 @@ const DeleteListPopover = (props: DeleteListPopoverProps) => {
           <PopoverHeader fontWeight="semibold">Uwaga</PopoverHeader>
           <PopoverArrow />
           <PopoverCloseButton />
-          <PopoverBody>Czy na pewno chcesz usunąć tę listę?</PopoverBody>
+          <PopoverBody>{props.label}</PopoverBody>
           <PopoverFooter display="flex" justifyContent="flex-end">
             <ButtonGroup size="sm">
               <Button variant="outline" onClick={close}>
@@ -64,4 +68,4 @@ const DeleteListPopover = (props: DeleteListPopoverProps) => {
   )
 }
 
-export default DeleteListPopover
+export default DeletePopover

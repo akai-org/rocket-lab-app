@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
 import Router from 'next/router'
+import StorageEdit from './StorageEdit/StorageEdit'
 
 const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
@@ -66,6 +67,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   return (
     <Flex flexDirection="row" w="100vw" maxW="2000px" m="75px auto 0 auto">
       <Flex w="95%" flexDirection="column" ml="223px" p="40px">
+        <StorageEdit />
         <FiltersGeneral>
           {(props) => <FiltersControlls {...props} />}
         </FiltersGeneral>

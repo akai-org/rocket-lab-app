@@ -40,7 +40,7 @@ const ListItem = () => {
               <Text fontSize="14px" fontWeight="500">
                 Ilość
               </Text>
-              <NumberInput
+              <NumberInput allowMouseWheel 
                 ml="10px"
                 h="25px"
                 w="70px"

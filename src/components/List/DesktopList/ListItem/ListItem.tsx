@@ -42,6 +42,7 @@ const ListItem = () => {
             <>
               <Flex mt="10px" flexDirection="column">
                 <NumberInput
+                  allowMouseWheel
                   mb="8px"
                   h="32px"
                   w="120px"
