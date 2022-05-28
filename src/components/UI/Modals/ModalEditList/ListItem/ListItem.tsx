@@ -1,45 +1,38 @@
 import {
   Flex,
+  Tr,
+  Td,
   Image,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
+  Text,
+  useDisclosure,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  Td,
-  Text,
-  Tr,
-  useDisclosure,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from '@chakra-ui/react'
-import React from 'react'
+import { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { useDispatch } from 'react-redux'
-import {
-  CartItem,
-  changeItemQuantity,
-  removeFromCart,
-} from '../../../../store/Slices/storageCartSlice'
-import ModalInfo from '../ModalInfo/ModalInfo'
+import { CartItem } from '../../../../../mongo/models/cart'
+import ModalInfo from '../../ModalInfo/ModalInfo'
 
-export type CheckoutItemProps = {
+interface ModalEditListProps {
   item: CartItem
 }
 
-const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
+const ListItem = ({ item }: ModalEditListProps) => {
+  const [quantity, setQuantity] = useState(1)
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,
     onClose: onCloseInfo,
   } = useDisclosure()
-
-  const dispatch = useDispatch()
-
   return (
-    <Tr fontSize="16px" fontWeight="700">
+    <Tr fontSize="14px" h="40px">
       <Td w="60%">
         <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
           <Text fontWeight="500" minW="50px" isTruncated>
-            {cartItem.item.name}
+            {item.item.name}
           </Text>
         </Flex>
       </Td>
@@ -50,9 +43,9 @@ const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
           h="30px"
           fontSize="16px"
           borderColor="#E2E8F0"
-          defaultValue={cartItem.quantity}
+          defaultValue={quantity}
           onChange={(e) => {
-            dispatch(changeItemQuantity({ id: cartItem.item.id, quantity: +e }))
+            setQuantity(parseInt(e))
           }}
           min={1}
         >
@@ -64,22 +57,17 @@ const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
         </NumberInput>
       </Td>
       <Td>
-        <Flex
-          justifyContent="flex-end"
-          onClick={(e) => {
-            dispatch(removeFromCart(cartItem.item))
-          }}
-        >
+        <Flex justifyContent="flex-end">
           <AiOutlineClose cursor="pointer" />
         </Flex>
       </Td>
       <ModalInfo
-        id={cartItem.item.id}
-        name={cartItem.item.name}
-        categories={cartItem.item.categories}
-        description={cartItem.item.description}
-        imageUrl={cartItem.item.imageUrl}
-        quantity={cartItem.quantity}
+        categories={item.item.categories}
+        id={item.item.id}
+        name={item.item.name}
+        description={item.item.description}
+        imageUrl={item.item.imageUrl}
+        quantity={item.item.quantity}
         onClose={onCloseInfo}
         isOpen={isOpenInfo}
         isCentered
@@ -88,4 +76,4 @@ const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
   )
 }
 
-export default CheckoutItem
+export default ListItem

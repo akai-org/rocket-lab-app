@@ -24,7 +24,7 @@ import { PopulatedCartList } from '../../../../mongo/models/cart'
 import { CartItem } from '../../../../store/Slices/storageCartSlice'
 import { storageCartInfo } from '../../../../store/store'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
-import DeleteListPopover from '../../Popovers/DeleteListPopover'
+import DeletePopover from '../../Popovers/DeletePopover'
 import CheckoutItem from './CheckoutItem'
 import { ExistingCheckoutItem } from './ExistingCheckoutItem'
 
@@ -71,7 +71,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
         <ModalHeader>Dodanie do listy</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Flex flexDirection="column" h="350px" overflowY="scroll" w="100%">
+          <Flex flexDirection="column" maxH="350px" overflowY="scroll" w="100%">
             <Table>
               <Thead>
                 <Tr fontSize="16px" fontWeight="700">
@@ -144,7 +144,10 @@ const ModalAddToList = (props: ModalAddToListProps) => {
           >
             {exsitingList ? 'Dodaj do listy' : 'Dodaj listę'}
           </ProductButton>
-          <DeleteListPopover onClick={() => {}} />
+          <DeletePopover
+            label="Czy na pewno chcesz usunąć tę listę?"
+            onClick={() => {}}
+          />
           <ProductButton
             fontSize="16px"
             colorScheme="blue"

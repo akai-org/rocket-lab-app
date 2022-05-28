@@ -1,29 +1,19 @@
-import {
-  Flex,
-  Image,
-  Td,
-  Text,
-  Tr,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Button,
-  ButtonGroup,
-  Box,
-} from '@chakra-ui/react'
+import { Flex, Image, Td, Text, Tr, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { Item } from '../../../../mongo/models/item'
-import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
+import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
 
-const ListItem = (props: {quantity: number, item: Item}) => {
+const ListItem = (props: { quantity: number; item: Item }) => {
   const [quantity, setQuantity] = useState(props.quantity)
-  const [isEdit, setIsEdit] = useState(false)
+  const {
+    isOpen: isOpenInfo,
+    onOpen: onOpenInfo,
+    onClose: onCloseInfo,
+  } = useDisclosure()
   return (
     <Tr fontSize="14px" h="40px">
       <Td>
-        <Flex justifyContent="flex-start">
+        <Flex justifyContent="flex-start" cursor="pointer" onClick={onOpenInfo}>
           <Image src="item.png" w="40px" h="40px" />
           <Text lineHeight="40px" ml="10px">
             {props.item.name}
@@ -31,93 +21,24 @@ const ListItem = (props: {quantity: number, item: Item}) => {
         </Flex>
       </Td>
       <Td>
-          <Text>{props.item.description}</Text>
+        <Text>{props.item.description}</Text>
       </Td>
       <Td textAlign="right">
         <Text color={quantity ? 'inherit' : 'red.500'}>
           {quantity ? quantity : 'brak w magazynie'}
         </Text>
       </Td>
-      <Td>
-        <Flex w="100%" justifyContent="flex-end">
-          {isEdit ? (
-            <>
-              <Flex mt="10px" flexDirection="column">
-                <NumberInput
-                  mb="8px"
-                  h="32px"
-                  w="120px"
-                  borderColor="#E2E8F0"
-                  defaultValue={props.quantity}
-                  min={1}
-                >
-                  <NumberInputField h="32px" />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-                <ButtonGroup isAttached w="120px" mb="8px">
-                  <ProductButton
-                    size="sm"
-                    pb="5px"
-                    w="60px"
-                    onClick={() => {
-                      setIsEdit(false)
-                    }}
-                  >
-                    +
-                  </ProductButton>
-                  <ProductButton
-                    size="sm"
-                    w="60px"
-                    pb="5px"
-                    onClick={() => {
-                      setIsEdit(false)
-                    }}
-                  >
-                    -
-                  </ProductButton>
-                </ButtonGroup>
-                <ProductButton
-                  size="sm"
-                  w="120px"
-                  mb="8px"
-                  fontSize="16px"
-                  onClick={() => {
-                    setIsEdit(false)
-                  }}
-                >
-                  Usuń z listy
-                </ProductButton>
-                <ProductButton
-                  size="sm"
-                  w="120px"
-                  fontSize="16px"
-                  onClick={() => {
-                    setIsEdit(false)
-                  }}
-                >
-                  Anuluj
-                </ProductButton>
-              </Flex>
-            </>
-          ) : (
-            <>
-              <ProductButton
-                size="sm"
-                w="120px"
-                fontSize="16px"
-                onClick={() => {
-                  setIsEdit(true)
-                }}
-              >
-                Edytuj
-              </ProductButton>
-            </>
-          )}
-        </Flex>
-      </Td>
+      <ModalInfo
+        categories={props.item.categories}
+        id={props.item.id}
+        name={props.item.name}
+        description={props.item.description}
+        imageUrl={props.item.imageUrl}
+        quantity={props.item.quantity}
+        onClose={onCloseInfo}
+        isOpen={isOpenInfo}
+        isCentered
+      />
     </Tr>
   )
 }

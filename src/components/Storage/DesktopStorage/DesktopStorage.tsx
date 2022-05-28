@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Text,
-  useDisclosure,
-  useToast,
-} from '@chakra-ui/react'
+import { Button, Flex, Text, useDisclosure, useToast } from '@chakra-ui/react'
 import FiltersControlls from './Filters/Filters'
 import DesktopItemsList from './DesktopItemsList/DesktopItemsList'
 import { MainViewProps } from '../../../utils/types/frontendGeneral'
@@ -15,6 +8,8 @@ import { storageCartInfo } from '../../../store/store'
 import { useEffect } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
+import Router from 'next/router'
+import StorageEdit from './StorageEdit/StorageEdit'
 import { fetcher } from '../../../utils/requests'
 import {
   clearCart,
@@ -37,6 +32,9 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   } = useDisclosure()
   const id = 'add-to-list-toast'
 
+  Router.events.on('beforeHistoryChange', () => {
+    toast.closeAll()
+  })
   const addNewList = async (name: string, listToMerge?: PopulatedCartList) => {
     try {
       if (!listToMerge) {
@@ -110,18 +108,20 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         duration: 36000000,
         isClosable: false,
       })
+    } else if (storageCartData.cartLists.length === 0) {
+      toast.closeAll()
     }
   }, [storageCartData.newCartList.length, isOpenDetails])
 
   return (
     <Flex flexDirection="row" w="100vw" maxW="2000px" m="75px auto 0 auto">
       <Flex w="95%" flexDirection="column" ml="223px" p="40px">
+        <StorageEdit />
         <FiltersGeneral>
           {(props) => <FiltersControlls {...props} />}
         </FiltersGeneral>
         <DesktopItemsList itemsCount={itemsCount} items={items} />
       </Flex>
-      {!storageCartData.newCartList.length && toast.closeAll()}
       <ModalAddToList
         addNewCartList={addNewList}
         items={storageCartData.newCartList}

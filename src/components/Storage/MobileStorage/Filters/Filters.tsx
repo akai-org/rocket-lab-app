@@ -1,15 +1,9 @@
 import React, { useState } from 'react'
 import {
-  Box,
   Button,
   Flex,
   Icon,
   Input,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
   Select,
   Text,
 } from '@chakra-ui/react'

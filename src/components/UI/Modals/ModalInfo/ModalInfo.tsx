@@ -14,15 +14,16 @@ import {
 } from '@chakra-ui/react'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 
-interface ModalEditProps extends Omit<ModalProps, 'children'> {
+interface ModalInfoProps extends Omit<ModalProps, 'children'> {
   name: string
   description: string
   imageUrl: string
   quantity: number
+  categories: string[]
   id: string
 }
 
-const ModalEdit = (props: ModalEditProps) => {
+const ModalInfo = (props: ModalInfoProps) => {
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
@@ -43,6 +44,11 @@ const ModalEdit = (props: ModalEditProps) => {
             Opis:
             <br /> {props.description}
           </Text>
+          <Text mt="5px">
+            Kategorie:
+            <br />
+            {props.categories.map((category) => `${category}, `)}
+          </Text>
         </ModalBody>
         <ModalFooter>
           <ProductButton
@@ -60,4 +66,4 @@ const ModalEdit = (props: ModalEditProps) => {
   )
 }
 
-export default ModalEdit
+export default ModalInfo

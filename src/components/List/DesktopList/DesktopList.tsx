@@ -5,9 +5,6 @@ import AddItem from './AddItem/AddItem'
 import List from './List/List'
 
 const DesktopList = () => {
-  // Temporarily TODO: fix this
-  useToast().closeAll()
-
   const [lists, setLists] = useState([])
 
   useEffect(() => {

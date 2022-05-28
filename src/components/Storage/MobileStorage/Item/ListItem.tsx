@@ -8,7 +8,7 @@ import {
 } from '../../../../store/Slices/storageCartSlice'
 import { storageCartInfo } from '../../../../store/store'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
-import ModalEdit from '../../../UI/Modals/ModalEdit/ModalEdit'
+import ModalEditItem from '../../../UI/Modals/ModalEditItem/ModalEditItem'
 import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
 
 interface Props {
@@ -90,6 +90,7 @@ const ListItem = ({ item }: Props) => {
         </Flex>
       </Box>
       <ModalInfo
+        categories={item.categories}
         id={item.id}
         name={item.name}
         description={item.description}
@@ -99,7 +100,7 @@ const ListItem = ({ item }: Props) => {
         isOpen={isOpenInfo}
         isCentered
       />
-      <ModalEdit
+      <ModalEditItem
         id={item.id}
         name={item.name}
         description={item.description}

@@ -23,7 +23,7 @@ const Filters: FC<FiltersControllsProps> = ({
         borderRadius="6px"
         border="1px solid #C4C4C4"
       >
-        <Text fontSize="24px" fontWeight="500" color="#2D3748">
+        <Text fontSize="20px" fontWeight="500" color="#2D3748">
           Wyszukaj części w magazynie
         </Text>
         <Flex

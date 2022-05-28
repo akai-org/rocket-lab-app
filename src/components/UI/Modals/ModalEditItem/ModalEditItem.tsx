@@ -21,9 +21,9 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
-import DeleteItemPopover from '../../Popovers/DeleteItemPopover'
+import DeletePopover from '../../Popovers/DeletePopover'
 
-interface ModalEditProps extends Omit<ModalProps, 'children'> {
+interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
   name: string
   description: string
   imageUrl: string
@@ -31,7 +31,7 @@ interface ModalEditProps extends Omit<ModalProps, 'children'> {
   id: string
 }
 
-const ModalEdit = (props: ModalEditProps) => {
+const ModalEditItem = (props: ModalEditItemProps) => {
   const [isEdit, setIsEdit] = useState(false)
   const [name, setName] = useState(props.name)
   const [description, setDescription] = useState(props.description)
@@ -61,6 +61,7 @@ const ModalEdit = (props: ModalEditProps) => {
               <Flex lineHeight="30px" mt="5px">
                 <Text>Ilość:</Text>
                 <NumberInput
+                  allowMouseWheel
                   display="inline"
                   h="30px"
                   w="84px"
@@ -115,11 +116,14 @@ const ModalEdit = (props: ModalEditProps) => {
           >
             Zamknij
           </ProductButton>
-          <DeleteItemPopover onClick={() => {}} />
+          <DeletePopover
+            label="Czy na pewno chcesz usunąć ten element?"
+            onClick={() => {}}
+          />
         </ModalFooter>
       </ModalContent>
     </Modal>
   )
 }
 
-export default ModalEdit
+export default ModalEditItem

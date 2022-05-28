@@ -4,21 +4,28 @@ import {
   Heading,
   Table,
   Tbody,
-  Text,
   Th,
   Thead,
   Tr,
+  useDisclosure,
 } from '@chakra-ui/react'
+import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
+import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
 import { CartList } from '../../../../mongo/models/cart'
 import { Item } from '../../../../mongo/models/item'
-import DeletePopover from '../../../UI/Popovers/DeleteListPopover'
+import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
 
 export interface Props extends Omit<CartList, 'items'> {
-  items: { id: string; item: Item, quantity: number }[]
+  items: { id: string; item: Item; quantity: number }[]
 }
 
 const List = (props: Props) => {
+  const {
+    isOpen: isOpenEditList,
+    onOpen: onOpenEditList,
+    onClose: onCloseEditList,
+  } = useDisclosure()
   return (
     <Box
       borderRadius="6px"
@@ -40,9 +47,20 @@ const List = (props: Props) => {
           >
             {props.name}
           </Heading>
-          <Box pt="5px" mr="20px">
-            <DeletePopover onClick={() => {}} />
-          </Box>
+          <Flex pt="5px" mr="20px">
+            <ProductButton
+              size="sm"
+              onClick={onOpenEditList}
+              w="80px"
+              fontSize="16px"
+            >
+              Edytuj
+            </ProductButton>
+            <DeletePopover
+              label="Czy na pewno chcesz usunąć tę listę?"
+              onClick={() => {}}
+            />
+          </Flex>
         </Flex>
         <Table p="20px">
           <Thead>
@@ -52,7 +70,6 @@ const List = (props: Props) => {
               <Th textAlign="right" minW="170px">
                 ILOŚĆ SZTUK
               </Th>
-              <Th textAlign="right">AKCJE</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -62,6 +79,13 @@ const List = (props: Props) => {
           </Tbody>
         </Table>
       </Flex>
+      <ModalEditList
+        list={props.items}
+        name="defaultowa lista"
+        onClose={onCloseEditList}
+        isOpen={isOpenEditList}
+        isCentered
+      />
     </Box>
   )
 }
