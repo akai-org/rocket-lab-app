@@ -21,7 +21,7 @@ import {
 } from '../../../../store/Slices/storageCartSlice'
 import ModalInfo from '../ModalInfo/ModalInfo'
 
-type CheckoutItemProps = {
+export type CheckoutItemProps = {
   item: CartItem
 }
 

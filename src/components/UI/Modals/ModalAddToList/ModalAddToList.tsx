@@ -17,6 +17,7 @@ import {
   Text,
   Select,
   Input,
+  Heading,
 } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -28,6 +29,7 @@ import { storageCartInfo } from '../../../../store/store'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeleteListPopover from '../../Popovers/DeleteListPopover'
 import CheckoutItem from './CheckoutItem'
+import { ExistingCheckoutItem } from './ExistingCheckoutItem'
 
 interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
   items: CartItem[]
@@ -77,20 +79,24 @@ const ModalAddToList = (props: ModalAddToListProps) => {
               </Tbody>
             </Table>
             {exsitingList && (
-              <Table>
-                <Thead>
-                  <Tr fontSize="16px" fontWeight="700">
-                    <Th>NAZWA</Th>
-                    <Th textAlign="right">ILOŚĆ SZTUK</Th>
-                    <Th textAlign="right">Akcje</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {exsitingList.items.map((item) => (
-                    <CheckoutItem key={item.item.id} item={item} />
-                  ))}
-                </Tbody>
-              </Table>
+              <>
+                <Heading mt="7px" mb="7px" size="md">
+                  {exsitingList.name}
+                </Heading>
+                <Table>
+                  <Thead>
+                    <Tr fontSize="16px" fontWeight="700">
+                      <Th>NAZWA</Th>
+                      <Th textAlign="right">ILOŚĆ SZTUK</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {exsitingList.items.map((item) => (
+                      <ExistingCheckoutItem key={item.item.id} item={item} />
+                    ))}
+                  </Tbody>
+                </Table>
+              </>
             )}
           </Flex>
           <Text mt="20px" mb="5px">
@@ -125,7 +131,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
             fontSize="16px"
             w="120px"
           >
-            Dodaj listę
+            {exsitingList ? 'Dodaj do listy' : 'Dodaj listę'}
           </ProductButton>
           <DeleteListPopover onClick={() => {}} />
           <ProductButton
