@@ -75,7 +75,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   }
 
   useEffect(() => {
-    if (!toast.isActive(id) && storageCartData.newCartList.length) {
+    if (!toast.isActive(id) && storageCartData.newCartList.length !== 0) {
       toast({
         id,
         position: 'top',
@@ -108,7 +108,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         duration: 36000000,
         isClosable: false,
       })
-    } else if (storageCartData.cartLists.length === 0) {
+    } else if (storageCartData.newCartList.length === 0) {
       toast.closeAll()
     }
   }, [storageCartData.newCartList.length, isOpenDetails])
