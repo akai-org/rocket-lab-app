@@ -1,11 +1,4 @@
-import {
-  Flex,
-  Image,
-  Td,
-  Text,
-  Tr,
-  useDisclosure,
-} from '@chakra-ui/react'
+import { Flex, Image, Td, Text, Tr, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { Item } from '../../../../mongo/models/item'
 import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
@@ -52,6 +45,7 @@ const ListItem = ({
         </Text>
       </Td>
       <ModalInfo
+        categories={item.categories}
         id={item.id}
         name={item.name}
         description={item.description}

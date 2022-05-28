@@ -63,6 +63,7 @@ const CheckoutItem = ({ item }: CheckoutItemProps) => {
         </Flex>
       </Td>
       <ModalInfo
+        categories={item.categories}
         id={item.id}
         name={item.name}
         description={item.description}

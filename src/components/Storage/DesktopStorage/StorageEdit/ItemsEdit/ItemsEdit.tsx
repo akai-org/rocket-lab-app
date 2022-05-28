@@ -6,8 +6,6 @@ import {
   AccordionPanel,
   Box,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
   Input,
   NumberInput,
   NumberInputField,
@@ -18,6 +16,7 @@ import {
   Checkbox,
   CheckboxGroup,
   Text,
+  Divider,
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
@@ -60,18 +59,22 @@ const ItemsEdit = () => {
           </Box>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel>
+        <AccordionPanel borderLeft="1px solid #C4C4C4">
           <FormControl fontSize="16px">
-            <FormLabel htmlFor="name">Nazwa</FormLabel>
+            <Text fontWeight={500}>Nazwa</Text>
             <Input ref={name} h="32px" id="name" type="text" />
             {!nameIsValid && (
               <Text fontSize="14px" color="red">
                 Wprowadź nazwę
               </Text>
             )}
-            <FormLabel htmlFor="description">Opis</FormLabel>
+            <Text mt="5px" fontWeight={500}>
+              Opis
+            </Text>
             <Input h="32px" id="description" ref={description} type="text" />
-            <FormLabel htmlFor="amount">Ilość</FormLabel>
+            <Text mt="5px" fontWeight={500}>
+              Ilość
+            </Text>
             <NumberInput
               allowMouseWheel
               h="32px"
@@ -85,18 +88,20 @@ const ItemsEdit = () => {
                 <NumberDecrementStepper h="32px" />
               </NumberInputStepper>
             </NumberInput>
-            <FormLabel htmlFor="photo">Zdjęcie</FormLabel>
+            <Text mt="5px" fontWeight={500}>
+              Obraz
+            </Text>
             <ProductButton id="photo" disabled fontSize="16px" w="100px">
               Wgraj
             </ProductButton>
-            <FormLabel htmlFor="categories">Kategorie</FormLabel>
+            <Text mt="5px" fontWeight={500}>
+              Kategorie
+            </Text>
             <CheckboxGroup
-              onChange={(e) =>
-                setCheckboxes(e.map((el) => el.toString()))
-              }
+              onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
               colorScheme="orange"
             >
-              <Flex flexDirection="column" pl="20px">
+              <Flex flexDirection="column">
                 <Checkbox value="category1">Kategoria 1</Checkbox>
                 <Checkbox value="category2">Kategoria 2</Checkbox>
                 <Checkbox value="category3">Kategoria 3</Checkbox>

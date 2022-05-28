@@ -19,6 +19,7 @@ interface ModalInfoProps extends Omit<ModalProps, 'children'> {
   description: string
   imageUrl: string
   quantity: number
+  categories: string[]
   id: string
 }
 
@@ -42,6 +43,11 @@ const ModalInfo = (props: ModalInfoProps) => {
           <Text mt="5px">
             Opis:
             <br /> {props.description}
+          </Text>
+          <Text mt="5px">
+            Kategorie:
+            <br />
+            {props.categories.map((category) => `${category}, `)}
           </Text>
         </ModalBody>
         <ModalFooter>

@@ -89,6 +89,7 @@ const ListItem = ({ item }: Props) => {
         </Td>
       </Tr>
       <ModalInfo
+        categories={item.categories}
         id={item.id}
         name={item.name}
         description={item.description}

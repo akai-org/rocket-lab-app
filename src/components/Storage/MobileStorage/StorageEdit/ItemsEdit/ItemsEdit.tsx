@@ -61,18 +61,18 @@ const ItemsEdit = () => {
         </AccordionButton>
         <AccordionPanel>
           <FormControl fontSize="14px">
-            <FormLabel htmlFor="name" fontSize="14px">
+            <Text fontWeight={500} fontSize="14px">
               Nazwa
-            </FormLabel>
+            </Text>
             <Input ref={name} h="32px" id="name" type="text" fontSize="14px" />
             {!nameIsValid && (
               <Text fontSize="12px" color="red">
                 Wprowadź nazwę
               </Text>
             )}
-            <FormLabel htmlFor="description" fontSize="14px">
+            <Text fontWeight={500} mt="5px" fontSize="14px">
               Opis
-            </FormLabel>
+            </Text>
             <Input
               h="32px"
               fontSize="14px"
@@ -80,9 +80,9 @@ const ItemsEdit = () => {
               ref={description}
               type="text"
             />
-            <FormLabel htmlFor="amount" fontSize="14px">
+            <Text fontWeight={500} mt="5px" fontSize="14px">
               Ilość
-            </FormLabel>
+            </Text>
             <NumberInput
               allowMouseWheel
               h="32px"
@@ -96,9 +96,9 @@ const ItemsEdit = () => {
                 <NumberDecrementStepper h="32px" />
               </NumberInputStepper>
             </NumberInput>
-            <FormLabel htmlFor="photo" fontSize="14px">
-              Zdjęcie
-            </FormLabel>
+            <Text fontWeight={500} mt="5px" fontSize="14px">
+              Obraz
+            </Text>
             <ProductButton
               id="photo"
               disabled
@@ -108,14 +108,14 @@ const ItemsEdit = () => {
             >
               Wgraj
             </ProductButton>
-            <FormLabel htmlFor="categories" fontSize="14px">
+            <Text fontWeight={500} mt="5px" fontSize="14px">
               Kategorie
-            </FormLabel>
+            </Text>
             <CheckboxGroup
               onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
               colorScheme="orange"
             >
-              <Flex flexDirection="column" pl="20px" fontSize="14px">
+              <Flex flexDirection="column" fontSize="14px">
                 <Checkbox value="category1">
                   <Text fontSize="14px">Kategoria 1</Text>
                 </Checkbox>

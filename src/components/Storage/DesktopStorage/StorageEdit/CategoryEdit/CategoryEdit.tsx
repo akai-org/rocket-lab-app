@@ -32,7 +32,7 @@ const CategoryEdit = () => {
     }
   }
   return (
-    <Accordion allowMultiple>
+    <Accordion allowMultiple mt="10px">
       <AccordionItem border="none">
         <AccordionButton>
           <Box
@@ -41,14 +41,15 @@ const CategoryEdit = () => {
             fontWeight="500"
             color="#2D3748"
             textAlign="left"
+            h="20px"
           >
             Edycja kategorii
           </Box>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel>
+        <AccordionPanel borderLeft="1px solid #C4C4C4">
           <FormControl fontSize="16px">
-            <FormLabel htmlFor="name">Nazwa</FormLabel>
+            <Text fontWeight={500}>Nazwa</Text>
             <Input ref={name} h="32px" id="name" type="text" />
             {!nameIsValid && (
               <Text fontSize="14px" color="red">
@@ -65,12 +66,12 @@ const CategoryEdit = () => {
                 Dodaj
               </ProductButton>
             </Flex>
-            <FormLabel htmlFor="list">Lista Kategorii</FormLabel>
+            <Text fontWeight={500}>Lista kategorii</Text>
             <CheckboxGroup
               onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
               colorScheme="orange"
             >
-              <Flex flexDirection="column" pl="20px">
+              <Flex flexDirection="column">
                 <Checkbox value="category1">Kategoria 1</Checkbox>
                 <Checkbox value="category2">Kategoria 2</Checkbox>
                 <Checkbox value="category3">Kategoria 3</Checkbox>

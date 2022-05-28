@@ -41,6 +41,7 @@ const CategoryEdit = () => {
             fontWeight="500"
             color="#2D3748"
             textAlign="left"
+            h="20px"
           >
             Edycja kategorii
           </Box>
@@ -48,9 +49,9 @@ const CategoryEdit = () => {
         </AccordionButton>
         <AccordionPanel>
           <FormControl fontSize="14px">
-            <FormLabel htmlFor="name" fontSize="14px">
+            <Text fontWeight={500} fontSize="14px">
               Nazwa
-            </FormLabel>
+            </Text>
             <Input ref={name} h="32px" fontSize="14px" id="name" type="text" />
             {!nameIsValid && (
               <Text fontSize="14px" color="red">
@@ -68,14 +69,14 @@ const CategoryEdit = () => {
                 Dodaj
               </ProductButton>
             </Flex>
-            <FormLabel fontSize="14px" htmlFor="list">
-              Lista Kategorii
-            </FormLabel>
+            <Text fontWeight={500} fontSize="14px">
+              Lista kategorii
+            </Text>
             <CheckboxGroup
               onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
               colorScheme="orange"
             >
-              <Flex flexDirection="column" pl="20px" fontSize="14px">
+              <Flex flexDirection="column" fontSize="14px">
                 <Checkbox value="category1">
                   <Text fontSize="14px">Kategoria 1</Text>
                 </Checkbox>

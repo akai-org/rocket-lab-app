@@ -82,6 +82,7 @@ const GridItem = ({ item }: Props) => {
         </Flex>
       </Box>
       <ModalInfo
+        categories={item.categories}
         id={item.id}
         name={item.name}
         description={item.description}
