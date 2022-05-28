@@ -40,4 +40,4 @@ export default store
 
 type RootState = ReturnType<typeof store.getState>
 export const authInfo = (state: RootState) => state.authData.data
-export const storageCartInfo = (state: RootState) => state.storageCartData.data
+export const storageCartInfo = (state: RootState) => state.storageCartData

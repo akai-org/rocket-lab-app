@@ -1,13 +1,32 @@
 import { Schema, Model, models, model } from 'mongoose'
+import { Item } from './item'
 
-export interface CartItem {
+export interface CartList {
   id: string
   quantity: number
-  item: Schema.Types.ObjectId
+  items: { item: Schema.Types.ObjectId }[]
+  name: string
+  createdAt: Date
+  updatedAt: Date
 }
 
-const cartItemSchema = new Schema<CartItem>({
-  quantity: { type: Number, default: 1, min: 1, max: 1000000 },
+export interface CartItem {
+  quantity: number
+  id: string
+  item: Item
+}
+
+export interface PopulatedCartList extends Omit<CartList, 'items'> {
+  items: CartItem[]
+}
+
+const CartItemSchema = new Schema<CartItem>({
+  quantity: {
+    type: Number,
+    required: [true, 'Cart item quantity must be provided'],
+    min: 1,
+    max: 666,
+  },
   item: {
     type: Schema.Types.ObjectId,
     ref: 'Item',
@@ -15,5 +34,13 @@ const cartItemSchema = new Schema<CartItem>({
   },
 })
 
-export const CartItemModel =
-  (models.CartItem as Model<CartItem>) || model('CartItem', cartItemSchema)
+const CartListSchema = new Schema<CartList>(
+  {
+    name: { type: String, required: [true, 'Cart list name must be provided'] },
+    items: [CartItemSchema],
+  },
+  { timestamps: true }
+)
+
+export const CartListModel =
+  (models.CartList as Model<CartList>) || model('CartList', CartListSchema)

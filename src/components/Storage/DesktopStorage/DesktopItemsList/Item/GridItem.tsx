@@ -17,7 +17,7 @@ interface Props {
 
 const GridItem = ({ item }: Props) => {
   const dispatch = useDispatch()
-  const storageCartData = useSelector(storageCartInfo).list
+  const storageCartData = useSelector(storageCartInfo).newCartList
   const {
     isOpen: isOpenDetails,
     onOpen: onOpenDetails,
@@ -66,7 +66,7 @@ const GridItem = ({ item }: Props) => {
           >
             Edytuj
           </ProductButton>
-          {storageCartData.some((element) => element.id === item.id) ? (
+          {storageCartData.some((element) => element.item.id === item.id) ? (
             <AiOutlineCheck
               size="25px"
               onClick={() => {

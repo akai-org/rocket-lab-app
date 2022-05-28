@@ -41,6 +41,8 @@ const FiltersGeneral: React.FC<Props> = ({ children }) => {
 
   delete query.page
 
+  delete query.category
+
   let searchQuery: Query = {}
 
   if (category) {
