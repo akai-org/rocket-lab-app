@@ -27,6 +27,17 @@ export const storageCartSlice = createSlice({
     ) => {
       state.cartLists = action.payload
     },
+    updateExistingCartLists: (
+      state,
+      action: PayloadAction<PopulatedCartList>
+    ) => {
+      const index = state.cartLists.findIndex(
+        ({ id }) => id === action.payload.id
+      )
+      const newList = [...state.cartLists]
+      newList.splice(index, 1, action.payload)
+      state.cartLists = newList
+    },
     addToCart: (state, action: PayloadAction<Item>) => {
       if (
         !state.newCartList.some(
@@ -70,4 +81,5 @@ export const {
   clearCart,
   changeItemQuantity,
   setExistingCartLists,
+  updateExistingCartLists,
 } = storageCartSlice.actions

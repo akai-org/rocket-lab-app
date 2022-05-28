@@ -54,10 +54,18 @@ const ModalAddToList = (props: ModalAddToListProps) => {
     } else if (selectedList === 'add_new') {
       setExistingList(undefined)
     }
-  }, [selectedList])
+  }, [selectedList, storageCartData])
+
+  console.log(exsitingList)
 
   return (
-    <Modal {...props}>
+    <Modal
+      {...props}
+      onClose={() => {
+        setSelectedList('add_new')
+        props.onClose()
+      }}
+    >
       <ModalOverlay backdropFilter="blur(3px)" />
       <ModalContent maxW="40rem">
         <ModalHeader>Dodanie do listy</ModalHeader>
@@ -127,7 +135,10 @@ const ModalAddToList = (props: ModalAddToListProps) => {
         </ModalBody>
         <ModalFooter>
           <ProductButton
-            onClick={() => props.addNewCartList(listName, exsitingList)}
+            onClick={() => {
+              props.addNewCartList(listName, exsitingList)
+              setSelectedList('add_new')
+            }}
             fontSize="16px"
             w="120px"
           >
@@ -139,7 +150,10 @@ const ModalAddToList = (props: ModalAddToListProps) => {
             colorScheme="blue"
             ml="10px"
             w="80px"
-            onClick={props.onClose}
+            onClick={() => {
+              setSelectedList('add_new')
+              props.onClose()
+            }}
           >
             Zamknij
           </ProductButton>

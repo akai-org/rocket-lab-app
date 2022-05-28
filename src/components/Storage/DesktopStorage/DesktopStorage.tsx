@@ -16,7 +16,10 @@ import { useEffect } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
 import { fetcher } from '../../../utils/requests'
-import { clearCart } from '../../../store/Slices/storageCartSlice'
+import {
+  clearCart,
+  updateExistingCartLists,
+} from '../../../store/Slices/storageCartSlice'
 import {
   CartItem,
   CartList,
@@ -56,10 +59,15 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
           }
           newList.push(changedItem)
         }
-        await fetcher('http://localhost:3000/api/cart/update', {
-          method: 'PUT',
-          body: { id: listToMerge.id, items: [...toAddList, ...newList] },
-        })
+        const updatedList = await fetcher(
+          'http://localhost:3000/api/cart/update',
+          {
+            method: 'PUT',
+            body: { id: listToMerge.id, items: [...toAddList, ...newList] },
+          }
+        )
+        console.log(updatedList)
+        dispatch(updateExistingCartLists(updatedList))
       }
       dispatch(clearCart())
       onCloseDetails()

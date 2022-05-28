@@ -18,13 +18,15 @@ export async function createNewCartList(
 }
 
 export async function updateCartList(id: string, items: CartItem[]) {
-  console.log('chuj')
   const mappedItems = items.map((item) => ({
     quantity: item.quantity,
     item: item.item.id,
   }))
-  console.log(mappedItems)
-  return await CartListModel.updateOne({ _id: id }, { items: mappedItems })
+  return await CartListModel.findOneAndUpdate(
+    { _id: id },
+    { items: mappedItems },
+    { new: true }
+  ).populate('items.item')
 }
 
 export async function fetchCartLists(populated: boolean) {
