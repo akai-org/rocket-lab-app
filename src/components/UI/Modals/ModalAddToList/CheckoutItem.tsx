@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { Item } from '../../../../../its-not-rocket-science-app/src/mongo/models/item'
+import { Item } from '../../../../mongo/models/item'
 import ModalInfo from '../ModalInfo/ModalInfo'
 
 type CheckoutItemProps = {

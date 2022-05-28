@@ -18,6 +18,7 @@ interface Props extends MainViewProps {
 
 const Home: NextPage<Props> = ({ items, error, itemsCount }) => {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
+
   const Storage = isDesktop ? (
     <DesktopStorage itemsCount={itemsCount} items={items ?? []} />
   ) : (
@@ -52,7 +53,7 @@ export const getServerSideProps = withPageAuthRequired({
       const items = await itemsService.fetchItems(skip, toDisplay, {
         category: category as string | undefined,
         searchTerm,
-        sort
+        sort,
       })
 
       const itemsCount = await itemsService.fetchItemsCount()

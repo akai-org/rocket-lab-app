@@ -15,9 +15,11 @@ import { storageCartInfo } from '../../../store/store'
 import { useEffect } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
+import Router, { useRouter } from 'next/router'
 
 const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
+  const router = useRouter()
   const storageCartData = useSelector(storageCartInfo)
   const {
     isOpen: isOpenDetails,
@@ -25,6 +27,11 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
     onClose: onCloseDetails,
   } = useDisclosure()
   const id = 'add-to-list-toast'
+
+  Router.events.on('beforeHistoryChange', () => {
+    toast.closeAll()
+  })
+
   useEffect(() => {
     if (!toast.isActive(id) && storageCartData.list.length) {
       toast({

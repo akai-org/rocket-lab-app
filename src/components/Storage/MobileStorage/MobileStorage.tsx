@@ -13,8 +13,7 @@ import FiltersGeneral from '../../UI/FiltersGeneral/FiltersGeneral'
 const MobileStorage = ({ items }: MainViewProps) => {
   const [listType, setListType] = useState<sortingType>('grid')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
-  // Temporarily TODO: fix this
-  useToast().closeAll()
+
   return (
     <Flex
       flexWrap="wrap"

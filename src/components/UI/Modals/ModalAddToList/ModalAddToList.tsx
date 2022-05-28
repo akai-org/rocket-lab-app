@@ -1,5 +1,4 @@
 import {
-  Button,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -17,7 +16,7 @@ import {
   Text,
   Select,
 } from '@chakra-ui/react'
-import { Item } from '../../../../../its-not-rocket-science-app/src/mongo/models/item'
+import { Item } from '../../../../mongo/models/item'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeleteListPopover from '../../Popovers/DeleteListPopover'
 import CheckoutItem from './CheckoutItem'
