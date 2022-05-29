@@ -11,6 +11,7 @@ import {
   Avatar,
 } from '@chakra-ui/react'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
+import ModalListItem from './ModalListItem'
 
 const MoreInfoModal = () => {
   return (
@@ -40,66 +41,17 @@ const MoreInfoModal = () => {
               <Heading fontSize="sm">Nazwa</Heading>
               <Heading fontSize="sm">Ilość</Heading>
             </Stack>
-            <Stack direction="column">
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Stack direction="row" alignItems="center">
-                  <Image
-                    boxSize="40px"
-                    objectFit="cover"
-                    src="/item.png"
-                    alt="Item"
-                    mr="5px"
-                  />
-                  <Text fontSize="sm" isTruncated>
-                    Silnik od malucha
-                  </Text>
-                </Stack>
-                <Text fontSize="sm">1 szt.</Text>
-              </Stack>
-
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Stack direction="row" alignItems="center">
-                  <Image
-                    boxSize="40px"
-                    objectFit="cover"
-                    src="/item.png"
-                    alt="Item"
-                    mr="5px"
-                  />
-                  <Text fontSize="sm" isTruncated>
-                    Śruba lewoskrętna
-                  </Text>
-                </Stack>
-                <Text fontSize="sm">25 szt.</Text>
-              </Stack>
-
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Stack direction="row" alignItems="center">
-                  <Image
-                    boxSize="40px"
-                    objectFit="cover"
-                    src="/item.png"
-                    alt="Item"
-                    mr="5px"
-                  />
-                  <Text fontSize="sm" isTruncated>
-                    Migomat turystyczny
-                  </Text>
-                </Stack>
-                <Text fontSize="sm">1 szt.</Text>
-              </Stack>
+            <Stack direction="column" overflow="scroll" maxH="35vh">
+              <ModalListItem />
+              <ModalListItem />
+              <ModalListItem />
+              <ModalListItem />
+              <ModalListItem />
+              <ModalListItem />
+              <ModalListItem />
+              <ModalListItem />
+              <ModalListItem />
+              <ModalListItem />
             </Stack>
           </Stack>
         </ModalBody>
