@@ -1,10 +1,4 @@
 import { Tr, Td, Flex, Image, Text } from '@chakra-ui/react'
-import { AiOutlineClose } from 'react-icons/ai'
-import {
-  changeItemQuantity,
-  removeFromCart,
-} from '../../../../store/Slices/storageCartSlice'
-import ModalInfo from '../ModalInfo/ModalInfo'
 import { CheckoutItemProps } from './CheckoutItem'
 
 export const ExistingCheckoutItem = ({ item }: CheckoutItemProps) => {
@@ -19,7 +13,7 @@ export const ExistingCheckoutItem = ({ item }: CheckoutItemProps) => {
         </Flex>
       </Td>
       <Td>
-          <Text>{item.quantity}</Text>
+        <Text>{item.quantity}</Text>
       </Td>
     </Tr>
   )

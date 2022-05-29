@@ -7,6 +7,7 @@ import { PopulatedCartList } from '../../mongo/models/cart'
 import { connectDB } from '../../mongo/db'
 import { Credentials } from '../../utils/credentials'
 import { fetchCartLists } from '../../services/cartService'
+import { API_URL } from '../../utils/constants'
 
 // TO DO fetch data from DB
 interface Props {
