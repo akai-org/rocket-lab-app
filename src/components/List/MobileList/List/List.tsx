@@ -15,29 +15,11 @@ import {
   AccordionIcon,
 } from '@chakra-ui/react'
 import ListItem from '../ListItem/ListItem'
-import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
-import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import { PopulatedCartList } from '../../../../mongo/models/cart'
 import ListMenu from '../../../UI/Menus/ListMenu'
 
 export interface Props extends PopulatedCartList {}
-
-{
-  /* <ProductButton
-  size="sm"
-  onClick={onOpenEditList}
-  w="80px"
-  fontSize="16px"
-  mr="5px"
->
-  Edytuj
-</ProductButton>
-<DeletePopover
-  label="Czy na pewno chcesz usunąć tę listę?"
-  onClick={() => {}}
-/> */
-}
 
 const List = (props: Props) => {
   const {
@@ -57,18 +39,19 @@ const List = (props: Props) => {
       justifyContent="center"
     >
       <AccordionItem border="none">
-        <Flex>
-          <AccordionButton w="100%" justifyContent="space-between">
+        <Flex shrink={0}>
+          <AccordionButton justifyContent="space-between">
             <Heading
-              fontSize="20px"
-              lineHeight="5px"
+              fontSize="18px"
+              isTruncated
+              textAlign="left"
               fontWeight="600"
             >
-              Lista 1
+              {props.name}
             </Heading>
             <AccordionIcon />
           </AccordionButton>
-          <Flex pt="5px" mr="20px">
+          <Flex pt="5px" px="10px" w="5%" justifyContent="flex-end">
             <ListMenu onEdit={onOpenEditList} onDelete={() => {}} />
           </Flex>
         </Flex>
