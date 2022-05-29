@@ -8,7 +8,7 @@ import { connectDB } from '../mongo/db'
 import { Text } from '@chakra-ui/react'
 import * as itemsService from '../services/itemsService'
 import { Credentials } from '../utils/credentials'
-import { FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../utils/constants'
+import { API_URL, FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../utils/constants'
 import { fetchCategories } from '../services/categoryService'
 import { SortType } from '../services/itemsService'
 import { useEffect } from 'react'
@@ -27,7 +27,7 @@ const Home: NextPage<Props> = ({ items, error, itemsCount }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    fetcher('http://localhost:3000/api/cart')
+    fetcher(API_URL+'/api/cart')
       .then((data) => {
         console.log(data)
         dispatch(setExistingCartLists(data))

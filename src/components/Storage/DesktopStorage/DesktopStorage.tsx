@@ -20,6 +20,7 @@ import {
   CartList,
   PopulatedCartList,
 } from '../../../mongo/models/cart'
+import { API_URL } from '../../../utils/constants'
 
 const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
@@ -38,7 +39,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const addNewList = async (name: string, listToMerge?: PopulatedCartList) => {
     try {
       if (!listToMerge) {
-        await fetcher('http://localhost:3000/api/cart/add', {
+        await fetcher(API_URL+'/api/cart/add', {
           method: 'POST',
           body: { name, items: storageCartData.newCartList },
         })

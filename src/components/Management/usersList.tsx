@@ -1,6 +1,7 @@
 import { Button, UnorderedList } from '@chakra-ui/react'
 import { FormEvent, useState } from 'react'
 import { User, Role } from '../../mongo/models/user'
+import { API_URL } from '../../utils/constants'
 import { fetcher } from '../../utils/requests'
 import { UserItem } from './userItem'
 
@@ -13,7 +14,7 @@ export const UsersList: React.FC<Props> = ({ users, updateUsers }) => {
   const [formUsers, setFormUsers] = useState(users)
 
   const handleSelectorChange = (id: string, role: Role) => {
-    const userIndex = formUsers.findIndex((user) => user._id === id)
+    const userIndex = formUsers.findIndex((user) => user.id === id)
     const copiedUsers = [...formUsers]
     const userToUpdate = { ...copiedUsers.splice(userIndex, 1)[0], role }
     copiedUsers.splice(userIndex, 0, userToUpdate)
@@ -23,7 +24,7 @@ export const UsersList: React.FC<Props> = ({ users, updateUsers }) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      await fetcher('http://localhost:3000/api/management', {
+      await fetcher(API_URL+'/api/management', {
         method: 'PATCH',
         body: JSON.stringify(updatedUsers),
       })
@@ -43,7 +44,7 @@ export const UsersList: React.FC<Props> = ({ users, updateUsers }) => {
   }
 
   const displayUsers = formUsers.map((user) => (
-    <UserItem changeHandler={handleSelectorChange} user={user} key={user._id} />
+    <UserItem changeHandler={handleSelectorChange} user={user} key={user.id} />
   ))
 
   return (
