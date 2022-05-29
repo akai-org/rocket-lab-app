@@ -39,10 +39,10 @@ const List = (props: Props) => {
       justifyContent="center"
     >
       <AccordionItem border="none">
-        <Flex shrink={0}>
+        <Flex height="45px">
           <AccordionButton justifyContent="space-between">
             <Heading
-              fontSize="18px"
+              fontSize="17px"
               isTruncated
               textAlign="left"
               fontWeight="600"

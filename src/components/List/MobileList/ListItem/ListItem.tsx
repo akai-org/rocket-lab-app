@@ -1,25 +1,10 @@
-import {
-  Box,
-  Flex,
-  Image,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Text,
-  useDisclosure,
-} from '@chakra-ui/react'
+import { Box, Flex, Image, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { IoIosArrowUp } from 'react-icons/io'
-import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 
-import { Item } from '../../../../mongo/models/item'
 import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
 import { CartItem } from '../../../../mongo/models/cart'
 
 const ListItem = (props: CartItem) => {
-  const [isEdit, setIsEdit] = useState(false)
   const [quantity, setQuantity] = useState(58)
   const {
     isOpen: isOpenInfo,
@@ -36,7 +21,7 @@ const ListItem = (props: CartItem) => {
       <Flex ml=" 10px" my="auto">
         <Image src={props.item.imageUrl} w="50px" h="50px" />
       </Flex>
-      <Box h="100%" w="80%" m="0 auto 0 0" textAlign="left" p="20px">
+      <Box h="80px" w="80%" m="0 auto 0 0" textAlign="left" p="20px">
         <Text fontSize="16px" fontWeight="600">
           {props.item.name}
         </Text>
