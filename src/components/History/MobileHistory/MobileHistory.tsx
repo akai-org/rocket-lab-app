@@ -6,13 +6,13 @@ const MobileHistory = () => {
   return (
     <Flex mt="6rem" color="black" flexDirection="column">
       <Box textAlign="left">
-        <Text fontSize="25px" fontWeight="600" ml="15px">
+        <Text fontSize="25px" fontWeight="600" ml="15px" isTruncated>
           Historia
         </Text>
       </Box>
       <Flex
         flexDirection="row"
-        border="3px solid #D4D4D4"
+        border="1px solid #D4D4D4"
         borderRadius="5px"
         m="5px auto 10px"
         w="95%"
