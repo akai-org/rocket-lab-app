@@ -79,6 +79,7 @@ export class Credentials {
   }
 
   private static parseUserRole(userRole: adminRoles) {
+    console.log({ userRole: Credentials.enumToUsersMap.get(userRole) })
     return Credentials.enumToUsersMap.get(userRole)
   }
 

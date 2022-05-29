@@ -3,9 +3,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { NextApiRequestCookies } from 'next/dist/server/api-utils'
 
 export enum Permissions {
-  reader,
-  editor,
-  admin,
+  reader = 1,
+  editor = 2,
+  admin = 3,
 }
 
 export type adminRoles = 'admin' | 'editor' | 'reader'
