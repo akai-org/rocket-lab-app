@@ -19,6 +19,7 @@ import {
 import { Item } from '../../../../mongo/models/item'
 import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
+import { fetcher } from '../../../../utils/requests'
 
 export interface Props extends PopulatedCartList {}
 
@@ -28,6 +29,22 @@ const List = (props: Props) => {
     onOpen: onOpenEditList,
     onClose: onCloseEditList,
   } = useDisclosure()
+
+  const deleteCartList = async () => {
+    try {
+      const deletedCartList = await fetcher(
+        'http://localhost:3000/api/cart/delete',
+        {
+          method: 'DELETE',
+          body: { id: props.id },
+        }
+      )
+      console.log(deletedCartList)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Box
       borderRadius="6px"
@@ -60,7 +77,7 @@ const List = (props: Props) => {
             </ProductButton>
             <DeletePopover
               label="Czy na pewno chcesz usunąć tę listę?"
-              onClick={() => {}}
+              onClick={deleteCartList}
             />
           </Flex>
         </Flex>

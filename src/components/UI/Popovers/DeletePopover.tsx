@@ -41,7 +41,6 @@ const DeletePopover = (props: DeletePopoverProps) => {
               w={props.width ? props.width : '80px'}
               h={props.height ? props.height : '32px'}
               onClick={() => {
-                props.onClick()
                 open()
               }}
               disabled={props.disabled}
@@ -60,7 +59,13 @@ const DeletePopover = (props: DeletePopoverProps) => {
               <Button variant="outline" onClick={close}>
                 Anuluj
               </Button>
-              <Button colorScheme="red" onClick={close}>
+              <Button
+                colorScheme="red"
+                onClick={() => {
+                  props.onClick()
+                  close()
+                }}
+              >
                 Usuń
               </Button>
             </ButtonGroup>
