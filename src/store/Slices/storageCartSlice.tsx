@@ -46,6 +46,9 @@ export const storageCartSlice = createSlice({
         (cart) => cart.id !== action.payload.id
       )
     },
+    addExistingCartList: (state, action: PayloadAction<PopulatedCartList>) => {
+      state.cartLists.push(action.payload)
+    },
     addToCart: (state, action: PayloadAction<Item>) => {
       if (
         !state.newCartList.some(

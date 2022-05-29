@@ -15,23 +15,70 @@ import {
   Tbody,
 } from '@chakra-ui/react'
 import { useState } from 'react'
-import { CartItem } from '../../../../mongo/models/cart'
+import { useDispatch } from 'react-redux'
+import { CartItem, PopulatedCartList } from '../../../../mongo/models/cart'
+import {
+  removeExisitngCartList,
+  updateExistingCartLists,
+} from '../../../../store/Slices/storageCartSlice'
+import { fetcher } from '../../../../utils/requests'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
 import ListItem from './ListItem/ListItem'
 
 interface ModalEditListProps extends Omit<ModalProps, 'children'> {
-  list: CartItem[]
+  cartList: PopulatedCartList
   name: string
 }
 
 const ModalEditList = (props: ModalEditListProps) => {
-  const [name, setName] = useState(props.name)
+  const dispatch = useDispatch()
+
+  const [cartList, setCartList] = useState(props.cartList)
+
+  // TODO: The same function is used in Desktop List & Mobile list - redundancy
+  const deleteCartList = async () => {
+    try {
+      const deletedCartList = await fetcher(
+        'http://localhost:3000/api/cart/delete',
+        {
+          method: 'DELETE',
+          body: { id: props.cartList.id },
+        }
+      )
+      dispatch(removeExisitngCartList(deletedCartList))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const updateCartList = async () => {
+    try {
+      const updatedCartList = await fetcher(
+        'http://localhost:3000/api/cart/update',
+        { method: 'PUT', body: { id: cartList.id, items: cartList.items } }
+      )
+      dispatch(updateExistingCartLists(updatedCartList))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const changeQuantity = (newQuantity: number, itemId: string) => {
+    setCartList((state) => {
+      const items = [...state.items]
+      const itemIndex = items.findIndex((item) => item.id === itemId)
+      const updatedItem = { ...items[itemIndex], quantity: newQuantity }
+      items.splice(itemIndex, 1, updatedItem)
+      return { ...state, items }
+    })
+  }
+
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
       <ModalContent maxW="40rem">
-        <ModalHeader>{props.name}</ModalHeader>
+        <ModalHeader>{cartList.name}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Flex flexDirection="column" maxH="350px" overflowY="scroll" w="100%">
@@ -44,8 +91,12 @@ const ModalEditList = (props: ModalEditListProps) => {
                 </Tr>
               </Thead>
               <Tbody>
-                {props.list.map((item) => (
-                  <ListItem key={item.id} item={item} />
+                {cartList.items.map((item) => (
+                  <ListItem
+                    changeQuantity={changeQuantity}
+                    key={item.id}
+                    item={item}
+                  />
                 ))}
               </Tbody>
             </Table>
@@ -53,7 +104,10 @@ const ModalEditList = (props: ModalEditListProps) => {
         </ModalBody>
         <ModalFooter>
           <ProductButton
-            onClick={props.onClose}
+            onClick={() => {
+              updateCartList()
+              props.onClose()
+            }}
             fontSize="16px"
             w="80px"
             ml="10px"
@@ -70,7 +124,7 @@ const ModalEditList = (props: ModalEditListProps) => {
           </ProductButton>
           <DeletePopover
             label="Czy na pewno chcesz usunąć tę listę?"
-            onClick={() => {}}
+            onClick={deleteCartList}
           />
         </ModalFooter>
       </ModalContent>

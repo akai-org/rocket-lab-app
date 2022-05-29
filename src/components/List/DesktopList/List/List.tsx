@@ -102,7 +102,7 @@ const List = (props: Props) => {
         </Table>
       </Flex>
       <ModalEditList
-        list={props.items}
+        cartList={props}
         name="defaultowa lista"
         onClose={onCloseEditList}
         isOpen={isOpenEditList}

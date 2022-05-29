@@ -18,10 +18,10 @@ import ModalInfo from '../../ModalInfo/ModalInfo'
 
 interface ModalEditListProps {
   item: CartItem
+  changeQuantity: (newQuantity: number, itemId: string) => void
 }
 
-const ListItem = ({ item }: ModalEditListProps) => {
-  const [quantity, setQuantity] = useState(1)
+const ListItem = ({ item, changeQuantity }: ModalEditListProps) => {
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,
@@ -43,9 +43,9 @@ const ListItem = ({ item }: ModalEditListProps) => {
           h="30px"
           fontSize="16px"
           borderColor="#E2E8F0"
-          defaultValue={quantity}
+          defaultValue={item.quantity}
           onChange={(e) => {
-            setQuantity(parseInt(e))
+            changeQuantity(+e, item.id)
           }}
           min={1}
         >
