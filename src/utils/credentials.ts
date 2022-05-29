@@ -71,7 +71,7 @@ export class Credentials {
     // Getting user info
     const validId = (session.user.sub as string).split('|')[1]
     const user = await UserModel.findById<User>(validId)
-
+    console.log(user)
     if (!user?.role) {
       throw new Error('Unauthorized access/ User role is not defined properly')
     }
