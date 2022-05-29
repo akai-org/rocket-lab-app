@@ -19,6 +19,8 @@ import {
 import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
 import { fetcher } from '../../../../utils/requests'
+import { useDispatch } from 'react-redux'
+import { removeExisitngCartList } from '../../../../store/Slices/storageCartSlice'
 
 export interface Props extends PopulatedCartList {}
 
@@ -29,6 +31,8 @@ const List = (props: Props) => {
     onClose: onCloseEditList,
   } = useDisclosure()
 
+  const dispatch = useDispatch()
+
   const deleteCartList = async () => {
     try {
       const deletedCartList = await fetcher(
@@ -38,7 +42,7 @@ const List = (props: Props) => {
           body: { id: props.id },
         }
       )
-      console.log(deletedCartList)
+      dispatch(removeExisitngCartList(deletedCartList))
     } catch (error) {
       console.log(error)
     }
