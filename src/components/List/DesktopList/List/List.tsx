@@ -19,25 +19,9 @@ import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
 import { PopulatedCartList } from '../../../../mongo/models/cart'
 import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
+import ListMenu from '../../../UI/Menus/ListMenu'
 
 export interface Props extends PopulatedCartList {}
-
-;<Accordion allowMultiple>
-  <AccordionItem>
-    <AccordionButton>
-      <Box flex="1" textAlign="left">
-        Section 1 title
-      </Box>
-      <AccordionIcon />
-    </AccordionButton>
-    <AccordionPanel pb={4}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </AccordionPanel>
-  </AccordionItem>
-</Accordion>
 
 const List = (props: Props) => {
   const {
@@ -53,7 +37,7 @@ const List = (props: Props) => {
       border="1px solid #C4C4C4"
       mt="20px"
     >
-      <AccordionItem>
+      <AccordionItem border="none">
         <Flex>
           <AccordionButton>
             <Box flex="1" textAlign="left">
@@ -74,18 +58,7 @@ const List = (props: Props) => {
             <AccordionIcon />
           </AccordionButton>
           <Flex pt="5px" mr="20px">
-            <ProductButton
-              size="sm"
-              onClick={onOpenEditList}
-              w="80px"
-              fontSize="16px"
-            >
-              Edytuj
-            </ProductButton>
-            <DeletePopover
-              label="Czy na pewno chcesz usunąć tę listę?"
-              onClick={() => {}}
-            />
+            <ListMenu onEdit={onOpenEditList} onDelete={() => {}} />
           </Flex>
         </Flex>
         <AccordionPanel pb={4}>

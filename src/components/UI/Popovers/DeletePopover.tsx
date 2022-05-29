@@ -10,6 +10,7 @@ import {
   Button,
   ButtonGroup,
   PopoverProps,
+  Text,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Box } from '@chakra-ui/react'
@@ -23,6 +24,7 @@ interface DeletePopoverProps extends PopoverProps {
   width?: string
   height?: string
   fontSize?: string
+  styles?: boolean
 }
 
 const DeletePopover = (props: DeletePopoverProps) => {
@@ -34,20 +36,32 @@ const DeletePopover = (props: DeletePopoverProps) => {
       <Popover onClose={close} isOpen={isOpen} placement="top">
         <PopoverTrigger>
           <Box cursor="pointer">
-            <ProductButton
-              ml="10px"
-              fontSize={props.fontSize ? props.fontSize : '16px'}
-              bgColor="red.500"
-              w={props.width ? props.width : '80px'}
-              h={props.height ? props.height : '32px'}
-              onClick={() => {
-                props.onClick()
-                open()
-              }}
-              disabled={props.disabled}
-            >
-              {props.buttonText ? props.buttonText : 'Usuń'}
-            </ProductButton>
+            {props.styles === false ? (
+              <Box
+                w="200px"
+                onClick={() => {
+                  props.onClick()
+                  open()
+                }}
+              >
+                {props.buttonText ? props.buttonText : 'Usuń'}
+              </Box>
+            ) : (
+              <ProductButton
+                ml="10px"
+                fontSize={props.fontSize ? props.fontSize : '16px'}
+                bgColor="red.500"
+                w={props.width ? props.width : '80px'}
+                h={props.height ? props.height : '32px'}
+                onClick={() => {
+                  props.onClick()
+                  open()
+                }}
+                disabled={props.disabled}
+              >
+                {props.buttonText ? props.buttonText : 'Usuń'}
+              </ProductButton>
+            )}
           </Box>
         </PopoverTrigger>
         <PopoverContent>
