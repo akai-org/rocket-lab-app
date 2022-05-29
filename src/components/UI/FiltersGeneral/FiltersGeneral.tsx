@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { Category } from '../../../mongo/models/category'
+import { API_URL } from '../../../utils/constants'
 import { fetcher } from '../../../utils/requests'
 
 interface Query {
@@ -58,7 +59,7 @@ const FiltersGeneral: React.FC<Props> = ({ children }) => {
   }
 
   useEffect(() => {
-    fetcher('http://localhost:3000/api/categories')
+    fetcher(API_URL+'/api/categories')
       .then((newCategories) => {
         setCategories(newCategories)
       })
