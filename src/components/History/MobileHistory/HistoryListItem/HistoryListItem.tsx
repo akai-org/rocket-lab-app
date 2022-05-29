@@ -8,6 +8,7 @@ import {
   Modal,
 } from '@chakra-ui/react'
 import MoreInfoModal from '../MoreInfoModal/MoreInfoModal'
+import NameAndQuantityElement from '../NameAndQuantityElement/NameAndQuantityElement'
 
 const HistoryListItem = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -20,9 +21,11 @@ const HistoryListItem = () => {
             <Heading size="sm">Rafał Walkowiak</Heading>
             <Text fontSize="sm">21:37</Text>
           </Stack>
-          <Text fontSize="sm">Wyciągnięto z magazynu:</Text>
-          <Text fontSize="sm">Silnik od malucha x1, Śruba lewoskrętna x25</Text>
-          <Text as="u" color="#FF7700" onClick={onOpen}>
+          <Text fontSize="sm" isTruncated>
+            Wyciągnięto z magazynu:
+          </Text>
+          <NameAndQuantityElement />
+          <Text as="u" color="#FF7700" onClick={onOpen} isTruncated>
             pokaż więcej
           </Text>
         </Stack>
