@@ -1,11 +1,12 @@
 import { ListItem, Select } from '@chakra-ui/react'
-import { Role, User } from '../../mongo/models/user'
+import { User } from '../../mongo/models/user'
+import { adminRoles } from '../../utils/types/backendGeneral'
 
-const options: Role[] = ['reader', 'editor', 'admin']
+const options: adminRoles[] = ['reader', 'editor', 'admin']
 
 interface Props {
   user: User
-  changeHandler: (id: string, value: Role) => void
+  changeHandler: (id: string, value: adminRoles) => void
 }
 
 export const UserItem: React.FC<Props> = ({ user, changeHandler }) => {
@@ -17,7 +18,9 @@ export const UserItem: React.FC<Props> = ({ user, changeHandler }) => {
     <ListItem>
       <h1>{user.email}</h1>
       <Select
-        onChange={(e) => changeHandler(user._id, e.currentTarget.value as Role)}
+        onChange={(e) =>
+          changeHandler(user.id, e.currentTarget.value as adminRoles)
+        }
         value={user.role}
       >
         {displayOptions}

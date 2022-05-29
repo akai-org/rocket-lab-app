@@ -1,13 +1,13 @@
-import { IncomingMessage, ServerResponse } from "http"
-import { NextApiRequest, NextApiResponse } from "next"
-import { NextApiRequestCookies } from "next/dist/server/api-utils"
+import { IncomingMessage, ServerResponse } from 'http'
+import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequestCookies } from 'next/dist/server/api-utils'
 
 export enum Permissions {
-    reader,
-    editor,
-    admin,
-  }
-  
+  reader,
+  editor,
+  admin,
+}
+
 export type adminRoles = 'admin' | 'editor' | 'reader'
 
 export type CredentialsReq =
