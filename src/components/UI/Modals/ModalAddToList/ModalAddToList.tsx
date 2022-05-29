@@ -24,6 +24,7 @@ import { PopulatedCartList } from '../../../../mongo/models/cart'
 import { CartItem } from '../../../../store/Slices/storageCartSlice'
 import { storageCartInfo } from '../../../../store/store'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
+import ChosenListPopover from '../../Popovers/ChosenListPopover'
 import DeletePopover from '../../Popovers/DeletePopover'
 import CheckoutItem from './CheckoutItem'
 import { ExistingCheckoutItem } from './ExistingCheckoutItem'
@@ -40,6 +41,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
   // TODO: delete these hardcoded 'add_new'
 
   const [selectedList, setSelectedList] = useState('add_new')
+  const [selectedListName, setSelectedListName] = useState('')
   const [listName, setListName] = useState('')
   const [exsitingList, setExistingList] = useState<PopulatedCartList>()
 
@@ -71,7 +73,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
         <ModalHeader>Dodanie do listy</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Flex flexDirection="column" maxH="350px" overflowY="scroll" w="100%">
+          <Flex flexDirection="column" maxH="200px" overflowY="scroll" w="100%">
             <Table>
               <Thead>
                 <Tr fontSize="16px" fontWeight="700">
@@ -86,36 +88,16 @@ const ModalAddToList = (props: ModalAddToListProps) => {
                 ))}
               </Tbody>
             </Table>
-            {exsitingList && (
-              <>
-                <Heading mt="7px" mb="7px" size="md">
-                  {exsitingList.name}
-                </Heading>
-                <Table>
-                  <Thead>
-                    <Tr fontSize="16px" fontWeight="700">
-                      <Th>NAZWA</Th>
-                      <Th textAlign="right">ILOŚĆ SZTUK</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {exsitingList.items.map((item) => (
-                      <ExistingCheckoutItem key={item.item.id} item={item} />
-                    ))}
-                  </Tbody>
-                </Table>
-              </>
-            )}
           </Flex>
-          <Text mt="20px" mb="5px">
-            Wybierz listę:
-          </Text>
+          <Text my="10px">Wybierz listę:</Text>
           <Select
             h="30px"
-            w="30%"
             borderColor="#D5D5D5"
             defaultValue="add_new"
-            onChange={(e) => setSelectedList(e.target.value)}
+            onChange={(e) => {
+              setSelectedListName(e.target.name)
+              setSelectedList(e.target.value)
+            }}
           >
             <option value="add_new">Utwórz nową listę</option>
             {storageCartData.cartLists.map((cartList) => (
@@ -124,9 +106,43 @@ const ModalAddToList = (props: ModalAddToListProps) => {
               </option>
             ))}
           </Select>
+          {exsitingList && (
+            <ChosenListPopover
+              name={selectedListName}
+              list={exsitingList}
+              onClick={() => {}}
+            />
+          )}
+          {console.log(selectedListName)}
+
+          {/* {exsitingList && (
+            <>
+              <Text fontSize="18px" mt="5px">
+                Wybrana lista
+              </Text>
+              <Flex maxH="200px" overflowY="scroll">
+                <Table>
+                  <Thead>
+                    <Tr fontSize="16px" fontWeight="700">
+                      <Th>NAZWA</Th>
+                      <Th textAlign="right" w="30%">
+                        ILOŚĆ SZTUK
+                      </Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {exsitingList.items.map((item) => (
+                      <ExistingCheckoutItem key={item.item.id} item={item} />
+                    ))}
+                  </Tbody>
+                </Table>
+              </Flex>
+            </>
+          )} */}
           <Input
             mt="15px"
-            maxW="400px"
+            h="30px"
+            fontSize="16px"
             placeholder="Nazwa listy"
             value={listName}
             onChange={(e) => setListName(e.target.value)}
