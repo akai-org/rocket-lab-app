@@ -79,6 +79,7 @@ export class Credentials {
   }
 
   private static parseUserRole(userRole: adminRoles) {
+    console.log({ userRole: Credentials.enumToUsersMap.get(userRole) })
     return Credentials.enumToUsersMap.get(userRole)
   }
 
@@ -86,7 +87,8 @@ export class Credentials {
     userPermission: Permissions | undefined,
     demandedPermission: Permissions
   ) {
-    if (!userPermission)
+    // toString, so 0 isn't evaluated as false during permission check
+    if (!userPermission?.toString())
       throw new Error('Unauthorized access. User permission is not valid')
     if (userPermission < demandedPermission)
       throw new Error('Unauthorized access')
