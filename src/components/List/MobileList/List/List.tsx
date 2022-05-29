@@ -1,59 +1,83 @@
-import { Box, Flex, Heading, useDisclosure } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  Heading,
+  Table,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+  useDisclosure,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react'
 import ListItem from '../ListItem/ListItem'
-import { AiOutlineClose } from 'react-icons/ai'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
 import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import { PopulatedCartList } from '../../../../mongo/models/cart'
-
+import ListMenu from '../../../UI/Menus/ListMenu'
 
 export interface Props extends PopulatedCartList {}
 
-const List = (props: Props) => {
+{
+  /* <ProductButton
+  size="sm"
+  onClick={onOpenEditList}
+  w="80px"
+  fontSize="16px"
+  mr="5px"
+>
+  Edytuj
+</ProductButton>
+<DeletePopover
+  label="Czy na pewno chcesz usunąć tę listę?"
+  onClick={() => {}}
+/> */
+}
 
+const List = (props: Props) => {
   const {
     isOpen: isOpenEditList,
     onOpen: onOpenEditList,
     onClose: onCloseEditList,
   } = useDisclosure()
   return (
-    <Flex
+    <Accordion
+      allowMultiple
       flexDir="column"
       w="95%"
-      mt="10px"
-      mb="20px"
+      border="1px solid #C4C4C4"
+      borderRadius="6px"
       mx="auto"
+      my="10px"
       justifyContent="center"
     >
-      <Flex w="100%" justifyContent="space-between">
-        <Heading
-          fontSize="20px"
-          lineHeight="10px"
-          mt="15px"
-          fontWeight="600"
-          ml="15px"
-        >
-          Lista 1
-        </Heading>
+      <AccordionItem border="none">
         <Flex>
-          <ProductButton
-            size="sm"
-            onClick={onOpenEditList}
-            w="80px"
-            fontSize="16px"
-            mr="5px"
-          >
-            Edytuj
-          </ProductButton>
-          <DeletePopover
-            label="Czy na pewno chcesz usunąć tę listę?"
-            onClick={() => {}}
-          />
+          <AccordionButton w="100%" justifyContent="space-between">
+            <Heading
+              fontSize="20px"
+              lineHeight="5px"
+              fontWeight="600"
+            >
+              Lista 1
+            </Heading>
+            <AccordionIcon />
+          </AccordionButton>
+          <Flex pt="5px" mr="20px">
+            <ListMenu onEdit={onOpenEditList} onDelete={() => {}} />
+          </Flex>
         </Flex>
-      </Flex>
-      {props.items.map((item) => (
-        <ListItem {...item} />
-      ))}
+        <AccordionPanel pb={4}>
+          {props.items.map((item) => (
+            <ListItem {...item} />
+          ))}
+        </AccordionPanel>
+      </AccordionItem>
       <ModalEditList
         list={props.items}
         name="defaultowa lista"
@@ -61,7 +85,7 @@ const List = (props: Props) => {
         isOpen={isOpenEditList}
         isCentered
       />
-    </Flex>
+    </Accordion>
   )
 }
 

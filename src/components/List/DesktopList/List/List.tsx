@@ -14,10 +14,8 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from '@chakra-ui/react'
-import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
 import { PopulatedCartList } from '../../../../mongo/models/cart'
-import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
 import ListMenu from '../../../UI/Menus/ListMenu'
 
@@ -39,22 +37,18 @@ const List = (props: Props) => {
     >
       <AccordionItem border="none">
         <Flex>
-          <AccordionButton>
-            <Box flex="1" textAlign="left">
-              <Flex w="100%" justifyContent="space-between">
-                <Heading
-                  fontSize="20px"
-                  lineHeight="10px"
-                  mt="15px"
-                  color="#4A5568"
-                  fontWeight="600"
-                  mb="15px"
-                  ml="20px"
-                >
-                  {props.name}
-                </Heading>
-              </Flex>
-            </Box>
+          <AccordionButton w="100%" justifyContent="space-between">
+            <Heading
+              fontSize="20px"
+              lineHeight="10px"
+              mt="15px"
+              color="#4A5568"
+              fontWeight="600"
+              mb="15px"
+              ml="20px"
+            >
+              {props.name}
+            </Heading>
             <AccordionIcon />
           </AccordionButton>
           <Flex pt="5px" mr="20px">
