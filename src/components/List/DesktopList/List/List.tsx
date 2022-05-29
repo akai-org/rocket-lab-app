@@ -16,7 +16,6 @@ import {
   CartList,
   PopulatedCartList,
 } from '../../../../mongo/models/cart'
-import { Item } from '../../../../mongo/models/item'
 import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
 import { fetcher } from '../../../../utils/requests'
