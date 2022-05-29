@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Box, Image, Flex, Heading, Icon } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
 import { Squash as Hamburger } from 'hamburger-react'
-import Sidebar from './MobileSidebar/MobileSidebar'
+import MobileSidebar from './MobileSidebar/MobileSidebar'
 
 const MobileNavigation = () => {
   const [isSideBarVisible, setIsSideBarVisible] = useState(false)
@@ -50,17 +50,11 @@ const MobileNavigation = () => {
           </Flex>
           <Flex alignItems="center">
             <Icon fontSize="30px" mr="10px" as={FaUserCircle} />
-            <Hamburger
-              size={30}
-              toggled={isSideBarVisible}
-              toggle={() => {
-                setIsSideBarVisible(!isSideBarVisible)
-              }}
-            />
+
+            <MobileSidebar />
           </Flex>
         </Flex>
       </Box>
-      {isSideBarVisible && <Sidebar />}
     </>
   )
 }

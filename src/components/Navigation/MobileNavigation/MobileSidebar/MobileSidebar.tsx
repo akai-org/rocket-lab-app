@@ -1,82 +1,94 @@
-import React from 'react'
-import { Box, Button, Flex, Icon, Link, Text } from '@chakra-ui/react'
-import { IoIosSettings } from 'react-icons/io'
-import NavButton from '../../../UI/Custom Buttons/NavButton/NavButton'
+import { useRef } from 'react'
+import {
+  Box,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import Hamburger from 'hamburger-react'
+import { FiSettings } from 'react-icons/fi'
+import { AiOutlineTool } from 'react-icons/ai'
+import { BsCardChecklist } from 'react-icons/bs'
+import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
+import { GrLogout } from 'react-icons/gr'
 
-const Sidebar = () => {
+const MobileSidebar = () => {
   const router = useRouter()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef(null)
+
   return (
-    <Box
-      position="fixed"
-      top="0"
-      right="0"
-      h="calc(100vh - 75px)"
-      w="90%"
-      mt="75px"
-      border="1px solid black"
-      bgColor="white"
-      zIndex="2"
-    >
-      <Flex flexDirection="column" h="100%" overflow="scroll">
-        <Flex flexDir="column" w="100%" alignItems="center" m="30px auto">
-          <NavButton
-            isItemActive={router.asPath === '/'}
-            onClick={() => {
-              router.push('/')
-            }}
-            fontSize="20px"
-            h="50px"
-            w="90%"
-            maxW="400px"
-          >
-            Magazyn
-          </NavButton>
-          <NavButton
-            isItemActive={router.asPath === '/list'}
-            onClick={() => {
-              router.push('/list')
-            }}
-            fontSize="20px"
-            h="50px"
-            w="90%"
-            maxW="400px"
-          >
-            Lista Zakupów
-          </NavButton>
-          <NavButton
-            isItemActive={router.asPath === '/history'}
-            fontSize="20px"
-            h="50px"
-            w="90%"
-            maxW="400px"
-          >
-            Historia
-          </NavButton>
-          <NavButton
-            isItemActive={router.asPath === '/schemes'}
-            fontSize="20px"
-            h="50px"
-            w="90%"
-            maxW="400px"
-          >
-            Schematy
-          </NavButton>
-        </Flex>
-        <Flex flexDirection="column" mt="auto" mr="20px">
-          <Flex justifyContent="flex-end">
-            <Text>Ustawienia</Text>
-            <Icon as={IoIosSettings} ml="10px" fontSize="22px" />
-          </Flex>
-          <Link m="10px 0 20px auto" href="/api/auth/logout">
-            <Button h="32px" w="120px" bgColor="#FF7700" color="white">
-              Logout
-            </Button>
-          </Link>
-        </Flex>
-      </Flex>
-    </Box>
+    <>
+      <Box ref={btnRef} onClick={onOpen}>
+        <Hamburger size={30} toggled={isOpen} />
+      </Box>
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay bgColor="transparent" />
+        <DrawerContent mt="76px">
+          <DrawerBody w="100%">
+            <Flex
+              flexDirection="column"
+              onClick={onClose}
+              fontSize="22px"
+              rowGap={10}
+              p="20px"
+            >
+              <Flex
+                lineHeight="30px"
+                onClick={() => {
+                  if (router.asPath !== '/') router.push('/')
+                }}
+                mt="10px"
+              >
+                <AiOutlineTool size={30} />
+                <Text ml="10px">Magazyn</Text>
+              </Flex>
+              <Flex
+                lineHeight="30px"
+                onClick={() => {
+                  if (router.asPath !== '/list') router.push('/list')
+                }}
+              >
+                <BsCardChecklist size={30} />
+                <Text ml="10px">Listy</Text>
+              </Flex>
+              <Flex lineHeight="30px">
+                <RiHistoryLine size={30} />
+                <Text ml="10px">Historia</Text>
+              </Flex>
+              <Flex lineHeight="30px">
+                <RiDraftLine size={30} />
+                <Text ml="10px">Szablony</Text>
+              </Flex>
+              <Flex lineHeight="30px">
+                <FiSettings size={30} />
+                <Text ml="10px">Ustawienia</Text>
+              </Flex>
+              <Flex
+                lineHeight="30px"
+                onClick={() => {
+                  router.push('/api/auth/logout')
+                }}
+              >
+                <GrLogout size={30} />
+                <Text ml="10px">Wyloguj</Text>
+              </Flex>
+            </Flex>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
   )
 }
 
-export default Sidebar
+export default MobileSidebar
