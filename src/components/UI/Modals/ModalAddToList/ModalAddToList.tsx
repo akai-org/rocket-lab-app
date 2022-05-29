@@ -42,7 +42,6 @@ const ModalAddToList = (props: ModalAddToListProps) => {
   // TODO: delete these hardcoded 'add_new'
 
   const [selectedList, setSelectedList] = useState('add_new')
-  const [selectedListName, setSelectedListName] = useState('')
   const [listName, setListName] = useState('')
   const [exsitingList, setExistingList] = useState<PopulatedCartList>()
 
@@ -93,10 +92,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
             h="30px"
             borderColor="#D5D5D5"
             defaultValue="add_new"
-            onChange={(e) => {
-              setSelectedListName(e.target.name)
-              setSelectedList(e.target.value)
-            }}
+            onChange={(e) => setSelectedList(e.target.value)}
           >
             <option value="add_new">Utwórz nową listę</option>
             {storageCartData.cartLists.map((cartList) => (

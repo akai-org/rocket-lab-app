@@ -8,15 +8,11 @@ import {
   PopoverTrigger,
   PopoverProps,
   Box,
-  PopoverFooter,
-  ButtonGroup,
-  Button,
   Text,
   Flex,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { PopulatedCartList } from '../../../mongo/models/cart'
-import ProductButton from '../Custom Buttons/ProductButton/ProductButton'
 
 interface ChosenListPopoverProps extends PopoverProps {
   onClick: () => void
