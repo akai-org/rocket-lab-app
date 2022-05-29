@@ -11,6 +11,8 @@ import {
   PopoverFooter,
   ButtonGroup,
   Button,
+  Text,
+  Flex,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { PopulatedCartList } from '../../../mongo/models/cart'
@@ -31,21 +33,23 @@ const ChosenListPopover = (props: ChosenListPopoverProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const open = () => setIsOpen(!isOpen)
   const close = () => setIsOpen(false)
+
   return (
     <>
       <Popover onClose={close} isOpen={isOpen} placement="top">
         <PopoverTrigger>
-          <Box cursor="pointer">
-            <ProductButton
+          <Box cursor="pointer" mt="5px" w="200px">
+            <Text
               onClick={() => {
                 props.onClick()
                 open()
               }}
-              fontSize="18px"
-              w="120px"
+              fontSize="15px"
+              as="u"
+              color="#FF7700"
             >
-              Trigger
-            </ProductButton>
+              Podgląd wybranej listy
+            </Text>
           </Box>
         </PopoverTrigger>
         <PopoverContent>
@@ -53,18 +57,15 @@ const ChosenListPopover = (props: ChosenListPopoverProps) => {
           <PopoverArrow />
           <PopoverCloseButton />
           <PopoverBody>
-            Are you sure you want to have that milkshake?
+            {props.list.items.map((item) => {
+              return (
+                <Flex justifyContent="space-between">
+                  <Text isTruncated>{item.item.name}</Text>
+                  <Text>x{item.quantity}</Text>
+                </Flex>
+              )
+            })}
           </PopoverBody>
-          <PopoverFooter display="flex" justifyContent="flex-end">
-            <ButtonGroup size="sm">
-              <Button variant="outline" onClick={close}>
-                Anuluj
-              </Button>
-              <Button colorScheme="red" onClick={close}>
-                Usuń
-              </Button>
-            </ButtonGroup>
-          </PopoverFooter>
         </PopoverContent>
       </Popover>
     </>

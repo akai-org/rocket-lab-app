@@ -17,6 +17,7 @@ import {
   Select,
   Input,
   Heading,
+  Box,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -58,8 +59,6 @@ const ModalAddToList = (props: ModalAddToListProps) => {
     }
   }, [selectedList, storageCartData])
 
-  console.log(exsitingList)
-
   return (
     <Modal
       {...props}
@@ -73,7 +72,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
         <ModalHeader>Dodanie do listy</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Flex flexDirection="column" maxH="200px" overflowY="scroll" w="100%">
+          <Flex flexDirection="column" maxH="250px" overflowY="scroll" w="100%">
             <Table>
               <Thead>
                 <Tr fontSize="16px" fontWeight="700">
@@ -108,46 +107,21 @@ const ModalAddToList = (props: ModalAddToListProps) => {
           </Select>
           {exsitingList && (
             <ChosenListPopover
-              name={selectedListName}
+              name={exsitingList.name}
               list={exsitingList}
               onClick={() => {}}
             />
           )}
-          {console.log(selectedListName)}
-
-          {/* {exsitingList && (
-            <>
-              <Text fontSize="18px" mt="5px">
-                Wybrana lista
-              </Text>
-              <Flex maxH="200px" overflowY="scroll">
-                <Table>
-                  <Thead>
-                    <Tr fontSize="16px" fontWeight="700">
-                      <Th>NAZWA</Th>
-                      <Th textAlign="right" w="30%">
-                        ILOŚĆ SZTUK
-                      </Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {exsitingList.items.map((item) => (
-                      <ExistingCheckoutItem key={item.item.id} item={item} />
-                    ))}
-                  </Tbody>
-                </Table>
-              </Flex>
-            </>
-          )} */}
-          <Input
-            mt="15px"
-            h="30px"
-            fontSize="16px"
-            placeholder="Nazwa listy"
-            value={listName}
-            onChange={(e) => setListName(e.target.value)}
-            visibility={selectedList !== 'add_new' ? 'hidden' : 'visible'}
-          />
+          {selectedList === 'add_new' && (
+            <Input
+              mt="15px"
+              h="30px"
+              fontSize="16px"
+              placeholder="Nazwa listy"
+              value={listName}
+              onChange={(e) => setListName(e.target.value)}
+            />
+          )}
         </ModalBody>
         <ModalFooter>
           <ProductButton
