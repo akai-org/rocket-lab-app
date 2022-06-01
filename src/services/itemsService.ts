@@ -1,3 +1,4 @@
+import { CartListModel } from '../mongo/models/cart'
 import { Item, ItemModel } from '../mongo/models/item'
 import { ITEMS_QUERY_LIMIT } from '../utils/constants'
 import { validateSortParam } from '../utils/dataValidation/validateSortParam'
@@ -83,4 +84,26 @@ export async function fetchItems(
 export async function fetchItemsCount(): Promise<number> {
   const itemsCount = await ItemModel.count()
   return itemsCount
+}
+
+export async function updateItem(id: string, item: Partial<Item>) {
+  return await ItemModel.findOneAndUpdate(
+    { _id: id },
+    { ...item },
+    { new: true }
+  )
+}
+
+export async function deleteItem(id: string) {
+  await CartListModel.updateMany(
+    {},
+    {
+      $pull: {
+        items: {
+          item: id,
+        },
+      },
+    }
+  )
+  return await ItemModel.deleteOne({ _id: id })
 }

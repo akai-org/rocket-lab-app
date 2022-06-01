@@ -2,12 +2,15 @@ import type { NextPage } from 'next'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import DesktopList from '../../components/List/DesktopList/DesktopList'
 import MobileList from '../../components/List/MobileList/MobileList'
-import { propNames, useMediaQuery } from '@chakra-ui/react'
+import { useMediaQuery } from '@chakra-ui/react'
 import { PopulatedCartList } from '../../mongo/models/cart'
 import { connectDB } from '../../mongo/db'
 import { Credentials } from '../../utils/credentials'
 import { fetchCartLists } from '../../services/cartService'
-import { API_URL } from '../../utils/constants'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { storageCartInfo } from '../../store/store'
+import { setExistingCartLists } from '../../store/Slices/storageCartSlice'
 
 // TO DO fetch data from DB
 interface Props {
@@ -18,13 +21,17 @@ interface Props {
 export interface CartListsProps extends Pick<Props, 'cartLists'> {}
 
 const Home: NextPage<Props> = ({ cartLists }) => {
+  const storageCartData = useSelector(storageCartInfo)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (storageCartData.cartLists.length !== cartLists.length) {
+      dispatch(setExistingCartLists(cartLists))
+    }
+  }, [])
+
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
-  console.log(cartLists)
-  const List = isDesktop ? (
-    <DesktopList cartLists={cartLists} />
-  ) : (
-    <MobileList cartLists={cartLists} />
-  )
+  const List = isDesktop ? <DesktopList /> : <MobileList />
   return List
 }
 

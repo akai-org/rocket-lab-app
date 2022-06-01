@@ -15,11 +15,24 @@ import {
   AccordionIcon,
 } from '@chakra-ui/react'
 import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
-import { PopulatedCartList } from '../../../../mongo/models/cart'
+import {
+  CartItem,
+  CartList,
+  PopulatedCartList,
+} from '../../../../mongo/models/cart'
+import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
+import { fetcher } from '../../../../utils/requests'
+import { useDispatch } from 'react-redux'
+import {
+  removeExisitngCartList,
+  updateExistingCartLists,
+} from '../../../../store/Slices/storageCartSlice'
 import ListMenu from '../../../UI/Menus/ListMenu'
+import { API_URL } from '../../../../utils/constants'
+import { useState } from 'react'
 
-export interface Props extends PopulatedCartList {}
+interface Props extends PopulatedCartList {}
 
 const List = (props: Props) => {
   const {
@@ -27,6 +40,24 @@ const List = (props: Props) => {
     onOpen: onOpenEditList,
     onClose: onCloseEditList,
   } = useDisclosure()
+
+  const dispatch = useDispatch()
+
+  const deleteCartList = async () => {
+    try {
+      const deletedCartList = await fetcher(
+        'http://localhost:3000/api/cart/delete',
+        {
+          method: 'DELETE',
+          body: { id: props.id },
+        }
+      )
+      dispatch(removeExisitngCartList(deletedCartList))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Accordion
       allowMultiple
@@ -52,7 +83,7 @@ const List = (props: Props) => {
             <AccordionIcon />
           </AccordionButton>
           <Flex pt="5px" mr="20px">
-            <ListMenu onEdit={onOpenEditList} onDelete={() => {}} />
+            <ListMenu onEdit={onOpenEditList} onDelete={deleteCartList} />
           </Flex>
         </Flex>
         <AccordionPanel pb={4}>
@@ -78,7 +109,7 @@ const List = (props: Props) => {
         </AccordionPanel>
       </AccordionItem>
       <ModalEditList
-        list={props.items}
+        cartList={props}
         name="defaultowa lista"
         onClose={onCloseEditList}
         isOpen={isOpenEditList}

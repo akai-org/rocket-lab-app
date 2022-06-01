@@ -7,7 +7,7 @@ const errorHandler: NextMiddleware = async (req, res, next) => {
     await next()
   } catch (error) {
     console.log(error)
-    res.status(500).json({ error: 'Coś się zjebało ewidentnie' })
+    res.status(500).json({ error, submessage: "Coś się zjebało ewidentnie" })
   }
 }
 const connectDatabase: NextMiddleware = async (req, res, next) => {

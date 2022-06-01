@@ -56,7 +56,7 @@ const ModalInfo = (props: ModalInfoProps) => {
             colorScheme="blue"
             ml="10px"
             w="80px"
-            onClick={props.onClose}
+            onClick={() => props.onClose}
           >
             Zamknij
           </ProductButton>
