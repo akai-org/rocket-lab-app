@@ -24,10 +24,15 @@ import DeletePopover from '../../../UI/Popovers/DeletePopover'
 import ListItem from '../ListItem/ListItem'
 import { fetcher } from '../../../../utils/requests'
 import { useDispatch } from 'react-redux'
-import { removeExisitngCartList } from '../../../../store/Slices/storageCartSlice'
+import {
+  removeExisitngCartList,
+  updateExistingCartLists,
+} from '../../../../store/Slices/storageCartSlice'
 import ListMenu from '../../../UI/Menus/ListMenu'
+import { API_URL } from '../../../../utils/constants'
+import { useState } from 'react'
 
-export interface Props extends PopulatedCartList {}
+interface Props extends PopulatedCartList {}
 
 const List = (props: Props) => {
   const {

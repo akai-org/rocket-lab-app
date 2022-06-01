@@ -14,7 +14,7 @@ import {
   Table,
   Tbody,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { CartItem, PopulatedCartList } from '../../../../mongo/models/cart'
 import {
@@ -64,6 +64,13 @@ const ModalEditList = (props: ModalEditListProps) => {
     }
   }
 
+  const removeCartListItem = (itemId: string) => {
+    setCartList((state) => {
+      const updatedItems = state.items.filter((item) => item.id !== itemId)
+      return { ...state, items: updatedItems }
+    })
+  }
+
   const changeQuantity = (newQuantity: number, itemId: string) => {
     setCartList((state) => {
       const items = [...state.items]
@@ -93,6 +100,7 @@ const ModalEditList = (props: ModalEditListProps) => {
               <Tbody>
                 {cartList.items.map((item) => (
                   <ListItem
+                    onRemoveItem={removeCartListItem}
                     changeQuantity={changeQuantity}
                     key={item.id}
                     item={item}
@@ -115,7 +123,10 @@ const ModalEditList = (props: ModalEditListProps) => {
             Zapisz
           </ProductButton>
           <ProductButton
-            onClick={props.onClose}
+            onClick={() => {
+              setCartList(props.cartList)
+              props.onClose()
+            }}
             fontSize="16px"
             w="80px"
             ml="10px"

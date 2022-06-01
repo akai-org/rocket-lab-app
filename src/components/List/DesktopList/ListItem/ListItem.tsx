@@ -4,8 +4,10 @@ import { CartItem } from '../../../../mongo/models/cart'
 import { Item } from '../../../../mongo/models/item'
 import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
 
-const ListItem = (props: CartItem) => {
-  const [quantity, setQuantity] = useState(props.quantity)
+interface Props extends CartItem {
+}
+
+const ListItem = (props: Props) => {
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,
@@ -25,13 +27,13 @@ const ListItem = (props: CartItem) => {
         <Text>{props.item.description}</Text>
       </Td>
       <Td textAlign="right">
-        <Text color={quantity ? 'inherit' : 'red.500'}>
-          {quantity ? quantity : 'brak w magazynie'}
+        <Text color={props.quantity ? 'inherit' : 'red.500'}>
+          {props.quantity ? props.quantity : 'brak w magazynie'}
         </Text>
       </Td>
       <ModalInfo
         categories={props.item.categories}
-        id={props.item.id}
+        id={props.id}
         name={props.item.name}
         description={props.item.description}
         imageUrl={props.item.imageUrl}

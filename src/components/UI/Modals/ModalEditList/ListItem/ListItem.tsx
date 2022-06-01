@@ -19,9 +19,10 @@ import ModalInfo from '../../ModalInfo/ModalInfo'
 interface ModalEditListProps {
   item: CartItem
   changeQuantity: (newQuantity: number, itemId: string) => void
+  onRemoveItem: (itemId: string) => void
 }
 
-const ListItem = ({ item, changeQuantity }: ModalEditListProps) => {
+const ListItem = ({ item, changeQuantity, onRemoveItem }: ModalEditListProps) => {
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,
@@ -58,7 +59,7 @@ const ListItem = ({ item, changeQuantity }: ModalEditListProps) => {
       </Td>
       <Td>
         <Flex justifyContent="flex-end">
-          <AiOutlineClose cursor="pointer" />
+          <AiOutlineClose onClick={() => onRemoveItem(item.id)} cursor="pointer" />
         </Flex>
       </Td>
       <ModalInfo

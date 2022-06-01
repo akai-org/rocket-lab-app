@@ -38,3 +38,17 @@ export async function fetchCartLists(populate?: boolean) {
     return await CartListModel.find().sort({ createdAt: -1 })
   }
 }
+
+export async function removeCartListItem(listId: string, itemId: string) {
+  return await CartListModel.updateOne(
+    { id: listId },
+    {
+      $pull: {
+        items: {
+          item: itemId,
+        },
+      },
+    },
+    { new: true }
+  ).populate('items')
+}
