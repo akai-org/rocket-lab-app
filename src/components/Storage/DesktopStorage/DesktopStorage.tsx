@@ -65,7 +65,6 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
             body: { id: listToMerge.id, items: [...toAddList, ...newList] },
           }
         )
-        console.log(updatedList)
         dispatch(updateExistingCartLists(updatedList))
       }
       dispatch(clearCart())
