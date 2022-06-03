@@ -18,16 +18,18 @@ import {
 } from '../store/Slices/storageCartSlice'
 import { fetcher } from '../utils/requests'
 import { useDispatch } from 'react-redux'
+import { setCategories } from '../store/Slices/categoriesSlice'
 
 interface Props extends MainViewProps {
   error?: Error
 }
 
-const Home: NextPage<Props> = ({ items, error, itemsCount }) => {
+const Home: NextPage<Props> = ({ items, error, itemsCount, categories }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    fetcher(API_URL+'/api/cart')
+    dispatch(setCategories(categories || []))
+    fetcher(API_URL + '/api/cart')
       .then((data) => {
         console.log(data)
         dispatch(setExistingCartLists(data))
