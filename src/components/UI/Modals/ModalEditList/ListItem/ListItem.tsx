@@ -17,23 +17,27 @@ import { CartItem } from '../../../../../mongo/models/cart'
 import ModalInfo from '../../ModalInfo/ModalInfo'
 
 interface ModalEditListProps {
-  item: CartItem
+  cartItem: CartItem
   changeQuantity: (newQuantity: number, itemId: string) => void
   onRemoveItem: (itemId: string) => void
 }
 
-const ListItem = ({ item, changeQuantity, onRemoveItem }: ModalEditListProps) => {
+const ListItem = ({
+  cartItem,
+  changeQuantity,
+  onRemoveItem,
+}: ModalEditListProps) => {
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,
     onClose: onCloseInfo,
   } = useDisclosure()
-  return (
+  return cartItem.item ? (
     <Tr fontSize="14px" h="40px">
       <Td w="60%">
         <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
           <Text fontWeight="500" minW="50px" isTruncated>
-            {item.item.name}
+            {cartItem.item.name}
           </Text>
         </Flex>
       </Td>
@@ -44,9 +48,9 @@ const ListItem = ({ item, changeQuantity, onRemoveItem }: ModalEditListProps) =>
           h="30px"
           fontSize="16px"
           borderColor="#E2E8F0"
-          defaultValue={item.quantity}
+          defaultValue={cartItem.quantity}
           onChange={(e) => {
-            changeQuantity(+e, item.id)
+            changeQuantity(+e, cartItem.id)
           }}
           min={1}
         >
@@ -59,22 +63,25 @@ const ListItem = ({ item, changeQuantity, onRemoveItem }: ModalEditListProps) =>
       </Td>
       <Td>
         <Flex justifyContent="flex-end">
-          <AiOutlineClose onClick={() => onRemoveItem(item.id)} cursor="pointer" />
+          <AiOutlineClose
+            onClick={() => onRemoveItem(cartItem.id)}
+            cursor="pointer"
+          />
         </Flex>
       </Td>
       <ModalInfo
-        categories={item.item.categories}
-        id={item.item.id}
-        name={item.item.name}
-        description={item.item.description}
-        imageUrl={item.item.imageUrl}
-        quantity={item.item.quantity}
+        categories={cartItem.item.categories}
+        id={cartItem.item.id}
+        name={cartItem.item.name}
+        description={cartItem.item.description}
+        imageUrl={cartItem.item.imageUrl}
+        quantity={cartItem.item.quantity}
         onClose={onCloseInfo}
         isOpen={isOpenInfo}
         isCentered
       />
     </Tr>
-  )
+  ) : null
 }
 
 export default ListItem

@@ -100,9 +100,9 @@ const List = (props: Props) => {
                 </Tr>
               </Thead>
               <Tbody>
-                {props.items.map((item) => (
+                {props.items.map((item) =>
                   <ListItem key={item.id} {...item} />
-                ))}
+                )}
               </Tbody>
             </Table>
           </Flex>

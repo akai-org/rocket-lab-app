@@ -62,7 +62,7 @@ const List = (props: Props) => {
         </AccordionPanel>
       </AccordionItem>
       <ModalEditList
-        list={props.items}
+        cartList={props}
         name="defaultowa lista"
         onClose={onCloseEditList}
         isOpen={isOpenEditList}

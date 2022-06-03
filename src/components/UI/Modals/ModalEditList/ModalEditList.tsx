@@ -36,6 +36,8 @@ const ModalEditList = (props: ModalEditListProps) => {
 
   const [cartList, setCartList] = useState(props.cartList)
 
+  console.log(props.cartList)
+
   // TODO: The same function is used in Desktop List & Mobile list - redundancy
   const deleteCartList = async () => {
     try {
@@ -103,7 +105,7 @@ const ModalEditList = (props: ModalEditListProps) => {
                     onRemoveItem={removeCartListItem}
                     changeQuantity={changeQuantity}
                     key={item.id}
-                    item={item}
+                    cartItem={item}
                   />
                 ))}
               </Tbody>

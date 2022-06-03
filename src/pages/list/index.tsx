@@ -21,13 +21,10 @@ interface Props {
 export interface CartListsProps extends Pick<Props, 'cartLists'> {}
 
 const Home: NextPage<Props> = ({ cartLists }) => {
-  const storageCartData = useSelector(storageCartInfo)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (storageCartData.cartLists.length !== cartLists.length) {
-      dispatch(setExistingCartLists(cartLists))
-    }
+    dispatch(setExistingCartLists(cartLists))
   }, [])
 
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
