@@ -12,14 +12,15 @@ import {
   Flex,
   Box,
 } from '@chakra-ui/react'
+import { Item } from '../../../../mongo/models/item'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 
-interface ModalInfoProps extends Omit<ModalProps, 'children'> {
-  name: string
-  description: string
-  imageUrl: string
-  quantity: number
-  categories: string[]
+interface ModalInfoProps
+  extends Omit<ModalProps, 'children'>,
+    Pick<
+      Item,
+      'imageUrl' | 'name' | 'quantity' | 'description' | 'categories'
+    > {
   id: string
 }
 

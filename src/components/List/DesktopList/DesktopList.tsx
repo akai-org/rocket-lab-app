@@ -10,6 +10,8 @@ import List from './List/List'
 const DesktopList = () => {
   const storageCartData = useSelector(storageCartInfo)
 
+  console.log(storageCartData.cartLists)
+
   return (
     <Flex flexDirection="row" w="100vw" maxW="2000px" m="75px auto 0 auto">
       <Flex w="100%" flexDirection="column" ml="223px" p="40px">

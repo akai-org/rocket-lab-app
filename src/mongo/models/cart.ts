@@ -13,7 +13,7 @@ export interface CartList {
 export interface CartItem {
   quantity: number
   id: string
-  item: Item
+  item?: Item
 }
 
 export interface PopulatedCartList extends Omit<CartList, 'items'> {
