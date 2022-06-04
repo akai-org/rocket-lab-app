@@ -19,6 +19,7 @@ import {
   NumberInputStepper,
   Textarea,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { removeItem, updateItem } from '../../../../store/Slices/itemsSlice'
@@ -35,6 +36,7 @@ interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
 }
 
 const ModalEditItem = (props: ModalEditItemProps) => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const [isEdit, setIsEdit] = useState(false)
   const [name, setName] = useState(props.name)
@@ -50,6 +52,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
           body: { id: props.id, item: { name, description, quantity } },
         }
       )
+      router.reload()
       dispatch(updateItem(updatedItem))
     } catch (error) {
       console.log(error)
@@ -64,6 +67,8 @@ const ModalEditItem = (props: ModalEditItemProps) => {
         'http://localhost:3000/api/items/delete',
         { method: 'DELETE', body: { id: props.id } }
       )
+
+      router.reload()
       dispatch(removeItem(deletedItem))
     } catch (error) {
       console.log(error)

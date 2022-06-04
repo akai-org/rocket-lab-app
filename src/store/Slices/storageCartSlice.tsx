@@ -1,9 +1,9 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { PopulatedCartList } from '../../mongo/models/cart'
-import { Item } from '../../mongo/models/item'
+import { Item, PopulatedItem } from '../../mongo/models/item'
 export interface CartItem {
-  item: Item
+  item: PopulatedItem
   quantity: number
 }
 
@@ -49,7 +49,7 @@ export const storageCartSlice = createSlice({
     addExistingCartList: (state, action: PayloadAction<PopulatedCartList>) => {
       state.cartLists.push(action.payload)
     },
-    addToCart: (state, action: PayloadAction<Item>) => {
+    addToCart: (state, action: PayloadAction<PopulatedItem>) => {
       if (
         !state.newCartList.some(
           (cartItem) => cartItem.item.id === action.payload.id
@@ -58,7 +58,7 @@ export const storageCartSlice = createSlice({
         state.newCartList.push({ quantity: 1, item: action.payload })
       }
     },
-    removeFromCart: (state, action: PayloadAction<Item>) => {
+    removeFromCart: (state, action: PayloadAction<PopulatedItem>) => {
       state.newCartList = state.newCartList.filter(
         (cart) => cart.item.id !== action.payload.id
       )

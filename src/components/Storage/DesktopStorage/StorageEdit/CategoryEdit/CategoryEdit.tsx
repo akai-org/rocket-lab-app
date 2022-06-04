@@ -9,28 +9,68 @@ import {
   CheckboxGroup,
   Flex,
   FormControl,
-  FormLabel,
   Input,
   Text,
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  addCategory,
+  removeCategories,
+} from '../../../../../store/Slices/categoriesSlice'
+import { categoriesInfo } from '../../../../../store/store'
+import { API_URL } from '../../../../../utils/constants'
+import { fetcher } from '../../../../../utils/requests'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../../../UI/Popovers/DeletePopover'
 
 const CategoryEdit = () => {
+  const categories = useSelector(categoriesInfo).categories
   const [nameIsValid, setNameIsValid] = useState(true)
-  const [checkboxes, setCheckboxes] = useState([''])
+  const [checkboxes, setCheckboxes] = useState<string[]>([])
+  const dispatch = useDispatch()
   const name = useRef<HTMLInputElement>(null)
-  const submitForm = () => {
+  const submitForm = async () => {
     if (name.current!.value) {
       setNameIsValid(true)
-      const data = {
-        name: name.current!.value,
+      await onAddCategory()
+      if (name.current) {
+        name.current.value = ''
       }
     } else {
       setNameIsValid(false)
     }
   }
+
+  const handleDeleteCategories = async () => {
+    try {
+      const deletedCategories = await fetcher(
+        API_URL + '/api/categories/delete',
+        {
+          method: 'DELETE',
+          body: { categoriesIds: checkboxes },
+        }
+      )
+      console.log({ deletedCategories, checkboxes })
+      setCheckboxes([])
+      dispatch(removeCategories(deletedCategories))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const onAddCategory = async () => {
+    try {
+      const addedCategory = await fetcher(API_URL + '/api/categories/add', {
+        method: 'POST',
+        body: name.current?.value,
+      })
+      dispatch(addCategory(addedCategory))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Accordion allowMultiple mt="10px">
       <AccordionItem border="none">
@@ -72,13 +112,11 @@ const CategoryEdit = () => {
               colorScheme="orange"
             >
               <Flex flexDirection="column">
-                <Checkbox value="category1">Kategoria 1</Checkbox>
-                <Checkbox value="category2">Kategoria 2</Checkbox>
-                <Checkbox value="category3">Kategoria 3</Checkbox>
-                <Checkbox value="category4">Kategoria 4</Checkbox>
-                <Checkbox value="category5">Kategoria 5</Checkbox>
-                <Checkbox value="category6">Kategoria 6</Checkbox>
-                <Checkbox value="category7">Kategoria 7</Checkbox>
+                {categories.map((category) => (
+                  <Checkbox key={category.id} value={category.id}>
+                    {category.name}
+                  </Checkbox>
+                ))}
               </Flex>
             </CheckboxGroup>
             <Flex justifyContent="flex-end">
@@ -86,8 +124,8 @@ const CategoryEdit = () => {
                 width="160px"
                 label="Czy na pewno chcesz usunąć zaznaczone kategorie?"
                 buttonText="Usuń zaznaczone"
-                onClick={() => {}}
-                disabled={!Boolean(...checkboxes)}
+                onClick={handleDeleteCategories}
+                disabled={checkboxes.length === 0}
               />
             </Flex>
           </FormControl>

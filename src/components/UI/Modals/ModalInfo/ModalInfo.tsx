@@ -12,13 +12,13 @@ import {
   Flex,
   Box,
 } from '@chakra-ui/react'
-import { Item } from '../../../../mongo/models/item'
+import { Item, PopulatedItem } from '../../../../mongo/models/item'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 
 interface ModalInfoProps
   extends Omit<ModalProps, 'children'>,
     Pick<
-      Item,
+      PopulatedItem,
       'imageUrl' | 'name' | 'quantity' | 'description' | 'categories'
     > {
   id: string
@@ -48,7 +48,7 @@ const ModalInfo = (props: ModalInfoProps) => {
           <Text mt="5px">
             Kategorie:
             <br />
-            {props.categories.map((category) => `${category}, `)}
+            {props.categories.map((category) => `${category.name}, `)}
           </Text>
         </ModalBody>
         <ModalFooter>

@@ -17,6 +17,7 @@ import {
   setExistingCartLists,
 } from '../store/Slices/storageCartSlice'
 import { fetcher } from '../utils/requests'
+import { setCategories } from '../store/Slices/categoriesSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { itemsInfo } from '../store/store'
 import { setItems } from '../store/Slices/itemsSlice'
@@ -25,11 +26,11 @@ interface Props extends MainViewProps {
   error?: Error
 }
 
-const Home: NextPage<Props> = ({ items, error, itemsCount }) => {
+const Home: NextPage<Props> = ({ items, error, itemsCount, categories }) => {
   const dispatch = useDispatch()
-  const reduxItems = useSelector(itemsInfo).items
 
   useEffect(() => {
+    dispatch(setCategories(categories || []))
     fetcher(API_URL + '/api/cart')
       .then((data) => {
         dispatch(setExistingCartLists(data))
@@ -44,9 +45,9 @@ const Home: NextPage<Props> = ({ items, error, itemsCount }) => {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
 
   const Storage = isDesktop ? (
-    <DesktopStorage itemsCount={itemsCount} items={reduxItems ?? []} />
+    <DesktopStorage itemsCount={itemsCount} items={items} />
   ) : (
-    <MobileStorage itemsCount={itemsCount} items={reduxItems ?? []} />
+    <MobileStorage itemsCount={itemsCount} items={items} />
   )
 
   return error ? <Text>{error.message}</Text> : Storage
