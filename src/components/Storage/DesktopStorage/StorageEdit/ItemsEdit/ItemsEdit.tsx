@@ -18,6 +18,7 @@ import {
   Text,
   Divider,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { categoriesInfo } from '../../../../../store/store'
@@ -26,6 +27,7 @@ import { fetcher } from '../../../../../utils/requests'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
 
 const ItemsEdit = () => {
+  const router = useRouter()
   const categories = useSelector(categoriesInfo).categories
   const [nameIsValid, setNameIsValid] = useState(true)
   const name = useRef<HTMLInputElement>(null)
@@ -57,6 +59,8 @@ const ItemsEdit = () => {
       })
 
       console.log(createdItem)
+
+      router.reload()
     } catch (error) {
       console.log(error)
     }
