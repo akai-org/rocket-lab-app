@@ -19,6 +19,7 @@ import {
   NumberInputStepper,
   Textarea,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { fetcher } from '../../../../utils/requests'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
@@ -33,6 +34,7 @@ interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
 }
 
 const ModalEditItem = (props: ModalEditItemProps) => {
+  const router = useRouter()
   const [isEdit, setIsEdit] = useState(false)
   const [name, setName] = useState(props.name)
   const [description, setDescription] = useState(props.description)
@@ -48,6 +50,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
         }
       )
       console.log(updatedItem)
+      router.reload()
     } catch (error) {
       console.log(error)
     }
@@ -61,6 +64,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
       )
 
       console.log(deletedItem)
+      router.reload()
     } catch (error) {
       console.log(error)
     }

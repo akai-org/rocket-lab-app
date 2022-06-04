@@ -58,8 +58,6 @@ const ItemsEdit = () => {
         },
       })
 
-      console.log(createdItem)
-
       router.reload()
     } catch (error) {
       console.log(error)

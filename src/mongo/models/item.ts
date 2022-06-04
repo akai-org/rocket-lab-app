@@ -1,4 +1,5 @@
 import { Schema, models, model, Model } from 'mongoose'
+import { Category } from './category'
 
 export interface Item {
   name: string
@@ -10,6 +11,10 @@ export interface Item {
   quantity: number
   createdAt: Date
   updatedAt: Date
+}
+
+export interface PopulatedItem extends Omit<Item, 'categories'> {
+  categories: Category[]
 }
 
 const itemSchema = new Schema<Item>(

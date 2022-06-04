@@ -72,13 +72,14 @@ export async function fetchItems(
   const filterBySearch = filterOptions?.searchTerm
 
   if (filterAlwaysByCategory) {
-    items = ItemModel.aggregate([...parseCategory, ...queryBody])
+    items = await ItemModel.aggregate([...parseCategory, ...queryBody])
   } else if (filterBySearch) {
-    items = ItemModel.aggregate([...queryBody])
+    items = await ItemModel.aggregate([...queryBody])
   } else {
-    items = ItemModel.find()
+    items = await ItemModel.find()
   }
-  return await items.sort(sort).skip(skip).limit(limit)
+  // return await items.sort(sort).skip(skip).limit(limit)
+  return await ItemModel.populate(items, { path: 'categories' })
 }
 
 export async function fetchItemsCount(): Promise<number> {

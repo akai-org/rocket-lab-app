@@ -12,6 +12,7 @@ import {
   Flex,
   Box,
 } from '@chakra-ui/react'
+import { Category } from '../../../../mongo/models/category'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 
 interface ModalInfoProps extends Omit<ModalProps, 'children'> {
@@ -19,7 +20,7 @@ interface ModalInfoProps extends Omit<ModalProps, 'children'> {
   description: string
   imageUrl: string
   quantity: number
-  categories: string[]
+  categories: Category[]
   id: string
 }
 
@@ -47,7 +48,7 @@ const ModalInfo = (props: ModalInfoProps) => {
           <Text mt="5px">
             Kategorie:
             <br />
-            {props.categories.map((category) => `${category}, `)}
+            {props.categories.map((category) => `${category.name}, `)}
           </Text>
         </ModalBody>
         <ModalFooter>
@@ -56,7 +57,7 @@ const ModalInfo = (props: ModalInfoProps) => {
             colorScheme="blue"
             ml="10px"
             w="80px"
-            onClick={() => props.onClose}
+            onClick={() => props.onClose()}
           >
             Zamknij
           </ProductButton>
