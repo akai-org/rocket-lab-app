@@ -1,12 +1,6 @@
 import {
-  Box,
   Flex,
   Heading,
-  Table,
-  Tbody,
-  Th,
-  Thead,
-  Tr,
   useDisclosure,
   Accordion,
   AccordionItem,
