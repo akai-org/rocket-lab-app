@@ -9,32 +9,50 @@ import {
   CheckboxGroup,
   Flex,
   FormControl,
-  FormLabel,
   Input,
   Text,
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeCategories } from '../../../../../store/Slices/categoriesSlice'
 import { categoriesInfo } from '../../../../../store/store'
+import { API_URL } from '../../../../../utils/constants'
+import { fetcher } from '../../../../../utils/requests'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../../../UI/Popovers/DeletePopover'
 
 const CategoryEdit = () => {
-  const globalCategories = useSelector(categoriesInfo).categories
-  const [categories, setCategories] = useState(globalCategories)
+  const categories = useSelector(categoriesInfo).categories
   const [nameIsValid, setNameIsValid] = useState(true)
-  const [checkboxes, setCheckboxes] = useState([''])
+  const [checkboxes, setCheckboxes] = useState<string[]>([])
+  const dispatch = useDispatch()
   const name = useRef<HTMLInputElement>(null)
   const submitForm = () => {
     if (name.current!.value) {
       setNameIsValid(true)
-      const data = {
-        name: name.current!.value,
-      }
     } else {
       setNameIsValid(false)
     }
   }
+  console.log(checkboxes)
+
+  const handleDeleteCategories = async () => {
+    try {
+      const deletedCategories = await fetcher(
+        API_URL + '/api/categories/delete',
+        {
+          method: 'DELETE',
+          body: { categoriesIds: checkboxes },
+        }
+      )
+      console.log({ deletedCategories, checkboxes })
+      setCheckboxes([])
+      dispatch(removeCategories(deletedCategories))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Accordion allowMultiple mt="10px">
       <AccordionItem border="none">
@@ -88,8 +106,8 @@ const CategoryEdit = () => {
                 width="160px"
                 label="Czy na pewno chcesz usunąć zaznaczone kategorie?"
                 buttonText="Usuń zaznaczone"
-                onClick={() => {}}
-                disabled={!Boolean(...checkboxes)}
+                onClick={handleDeleteCategories}
+                disabled={checkboxes.length === 0}
               />
             </Flex>
           </FormControl>
