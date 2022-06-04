@@ -5,9 +5,12 @@ export interface Category {
   name: string
 }
 
-const categorySchema = new Schema<Category>({
-  name: { type: String, required: true },
-})
+const categorySchema = new Schema<Category>(
+  {
+    name: { type: String, required: true },
+  },
+  { timestamps: true }
+)
 
 export const CategoryModel =
   (models.Category as Model<Category>) || model('Category', categorySchema)

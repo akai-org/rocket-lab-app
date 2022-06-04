@@ -14,7 +14,10 @@ import {
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeCategories } from '../../../../../store/Slices/categoriesSlice'
+import {
+  addCategory,
+  removeCategories,
+} from '../../../../../store/Slices/categoriesSlice'
 import { categoriesInfo } from '../../../../../store/store'
 import { API_URL } from '../../../../../utils/constants'
 import { fetcher } from '../../../../../utils/requests'
@@ -27,14 +30,17 @@ const CategoryEdit = () => {
   const [checkboxes, setCheckboxes] = useState<string[]>([])
   const dispatch = useDispatch()
   const name = useRef<HTMLInputElement>(null)
-  const submitForm = () => {
+  const submitForm = async () => {
     if (name.current!.value) {
       setNameIsValid(true)
+      await onAddCategory()
+      if (name.current) {
+        name.current.value = ''
+      }
     } else {
       setNameIsValid(false)
     }
   }
-  console.log(checkboxes)
 
   const handleDeleteCategories = async () => {
     try {
@@ -48,6 +54,18 @@ const CategoryEdit = () => {
       console.log({ deletedCategories, checkboxes })
       setCheckboxes([])
       dispatch(removeCategories(deletedCategories))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const onAddCategory = async () => {
+    try {
+      const addedCategory = await fetcher(API_URL + '/api/categories/add', {
+        method: 'POST',
+        body: name.current?.value,
+      })
+      dispatch(addCategory(addedCategory))
     } catch (error) {
       console.log(error)
     }

@@ -12,9 +12,8 @@ export async function addCategory(name: string): Promise<Category> {
 }
 
 export async function deleteCategories(categoriesIds: string[]) {
-  console.log(categoriesIds)
   const deletedCategories = await CategoryModel.find({
-    id: { $in: categoriesIds },
+    _id: { $in: categoriesIds },
   })
 
   await CategoryModel.deleteMany({
