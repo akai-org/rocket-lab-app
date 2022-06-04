@@ -106,7 +106,7 @@ export async function deleteItem(id: string) {
       },
     }
   )
-  return await ItemModel.deleteOne({ _id: id })
+  return await ItemModel.findOneAndDelete({ _id: id }, { new: true })
 }
 
 export async function addItem(item: Item) {

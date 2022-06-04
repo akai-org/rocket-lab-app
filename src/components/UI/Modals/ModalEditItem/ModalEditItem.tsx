@@ -21,6 +21,8 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { removeItem, updateItem } from '../../../../store/Slices/itemsSlice'
 import { fetcher } from '../../../../utils/requests'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
@@ -35,12 +37,13 @@ interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
 
 const ModalEditItem = (props: ModalEditItemProps) => {
   const router = useRouter()
+  const dispatch = useDispatch()
   const [isEdit, setIsEdit] = useState(false)
   const [name, setName] = useState(props.name)
   const [description, setDescription] = useState(props.description)
   const [quantity, setQuantity] = useState(props.quantity)
 
-  const updateItem = async () => {
+  const initUpdateItem = async () => {
     try {
       const updatedItem = await fetcher(
         'http://localhost:3000/api/items/update',
@@ -49,10 +52,12 @@ const ModalEditItem = (props: ModalEditItemProps) => {
           body: { id: props.id, item: { name, description, quantity } },
         }
       )
-      console.log(updatedItem)
       router.reload()
+      dispatch(updateItem(updatedItem))
     } catch (error) {
       console.log(error)
+    } finally {
+      props.onClose()
     }
   }
 
@@ -63,10 +68,12 @@ const ModalEditItem = (props: ModalEditItemProps) => {
         { method: 'DELETE', body: { id: props.id } }
       )
 
-      console.log(deletedItem)
       router.reload()
+      dispatch(removeItem(deletedItem))
     } catch (error) {
       console.log(error)
+    } finally {
+      props.onClose()
     }
   }
 
@@ -133,7 +140,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
           <ProductButton
             onClick={() => {
               setIsEdit(false)
-              updateItem()
+              initUpdateItem()
             }}
             fontSize="16px"
             w="80px"

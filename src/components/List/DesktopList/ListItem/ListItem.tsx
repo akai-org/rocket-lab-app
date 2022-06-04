@@ -4,8 +4,7 @@ import { CartItem } from '../../../../mongo/models/cart'
 import { Item } from '../../../../mongo/models/item'
 import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
 
-interface Props extends CartItem {
-}
+interface Props extends CartItem {}
 
 const ListItem = (props: Props) => {
   const {
@@ -13,7 +12,7 @@ const ListItem = (props: Props) => {
     onOpen: onOpenInfo,
     onClose: onCloseInfo,
   } = useDisclosure()
-  return (
+  return props.item ? (
     <Tr fontSize="14px" h="40px">
       <Td>
         <Flex justifyContent="flex-start" cursor="pointer" onClick={onOpenInfo}>
@@ -43,7 +42,7 @@ const ListItem = (props: Props) => {
         isCentered
       />
     </Tr>
-  )
+  ) : null
 }
 
 export default ListItem

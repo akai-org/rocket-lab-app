@@ -48,7 +48,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         const newList: CartItem[] = []
         for (const item of listToMerge.items) {
           const foundCopyindex = toAddList.findIndex(
-            (cartItem) => cartItem.item.id === item.item.id
+            (cartItem) => cartItem.item.id === item.item?.id
           )
           const changedItem = { ...item }
           if (toAddList[foundCopyindex]) {
@@ -65,7 +65,6 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
             body: { id: listToMerge.id, items: [...toAddList, ...newList] },
           }
         )
-        console.log(updatedList)
         dispatch(updateExistingCartLists(updatedList))
       }
       dispatch(clearCart())

@@ -17,8 +17,10 @@ import {
   setExistingCartLists,
 } from '../store/Slices/storageCartSlice'
 import { fetcher } from '../utils/requests'
-import { useDispatch } from 'react-redux'
 import { setCategories } from '../store/Slices/categoriesSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { itemsInfo } from '../store/store'
+import { setItems } from '../store/Slices/itemsSlice'
 
 interface Props extends MainViewProps {
   error?: Error
@@ -31,22 +33,24 @@ const Home: NextPage<Props> = ({ items, error, itemsCount, categories }) => {
     dispatch(setCategories(categories || []))
     fetcher(API_URL + '/api/cart')
       .then((data) => {
-        console.log(data)
         dispatch(setExistingCartLists(data))
       })
       .catch((error) => console.log(error))
   }, [])
 
+  useEffect(() => {
+    dispatch(setItems(items || []))
+  }, [items])
+
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
 
   const Storage = isDesktop ? (
-    <DesktopStorage itemsCount={itemsCount} items={items ?? []} />
+    <DesktopStorage itemsCount={itemsCount} items={items} />
   ) : (
-    <MobileStorage itemsCount={itemsCount} items={items ?? []} />
+    <MobileStorage itemsCount={itemsCount} items={items} />
   )
-  console.log(items)
 
-  return !error ? Storage : <Text>{error.message}</Text>
+  return error ? <Text>{error.message}</Text> : Storage
 }
 
 export default Home
@@ -91,6 +95,7 @@ export const getServerSideProps = withPageAuthRequired({
       console.log(e)
       return {
         props: {
+          items: [],
           error: JSON.parse(JSON.stringify(e)),
         },
       }

@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Item } from '../../mongo/models/item'
+import { Item, PopulatedItem } from '../../mongo/models/item'
 
 interface State {
-  items: Item[]
+  items: PopulatedItem[]
 }
 
 const initialState: State = { items: [] }
 
-const itemsSlice = createSlice({
+export const itemsSlice = createSlice({
   name: 'itemsSlice',
   initialState,
   reducers: {
-    setItems: (state, action: PayloadAction<Item[]>) => {
+    setItems: (state, action: PayloadAction<PopulatedItem[]>) => {
       state.items = action.payload
     },
-    updateItem: (state, action: PayloadAction<Item>) => {
+    updateItem: (state, action: PayloadAction<PopulatedItem>) => {
       const itemIndex = state.items.findIndex(
         (item) => item.id === action.payload.id
       )
@@ -23,21 +23,17 @@ const itemsSlice = createSlice({
       copiedItems.splice(itemIndex, 1, action.payload)
       state.items = copiedItems
     },
-    deleteItem: (state, action: PayloadAction<Item>) => {
+    addItems: (state, action: PayloadAction<PopulatedItem[]>) => {
+      state.items.push(...action.payload)},
+    removeItem: (state, action: PayloadAction<PopulatedItem>) => {
       state.items = state.items.filter((item) => item.id !== action.payload.id)
     },
-    addItem: (state, action: PayloadAction<Item>) => {
-      const copiedItems = [...state.items]
-      copiedItems.splice(0, 0, action.payload)
-      state.items = copiedItems
-    },
-    addItems: (state, action: PayloadAction<Item[]>) => {
-      state.items.push(...action.payload)
+    addItem: (state, action: PayloadAction<PopulatedItem>) => {
+      state.items = [action.payload, ...state.items]
     },
   },
 })
 
-export const itemReducer = itemsSlice.reducer
+export const itemsReducer = itemsSlice.reducer
 
-export const { addItem, deleteItem, setItems, updateItem, addItems } =
-  itemsSlice.actions
+export const { setItems, addItem, removeItem, updateItem, addItems } = itemsSlice.actions
