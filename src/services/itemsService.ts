@@ -71,12 +71,19 @@ export async function fetchItems(
 
   const filterBySearch = filterOptions?.searchTerm
 
+  //TODO: Delete redundation
   if (filterAlwaysByCategory) {
     items = await ItemModel.aggregate([...parseCategory, ...queryBody])
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
   } else if (filterBySearch) {
     items = await ItemModel.aggregate([...queryBody])
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
   } else {
-    items = await ItemModel.find()
+    items = await ItemModel.find().sort(sort).skip(skip).limit(limit)
   }
   // return await items.sort(sort).skip(skip).limit(limit)
   return await ItemModel.populate(items, { path: 'categories' })

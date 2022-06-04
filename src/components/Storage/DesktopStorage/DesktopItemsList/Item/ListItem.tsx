@@ -16,6 +16,7 @@ interface Props {
 }
 
 const ListItem = ({ item }: Props) => {
+  console.log(item)
   const dispatch = useDispatch()
   const storageCartData = useSelector(storageCartInfo).newCartList
   const {

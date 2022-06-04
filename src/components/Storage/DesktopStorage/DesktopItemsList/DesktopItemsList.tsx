@@ -52,10 +52,9 @@ const DesktopItemsList = ({ items, itemsCount }: MainViewProps) => {
               </Tr>
             </Thead>
             <Tbody>
-              {items &&
-                items.map((item) => {
-                  item ? <ListItem item={item} key={item.id} /> : null
-                })}
+              {items!.map((item) =>
+                item ? <ListItem item={item} key={item.id} /> : null
+              )}
             </Tbody>
           </Table>
         </Flex>
