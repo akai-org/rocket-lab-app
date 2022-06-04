@@ -107,3 +107,8 @@ export async function deleteItem(id: string) {
   )
   return await ItemModel.deleteOne({ _id: id })
 }
+
+export async function addItem(item: Item) {
+  const createdItem = await ItemModel.create(item)
+  return createdItem
+}
