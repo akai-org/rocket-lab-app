@@ -1,11 +1,20 @@
 import React, { useState } from 'react'
 import {
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
   Flex,
+  HStack,
   Icon,
   Input,
   Select,
   Text,
+  useDisclosure,
+  VStack,
 } from '@chakra-ui/react'
 import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai'
 import { IoFilterSharp } from 'react-icons/io5'
@@ -17,6 +26,7 @@ interface Props extends FiltersControllsProps {
 
 const Filters: React.FC<Props> = (props) => {
   const [isFilterVisible, setIsFilterVisible] = useState(false)
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <form onSubmit={props.handleSubmit}>
       <Flex
@@ -24,7 +34,7 @@ const Filters: React.FC<Props> = (props) => {
         position="fixed"
         left="0"
         bottom="0"
-        h={isFilterVisible ? '230px' : '60px'}
+        h="60px"
         w="100%"
         minW="300px"
         border="1px solid #D4D4D4"
@@ -34,7 +44,71 @@ const Filters: React.FC<Props> = (props) => {
         <Flex flexDirection="column" justifyContent="space-between" h="60px">
           {isFilterVisible ? (
             <>
-              <Flex my="15px" ml="10px" justifyContent="space-between">
+              <Drawer
+                placement="bottom"
+                onClose={() => {
+                  onClose()
+                  setIsFilterVisible(false)
+                }}
+                isOpen={isOpen}
+              >
+                <DrawerOverlay />
+                <DrawerContent>
+                  <DrawerCloseButton
+                    onClick={() => {
+                      props.setIsFiltersOpen(false)
+                      setIsFilterVisible(false)
+                      onClose()
+                    }}
+                  />
+                  <DrawerHeader>Filtruj przedmioty</DrawerHeader>
+                  <DrawerBody>
+                    <HStack>
+                      <Input
+                        placeholder="Wyszukaj"
+                        h="30px"
+                        w="100%"
+                        border="1px solid #D4D4D4"
+                        value={props.searchTerm}
+                        onChange={(e) => props.setSearchTerm(e.target.value)}
+                      />
+                      <Icon h="6" w="6" as={AiOutlineSearch} />
+                    </HStack>
+                    <Text mt="15px" mb="5px" fontWeight="500">
+                      Kategoria
+                    </Text>
+                    <Select
+                      onChange={(e) => props.setCategory(e.target.value)}
+                      value={props.category}
+                      fontSize="14px"
+                      h="32px"
+                    >
+                      <option value="all">Wszystkie</option>
+                      {props.categories.map(({ name, id }) => (
+                        <option key={id} value={name}>
+                          {name}
+                        </option>
+                      ))}
+                    </Select>
+                    <Button
+                      h="32px"
+                      bgColor="#FF7700"
+                      color="white"
+                      fontSize="14px"
+                      fontWeight="600"
+                      lineHeight="32px"
+                      type="submit"
+                      my="20px"
+                      onClick={() => {
+                        onClose()
+                      }}
+                    >
+                      Zapisz
+                    </Button>
+                  </DrawerBody>
+                </DrawerContent>
+              </Drawer>
+              {/* <Flex my="15px" ml="10px" justifyContent="space-between">
                 <Text fontWeight="500">Filtruj obiekty</Text>
                 <Flex m="auto 10px" lineHeight="20px">
                   <Icon
@@ -95,7 +169,7 @@ const Filters: React.FC<Props> = (props) => {
                 >
                   Zapisz
                 </Button>
-              </Flex>
+              </Flex> */}
             </>
           ) : (
             <Flex
@@ -115,7 +189,7 @@ const Filters: React.FC<Props> = (props) => {
                 />
                 <Icon h="6" w="6" ml="5px" as={AiOutlineSearch} />
               </Flex>
-              <Flex pt="5px">
+              <Flex pt="5px" onClick={onOpen}>
                 <Text
                   mr="5px"
                   fontSize="16px"
