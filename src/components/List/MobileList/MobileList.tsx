@@ -1,6 +1,5 @@
 import { Flex } from '@chakra-ui/react'
 import { useSelector } from 'react-redux'
-import { CartListsProps } from '../../../pages/list'
 import { storageCartInfo } from '../../../store/store'
 import AddItem from './AddItem/AddItem'
 import List from './List/List'

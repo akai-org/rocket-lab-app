@@ -1,5 +1,5 @@
 import { Schema, Model, models, model } from 'mongoose'
-import { Item } from './item'
+import { Item, PopulatedItem } from './item'
 
 export interface CartList {
   id: string
@@ -13,7 +13,7 @@ export interface CartList {
 export interface CartItem {
   quantity: number
   id: string
-  item?: Item
+  item?: PopulatedItem | Item
 }
 
 export interface PopulatedCartList extends Omit<CartList, 'items'> {

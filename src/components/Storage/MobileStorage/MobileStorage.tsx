@@ -54,7 +54,7 @@ const MobileStorage = ({ items }: MainViewProps) => {
         const newList: CartItem[] = []
         for (const item of listToMerge.items) {
           const foundCopyindex = toAddList.findIndex(
-            (cartItem) => cartItem.item.id === item.item.id
+            (cartItem) => cartItem.item.id === item.item?.id
           )
           const changedItem = { ...item }
           if (toAddList[foundCopyindex]) {
