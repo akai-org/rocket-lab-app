@@ -42,6 +42,7 @@ const Home: NextPage<Props> = ({ items, error, itemsCount, categories }) => {
 
   useEffect(() => {
     dispatch(setItems(items || []))
+    setLocalItems(items)
   }, [items])
 
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
