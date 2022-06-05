@@ -14,7 +14,6 @@ const DesktopNavigation = () => {
         bgColor="red.500"
         borderBottom="1px solid #D5D5D5"
         boxShadow="0 -15px 40px 2px #D5D5D5"
-        bgColor="white"
         zIndex="2"
       >
         <Flex
