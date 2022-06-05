@@ -6,7 +6,7 @@ import { fetcher } from '../../../utils/requests'
 
 interface Query {
   category?: string
-  searchTerm?: string
+  searchTerm?: string | string[]
 }
 
 export interface FiltersControllsProps {
@@ -47,8 +47,10 @@ const FiltersGeneral: React.FC<Props> = ({ children }) => {
     searchQuery.category = category
   }
 
-  if (searchTerm || searchTerm === '') {
+  if (searchTerm) {
     searchQuery.searchTerm = searchTerm
+  } else {
+    searchQuery.searchTerm = []
   }
 
   if (category === 'all') {
