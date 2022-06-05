@@ -37,8 +37,6 @@ const FiltersGeneral: React.FC<Props> = ({ children }) => {
     querySearchTerm ? querySearchTerm : ''
   )
 
-  console.log(searchTerm)
-
   delete query.page
 
   delete query.category
