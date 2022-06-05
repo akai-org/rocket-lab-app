@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react'
 import { Category } from '../../mongo/models/category'
 import { Item, PopulatedItem } from '../../mongo/models/item'
 
@@ -10,8 +11,8 @@ export interface ItemsQueryParams {
 }
 
 export interface MainViewProps {
-  items?: PopulatedItem[]
-  itemsCount?: number
+  items: PopulatedItem[]
+  itemsCount: number
   categories?: Category[]
+  setItems?: Dispatch<SetStateAction<PopulatedItem[]>>
 }
-

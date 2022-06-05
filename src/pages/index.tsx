@@ -11,7 +11,7 @@ import { Credentials } from '../utils/credentials'
 import { API_URL, FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../utils/constants'
 import { fetchCategories } from '../services/categoryService'
 import { SortType } from '../services/itemsService'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
   clearCart,
   setExistingCartLists,
@@ -21,6 +21,7 @@ import { setCategories } from '../store/Slices/categoriesSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { itemsInfo } from '../store/store'
 import { setItems } from '../store/Slices/itemsSlice'
+import { PopulatedItem } from '../mongo/models/item'
 
 interface Props extends MainViewProps {
   error?: Error
@@ -28,6 +29,7 @@ interface Props extends MainViewProps {
 
 const Home: NextPage<Props> = ({ items, error, itemsCount, categories }) => {
   const dispatch = useDispatch()
+  const [localItems, setLocalItems] = useState<PopulatedItem[]>(items)
 
   useEffect(() => {
     dispatch(setCategories(categories || []))
@@ -47,7 +49,11 @@ const Home: NextPage<Props> = ({ items, error, itemsCount, categories }) => {
   const Storage = isDesktop ? (
     <DesktopStorage itemsCount={itemsCount} items={items} />
   ) : (
-    <MobileStorage itemsCount={itemsCount} items={items} />
+    <MobileStorage
+      setItems={setLocalItems}
+      itemsCount={itemsCount}
+      items={localItems}
+    />
   )
 
   return error ? <Text>{error.message}</Text> : Storage
@@ -95,6 +101,7 @@ export const getServerSideProps = withPageAuthRequired({
       console.log(e)
       return {
         props: {
+          itemsCount: 0,
           items: [],
           error: JSON.parse(JSON.stringify(e)),
         },

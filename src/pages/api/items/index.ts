@@ -6,7 +6,7 @@ import { withMiddleware } from '../../../utils/middlewares'
 const handler: NextApiHandler = async (req, res) => {
   if (req.method === 'GET') {
     try {
-      const items = await itemsService.fetchItems(+req.query.skip)
+      const items = await itemsService.fetchItems(+req.body.skip)
       res.status(200).send(items)
     } catch (error) {
       console.log(error)

@@ -21,9 +21,10 @@ import {
   clearCart,
 } from '../../../store/Slices/storageCartSlice'
 import { fetcher } from '../../../utils/requests'
-import { API_URL } from '../../../utils/constants'
+import { API_URL, ITEMS_QUERY_LIMIT } from '../../../utils/constants'
+import ProductButton from '../../UI/Custom Buttons/ProductButton/ProductButton'
 
-const MobileStorage = ({ items }: MainViewProps) => {
+const MobileStorage = ({ items, setItems, itemsCount }: MainViewProps) => {
   const [listType, setListType] = useState<sortingType>('grid')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
   const storageCartData = useSelector(storageCartInfo)
@@ -36,6 +37,7 @@ const MobileStorage = ({ items }: MainViewProps) => {
   const id = 'add-to-list-toast'
 
   const dispatch = useDispatch()
+  const [skip, setSkip] = useState(ITEMS_QUERY_LIMIT)
 
   Router.events.on('beforeHistoryChange', () => {
     toast.closeAll()
@@ -45,7 +47,7 @@ const MobileStorage = ({ items }: MainViewProps) => {
   const addNewList = async (name: string, listToMerge?: PopulatedCartList) => {
     try {
       if (!listToMerge) {
-        await fetcher(API_URL+'/api/cart/add', {
+        await fetcher(API_URL + '/api/cart/add', {
           method: 'POST',
           body: { name, items: storageCartData.newCartList },
         })
@@ -76,6 +78,19 @@ const MobileStorage = ({ items }: MainViewProps) => {
       }
       dispatch(clearCart())
       onCloseDetails()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const loadMoreItems = async () => {
+    try {
+      const moreItems = await fetcher(API_URL + '/api/items', { body: skip })
+      setSkip((state) => state + ITEMS_QUERY_LIMIT)
+      if (setItems) {
+        setItems((state) => [...state, ...moreItems])
+      }
+      console.log(moreItems)
     } catch (error) {
       console.log(error)
     }
@@ -132,6 +147,18 @@ const MobileStorage = ({ items }: MainViewProps) => {
       {listType === 'grid'
         ? items && items.map((item) => <GridItem item={item} key={item.id} />)
         : items && items.map((item) => <ListItem item={item} key={item.id} />)}
+      <Flex w="100%" alignItems="center" justifyContent="center">
+        <ProductButton
+          mt="25px"
+          mb="25px"
+          w="250px"
+          h="50px"
+          disabled={skip >= itemsCount}
+          onClick={loadMoreItems}
+        >
+          Załaduj więcej
+        </ProductButton>
+      </Flex>
       <FiltersGeneral>
         {(props) => <Filters {...props} setIsFiltersOpen={setIsFiltersOpen} />}
       </FiltersGeneral>
