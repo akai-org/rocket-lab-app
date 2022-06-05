@@ -16,6 +16,7 @@ import { AiOutlineTool } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
 import { GrLogout } from 'react-icons/gr'
+import { IS_DEV } from '../../../../utils/constants'
 
 const MobileSidebar = () => {
   const router = useRouter()
@@ -62,18 +63,22 @@ const MobileSidebar = () => {
                 <BsCardChecklist size={30} />
                 <Text ml="10px">Listy</Text>
               </Flex>
-              <Flex lineHeight="30px">
-                <RiHistoryLine size={30} />
-                <Text ml="10px">Historia</Text>
-              </Flex>
-              <Flex lineHeight="30px">
-                <RiDraftLine size={30} />
-                <Text ml="10px">Szablony</Text>
-              </Flex>
-              <Flex lineHeight="30px">
-                <FiSettings size={30} />
-                <Text ml="10px">Ustawienia</Text>
-              </Flex>
+              {IS_DEV && (
+                <>
+                  <Flex lineHeight="30px">
+                    <RiHistoryLine size={30} />
+                    <Text ml="10px">Historia</Text>
+                  </Flex>
+                  <Flex lineHeight="30px">
+                    <RiDraftLine size={30} />
+                    <Text ml="10px">Szablony</Text>
+                  </Flex>
+                  <Flex lineHeight="30px">
+                    <FiSettings size={30} />
+                    <Text ml="10px">Ustawienia</Text>
+                  </Flex>
+                </>
+              )}
               <Flex
                 lineHeight="30px"
                 onClick={() => {

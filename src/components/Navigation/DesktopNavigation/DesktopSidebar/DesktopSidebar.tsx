@@ -2,6 +2,7 @@ import { Button, Flex, Icon, Text, Link } from '@chakra-ui/react'
 import { IoIosSettings } from 'react-icons/io'
 import NavButton from '../../../UI/Custom Buttons/NavButton/NavButton'
 import { useRouter } from 'next/router'
+import { IS_DEV } from '../../../../utils/constants'
 
 const DesktopSidebar = () => {
   const router = useRouter()
@@ -40,18 +41,24 @@ const DesktopSidebar = () => {
         >
           Lista Zakupów
         </NavButton>
-        <NavButton isItemActive={router.asPath === '/history'} w="80%">
-          Historia
-        </NavButton>
-        <NavButton isItemActive={router.asPath === '/schemes'} w="80%">
-          Schematy
-        </NavButton>
+        {IS_DEV && (
+          <>
+            <NavButton isItemActive={router.asPath === '/history'} w="80%">
+              Historia
+            </NavButton>
+            <NavButton isItemActive={router.asPath === '/schemes'} w="80%">
+              Schematy
+            </NavButton>
+          </>
+        )}
       </Flex>
       <Flex flexDirection="column" mt="auto" ml="20px">
-        <Flex justifyContent="flex-start">
-          <Icon as={IoIosSettings} mr="10px" fontSize="22px" />
-          <Text>Ustawienia</Text>
-        </Flex>
+        {IS_DEV && (
+          <Flex justifyContent="flex-start">
+            <Icon as={IoIosSettings} mr="10px" fontSize="22px" />
+            <Text>Ustawienia</Text>
+          </Flex>
+        )}
         <Link m="10px auto 20px 0" href="/api/auth/logout">
           <Button h="32px" w="120px" bgColor="#FF7700" color="white">
             Logout

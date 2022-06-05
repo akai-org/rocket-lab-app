@@ -5,7 +5,6 @@ export interface Item {
   name: string
   imageUrl: string
   description: string
-  toBuy: boolean
   id: string
   categories: string[]
   quantity: number
@@ -25,10 +24,6 @@ const itemSchema = new Schema<Item>(
       required: [true, 'You must specify imageUrl'],
     },
     description: { type: String, default: '' },
-    toBuy: {
-      type: Boolean,
-      default: false,
-    },
     quantity: { type: Number, default: 1, min: 1, max: 1000000 },
     categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
   },

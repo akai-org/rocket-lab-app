@@ -1,15 +1,12 @@
-import { Button, Flex, Icon, Input, Select, Text } from '@chakra-ui/react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { AiOutlineSearch } from 'react-icons/ai'
 import { Category } from '../../../mongo/models/category'
 import { API_URL } from '../../../utils/constants'
 import { fetcher } from '../../../utils/requests'
 
 interface Query {
   category?: string
-  searchTerm?: string
+  searchTerm?: string | string[]
 }
 
 export interface FiltersControllsProps {
@@ -52,6 +49,8 @@ const FiltersGeneral: React.FC<Props> = ({ children }) => {
 
   if (searchTerm) {
     searchQuery.searchTerm = searchTerm
+  } else {
+    searchQuery.searchTerm = []
   }
 
   if (category === 'all') {
@@ -59,7 +58,7 @@ const FiltersGeneral: React.FC<Props> = ({ children }) => {
   }
 
   useEffect(() => {
-    fetcher(API_URL+'/api/categories')
+    fetcher(API_URL + '/api/categories')
       .then((newCategories) => {
         setCategories(newCategories)
       })
@@ -68,7 +67,7 @@ const FiltersGeneral: React.FC<Props> = ({ children }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
+    console.log(searchQuery)
     router.push({ query: { ...query, ...searchQuery } })
   }
 
