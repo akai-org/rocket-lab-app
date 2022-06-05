@@ -1,10 +1,6 @@
 import { Button, Flex, Icon, Input, Select, Text } from '@chakra-ui/react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { Category } from '../../../../mongo/models/category'
-import { fetcher } from '../../../../utils/requests'
 import { FiltersControllsProps } from '../../../UI/FiltersGeneral/FiltersGeneral'
 
 const Filters: FC<FiltersControllsProps> = ({
