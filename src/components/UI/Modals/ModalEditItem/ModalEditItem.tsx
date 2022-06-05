@@ -23,6 +23,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { removeItem, updateItem } from '../../../../store/Slices/itemsSlice'
+import { API_URL } from '../../../../utils/constants'
 import { fetcher } from '../../../../utils/requests'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
@@ -46,7 +47,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
   const initUpdateItem = async () => {
     try {
       const updatedItem = await fetcher(
-        'http://localhost:3000/api/items/update',
+        API_URL + '/api/items/update',
         {
           method: 'PUT',
           body: { id: props.id, item: { name, description, quantity } },
@@ -64,7 +65,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
   const deleteItem = async () => {
     try {
       const deletedItem = await fetcher(
-        'http://localhost:3000/api/items/delete',
+        API_URL + '/api/items/delete',
         { method: 'DELETE', body: { id: props.id } }
       )
 

@@ -59,7 +59,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
           newList.push(changedItem)
         }
         const updatedList = await fetcher(
-          'http://localhost:3000/api/cart/update',
+          API_URL + '/api/cart/update',
           {
             method: 'PUT',
             body: { id: listToMerge.id, items: [...toAddList, ...newList] },

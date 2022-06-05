@@ -66,13 +66,10 @@ const MobileStorage = ({ items, setItems, itemsCount }: MainViewProps) => {
           }
           newList.push(changedItem)
         }
-        const updatedList = await fetcher(
-          'http://localhost:3000/api/cart/update',
-          {
-            method: 'PUT',
-            body: { id: listToMerge.id, items: [...toAddList, ...newList] },
-          }
-        )
+        const updatedList = await fetcher(API_URL + '/api/cart/update', {
+          method: 'PUT',
+          body: { id: listToMerge.id, items: [...toAddList, ...newList] },
+        })
         console.log(updatedList)
         dispatch(updateExistingCartLists(updatedList))
       }

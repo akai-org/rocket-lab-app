@@ -21,6 +21,7 @@ import {
   removeExisitngCartList,
   updateExistingCartLists,
 } from '../../../../store/Slices/storageCartSlice'
+import { API_URL } from '../../../../utils/constants'
 import { fetcher } from '../../../../utils/requests'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
@@ -42,7 +43,7 @@ const ModalEditList = (props: ModalEditListProps) => {
   const deleteCartList = async () => {
     try {
       const deletedCartList = await fetcher(
-        'http://localhost:3000/api/cart/delete',
+        API_URL + '/api/cart/delete',
         {
           method: 'DELETE',
           body: { id: props.cartList.id },
@@ -57,7 +58,7 @@ const ModalEditList = (props: ModalEditListProps) => {
   const updateCartList = async () => {
     try {
       const updatedCartList = await fetcher(
-        'http://localhost:3000/api/cart/update',
+        API_URL + '/api/cart/update',
         { method: 'PUT', body: { id: cartList.id, items: cartList.items } }
       )
       dispatch(updateExistingCartLists(updatedCartList))

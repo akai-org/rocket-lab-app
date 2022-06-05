@@ -15,6 +15,7 @@ import ListMenu from '../../../UI/Menus/ListMenu'
 import { useDispatch } from 'react-redux'
 import { removeExisitngCartList } from '../../../../store/Slices/storageCartSlice'
 import { fetcher } from '../../../../utils/requests'
+import { API_URL } from '../../../../utils/constants'
 
 export interface Props extends PopulatedCartList {}
 
@@ -24,7 +25,7 @@ const List = (props: Props) => {
   const deleteCartList = async () => {
     try {
       const deletedCartList = await fetcher(
-        'http://localhost:3000/api/cart/delete',
+        API_URL + '/api/cart/delete',
         {
           method: 'DELETE',
           body: { id: props.id },
