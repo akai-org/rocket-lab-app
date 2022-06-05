@@ -14,7 +14,7 @@ export interface CartList {
 export interface CartItem {
   quantity: number
   id: string
-  item?: PopulatedItem | Item
+  item?: PopulatedItem
 }
 
 export interface CustomCartItem {

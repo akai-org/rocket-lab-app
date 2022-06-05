@@ -13,13 +13,11 @@ import { fetchCategories } from '../services/categoryService'
 import { SortType } from '../services/itemsService'
 import { useEffect, useState } from 'react'
 import {
-  clearCart,
   setExistingCartLists,
 } from '../store/Slices/storageCartSlice'
 import { fetcher } from '../utils/requests'
 import { setCategories } from '../store/Slices/categoriesSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { itemsInfo } from '../store/store'
+import { useDispatch } from 'react-redux'
 import { setItems } from '../store/Slices/itemsSlice'
 import { PopulatedItem } from '../mongo/models/item'
 

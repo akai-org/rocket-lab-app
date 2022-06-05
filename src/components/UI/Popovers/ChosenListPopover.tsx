@@ -56,7 +56,7 @@ const ChosenListPopover = (props: ChosenListPopoverProps) => {
             {props.list.items.map((item) => {
               return (
                 <Flex justifyContent="space-between">
-                  <Text isTruncated>{item.item.name}</Text>
+                  <Text isTruncated>{item.item?.name}</Text>
                   <Text>x{item.quantity}</Text>
                 </Flex>
               )
