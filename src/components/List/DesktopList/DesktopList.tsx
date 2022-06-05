@@ -14,7 +14,13 @@ const DesktopList = () => {
   console.log(storageCartData.cartLists)
 
   return (
-    <Flex flexDirection="row" w="100vw" maxW="2000px" m="75px auto 0 auto">
+    <Flex
+      flexDirection="row"
+      w="100vw"
+      pb="150px"
+      maxW="2000px"
+      m="75px auto 0 auto"
+    >
       <Flex w="100%" flexDirection="column" ml="223px" p="40px">
         {IS_DEV && <AddItem />}
         {storageCartData.cartLists.map((cartList) => (

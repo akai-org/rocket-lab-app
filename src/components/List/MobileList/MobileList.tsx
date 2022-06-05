@@ -8,7 +8,7 @@ import List from './List/List'
 const MobileList = () => {
   const storageCartData = useSelector(storageCartInfo)
   return (
-    <Flex mt="80px" color="#3F3F3F" flexDirection="column">
+    <Flex mt="80px" pb="150px" color="#3F3F3F" flexDirection="column">
       {IS_DEV && <AddItem />}
       {storageCartData.cartLists.map((cartList) => (
         <List {...cartList} key={cartList.id} />
