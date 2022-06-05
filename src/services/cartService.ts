@@ -20,7 +20,7 @@ export async function createNewCartList(
 export async function updateCartList(id: string, items: CartItem[]) {
   const mappedItems = items.map((item) => ({
     quantity: item.quantity,
-    item: item.item.id,
+    item: item.item?.id,
   }))
   return await CartListModel.findOneAndUpdate(
     { _id: id },
