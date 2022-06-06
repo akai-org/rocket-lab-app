@@ -1,8 +1,13 @@
-import { Flex, Box, Text, Stack, Select } from '@chakra-ui/react'
+import { Flex, Box, Text, Stack, Select, useDisclosure } from '@chakra-ui/react'
 import { IoMdFunnel } from 'react-icons/io'
 import HistoryList from './HistoryList/HistoryList'
+import { useRef } from 'react'
+import FilterDrawer from './FilterDrawer/FilterDrawer'
 
 const MobileHistory = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const filterRef = useRef<HTMLDivElement>(null)
+
   return (
     <Flex mt="6rem" color="black" flexDirection="column">
       <Box textAlign="left">
@@ -33,10 +38,10 @@ const MobileHistory = () => {
         <Stack
           direction="row"
           alignItems="center"
-          onClick={() => {
-            //   TODO: History filtering
-          }}
+          onClick={onOpen}
+          ref={filterRef}
         >
+          <FilterDrawer isOpen={isOpen} onClose={onClose} />
           <Text>Filtry</Text>
           <IoMdFunnel color="black" />
         </Stack>
