@@ -1,10 +1,10 @@
 import {
+  Modal,
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
   ModalBody,
   ModalFooter,
-  Image,
   Text,
   Stack,
   Heading,
@@ -13,11 +13,11 @@ import {
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import ModalListItem from './ModalListItem'
 
-const MoreInfoModal = () => {
+const MoreInfoModal = (props: { isOpen: boolean; onClose: () => void }) => {
   return (
-    <>
+    <Modal {...props} isCentered>
       <ModalOverlay backdropFilter="blur(1px)" />
-      <ModalContent maxW="40rem" mt="auto">
+      <ModalContent maxW="40rem">
         <ModalCloseButton />
         <ModalBody mt="10px">
           <Stack direction="row" alignItems="center">
@@ -61,12 +61,13 @@ const MoreInfoModal = () => {
             colorScheme="orange"
             ml="10px"
             w="80px"
+            onClick={props.onClose}
           >
             Zamknij
           </ProductButton>
         </ModalFooter>
       </ModalContent>
-    </>
+    </Modal>
   )
 }
 

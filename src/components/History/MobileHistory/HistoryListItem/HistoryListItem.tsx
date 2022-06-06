@@ -5,7 +5,7 @@ import {
   Heading,
   Text,
   useDisclosure,
-  Modal,
+  Box,
 } from '@chakra-ui/react'
 import MoreInfoModal from '../../../UI/Modals/MoreInfoModal/MoreInfoModal'
 import NameAndQuantityElement from '../NameAndQuantityElement/NameAndQuantityElement'
@@ -30,9 +30,7 @@ const HistoryListItem = () => {
           </Text>
         </Stack>
       </Stack>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <MoreInfoModal />
-      </Modal>
+      <MoreInfoModal isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
 }
