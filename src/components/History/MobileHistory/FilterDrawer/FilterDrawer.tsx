@@ -12,7 +12,7 @@ import {
 
 const FilterDrawer = (props: { isOpen: boolean; onClose: () => void }) => {
   return (
-    <Drawer isOpen={props.isOpen} placement="right" onClose={props.onClose}>
+    <Drawer isOpen={props.isOpen} placement="bottom" onClose={props.onClose}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
