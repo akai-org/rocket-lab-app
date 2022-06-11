@@ -2,6 +2,7 @@ import { Flex, Image, Text, Box, useDisclosure } from '@chakra-ui/react'
 import { AiOutlineCheck, AiOutlinePlus } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { Item, PopulatedItem } from '../../../../../mongo/models/item'
+import categories from '../../../../../pages/api/categories'
 import {
   addToCart,
   removeFromCart,
@@ -99,6 +100,7 @@ const GridItem = ({ item }: Props) => {
       <ModalEditItem
         id={item.id}
         name={item.name}
+        categories={item.categories}
         description={item.description}
         imageUrl={item.imageUrl}
         quantity={item.quantity}

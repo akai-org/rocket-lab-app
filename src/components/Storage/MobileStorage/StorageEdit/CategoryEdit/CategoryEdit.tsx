@@ -5,11 +5,9 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Checkbox,
   CheckboxGroup,
   Flex,
   FormControl,
-  FormLabel,
   Input,
   Text,
 } from '@chakra-ui/react'
@@ -24,6 +22,7 @@ import { API_URL } from '../../../../../utils/constants'
 import { fetcher } from '../../../../../utils/requests'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../../../UI/Popovers/DeletePopover'
+import Category from './Category/Category'
 
 const CategoryEdit = () => {
   const categories = useSelector(categoriesInfo).categories
@@ -119,13 +118,15 @@ const CategoryEdit = () => {
             >
               <Flex flexDirection="column" fontSize="14px">
                 {categories.map((category) => (
-                  <Checkbox key={category.id} value={category.id}>
-                    <Text fontSize="14px">{category.name}</Text>
-                  </Checkbox>
+                  <Category
+                    categoryName={category.name}
+                    value={category.id}
+                    key={category.id}
+                  />
                 ))}
               </Flex>
             </CheckboxGroup>
-            <Flex justifyContent="flex-end">
+            <Flex justifyContent="flex-end" mt="15px">
               <DeletePopover
                 width="140px"
                 height="25px"
