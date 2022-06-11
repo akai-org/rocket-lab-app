@@ -1,8 +1,12 @@
-import { Button, Flex, Icon, Text, Link } from '@chakra-ui/react'
-import { IoIosSettings } from 'react-icons/io'
-import NavButton from '../../../UI/Custom Buttons/NavButton/NavButton'
 import { useRouter } from 'next/router'
 import { IS_DEV } from '../../../../utils/constants'
+import { Flex, Text } from '@chakra-ui/react'
+import { FiSettings } from 'react-icons/fi'
+import { AiOutlineTool } from 'react-icons/ai'
+import { BsCardChecklist } from 'react-icons/bs'
+import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
+import { GrLogout } from 'react-icons/gr'
+import s from './sidebar.module.scss'
 
 const DesktopSidebar = () => {
   const router = useRouter()
@@ -15,55 +19,65 @@ const DesktopSidebar = () => {
       w="223px"
       h="100vh"
       mt="75px"
-      m={''}
       bgColor="white"
       maxH="calc(100vh - 80px)"
       boxShadow="0 0 10px 0.2px #DDDDDD"
       zIndex="1"
     >
-      <Flex flexDirection="column" w="100%" alignItems="center">
-        <NavButton
-          isItemActive={router.asPath === '/'}
+      <Flex
+        flexDirection="column"
+        className={s.underline}
+        fontSize="18px"
+        rowGap={6}
+        p="20px 30px"
+      >
+        <Flex
+          lineHeight="25px"
+          w="85%"
           onClick={() => {
-            router.push('/')
+            if (router.asPath !== '/') router.push('/')
           }}
-          mt="20px"
-          w="80%"
+          mt="10px"
         >
-          Magazyn
-        </NavButton>
-        <NavButton
-          isItemActive={router.asPath === '/list'}
+          <AiOutlineTool size={25} />
+          <Text ml="10px">Magazyn</Text>
+        </Flex>
+        <Flex
+          lineHeight="25px"
+          w="85%"
           onClick={() => {
-            router.push('/list')
+            if (router.asPath !== '/list') router.push('/list')
           }}
-          w="80%"
         >
-          Lista Zakupów
-        </NavButton>
+          <BsCardChecklist size={25} />
+          <Text ml="10px">Listy</Text>
+        </Flex>
         {IS_DEV && (
           <>
-            <NavButton isItemActive={router.asPath === '/history'} w="80%">
-              Historia
-            </NavButton>
-            <NavButton isItemActive={router.asPath === '/schemes'} w="80%">
-              Schematy
-            </NavButton>
+            <Flex lineHeight="25px" w="85%">
+              <RiHistoryLine size={25} />
+              <Text ml="10px">Historia</Text>
+            </Flex>
+            <Flex lineHeight="25px" w="85%">
+              <RiDraftLine size={25} />
+              <Text ml="10px">Szablony</Text>
+            </Flex>
+            <Flex lineHeight="25px" w="85%">
+              <FiSettings size={25} />
+              <Text ml="10px">Ustawienia</Text>
+            </Flex>
           </>
         )}
-      </Flex>
-      <Flex flexDirection="column" mt="auto" ml="20px">
-        {IS_DEV && (
-          <Flex justifyContent="flex-start">
-            <Icon as={IoIosSettings} mr="10px" fontSize="22px" />
-            <Text>Ustawienia</Text>
-          </Flex>
-        )}
-        <Link m="10px auto 20px 0" href="/api/auth/logout">
-          <Button h="32px" w="120px" bgColor="#FF7700" color="white">
-            Logout
-          </Button>
-        </Link>
+        <Flex
+          lineHeight="25px"
+          onClick={() => {
+            router.push('/api/auth/logout')
+          }}
+          w="85%"
+        >
+          <GrLogout size={25} />
+          <Text ml="10px">Wyloguj</Text>
+        </Flex>
       </Flex>
     </Flex>
   )
