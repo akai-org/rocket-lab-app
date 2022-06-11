@@ -5,7 +5,6 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Checkbox,
   CheckboxGroup,
   Flex,
   FormControl,
@@ -23,6 +22,7 @@ import { API_URL } from '../../../../../utils/constants'
 import { fetcher } from '../../../../../utils/requests'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../../../UI/Popovers/DeletePopover'
+import Category from './Category/Category'
 
 const CategoryEdit = () => {
   const categories = useSelector(categoriesInfo).categories
@@ -30,6 +30,7 @@ const CategoryEdit = () => {
   const [checkboxes, setCheckboxes] = useState<string[]>([])
   const dispatch = useDispatch()
   const name = useRef<HTMLInputElement>(null)
+
   const submitForm = async () => {
     if (name.current!.value) {
       setNameIsValid(true)
@@ -111,15 +112,18 @@ const CategoryEdit = () => {
               onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
               colorScheme="orange"
             >
+              {/* TODO: */}
               <Flex flexDirection="column">
                 {categories.map((category) => (
-                  <Checkbox key={category.id} value={category.id}>
-                    {category.name}
-                  </Checkbox>
+                  <Category
+                    categoryName={category.name}
+                    value={category.id}
+                    key={category.id}
+                  />
                 ))}
               </Flex>
             </CheckboxGroup>
-            <Flex justifyContent="flex-end">
+            <Flex justifyContent="flex-end" mt="20px">
               <DeletePopover
                 width="160px"
                 label="Czy na pewno chcesz usunąć zaznaczone kategorie?"

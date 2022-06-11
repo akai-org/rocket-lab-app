@@ -18,11 +18,16 @@ import {
   NumberIncrementStepper,
   NumberInputStepper,
   Textarea,
+  CheckboxGroup,
+  Checkbox,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { Category } from '../../../../mongo/models/category'
+import categories from '../../../../pages/api/categories'
 import { removeItem, updateItem } from '../../../../store/Slices/itemsSlice'
+import { categoriesInfo } from '../../../../store/store'
 import { API_URL } from '../../../../utils/constants'
 import { fetcher } from '../../../../utils/requests'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
@@ -34,25 +39,27 @@ interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
   imageUrl: string
   quantity: number
   id: string
+  categories: Category[]
 }
 
 const ModalEditItem = (props: ModalEditItemProps) => {
   const router = useRouter()
   const dispatch = useDispatch()
+  const categoriesData = useSelector(categoriesInfo)
   const [isEdit, setIsEdit] = useState(false)
   const [name, setName] = useState(props.name)
   const [description, setDescription] = useState(props.description)
   const [quantity, setQuantity] = useState(props.quantity)
+  const [checkboxes, setCheckboxes] = useState<string[]>(
+    props.categories.map((category) => category.id)
+  )
 
   const initUpdateItem = async () => {
     try {
-      const updatedItem = await fetcher(
-        API_URL + '/api/items/update',
-        {
-          method: 'PUT',
-          body: { id: props.id, item: { name, description, quantity } },
-        }
-      )
+      const updatedItem = await fetcher(API_URL + '/api/items/update', {
+        method: 'PUT',
+        body: { id: props.id, item: { name, description, quantity } },
+      })
       router.reload()
       dispatch(updateItem(updatedItem))
     } catch (error) {
@@ -64,10 +71,10 @@ const ModalEditItem = (props: ModalEditItemProps) => {
 
   const deleteItem = async () => {
     try {
-      const deletedItem = await fetcher(
-        API_URL + '/api/items/delete',
-        { method: 'DELETE', body: { id: props.id } }
-      )
+      const deletedItem = await fetcher(API_URL + '/api/items/delete', {
+        method: 'DELETE',
+        body: { id: props.id },
+      })
 
       router.reload()
       dispatch(removeItem(deletedItem))
@@ -135,6 +142,27 @@ const ModalEditItem = (props: ModalEditItemProps) => {
                 setDescription(e.currentTarget.value)
               }}
             />
+          </Flex>
+          <Flex flexDirection="column">
+            <Text mt="5px">Kategorie:</Text>
+            <CheckboxGroup
+              value={checkboxes}
+              onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
+              colorScheme="orange"
+            >
+              <Flex flexDirection="column">
+                {console.log(checkboxes)}
+                {categoriesData.categories.map((category) => (
+                  <Checkbox
+                    key={category.id}
+                    defaultChecked
+                    value={category.id}
+                  >
+                    {category.name}
+                  </Checkbox>
+                ))}
+              </Flex>
+            </CheckboxGroup>
           </Flex>
         </ModalBody>
         <ModalFooter>

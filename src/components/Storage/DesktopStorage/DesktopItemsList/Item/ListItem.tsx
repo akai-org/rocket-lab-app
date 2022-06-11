@@ -103,6 +103,7 @@ const ListItem = ({ item }: Props) => {
       <ModalEditItem
         id={item.id}
         name={item.name}
+        categories={item.categories}
         description={item.description}
         imageUrl={item.imageUrl}
         quantity={item.quantity}
