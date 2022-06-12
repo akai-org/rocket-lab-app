@@ -4,8 +4,6 @@ import { User } from '../../../mongo/models/user'
 import * as userService from '../../../services/userService'
 import { withMiddleware } from '../../../utils/middlewares'
 
-// TODO: Refactor needed
-
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'PATCH') {
     try {

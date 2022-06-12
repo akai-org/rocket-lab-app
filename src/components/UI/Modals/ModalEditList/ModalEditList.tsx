@@ -22,6 +22,7 @@ import {
   updateExistingCartLists,
 } from '../../../../store/Slices/storageCartSlice'
 import { API_URL } from '../../../../utils/constants'
+import { useDeleteCartList } from '../../../../utils/effects/useDeleteCartList'
 import { fetcher } from '../../../../utils/requests'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
@@ -37,30 +38,14 @@ const ModalEditList = (props: ModalEditListProps) => {
 
   const [cartList, setCartList] = useState(props.cartList)
 
-  console.log(props.cartList)
-
-  // TODO: The same function is used in Desktop List & Mobile list - redundancy
-  const deleteCartList = async () => {
-    try {
-      const deletedCartList = await fetcher(
-        API_URL + '/api/cart/delete',
-        {
-          method: 'DELETE',
-          body: { id: props.cartList.id },
-        }
-      )
-      dispatch(removeExisitngCartList(deletedCartList))
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const deleteCartList = useDeleteCartList()
 
   const updateCartList = async () => {
     try {
-      const updatedCartList = await fetcher(
-        API_URL + '/api/cart/update',
-        { method: 'PUT', body: { id: cartList.id, items: cartList.items } }
-      )
+      const updatedCartList = await fetcher(API_URL + '/api/cart/update', {
+        method: 'PUT',
+        body: { id: cartList.id, items: cartList.items },
+      })
       dispatch(updateExistingCartLists(updatedCartList))
     } catch (error) {
       console.log(error)
@@ -138,7 +123,7 @@ const ModalEditList = (props: ModalEditListProps) => {
           </ProductButton>
           <DeletePopover
             label="Czy na pewno chcesz usunąć tę listę?"
-            onClick={deleteCartList}
+            onClick={() => deleteCartList(props.cartList.id)}
           />
         </ModalFooter>
       </ModalContent>
