@@ -22,3 +22,12 @@ export async function deleteCategories(categoriesIds: string[]) {
 
   return deletedCategories
 }
+
+export async function updateCategory(categoryId: string, newName: string) {
+  const updatedCategory = await CategoryModel.findByIdAndUpdate(
+    categoryId,
+    { name: newName },
+    { new: true }
+  )
+  return updatedCategory
+}
