@@ -3,29 +3,18 @@ import FiltersControlls from './Filters/Filters'
 import DesktopItemsList from './DesktopItemsList/DesktopItemsList'
 import { MainViewProps } from '../../../utils/types/frontendGeneral'
 import FiltersGeneral from '../../UI/FiltersGeneral/FiltersGeneral'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { storageCartInfo } from '../../../store/store'
 import { useEffect } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
 import Router from 'next/router'
 import StorageEdit from './StorageEdit/StorageEdit'
-import { fetcher } from '../../../utils/requests'
-import {
-  clearCart,
-  updateExistingCartLists,
-} from '../../../store/Slices/storageCartSlice'
-import {
-  CartItem,
-  CartList,
-  PopulatedCartList,
-} from '../../../mongo/models/cart'
-import { API_URL } from '../../../utils/constants'
+import { useAddNewList } from '../../../utils/effects/useAddNewList'
 
 const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
   const storageCartData = useSelector(storageCartInfo)
-  const dispatch = useDispatch()
   const {
     isOpen: isOpenDetails,
     onOpen: onOpenDetails,
@@ -36,43 +25,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   Router.events.on('beforeHistoryChange', () => {
     toast.closeAll()
   })
-  const addNewList = async (name: string, listToMerge?: PopulatedCartList) => {
-    try {
-      if (!listToMerge) {
-        await fetcher(API_URL+'/api/cart/add', {
-          method: 'POST',
-          body: { name, items: storageCartData.newCartList },
-        })
-      } else {
-        const toAddList = [...storageCartData.newCartList]
-        const newList: CartItem[] = []
-        for (const item of listToMerge.items) {
-          const foundCopyindex = toAddList.findIndex(
-            (cartItem) => cartItem.item.id === item.item?.id
-          )
-          const changedItem = { ...item }
-          if (toAddList[foundCopyindex]) {
-            changedItem.quantity += toAddList[foundCopyindex].quantity
-
-            toAddList.splice(foundCopyindex, 1)
-          }
-          newList.push(changedItem)
-        }
-        const updatedList = await fetcher(
-          API_URL + '/api/cart/update',
-          {
-            method: 'PUT',
-            body: { id: listToMerge.id, items: [...toAddList, ...newList] },
-          }
-        )
-        dispatch(updateExistingCartLists(updatedList))
-      }
-      dispatch(clearCart())
-      onCloseDetails()
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const addNewList = useAddNewList(onCloseDetails)
 
   useEffect(() => {
     if (!toast.isActive(id) && storageCartData.newCartList.length !== 0) {
