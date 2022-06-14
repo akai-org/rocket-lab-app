@@ -151,7 +151,6 @@ const ModalEditItem = (props: ModalEditItemProps) => {
               colorScheme="orange"
             >
               <Flex flexDirection="column">
-                {console.log(checkboxes)}
                 {categoriesData.categories.map((category) => (
                   <Checkbox
                     key={category.id}

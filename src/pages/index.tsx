@@ -14,17 +14,31 @@ import { useEffect, useState } from 'react'
 import { setExistingCartLists } from '../store/Slices/storageCartSlice'
 import { fetcher } from '../utils/requests'
 import { setCategories } from '../store/Slices/categoriesSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setItems } from '../store/Slices/itemsSlice'
 import { PopulatedItem } from '../mongo/models/item'
+import { useRouter } from 'next/router'
+import { itemsInfo } from '../store/store'
 
 interface Props extends MainViewProps {
   error?: Error
+  page: number
+  toDisplay: number
 }
 
-const Home: NextPage<Props> = ({ items, error, itemsCount, categories }) => {
+const Home: NextPage<Props> = ({
+  items,
+  error,
+  itemsCount,
+  categories,
+  page,
+  toDisplay,
+}) => {
   const dispatch = useDispatch()
-  const [localItems, setLocalItems] = useState<PopulatedItem[]>(items)
+  const reduxItems = useSelector(itemsInfo).items
+  const [localItems, setLocalItems] = useState<PopulatedItem[]>(
+    [...reduxItems].splice(page - 1, toDisplay)
+  )
 
   useEffect(() => {
     dispatch(setCategories(categories || []))
@@ -37,13 +51,21 @@ const Home: NextPage<Props> = ({ items, error, itemsCount, categories }) => {
 
   useEffect(() => {
     dispatch(setItems(items || []))
-    setLocalItems(items)
   }, [items])
 
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
 
+  let processedToDisplay: number = toDisplay
+
+  if(toDisplay * page > itemsCount){
+    processedToDisplay = itemsCount - (page-1)*toDisplay
+  }
+
   const Storage = isDesktop ? (
-    <DesktopStorage itemsCount={itemsCount} items={items} />
+    <DesktopStorage
+      itemsCount={itemsCount}
+      items={[...reduxItems].splice((page - 1)*toDisplay, processedToDisplay)}
+    />
   ) : (
     <MobileStorage
       setItems={setLocalItems}
@@ -73,8 +95,13 @@ export const getServerSideProps = withPageAuthRequired({
 
       const categories = await fetchCategories()
 
+      const page = query.page || 1
+      const toDisplay = query.toDisplay || 15
+
       return {
         props: {
+          page: JSON.parse(JSON.stringify(+page)),
+          toDisplay: JSON.parse(JSON.stringify(+toDisplay)),
           items: JSON.parse(JSON.stringify(items)),
           itemsCount: JSON.parse(JSON.stringify(itemsCount)),
           categories: JSON.parse(JSON.stringify(categories)),
@@ -84,6 +111,8 @@ export const getServerSideProps = withPageAuthRequired({
       console.log(e)
       return {
         props: {
+          page: JSON.parse(JSON.stringify(1)),
+          toDisplay: JSON.parse(JSON.stringify(15)),
           itemsCount: 0,
           items: [],
           error: JSON.parse(JSON.stringify(e)),
