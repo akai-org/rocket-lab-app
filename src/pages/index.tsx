@@ -39,8 +39,10 @@ const Home: NextPage<Props> = ({
   const dispatch = useDispatch()
   const reduxItems = useSelector(itemsInfo).items
   const [localItems, setLocalItems] = useState<PopulatedItem[]>(
-    [...reduxItems].splice(page - 1, toDisplay)
+    [...reduxItems].splice(0, toDisplay)
   )
+
+  let desktopItems = reduxItems
 
   useEffect(() => {
     dispatch(setCategories(categories || []))
@@ -71,7 +73,7 @@ const Home: NextPage<Props> = ({
   const Storage = isDesktop ? (
     <DesktopStorage
       itemsCount={itemsCount}
-      items={[...reduxItems].splice((page - 1) * toDisplay, processedToDisplay)}
+      items={[...desktopItems].splice((page - 1) * toDisplay, processedToDisplay)}
     />
   ) : (
     <MobileStorage
