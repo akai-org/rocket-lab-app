@@ -15,7 +15,7 @@ import { setExistingCartLists } from '../store/Slices/storageCartSlice'
 import { fetcher } from '../utils/requests'
 import { setCategories } from '../store/Slices/categoriesSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { setItems } from '../store/Slices/itemsSlice'
+import { resortItems, setItems } from '../store/Slices/itemsSlice'
 import { PopulatedItem } from '../mongo/models/item'
 import { useRouter } from 'next/router'
 import { itemsInfo } from '../store/store'
@@ -24,6 +24,7 @@ interface Props extends MainViewProps {
   error?: Error
   page: number
   toDisplay: number
+  sort: itemsService.SortType
 }
 
 const Home: NextPage<Props> = ({
@@ -33,6 +34,7 @@ const Home: NextPage<Props> = ({
   categories,
   page,
   toDisplay,
+  sort
 }) => {
   const dispatch = useDispatch()
   const reduxItems = useSelector(itemsInfo).items
@@ -53,18 +55,22 @@ const Home: NextPage<Props> = ({
     dispatch(setItems(items || []))
   }, [items])
 
+  useEffect(() => {
+    dispatch(resortItems(sort))
+  }, [sort])
+
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
 
   let processedToDisplay: number = toDisplay
 
-  if(toDisplay * page > itemsCount){
-    processedToDisplay = itemsCount - (page-1)*toDisplay
+  if (toDisplay * page > itemsCount) {
+    processedToDisplay = itemsCount - (page - 1) * toDisplay
   }
 
   const Storage = isDesktop ? (
     <DesktopStorage
       itemsCount={itemsCount}
-      items={[...reduxItems].splice((page - 1)*toDisplay, processedToDisplay)}
+      items={[...reduxItems].splice((page - 1) * toDisplay, processedToDisplay)}
     />
   ) : (
     <MobileStorage
@@ -98,8 +104,11 @@ export const getServerSideProps = withPageAuthRequired({
       const page = query.page || 1
       const toDisplay = query.toDisplay || 15
 
+      const sort = (query.sort || 'newest') as itemsService.SortType
+
       return {
         props: {
+          sort: JSON.parse(JSON.stringify(sort)),
           page: JSON.parse(JSON.stringify(+page)),
           toDisplay: JSON.parse(JSON.stringify(+toDisplay)),
           items: JSON.parse(JSON.stringify(items)),
@@ -111,6 +120,7 @@ export const getServerSideProps = withPageAuthRequired({
       console.log(e)
       return {
         props: {
+          sort: JSON.parse(JSON.stringify('newest')),
           page: JSON.parse(JSON.stringify(1)),
           toDisplay: JSON.parse(JSON.stringify(15)),
           itemsCount: 0,

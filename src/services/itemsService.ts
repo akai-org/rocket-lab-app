@@ -122,5 +122,6 @@ export async function addItem(item: Item) {
 }
 
 export async function fetchAllItems() {
-  return await ItemModel.find()
+  const items = await ItemModel.find({}).sort({updatedAt: -1})
+  return items
 }
