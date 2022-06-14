@@ -8,13 +8,10 @@ import { connectDB } from '../mongo/db'
 import { Text } from '@chakra-ui/react'
 import * as itemsService from '../services/itemsService'
 import { Credentials } from '../utils/credentials'
-import { API_URL, FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../utils/constants'
+import { API_URL } from '../utils/constants'
 import { fetchCategories } from '../services/categoryService'
-import { SortType } from '../services/itemsService'
 import { useEffect, useState } from 'react'
-import {
-  setExistingCartLists,
-} from '../store/Slices/storageCartSlice'
+import { setExistingCartLists } from '../store/Slices/storageCartSlice'
 import { fetcher } from '../utils/requests'
 import { setCategories } from '../store/Slices/categoriesSlice'
 import { useDispatch } from 'react-redux'
@@ -70,20 +67,7 @@ export const getServerSideProps = withPageAuthRequired({
       await connectDB()
       await Credentials.withReader(req, res)
 
-      const page = query.page ? +query.page : FIRST_PAGE
-      const toDisplay = query.toDisplay ? +query.toDisplay : ITEMS_QUERY_LIMIT
-      const category = query.category
-      const searchTerm = query.searchTerm as string | undefined
-
-      const skip = (page - FIRST_PAGE) * toDisplay
-
-      const sort = query.sort as SortType | undefined
-
-      const items = await itemsService.fetchItems(skip, toDisplay, {
-        category: category as string | undefined,
-        searchTerm,
-        sort,
-      })
+      const items = await itemsService.fetchAllItems()
 
       const itemsCount = await itemsService.fetchItemsCount()
 

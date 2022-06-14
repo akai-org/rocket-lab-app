@@ -120,3 +120,7 @@ export async function addItem(item: Item) {
   const createdItem = await ItemModel.create(item)
   return createdItem
 }
+
+export async function fetchAllItems() {
+  return await ItemModel.find()
+}
