@@ -53,9 +53,10 @@ const Home: NextPage<Props> = ({
 
   useEffect(() => {
     dispatch(setItems(items || []))
-  }, [items])
+  }, [])
 
   useEffect(() => {
+    console.log(sort)
     dispatch(resortItems(sort))
   }, [sort])
 
