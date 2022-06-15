@@ -81,7 +81,7 @@ const MobileSidebar = () => {
                     }}
                   >
                     <RiDraftLine size={30} />
-                    <Text ml="10px">Szablony</Text>
+                    <Text ml="10px">Schematy</Text>
                   </Flex>
                   <Flex lineHeight="30px">
                     <FiSettings size={30} />

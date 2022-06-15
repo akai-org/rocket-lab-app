@@ -39,15 +39,15 @@ const AddScheme = () => {
     >
       <AccordionItem border="none">
         <AccordionButton>
-          <Box
+          <Text
             flex="1"
             fontSize="20px"
-            fontWeight="500"
-            color="#2D3748"
+            fontWeight="600"
+            color="#4A5568"
             textAlign="left"
           >
-            Dodaj schemat
-          </Box>
+            Dodaj Schemat
+          </Text>
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel>

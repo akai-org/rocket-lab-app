@@ -72,7 +72,7 @@ const DesktopSidebar = () => {
               }}
             >
               <RiDraftLine size={25} />
-              <Text ml="10px">Szablony</Text>
+              <Text ml="10px">Schematy</Text>
             </Flex>
             <Flex lineHeight="25px" w="85%">
               <FiSettings size={25} />
