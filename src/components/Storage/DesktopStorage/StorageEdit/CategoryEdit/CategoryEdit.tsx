@@ -119,6 +119,7 @@ const CategoryEdit = () => {
                     categoryName={category.name}
                     value={category.id}
                     key={category.id}
+                    id={category.id}
                   />
                 ))}
               </Flex>

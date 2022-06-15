@@ -10,7 +10,7 @@ import {
 } from '../../../utils/types/frontendGeneral'
 import FiltersGeneral from '../../UI/FiltersGeneral/FiltersGeneral'
 import { useSelector } from 'react-redux'
-import { storageCartInfo } from '../../../store/store'
+import { itemsInfo, storageCartInfo } from '../../../store/store'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
 import { Router } from 'next/router'
@@ -20,7 +20,7 @@ import { API_URL, ITEMS_QUERY_LIMIT } from '../../../utils/constants'
 import ProductButton from '../../UI/Custom Buttons/ProductButton/ProductButton'
 import { useAddNewList } from '../../../utils/effects/useAddNewList'
 
-const MobileStorage = ({ items, setItems, itemsCount }: MainViewProps) => {
+const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
   const [listType, setListType] = useState<sortingType>('grid')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
   const storageCartData = useSelector(storageCartInfo)
@@ -32,6 +32,7 @@ const MobileStorage = ({ items, setItems, itemsCount }: MainViewProps) => {
   } = useDisclosure()
   const id = 'add-to-list-toast'
   const [skip, setSkip] = useState(ITEMS_QUERY_LIMIT)
+  const items = useSelector(itemsInfo).items
 
   Router.events.on('beforeHistoryChange', () => {
     toast.closeAll()
@@ -39,17 +40,18 @@ const MobileStorage = ({ items, setItems, itemsCount }: MainViewProps) => {
 
   const addNewList = useAddNewList(onCloseDetails)
 
-  const loadMoreItems = async () => {
-    try {
-      const moreItems = await fetcher(API_URL + '/api/items', { body: skip })
-      setSkip((state) => state + ITEMS_QUERY_LIMIT)
-      if (setItems) {
-        setItems((state) => [...state, ...moreItems])
-      }
-      console.log(moreItems)
-    } catch (error) {
-      console.log(error)
-    }
+  const processedItems = [...items].splice(0, skip)
+
+  const loadMoreItems = () => {
+      setSkip((state) => {
+        const newAmount = state + ITEMS_QUERY_LIMIT
+        if(newAmount <= items.length){
+          return newAmount
+        }
+        else {
+          return items.length
+        }
+      })
   }
 
   useEffect(() => {
@@ -101,8 +103,8 @@ const MobileStorage = ({ items, setItems, itemsCount }: MainViewProps) => {
       <Sorting setListType={setListType} listType={listType} />
       <StorageEdit />
       {listType === 'grid'
-        ? items && items.map((item) => <GridItem item={item} key={item.id} />)
-        : items && items.map((item) => <ListItem item={item} key={item.id} />)}
+        ? processedItems.map((item) => <GridItem item={item} key={item.id} />)
+        : processedItems.map((item) => <ListItem item={item} key={item.id} />)}
       <Flex w="100%" alignItems="center" justifyContent="center">
         <ProductButton
           mt="25px"

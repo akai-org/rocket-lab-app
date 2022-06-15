@@ -3,18 +3,19 @@ import { useState } from 'react'
 import { AiOutlineCheck, AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 
 interface CategoryProps {
-  key: string
+  // FIXME: nie wolno używać key jako propsów
+  id: string
   value: string
   categoryName: string
 }
 
-const Category = ({ key, value, categoryName }: CategoryProps) => {
+const Category = ({ id, value, categoryName }: CategoryProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState(categoryName)
 
   return (
     <Flex h="30px">
-      <Checkbox key={key} value={value}></Checkbox>
+      <Checkbox key={id} value={value}></Checkbox>
 
       {isEditing ? (
         <Flex justifyContent="space-between" w="100%">

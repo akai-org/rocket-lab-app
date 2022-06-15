@@ -120,3 +120,8 @@ export async function addItem(item: Item) {
   const createdItem = await ItemModel.create(item)
   return createdItem
 }
+
+export async function fetchAllItems() {
+  const items = await ItemModel.find({}).sort({updatedAt: -1})
+  return items
+}
