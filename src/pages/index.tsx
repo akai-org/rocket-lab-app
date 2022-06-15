@@ -8,26 +8,41 @@ import { connectDB } from '../mongo/db'
 import { Text } from '@chakra-ui/react'
 import * as itemsService from '../services/itemsService'
 import { Credentials } from '../utils/credentials'
-import { API_URL, FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../utils/constants'
+import { API_URL } from '../utils/constants'
 import { fetchCategories } from '../services/categoryService'
-import { SortType } from '../services/itemsService'
 import { useEffect, useState } from 'react'
-import {
-  setExistingCartLists,
-} from '../store/Slices/storageCartSlice'
+import { setExistingCartLists } from '../store/Slices/storageCartSlice'
 import { fetcher } from '../utils/requests'
 import { setCategories } from '../store/Slices/categoriesSlice'
-import { useDispatch } from 'react-redux'
-import { setItems } from '../store/Slices/itemsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { resortItems, setItems } from '../store/Slices/itemsSlice'
 import { PopulatedItem } from '../mongo/models/item'
+import { useRouter } from 'next/router'
+import { itemsInfo } from '../store/store'
 
 interface Props extends MainViewProps {
   error?: Error
+  page: number
+  toDisplay: number
+  sort: itemsService.SortType
 }
 
-const Home: NextPage<Props> = ({ items, error, itemsCount, categories }) => {
+const Home: NextPage<Props> = ({
+  items,
+  error,
+  itemsCount,
+  categories,
+  page,
+  toDisplay,
+  sort
+}) => {
   const dispatch = useDispatch()
-  const [localItems, setLocalItems] = useState<PopulatedItem[]>(items)
+  const reduxItems = useSelector(itemsInfo).items
+  const [localItems, setLocalItems] = useState<PopulatedItem[]>(
+    [...reduxItems].splice(0, toDisplay)
+  )
+
+  let desktopItems = reduxItems
 
   useEffect(() => {
     dispatch(setCategories(categories || []))
@@ -40,13 +55,26 @@ const Home: NextPage<Props> = ({ items, error, itemsCount, categories }) => {
 
   useEffect(() => {
     dispatch(setItems(items || []))
-    setLocalItems(items)
-  }, [items])
+  }, [])
+
+  useEffect(() => {
+    console.log(sort)
+    dispatch(resortItems(sort))
+  }, [sort])
 
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
 
+  let processedToDisplay: number = toDisplay
+
+  if (toDisplay * page > itemsCount) {
+    processedToDisplay = itemsCount - (page - 1) * toDisplay
+  }
+
   const Storage = isDesktop ? (
-    <DesktopStorage itemsCount={itemsCount} items={items} />
+    <DesktopStorage
+      itemsCount={itemsCount}
+      items={[...desktopItems].splice((page - 1) * toDisplay, processedToDisplay)}
+    />
   ) : (
     <MobileStorage
       setItems={setLocalItems}
@@ -70,27 +98,22 @@ export const getServerSideProps = withPageAuthRequired({
       await connectDB()
       await Credentials.withReader(req, res)
 
-      const page = query.page ? +query.page : FIRST_PAGE
-      const toDisplay = query.toDisplay ? +query.toDisplay : ITEMS_QUERY_LIMIT
-      const category = query.category
-      const searchTerm = query.searchTerm as string | undefined
-
-      const skip = (page - FIRST_PAGE) * toDisplay
-
-      const sort = query.sort as SortType | undefined
-
-      const items = await itemsService.fetchItems(skip, toDisplay, {
-        category: category as string | undefined,
-        searchTerm,
-        sort,
-      })
+      const items = await itemsService.fetchAllItems()
 
       const itemsCount = await itemsService.fetchItemsCount()
 
       const categories = await fetchCategories()
 
+      const page = query.page || 1
+      const toDisplay = query.toDisplay || 15
+
+      const sort = (query.sort || 'newest') as itemsService.SortType
+
       return {
         props: {
+          sort: JSON.parse(JSON.stringify(sort)),
+          page: JSON.parse(JSON.stringify(+page)),
+          toDisplay: JSON.parse(JSON.stringify(+toDisplay)),
           items: JSON.parse(JSON.stringify(items)),
           itemsCount: JSON.parse(JSON.stringify(itemsCount)),
           categories: JSON.parse(JSON.stringify(categories)),
@@ -100,6 +123,9 @@ export const getServerSideProps = withPageAuthRequired({
       console.log(e)
       return {
         props: {
+          sort: JSON.parse(JSON.stringify('newest')),
+          page: JSON.parse(JSON.stringify(1)),
+          toDisplay: JSON.parse(JSON.stringify(15)),
           itemsCount: 0,
           items: [],
           error: JSON.parse(JSON.stringify(e)),

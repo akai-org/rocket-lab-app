@@ -1,20 +1,40 @@
 import { Box, ButtonGroup, Checkbox, Flex, Input } from '@chakra-ui/react'
 import { useState } from 'react'
 import { AiOutlineCheck, AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
+import { useDispatch } from 'react-redux'
+import { updateCategory } from '../../../../../../store/Slices/categoriesSlice'
+import { API_URL } from '../../../../../../utils/constants'
+import { fetcher } from '../../../../../../utils/requests'
 
 interface CategoryProps {
-  key: string
+  id: string
   value: string
   categoryName: string
 }
 
-const Category = ({ key, value, categoryName }: CategoryProps) => {
+const Category = ({ id, value, categoryName }: CategoryProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState(categoryName)
+  const dispatch = useDispatch()
+
+  const editCategory = async () => {
+    try {
+      const updatedCategory = await fetcher(API_URL + '/api/categories/edit', {
+        method: 'PATCH',
+        body: { id, name },
+      })
+      dispatch(updateCategory(updatedCategory))
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsEditing(false)
+      setName(categoryName)
+    }
+  }
 
   return (
     <Flex h="30px">
-      <Checkbox key={key} value={value}></Checkbox>
+      <Checkbox key={id} value={value}></Checkbox>
 
       {isEditing ? (
         <Flex justifyContent="space-between" w="100%">
@@ -25,7 +45,7 @@ const Category = ({ key, value, categoryName }: CategoryProps) => {
             onChange={(e) => setName(e.currentTarget.value)}
           />
           <ButtonGroup ml="10px" size="sm">
-            <AiOutlineCheck onClick={() => setIsEditing(false)} size="25px" />
+            <AiOutlineCheck onClick={editCategory} size="25px" />
             <AiOutlineClose onClick={() => setIsEditing(false)} size="25px" />
           </ButtonGroup>
         </Flex>
