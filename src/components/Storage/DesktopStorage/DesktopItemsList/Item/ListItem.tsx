@@ -31,28 +31,22 @@ const ListItem = ({ item }: Props) => {
   } = useDisclosure()
   return (
     <>
-      <Tr fontSize="14px" w="100%">
-        <Td
-          justifyContent="flex-start"
-          onClick={onOpenInfo}
-          cursor="pointer"
-          w="30%"
-          maxW="250px"
-        >
+      <Tr fontSize="14px">
+        <Td justifyContent="flex-start" onClick={onOpenInfo} cursor="pointer">
           <Flex>
             <Image src={item.imageUrl} w="40px" h="40px" />
-            <Text isTruncated lineHeight="40px" ml="10px">
+            <Text noOfLines={1} lineHeight="40px" ml="10px">
               {item.name}
             </Text>
           </Flex>
         </Td>
-        <Td onClick={onOpenInfo} cursor="pointer" w="50%" maxW="500px">
-          <Text isTruncated>{item.description}</Text>
+        <Td onClick={onOpenInfo} cursor="pointer">
+          <Text noOfLines={1}>{item.description}</Text>
         </Td>
-        <Td textAlign="right" minW="140px">
+        <Td textAlign="right">
           <Text
+            noOfLines={1}
             fontSize="14px"
-            isTruncated
             fontWeight={item.quantity ? '400' : '500'}
             color={item.quantity ? 'inherit' : 'red.500'}
           >
