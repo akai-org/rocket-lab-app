@@ -1,6 +1,5 @@
 import {
   Flex,
-  Image,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,

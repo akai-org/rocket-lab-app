@@ -65,11 +65,21 @@ const MobileSidebar = () => {
               </Flex>
               {IS_DEV && (
                 <>
-                  <Flex lineHeight="30px">
+                  <Flex
+                    lineHeight="30px"
+                    onClick={() => {
+                      if (router.asPath !== '/history') router.push('/history')
+                    }}
+                  >
                     <RiHistoryLine size={30} />
                     <Text ml="10px">Historia</Text>
                   </Flex>
-                  <Flex lineHeight="30px">
+                  <Flex
+                    lineHeight="30px"
+                    onClick={() => {
+                      if (router.asPath !== '/schemes') router.push('/schemes')
+                    }}
+                  >
                     <RiDraftLine size={30} />
                     <Text ml="10px">Szablony</Text>
                   </Flex>
