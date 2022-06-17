@@ -54,8 +54,8 @@ export function useFilters() {
   }, [])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    console.log('Submitting form')
     e.preventDefault()
-    console.log(searchQuery)
     router.push({ query: { ...query, ...searchQuery } })
   }
 
