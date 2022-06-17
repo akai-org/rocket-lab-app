@@ -1,7 +1,9 @@
 import { Button, Flex, Icon, Input, Select, Text } from '@chakra-ui/react'
+import router from 'next/router'
 import React, { FC } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { FiltersControllsProps } from '../../../UI/FiltersGeneral/FiltersGeneral'
+import queryString from 'query-string'
 
 const Filters: FC<FiltersControllsProps> = ({
   categories,
@@ -11,6 +13,7 @@ const Filters: FC<FiltersControllsProps> = ({
   setCategory,
   setSearchTerm,
 }) => {
+  const query = queryString.parseUrl(router.asPath).query
   return (
     <form onSubmit={handleSubmit}>
       <Flex
@@ -50,7 +53,7 @@ const Filters: FC<FiltersControllsProps> = ({
               h="40px"
               border="1px solid #D4D4D4"
               fontWeight="400"
-              value={category}
+              value={(query.category as string | undefined) || category}
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="all">Wszystkie</option>

@@ -21,7 +21,6 @@ export const PaginationControlls: React.FC<Props> = ({
   listType,
   setListType,
 }) => {
-  const router = useRouter()
 
   const {
     maxPage,
