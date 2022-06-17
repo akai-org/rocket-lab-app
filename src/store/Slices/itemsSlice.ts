@@ -17,42 +17,11 @@ export const itemsSlice = createSlice({
   reducers: {
     setCategory: (state, action: PayloadAction<string | undefined>) => {
       state.category = !action.payload ? undefined : action.payload
-      const regex = state.searchTerm
-        ? new RegExp(state.searchTerm, 'i')
-        : undefined
-      state.displayItems = state.items.filter((item) => {
-        const includesSearchedCategory = item.categories.some(
-          (category) => category.name === state.category
-        )
-        console.log(includesSearchedCategory)
-        if (!state.category && !state.searchTerm) return true
-        if (
-          (regex?.test(item.name) ||
-          regex?.test(item.description)) &&
-          includesSearchedCategory
-        ) {
-          return true
-        }
-      })
+      filterItems(state)
     },
     setSearchTerm: (state, action: PayloadAction<string | undefined>) => {
       state.searchTerm = !action.payload ? undefined : action.payload
-      const regex = state.searchTerm
-        ? new RegExp(state.searchTerm, 'i')
-        : undefined
-      state.displayItems = state.items.filter((item) => {
-        const includesSearchedCategory = item.categories.some(
-          (category) => category.name === state.category
-        )
-        if (!state.category && !state.searchTerm) return true
-        if (
-          (regex?.test(item.name) ||
-          regex?.test(item.description)) &&
-          includesSearchedCategory
-        ) {
-          return true
-        }
-      })
+      filterItems(state)
     },
     setItems: (state, action: PayloadAction<PopulatedItem[]>) => {
       state.items = action.payload
@@ -145,3 +114,28 @@ export const {
   setCategory,
   setSearchTerm,
 } = itemsSlice.actions
+function filterItems(state: State) {
+  const regex = state.searchTerm ? new RegExp(state.searchTerm, 'i') : undefined
+  state.displayItems = state.items.filter((item) => {
+    const includesSearchedCategory = item.categories.some(
+      (category) => category.name === state.category
+    )
+    // Fires when nor category, neither searchTerm are provided
+    if (!state.category && !state.searchTerm) return true
+    // Fires when no category is selected
+    if (
+      !state.category &&
+      (regex?.test(item.name) || regex?.test(item.description))
+    )
+      return true
+    // Fires when no searchTerm is provided
+    if (!state.searchTerm && includesSearchedCategory) return true
+    // Fires when both category and searchTerm is provided
+    if (
+      (regex?.test(item.name) || regex?.test(item.description)) &&
+      includesSearchedCategory
+    ) {
+      return true
+    }
+  })
+}
