@@ -1,19 +1,18 @@
 import { Button, Flex, Icon, Input, Select, Text } from '@chakra-ui/react'
-import router from 'next/router'
 import React, { FC } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { FiltersControllsProps } from '../../../UI/FiltersGeneral/FiltersGeneral'
-import queryString from 'query-string'
+import { useFilters } from '../../../../utils/effects/useFilters'
 
-const Filters: FC<FiltersControllsProps> = ({
-  categories,
-  category,
-  handleSubmit,
-  searchTerm,
-  setCategory,
-  setSearchTerm,
-}) => {
-  const query = queryString.parseUrl(router.asPath).query
+const Filters: FC = () => {
+  const {
+    categories,
+    category,
+    handleSubmit,
+    searchTerm,
+    setCategory,
+    setSearchTerm,
+    query,
+  } = useFilters()
   return (
     <form onSubmit={handleSubmit}>
       <Flex
