@@ -61,7 +61,7 @@ export const itemsSlice = createSlice({
     resortItems: (state, action: PayloadAction<SortType>) => {
       switch (action.payload) {
         case 'newest':
-          state.items = [...state.items].sort((a, b) => {
+          state.displayItems = [...state.displayItems].sort((a, b) => {
             if (a.updatedAt > b.updatedAt) {
               return -1
             }
@@ -73,7 +73,7 @@ export const itemsSlice = createSlice({
           })
           break
         case 'oldest':
-          state.items = [...state.items].sort((a, b) => {
+          state.displayItems = [...state.displayItems].sort((a, b) => {
             if (a.updatedAt > b.updatedAt) {
               return 1
             }
@@ -85,7 +85,7 @@ export const itemsSlice = createSlice({
           })
           break
         case 'alphabetically':
-          state.items = [...state.items].sort((a, b) => {
+          state.displayItems = [...state.displayItems].sort((a, b) => {
             if (a.name.toLowerCase() > b.name.toLowerCase()) {
               return 1
             }
