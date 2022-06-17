@@ -1,23 +1,21 @@
 import { useRouter } from 'next/router'
-import { ChangeEvent, FC } from 'react'
-import { ITEMS_QUERY_LIMIT, FIRST_PAGE } from '../../../utils/constants'
+import { ChangeEvent, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { itemsInfo } from '../../store/store'
+import { FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../constants'
+import queryString from 'query-string'
 
-export interface PaginationSettings {
-  handleOnChangeQuantity?: (e: ChangeEvent<HTMLSelectElement>) => void
-  minPage?: number
-  maxPage?: number
-  nextPage?: number
-  previousPage?: number
-  toDisplay?: number
-  itemsCount?: number
-}
-
-interface Props {
-  itemsCount?: number
-  children: (controls: PaginationSettings) => JSX.Element
-}
-
-export const PaginationGeneral: FC<Props> = (props) => {
+export function usePagination(): {
+  minPage: number
+  maxPage: number
+  previousPage: number
+  nextPage: number
+  itemsCount: number
+  toDisplay: number
+  currentPage: number
+  query: object
+  onToDisplayChange: (e: ChangeEvent<HTMLSelectElement>) => void
+} {
   const sanitizePage = (
     page: number,
     toDisplay: number,
@@ -33,16 +31,16 @@ export const PaginationGeneral: FC<Props> = (props) => {
     return sanitizedPage
   }
 
+  const itemsCount = useSelector(itemsInfo).displayItems.length
+
   const router = useRouter()
-  const query = router.query
+  const query = queryString.parseUrl(router.asPath).query
 
   const presumedToDisplay = query.toDisplay
 
   const toDisplay = presumedToDisplay ? +presumedToDisplay : ITEMS_QUERY_LIMIT
 
   const currentPage = query.page ? +query.page : FIRST_PAGE
-
-  const itemsCount = props.itemsCount ?? 1
 
   const presumedNextPage = currentPage + FIRST_PAGE
   const presumedPreviousPage = currentPage - FIRST_PAGE
@@ -67,13 +65,15 @@ export const PaginationGeneral: FC<Props> = (props) => {
     router.push({ query: { ...query, page, toDisplay: newToDisplay } })
   }
 
-  return props.children({
-    handleOnChangeQuantity: onToDisplayChange,
-    itemsCount,
-    maxPage,
+  return {
     minPage,
-    nextPage,
+    maxPage,
     previousPage,
+    nextPage,
+    onToDisplayChange,
+    itemsCount,
     toDisplay,
-  })
+    currentPage,
+    query
+  }
 }

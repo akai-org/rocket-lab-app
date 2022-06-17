@@ -16,33 +16,49 @@ import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai'
 import { IoFilterSharp } from 'react-icons/io5'
 import { FiltersControllsProps } from '../../../UI/FiltersGeneral/FiltersGeneral'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
+import { useFilters } from '../../../../utils/effects/useFilters'
 
-interface Props extends FiltersControllsProps {
+interface Props {
   setIsFiltersOpen: (isOpen: boolean) => void
 }
 
 const Filters: React.FC<Props> = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    categories,
+    category,
+    handleSubmit,
+    query,
+    searchTerm,
+    setCategory,
+    setSearchTerm,
+  } = useFilters()
   return (
-    <form onSubmit={props.handleSubmit}>
-      <Flex
-        flexDirection="column"
-        position="fixed"
-        left="0"
-        bottom="0"
-        h="60px"
-        w="100%"
-        minW="300px"
-        border="1px solid #D4D4D4"
-        borderRadius="6px"
-        bgColor="white"
-      >
-        <Flex flexDirection="column" justifyContent="space-between" h="60px">
-          {isOpen ? (
-            <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
-              <DrawerOverlay onClick={() => props.setIsFiltersOpen(false)} />
-              <DrawerContent h="230px">
-                <DrawerBody>
+    <Flex
+      flexDirection="column"
+      position="fixed"
+      left="0"
+      bottom="0"
+      h="60px"
+      w="100%"
+      minW="300px"
+      border="1px solid #D4D4D4"
+      borderRadius="6px"
+      bgColor="white"
+    >
+      <Flex flexDirection="column" justifyContent="space-between" h="60px">
+        {isOpen ? (
+          <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
+            <DrawerOverlay onClick={() => props.setIsFiltersOpen(false)} />
+            <DrawerContent h="230px">
+              <DrawerBody>
+                <form
+                  onSubmit={(e) => {
+                    handleSubmit(e)
+                    onClose()
+                    props.setIsFiltersOpen(false)
+                  }}
+                >
                   <Flex my="10px" justifyContent="space-between">
                     <Text fontWeight="500">Filtruj obiekty</Text>
                     <Flex m="auto 10px" lineHeight="20px">
@@ -69,20 +85,20 @@ const Filters: React.FC<Props> = (props) => {
                       h="32px"
                       w="100%"
                       border="1px solid #D4D4D4"
-                      value={props.searchTerm}
-                      onChange={(e) => props.setSearchTerm(e.target.value)}
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     <Icon h="6" w="6" ml="5px" mr="10px" as={AiOutlineSearch} />
                   </Flex>
                   <Select
-                    onChange={(e) => props.setCategory(e.target.value)}
-                    value={props.category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    value={(query.category as string | undefined) || category}
                     fontSize="14px"
                     h="32px"
                     mt="20px"
                   >
                     <option value="all">Wszystkie</option>
-                    {props.categories.map(({ name, id }) => (
+                    {categories.map(({ name, id }) => (
                       <option key={id} value={name}>
                         {name}
                       </option>
@@ -101,55 +117,55 @@ const Filters: React.FC<Props> = (props) => {
                       lineHeight="32px"
                       type="submit"
                     >
-                      Zapisz
+                      Wyszukaj
                     </ProductButton>
                   </Stack>
-                </DrawerBody>
-              </DrawerContent>
-            </Drawer>
-          ) : (
-            <Flex
-              mx="10px"
-              my="auto"
-              justifyContent="space-between"
-              lineHeight="20px"
-            >
-              <Flex flexDirection="row" alignItems="center" h="30px">
-                <Input
-                  placeholder="Wyszukaj"
-                  h="30px"
-                  w="200px"
-                  border="1px solid #D4D4D4"
-                  value={props.searchTerm}
-                  onChange={(e) => props.setSearchTerm(e.target.value)}
-                />
-                <Icon h="6" w="6" ml="5px" as={AiOutlineSearch} />
-              </Flex>
-              <Flex pt="5px">
-                <Text
-                  mr="5px"
-                  fontSize="16px"
-                  onClick={() => {
-                    onOpen()
-                    props.setIsFiltersOpen(true)
-                  }}
-                >
-                  Filtry
-                </Text>
-                <Icon
-                  h="5"
-                  w="5"
-                  as={IoFilterSharp}
-                  onClick={() => {
-                    props.setIsFiltersOpen(true)
-                  }}
-                />
-              </Flex>
+                </form>
+              </DrawerBody>
+            </DrawerContent>
+          </Drawer>
+        ) : (
+          <Flex
+            mx="10px"
+            my="auto"
+            justifyContent="space-between"
+            lineHeight="20px"
+          >
+            <Flex flexDirection="row" alignItems="center" h="30px">
+              <Input
+                placeholder="Wyszukaj"
+                h="30px"
+                w="200px"
+                border="1px solid #D4D4D4"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <Icon h="6" w="6" ml="5px" as={AiOutlineSearch} />
             </Flex>
-          )}
-        </Flex>
+            <Flex pt="5px">
+              <Text
+                mr="5px"
+                fontSize="16px"
+                onClick={() => {
+                  onOpen()
+                  props.setIsFiltersOpen(true)
+                }}
+              >
+                Filtry
+              </Text>
+              <Icon
+                h="5"
+                w="5"
+                as={IoFilterSharp}
+                onClick={() => {
+                  props.setIsFiltersOpen(true)
+                }}
+              />
+            </Flex>
+          </Flex>
+        )}
       </Flex>
-    </form>
+    </Flex>
   )
 }
 

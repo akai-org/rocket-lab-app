@@ -2,10 +2,12 @@ import { Flex, Select, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { SortType } from '../../../services/itemsService'
 import { validateSortParam } from '../../../utils/dataValidation/validateSortParam'
+import queryString from 'query-string'
+import { FIRST_PAGE } from '../../../utils/constants'
 
 export const SortingGeneral = () => {
   const router = useRouter()
-  const query = router.query
+  const query = queryString.parseUrl(router.asPath).query
 
   let sort: SortType
 
@@ -18,7 +20,7 @@ export const SortingGeneral = () => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value
     if (value !== sort) {
-      router.push({ query: { ...query, sort: value } })
+      router.push({ query: { ...query, sort: value, page: FIRST_PAGE } })
     }
   }
 

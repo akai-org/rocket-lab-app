@@ -13,14 +13,16 @@ import { useSelector } from 'react-redux'
 import { itemsInfo, storageCartInfo } from '../../../store/store'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
-import { Router } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import StorageEdit from './StorageEdit/StorageEdit'
-import { fetcher } from '../../../utils/requests'
-import { API_URL, ITEMS_QUERY_LIMIT } from '../../../utils/constants'
+import { ITEMS_QUERY_LIMIT } from '../../../utils/constants'
 import ProductButton from '../../UI/Custom Buttons/ProductButton/ProductButton'
 import { useAddNewList } from '../../../utils/effects/useAddNewList'
+import queryString from 'query-string'
 
 const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
+  const router = useRouter()
+  const query = queryString.parseUrl(router.asPath).query
   const [listType, setListType] = useState<sortingType>('grid')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
   const storageCartData = useSelector(storageCartInfo)
@@ -32,7 +34,7 @@ const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
   } = useDisclosure()
   const id = 'add-to-list-toast'
   const [skip, setSkip] = useState(ITEMS_QUERY_LIMIT)
-  const items = useSelector(itemsInfo).items
+  const items = useSelector(itemsInfo).displayItems
 
   Router.events.on('beforeHistoryChange', () => {
     toast.closeAll()
@@ -43,16 +45,19 @@ const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
   const processedItems = [...items].splice(0, skip)
 
   const loadMoreItems = () => {
-      setSkip((state) => {
-        const newAmount = state + ITEMS_QUERY_LIMIT
-        if(newAmount <= items.length){
-          return newAmount
-        }
-        else {
-          return items.length
-        }
-      })
+    setSkip((state) => {
+      const newAmount = state + ITEMS_QUERY_LIMIT
+      if (newAmount <= items.length) {
+        return newAmount
+      } else {
+        return items.length
+      }
+    })
   }
+
+  useEffect(() => {
+    setSkip(ITEMS_QUERY_LIMIT)
+  }, [query.sort])
 
   useEffect(() => {
     if (!toast.isActive(id) && storageCartData.newCartList.length) {
@@ -117,9 +122,7 @@ const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
           Załaduj więcej
         </ProductButton>
       </Flex>
-      <FiltersGeneral>
-        {(props) => <Filters {...props} setIsFiltersOpen={setIsFiltersOpen} />}
-      </FiltersGeneral>
+      <Filters setIsFiltersOpen={setIsFiltersOpen} />
       <ModalAddToList
         addNewCartList={addNewList}
         items={storageCartData.newCartList}
