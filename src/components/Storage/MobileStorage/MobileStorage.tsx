@@ -32,7 +32,7 @@ const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
   } = useDisclosure()
   const id = 'add-to-list-toast'
   const [skip, setSkip] = useState(ITEMS_QUERY_LIMIT)
-  const items = useSelector(itemsInfo).items
+  const items = useSelector(itemsInfo).displayItems
 
   Router.events.on('beforeHistoryChange', () => {
     toast.closeAll()
