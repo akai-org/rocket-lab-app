@@ -122,6 +122,6 @@ export async function addItem(item: Item) {
 }
 
 export async function fetchAllItems() {
-  const items = await ItemModel.find({}).sort({updatedAt: -1})
+  const items = await ItemModel.find({}).sort({updatedAt: -1}).populate('categories')
   return items
 }
