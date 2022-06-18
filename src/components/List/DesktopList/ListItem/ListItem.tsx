@@ -17,13 +17,13 @@ const ListItem = (props: Props) => {
       <Td>
         <Flex justifyContent="flex-start" cursor="pointer" onClick={onOpenInfo}>
           <Image src="item.png" w="40px" h="40px" />
-          <Text lineHeight="40px" ml="10px">
+          <Text lineHeight="40px" noOfLines={1} ml="10px">
             {props.item.name}
           </Text>
         </Flex>
       </Td>
       <Td>
-        <Text>{props.item.description}</Text>
+        <Text noOfLines={1}>{props.item.description}</Text>
       </Td>
       <Td textAlign="right">
         <Text color={props.quantity ? 'inherit' : 'red.500'}>

@@ -42,6 +42,7 @@ const AddItem = () => {
         <AccordionButton>
           <Text
             flex="1"
+            noOfLines={1}
             fontSize="20px"
             fontWeight="600"
             color="#4A5568"

@@ -25,7 +25,6 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Category } from '../../../../mongo/models/category'
-import categories from '../../../../pages/api/categories'
 import { removeItem, updateItem } from '../../../../store/Slices/itemsSlice'
 import { categoriesInfo } from '../../../../store/store'
 import { API_URL } from '../../../../utils/constants'
@@ -94,7 +93,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
         <ModalBody>
           <Flex>
             <Image src={props.imageUrl} w="80px" h="80px" mr="10px" />
-            <Box>
+            <Box w="100%">
               <Input
                 h="30px"
                 pl="5px"

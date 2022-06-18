@@ -16,15 +16,15 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import SchemeItem from './SchemeItem/SchemeItem'
-import ListMenu from '../../../UI/Menus/ListMenu'
 import { useSelector } from 'react-redux'
 import { itemsInfo, schemeInfo } from '../../../../store/store'
+import SchemeMenu from '../../../UI/Menus/SchemeMenu'
 
 const Scheme = () => {
   const {
-    isOpen: isOpenEditList,
-    onOpen: onOpenEditList,
-    onClose: onCloseEditList,
+    isOpen: isOpenEditScheme,
+    onOpen: onOpenEditScheme,
+    onClose: onCloseEditScheme,
   } = useDisclosure()
 
   const itemsData = useSelector(itemsInfo)
@@ -56,7 +56,7 @@ const Scheme = () => {
             <AccordionIcon />
           </AccordionButton>
           <Flex pt="5px" mr="20px">
-            <ListMenu onEdit={onOpenEditList} onDelete={handleDelete} />
+            <SchemeMenu onEdit={onOpenEditScheme} onDelete={handleDelete} />
           </Flex>
         </Flex>
         <AccordionPanel pb={4}>
@@ -64,7 +64,7 @@ const Scheme = () => {
             <Table p="20px">
               <Thead>
                 <Tr>
-                  <Th>NAZWA</Th>
+                  <Th w="80%">NAZWA</Th>
                   <Th w="1%">ILOŚĆ</Th>
                   <Th w="1%">Dostępność</Th>
                 </Tr>

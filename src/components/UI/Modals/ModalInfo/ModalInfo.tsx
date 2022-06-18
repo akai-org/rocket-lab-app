@@ -35,7 +35,7 @@ const ModalInfo = (props: ModalInfoProps) => {
           <Flex>
             <Image src={props.imageUrl} w="80px" h="80px" mr="10px" />
             <Box>
-              <Text fontWeight="500" fontSize="19px">
+              <Text fontWeight="500" noOfLines={2} fontSize="19px">
                 {props.name}
               </Text>
               <Text>Ilość: {props.quantity}</Text>

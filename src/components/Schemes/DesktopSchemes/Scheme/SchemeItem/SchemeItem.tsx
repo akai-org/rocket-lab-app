@@ -9,7 +9,7 @@ interface SchemeItemProps {
 
 const SchemeItem = ({ schemeQuantity, storageQuantity }: SchemeItemProps) => {
   return (
-    <Tr>
+    <Tr fontSize="14px">
       <Td>
         <Text noOfLines={1}>Nazwa elementu tymczasowego</Text>
       </Td>

@@ -30,7 +30,7 @@ const GridItem = ({ item }: Props) => {
     onClose: onCloseInfo,
   } = useDisclosure()
   return (
-    <Flex flexDirection="column" maxW="190px" m="10px auto 0 auto">
+    <Flex flexDirection="column" w="180px" m="10px auto 0 auto">
       <Image
         onClick={onOpenInfo}
         cursor="pointer"
