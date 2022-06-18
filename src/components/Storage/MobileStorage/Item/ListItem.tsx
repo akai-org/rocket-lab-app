@@ -40,14 +40,19 @@ const ListItem = ({ item }: Props) => {
         <Image
           onClick={onOpenInfo}
           src={item.imageUrl}
-          minH="100px"
-          minW="100px"
-          w="100px"
-          h="100px"
+          minH="90px"
+          minW="90px"
+          w="90px"
+          h="90px"
         />
       </Flex>
       <Box h="100%" w="80%" m="0 auto 0 0" textAlign="left" p="20px">
-        <Text onClick={onOpenInfo} fontSize="16px" fontWeight="500">
+        <Text
+          onClick={onOpenInfo}
+          fontSize="16px"
+          noOfLines={1}
+          fontWeight="500"
+        >
           {item.name}
         </Text>
 

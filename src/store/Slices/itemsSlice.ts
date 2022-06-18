@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Item, PopulatedItem } from '../../mongo/models/item'
+import { PopulatedItem } from '../../mongo/models/item'
 import { SortType } from '../../services/itemsService'
 
 interface State {

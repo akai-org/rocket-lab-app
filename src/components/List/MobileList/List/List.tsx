@@ -7,6 +7,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Text,
 } from '@chakra-ui/react'
 import ListItem from '../ListItem/ListItem'
 import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
@@ -24,13 +25,10 @@ const List = (props: Props) => {
 
   const deleteCartList = async () => {
     try {
-      const deletedCartList = await fetcher(
-        API_URL + '/api/cart/delete',
-        {
-          method: 'DELETE',
-          body: { id: props.id },
-        }
-      )
+      const deletedCartList = await fetcher(API_URL + '/api/cart/delete', {
+        method: 'DELETE',
+        body: { id: props.id },
+      })
       dispatch(removeExisitngCartList(deletedCartList))
     } catch (error) {
       console.log(error)
@@ -54,18 +52,19 @@ const List = (props: Props) => {
     >
       <AccordionItem border="none">
         <Flex height="45px">
-          <AccordionButton justifyContent="space-between">
-            <Heading
+          <AccordionButton w="94%" justifyContent="space-between">
+            <Text
               fontSize="17px"
-              isTruncated
+              noOfLines={1}
+              color="#4A5568"
               textAlign="left"
-              fontWeight="600"
+              fontWeight="500"
             >
               {props.name}
-            </Heading>
+            </Text>
             <AccordionIcon />
           </AccordionButton>
-          <Flex pt="5px" px="10px" w="5%" justifyContent="flex-end">
+          <Flex pt="5px" w="4%" justifyContent="flex-end">
             <ListMenu onEdit={onOpenEditList} onDelete={deleteCartList} />
           </Flex>
         </Flex>

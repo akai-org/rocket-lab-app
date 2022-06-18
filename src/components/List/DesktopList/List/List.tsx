@@ -12,6 +12,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Text,
 } from '@chakra-ui/react'
 import ModalEditList from '../../../UI/Modals/ModalEditList/ModalEditList'
 import { PopulatedCartList } from '../../../../mongo/models/cart'
@@ -56,17 +57,18 @@ const List = (props: Props) => {
       <AccordionItem border="none">
         <Flex>
           <AccordionButton w="100%" justifyContent="space-between">
-            <Heading
+            <Text
               fontSize="20px"
-              lineHeight="10px"
-              mt="15px"
+              lineHeight="25px"
+              noOfLines={1}
+              textAlign="left"
+              my="5px"
+              ml="10px"
               color="#4A5568"
-              fontWeight="600"
-              mb="15px"
-              ml="20px"
+              fontWeight="500"
             >
               {props.name}
-            </Heading>
+            </Text>
             <AccordionIcon />
           </AccordionButton>
           <Flex pt="5px" mr="20px">
@@ -79,9 +81,9 @@ const List = (props: Props) => {
             <Table p="20px">
               <Thead>
                 <Tr fontSize="16px" fontWeight="700">
-                  <Th minW="250px">NAZWA</Th>
-                  <Th w="100%">OPIS</Th>
-                  <Th textAlign="right" minW="170px">
+                  <Th w="50%">NAZWA</Th>
+                  <Th w="50%">OPIS</Th>
+                  <Th textAlign="right" w="1%" minW="140px">
                     ILOŚĆ SZTUK
                   </Th>
                 </Tr>

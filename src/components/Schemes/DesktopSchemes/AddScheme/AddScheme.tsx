@@ -1,10 +1,5 @@
 import {
   Input,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
   Text,
   Box,
   Accordion,
@@ -12,25 +7,32 @@ import {
   AccordionButton,
   AccordionIcon,
   AccordionPanel,
-  Stack,
-  Select,
+  Flex,
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
+import AddItem from './AddItem/AddItem'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
+import ItemsList from './ItemsList/ItemsList'
+import { useSelector } from 'react-redux'
+import { schemeInfo } from '../../../../store/store'
 
-const AddItem = () => {
+const AddScheme = () => {
   const name = useRef<HTMLInputElement>(null)
   const [nameIsValid, setNameIsValid] = useState(true)
-  const [quantity, setQuantity] = useState(1)
+  const [itemsIsValid, setItemsIsValid] = useState(true)
+  const schemeData = useSelector(schemeInfo)
 
-  const submitForm = () => {
+  const handleSubmit = () => {
     if (name.current!.value) setNameIsValid(true)
     else setNameIsValid(false)
+
+    if (schemeData.items.length === 0) setItemsIsValid(false)
+    else setItemsIsValid(true)
   }
 
   return (
     <Accordion
-      p="5px 5px 5px 10px"
+      p="5px 5px 5px 15px"
       borderRadius="6px"
       border="1px solid #C4C4C4"
       allowMultiple
@@ -44,7 +46,7 @@ const AddItem = () => {
             color="#4A5568"
             textAlign="left"
           >
-            Dodaj do listy przedmiot spoza magazynu
+            Dodaj Schemat
           </Text>
           <AccordionIcon />
         </AccordionButton>
@@ -61,53 +63,24 @@ const AddItem = () => {
           </Text>
           <Input h="32px" id="description" type="text" />
           <Text fontWeight={500} mt="10px">
-            Ilość
+            Przedmioty
           </Text>
-          <NumberInput
-            allowMouseWheel
-            h="32px"
-            w="100%"
-            onChange={(e) => {
-              setQuantity(parseInt(e))
-            }}
-            borderColor="#D5D5D5"
-            defaultValue={1}
-            min={1}
-          >
-            <NumberInputField
-              h="32px"
-              onChange={(event) => {
-                console.log(event)
-              }}
-            />
-            <NumberInputStepper>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
-            </NumberInputStepper>
-          </NumberInput>
-          <Text fontWeight={500} mt="10px">
-            Lista
-          </Text>
-          <Select h="32px">
-            <option>Lista 1</option>
-            <option>Lista 2</option>
-            <option>Lista 3</option>
-          </Select>
-          <Stack>
+          <AddItem itemsValid={itemsIsValid} />
+          <ItemsList />
+          <Flex justifyContent="flex-end">
             <ProductButton
-              ml="auto"
-              onClick={submitForm}
-              fontSize="16px"
-              w="90px"
               mt="20px"
+              fontSize="16px"
+              onClick={handleSubmit}
+              w="150px"
             >
-              Dodaj
+              Dodaj schemat
             </ProductButton>
-          </Stack>
+          </Flex>
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
   )
 }
 
-export default AddItem
+export default AddScheme

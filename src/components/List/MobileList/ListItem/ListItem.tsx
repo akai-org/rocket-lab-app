@@ -22,7 +22,7 @@ const ListItem = (props: CartItem) => {
         <Image src={props.item.imageUrl} w="50px" h="50px" />
       </Flex>
       <Box h="80px" w="80%" m="0 auto 0 0" textAlign="left" p="20px">
-        <Text fontSize="16px" fontWeight="600">
+        <Text fontSize="16px" noOfLines={1} fontWeight="600">
           {props.item.name}
         </Text>
         <Text fontSize="14px" fontWeight="500">

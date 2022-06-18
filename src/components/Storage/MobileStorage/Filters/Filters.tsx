@@ -60,7 +60,9 @@ const Filters: React.FC<Props> = (props) => {
                   }}
                 >
                   <Flex my="10px" justifyContent="space-between">
-                    <Text fontWeight="500">Filtruj obiekty</Text>
+                    <Text fontWeight="500" noOfLines={1}>
+                      Filtruj obiekty
+                    </Text>
                     <Flex m="auto 10px" lineHeight="20px">
                       <Icon
                         h="6"

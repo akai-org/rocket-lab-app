@@ -54,13 +54,25 @@ const DesktopSidebar = () => {
         </Flex>
         {IS_DEV && (
           <>
-            <Flex lineHeight="25px" w="85%">
+            <Flex
+              lineHeight="25px"
+              w="85%"
+              onClick={() => {
+                if (router.asPath !== '/history') router.push('/history')
+              }}
+            >
               <RiHistoryLine size={25} />
               <Text ml="10px">Historia</Text>
             </Flex>
-            <Flex lineHeight="25px" w="85%">
+            <Flex
+              lineHeight="25px"
+              w="85%"
+              onClick={() => {
+                if (router.asPath !== '/schemes') router.push('/schemes')
+              }}
+            >
               <RiDraftLine size={25} />
-              <Text ml="10px">Szablony</Text>
+              <Text ml="10px">Schematy</Text>
             </Flex>
             <Flex lineHeight="25px" w="85%">
               <FiSettings size={25} />

@@ -1,6 +1,5 @@
 import {
   Flex,
-  Image,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
@@ -36,12 +35,15 @@ const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
 
   return (
     <Tr fontSize="16px" fontWeight="700">
-      <Td w="60%">
-        <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
-          <Text fontWeight="500" minW="50px" isTruncated>
-            {cartItem.item.name}
-          </Text>
-        </Flex>
+      <Td>
+        <Text
+          fontWeight="500"
+          noOfLines={1}
+          onClick={onOpenInfo}
+          cursor="pointer"
+        >
+          {cartItem.item.name}
+        </Text>
       </Td>
       <Td>
         <NumberInput
@@ -56,7 +58,7 @@ const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
           }}
           min={1}
         >
-          <NumberInputField h="30px" minW="80px" />
+          <NumberInputField h="30px" />
           <NumberInputStepper h="30px">
             <NumberIncrementStepper />
             <NumberDecrementStepper />

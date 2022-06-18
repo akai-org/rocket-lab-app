@@ -13,6 +13,8 @@ import {
   Th,
   Table,
   Tbody,
+  Text,
+  Input,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -37,8 +39,22 @@ const ModalEditList = (props: ModalEditListProps) => {
   const dispatch = useDispatch()
 
   const [cartList, setCartList] = useState(props.cartList)
+  const [listName, setListName] = useState(cartList.name)
 
   const deleteCartList = useDeleteCartList()
+
+  // TODO: The same function is used in Desktop List & Mobile list - redundancy
+  const deleteCartList = async () => {
+    try {
+      const deletedCartList = await fetcher(API_URL + '/api/cart/delete', {
+        method: 'DELETE',
+        body: { id: props.cartList.id },
+      })
+      dispatch(removeExisitngCartList(deletedCartList))
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const updateCartList = async () => {
     try {
@@ -73,16 +89,32 @@ const ModalEditList = (props: ModalEditListProps) => {
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
       <ModalContent maxW="40rem">
-        <ModalHeader>{cartList.name}</ModalHeader>
+        <ModalHeader pr="50px">
+          <Input
+            h="30px"
+            pl="5px"
+            mb="5px"
+            value={listName}
+            onChange={(e) => {
+              setListName(e.currentTarget.value)
+            }}
+            fontWeight="500"
+            fontSize="19px"
+          />
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Flex flexDirection="column" maxH="350px" overflowY="scroll" w="100%">
             <Table>
               <Thead>
                 <Tr fontSize="16px" fontWeight="700">
-                  <Th>NAZWA</Th>
-                  <Th textAlign="right">ILOŚĆ SZTUK</Th>
-                  <Th textAlign="right">Akcje</Th>
+                  <Th w="80%">NAZWA</Th>
+                  <Th w="1%" minW="120px" textAlign="right">
+                    ILOŚĆ SZTUK
+                  </Th>
+                  <Th w="1%" textAlign="right">
+                    Akcje
+                  </Th>
                 </Tr>
               </Thead>
               <Tbody>
