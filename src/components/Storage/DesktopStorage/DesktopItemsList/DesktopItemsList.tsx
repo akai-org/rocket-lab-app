@@ -27,15 +27,10 @@ const DesktopItemsList = ({ items, itemsCount }: MainViewProps) => {
       border="1px solid #C4C4C4"
       mt="20px"
     >
-      <PaginationGeneral itemsCount={itemsCount}>
-        {(controlls) => (
-          <PaginationControlls
-            {...controlls}
-            listType={listType}
-            setListType={setListType}
-          />
-        )}
-      </PaginationGeneral>
+      <PaginationControlls
+        listType={listType}
+        setListType={setListType}
+      />
       {listType === 'list' ? (
         <Flex flexWrap="wrap" p="20px">
           <Table p="20px">

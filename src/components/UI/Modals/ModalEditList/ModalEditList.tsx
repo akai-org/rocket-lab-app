@@ -24,6 +24,7 @@ import {
   updateExistingCartLists,
 } from '../../../../store/Slices/storageCartSlice'
 import { API_URL } from '../../../../utils/constants'
+import { useDeleteCartList } from '../../../../utils/effects/useDeleteCartList'
 import { fetcher } from '../../../../utils/requests'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
@@ -40,7 +41,7 @@ const ModalEditList = (props: ModalEditListProps) => {
   const [cartList, setCartList] = useState(props.cartList)
   const [listName, setListName] = useState(cartList.name)
 
-  console.log(props.cartList)
+  const deleteCartList = useDeleteCartList()
 
   // TODO: The same function is used in Desktop List & Mobile list - redundancy
   const deleteCartList = async () => {
@@ -154,7 +155,7 @@ const ModalEditList = (props: ModalEditListProps) => {
           </ProductButton>
           <DeletePopover
             label="Czy na pewno chcesz usunąć tę listę?"
-            onClick={deleteCartList}
+            onClick={() => deleteCartList(props.cartList.id)}
           />
         </ModalFooter>
       </ModalContent>

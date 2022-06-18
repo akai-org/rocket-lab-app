@@ -15,9 +15,13 @@ import { setExistingCartLists } from '../store/Slices/storageCartSlice'
 import { fetcher } from '../utils/requests'
 import { setCategories } from '../store/Slices/categoriesSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { resortItems, setItems } from '../store/Slices/itemsSlice'
+import {
+  resortItems,
+  setCategory,
+  setItems,
+  setSearchTerm,
+} from '../store/Slices/itemsSlice'
 import { PopulatedItem } from '../mongo/models/item'
-import { useRouter } from 'next/router'
 import { itemsInfo } from '../store/store'
 
 interface Props extends MainViewProps {
@@ -25,6 +29,8 @@ interface Props extends MainViewProps {
   page: number
   toDisplay: number
   sort: itemsService.SortType
+  category?: string
+  searchTerm?: string
 }
 
 const Home: NextPage<Props> = ({
@@ -34,10 +40,12 @@ const Home: NextPage<Props> = ({
   categories,
   page,
   toDisplay,
-  sort
+  sort,
+  category,
+  searchTerm,
 }) => {
   const dispatch = useDispatch()
-  const reduxItems = useSelector(itemsInfo).items
+  const reduxItems = useSelector(itemsInfo).displayItems
   const [localItems, setLocalItems] = useState<PopulatedItem[]>(
     [...reduxItems].splice(0, toDisplay)
   )
@@ -62,6 +70,14 @@ const Home: NextPage<Props> = ({
     dispatch(resortItems(sort))
   }, [sort])
 
+  useEffect(() => {
+    dispatch(setCategory(category))
+  }, [category])
+
+  useEffect(() => {
+    dispatch(setSearchTerm(searchTerm))
+  }, [searchTerm])
+
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
 
   let processedToDisplay: number = toDisplay
@@ -73,7 +89,10 @@ const Home: NextPage<Props> = ({
   const Storage = isDesktop ? (
     <DesktopStorage
       itemsCount={itemsCount}
-      items={[...desktopItems].splice((page - 1) * toDisplay, processedToDisplay)}
+      items={[...desktopItems].splice(
+        (page - 1) * toDisplay,
+        processedToDisplay
+      )}
     />
   ) : (
     <MobileStorage
@@ -106,6 +125,8 @@ export const getServerSideProps = withPageAuthRequired({
 
       const page = query.page || 1
       const toDisplay = query.toDisplay || 15
+      const category = query.category
+      const searchTerm = query.searchTerm
 
       const sort = (query.sort || 'newest') as itemsService.SortType
 
@@ -117,6 +138,12 @@ export const getServerSideProps = withPageAuthRequired({
           items: JSON.parse(JSON.stringify(items)),
           itemsCount: JSON.parse(JSON.stringify(itemsCount)),
           categories: JSON.parse(JSON.stringify(categories)),
+          category: category
+            ? JSON.parse(JSON.stringify(category as string))
+            : null,
+          searchTerm: searchTerm
+            ? JSON.parse(JSON.stringify(searchTerm as string))
+            : null,
         },
       }
     } catch (e) {
