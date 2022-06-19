@@ -41,8 +41,6 @@ const ModalEditList = (props: ModalEditListProps) => {
   const [cartList, setCartList] = useState(props.cartList)
   const [listName, setListName] = useState(cartList.name)
 
-  const deleteCartList = useDeleteCartList()
-
   // TODO: The same function is used in Desktop List & Mobile list - redundancy
   const deleteCartList = async () => {
     try {
