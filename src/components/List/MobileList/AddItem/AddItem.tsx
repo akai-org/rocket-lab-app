@@ -44,7 +44,7 @@ const AddItem = () => {
             flex="1"
             noOfLines={1}
             fontSize="20px"
-            fontWeight="600"
+            fontWeight="500"
             color="#4A5568"
             textAlign="left"
           >
