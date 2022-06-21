@@ -9,6 +9,7 @@ const DesktopHistory = () => {
       maxW="2000px"
       m="75px auto 0 auto"
       minW="900px"
+      color="#2D3748"
     >
       <Flex
         w="100%"
@@ -26,15 +27,15 @@ const DesktopHistory = () => {
 
         <Flex
           flexDirection="row"
-          border="1px solid #D4D4D4"
-          borderRadius="6px"
+          // border="1px solid #D4D4D4"
+          // borderRadius="6px"
           m="5px 0 10px 0"
           w="100%"
           p="15px"
           alignItems="center"
-          justifyContent="space-between"
+          justifyContent="flex-start"
         >
-          <Select h="40px" borderColor="#D5D5D5" maxW="160px">
+          <Select h="40px" borderColor="#D5D5D5" maxW="160px" mr="15px">
             <option value="wszystkie">wszystkie</option>
             <option value="25">25</option>
             <option value="50">50</option>
@@ -43,12 +44,12 @@ const DesktopHistory = () => {
             <option value="200">200</option>
           </Select>
 
-          <Stack direction="row" alignItems="center" w="170px">
+          <Stack direction="row" alignItems="center" w="170px" mr="15px">
             <Text>od:</Text>
             <Input type="data" placeholder="DD.MM.RRRR"></Input>
           </Stack>
 
-          <Stack direction="row" alignItems="center" w="170px">
+          <Stack direction="row" alignItems="center" w="170px" mr="15px">
             <Text>do:</Text>
             <Input type="data" placeholder="DD.MM.RRRR"></Input>
           </Stack>

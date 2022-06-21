@@ -16,9 +16,9 @@ const HistoryListItem = () => {
     <Flex
       w="60vw"
       m="10px auto 5px 15px"
-      color="black"
       flexDirection="column"
       maxW="2000px"
+      color="#2D3748"
     >
       <Box m="10px 0 0 10px" w="100%">
         <Text size="sm" fontWeight="500" m="5px">
@@ -31,13 +31,12 @@ const HistoryListItem = () => {
               <Heading size="sm">Rafał Walkowiak</Heading>
               <Text fontSize="sm">21:37</Text>
             </Stack>
-            <Text fontSize="sm" isTruncated>
-              Wyciągnięto z magazynu:
-            </Text>
-            <NameAndQuantityElement />
-            <Text as="u" color="#FF7700" onClick={onOpen}>
-              pokaż więcej
-            </Text>
+            <Stack direction="row">
+              <NameAndQuantityElement />
+              <Text as="u" color="#FF7700" onClick={onOpen}>
+                pokaż&nbsp;więcej...
+              </Text>
+            </Stack>
           </Stack>
         </Stack>
 
@@ -48,13 +47,12 @@ const HistoryListItem = () => {
               <Heading size="sm">Rafał Walkowiak</Heading>
               <Text fontSize="sm">21:37</Text>
             </Stack>
-            <Text fontSize="sm" isTruncated>
-              Wyciągnięto z magazynu:
-            </Text>
-            <NameAndQuantityElement />
-            <Text as="u" color="#FF7700" onClick={onOpen}>
-              pokaż więcej
-            </Text>
+            <Stack direction="row">
+              <NameAndQuantityElement />
+              <Text as="u" color="#FF7700" onClick={onOpen}>
+                pokaż&nbsp;więcej...
+              </Text>
+            </Stack>
           </Stack>
         </Stack>
 
@@ -65,13 +63,12 @@ const HistoryListItem = () => {
               <Heading size="sm">Rafał Walkowiak</Heading>
               <Text fontSize="sm">21:37</Text>
             </Stack>
-            <Text fontSize="sm" isTruncated>
-              Wyciągnięto z magazynu:
-            </Text>
-            <NameAndQuantityElement />
-            <Text as="u" color="#FF7700" onClick={onOpen}>
-              pokaż więcej
-            </Text>
+            <Stack direction="row">
+              <NameAndQuantityElement />
+              <Text as="u" color="#FF7700" onClick={onOpen}>
+                pokaż&nbsp;więcej...
+              </Text>
+            </Stack>
           </Stack>
         </Stack>
 
@@ -82,13 +79,12 @@ const HistoryListItem = () => {
               <Heading size="sm">Rafał Walkowiak</Heading>
               <Text fontSize="sm">21:37</Text>
             </Stack>
-            <Text fontSize="sm" isTruncated>
-              Wyciągnięto z magazynu:
-            </Text>
-            <NameAndQuantityElement />
-            <Text as="u" color="#FF7700" onClick={onOpen}>
-              pokaż więcej
-            </Text>
+            <Stack direction="row">
+              <NameAndQuantityElement />
+              <Text as="u" color="#FF7700" onClick={onOpen}>
+                pokaż&nbsp;więcej...
+              </Text>
+            </Stack>
           </Stack>
         </Stack>
       </Box>
@@ -104,13 +100,12 @@ const HistoryListItem = () => {
               <Heading size="sm">Rafał Walkowiak</Heading>
               <Text fontSize="sm">21:37</Text>
             </Stack>
-            <Text fontSize="sm" isTruncated>
-              Wyciągnięto z magazynu:
-            </Text>
-            <NameAndQuantityElement />
-            <Text as="u" color="#FF7700" onClick={onOpen}>
-              pokaż więcej
-            </Text>
+            <Stack direction="row">
+              <NameAndQuantityElement />
+              <Text as="u" color="#FF7700" onClick={onOpen}>
+                pokaż&nbsp;więcej...
+              </Text>
+            </Stack>
           </Stack>
         </Stack>
       </Box>
