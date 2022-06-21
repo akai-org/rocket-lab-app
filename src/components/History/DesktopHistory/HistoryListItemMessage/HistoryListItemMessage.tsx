@@ -1,6 +1,6 @@
-import { Text, Flex } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 
-const NameAndQuantityElement = () => {
+const HistoryListItemMessage = () => {
   return (
     <Text fontSize="sm" isTruncated>
       Wyciągnięto z magazynu: Silnik od malucha x1, Śruba lewoskrętna x25,
@@ -14,4 +14,4 @@ const NameAndQuantityElement = () => {
   )
 }
 
-export default NameAndQuantityElement
+export default HistoryListItemMessage
