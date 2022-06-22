@@ -7,9 +7,10 @@ interface State {
   displayItems: PopulatedItem[]
   searchTerm?: string
   category?: string
+  sorting: SortType
 }
 
-const initialState: State = { items: [], displayItems: [] }
+const initialState: State = { items: [], displayItems: [], sorting: 'newest' }
 
 export const itemsSlice = createSlice({
   name: 'itemsSlice',
@@ -38,65 +39,34 @@ export const itemsSlice = createSlice({
       const copiedItems = [...state.items]
       copiedItems.splice(itemIndex, 1, action.payload)
       state.items = copiedItems
+
+      filterItems(state)
+      resort(state)
     },
     addItems: (state, action: PayloadAction<PopulatedItem[]>) => {
       state.items.push(...action.payload)
+
+      filterItems(state)
+      resort(state)
     },
     removeItem: (state, action: PayloadAction<PopulatedItem>) => {
       state.items = state.items.filter((item) => item.id !== action.payload.id)
       state.displayItems = state.displayItems.filter(
         (item) => item.id !== action.payload.id
       )
+
+      filterItems(state)
+      resort(state)
     },
     addItem: (state, action: PayloadAction<PopulatedItem>) => {
       state.items = [action.payload, ...state.items]
-      if (
-        action.payload.categories.some(
-          (category) => category.name === state.category
-        )
-      ) {
-        state.displayItems.push(action.payload)
-      }
+
+      filterItems(state)
+      resort(state)
     },
-    resortItems: (state, action: PayloadAction<SortType>) => {
-      switch (action.payload) {
-        case 'newest':
-          state.displayItems = [...state.displayItems].sort((a, b) => {
-            if (a.updatedAt > b.updatedAt) {
-              return -1
-            }
-            if (a.updatedAt < b.updatedAt) {
-              return 1
-            }
-
-            return 0
-          })
-          break
-        case 'oldest':
-          state.displayItems = [...state.displayItems].sort((a, b) => {
-            if (a.updatedAt > b.updatedAt) {
-              return 1
-            }
-            if (a.updatedAt < b.updatedAt) {
-              return -1
-            }
-
-            return 0
-          })
-          break
-        case 'alphabetically':
-          state.displayItems = [...state.displayItems].sort((a, b) => {
-            if (a.name.toLowerCase() > b.name.toLowerCase()) {
-              return 1
-            }
-            if (a.name.toLowerCase() < b.name.toLowerCase()) {
-              return -1
-            }
-
-            return 0
-          })
-          break
-      }
+    setSorting: (state, action: PayloadAction<SortType>) => {
+      state.sorting = action.payload
+      resort(state)
     },
   },
 })
@@ -109,11 +79,52 @@ export const {
   removeItem,
   updateItem,
   addItems,
-  resortItems,
+  setSorting,
   resetDisplayItems,
   setCategory,
   setSearchTerm,
 } = itemsSlice.actions
+function resort(state: State) {
+  switch (state.sorting) {
+    case 'newest':
+      state.displayItems = [...state.displayItems].sort((a, b) => {
+        if (a.updatedAt > b.updatedAt) {
+          return -1
+        }
+        if (a.updatedAt < b.updatedAt) {
+          return 1
+        }
+
+        return 0
+      })
+      break
+    case 'oldest':
+      state.displayItems = [...state.displayItems].sort((a, b) => {
+        if (a.updatedAt > b.updatedAt) {
+          return 1
+        }
+        if (a.updatedAt < b.updatedAt) {
+          return -1
+        }
+
+        return 0
+      })
+      break
+    case 'alphabetically':
+      state.displayItems = [...state.displayItems].sort((a, b) => {
+        if (a.name.toLowerCase() > b.name.toLowerCase()) {
+          return 1
+        }
+        if (a.name.toLowerCase() < b.name.toLowerCase()) {
+          return -1
+        }
+
+        return 0
+      })
+      break
+  }
+}
+
 function filterItems(state: State) {
   const regex = state.searchTerm ? new RegExp(state.searchTerm, 'i') : undefined
   state.displayItems = state.items.filter((item) => {

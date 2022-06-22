@@ -16,10 +16,10 @@ import { fetcher } from '../utils/requests'
 import { setCategories } from '../store/Slices/categoriesSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  resortItems,
   setCategory,
   setItems,
   setSearchTerm,
+  setSorting,
 } from '../store/Slices/itemsSlice'
 import { PopulatedItem } from '../mongo/models/item'
 import { itemsInfo } from '../store/store'
@@ -66,8 +66,7 @@ const Home: NextPage<Props> = ({
   }, [])
 
   useEffect(() => {
-    console.log(sort)
-    dispatch(resortItems(sort))
+    dispatch(setSorting(sort))
   }, [sort])
 
   useEffect(() => {
