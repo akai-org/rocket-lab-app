@@ -43,24 +43,11 @@ const ModalEditList = (props: ModalEditListProps) => {
 
   const deleteCartList = useDeleteCartList()
 
-  // TODO: The same function is used in Desktop List & Mobile list - redundancy
-  // const deleteCartList = async () => {
-  //   try {
-  //     const deletedCartList = await fetcher(API_URL + '/api/cart/delete', {
-  //       method: 'DELETE',
-  //       body: { id: props.cartList.id },
-  //     })
-  //     dispatch(removeExisitngCartList(deletedCartList))
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
   const updateCartList = async () => {
     try {
       const updatedCartList = await fetcher(API_URL + '/api/cart/update', {
         method: 'PUT',
-        body: { id: cartList.id, items: cartList.items },
+        body: { id: cartList.id, items: cartList.items, name: listName },
       })
       dispatch(updateExistingCartLists(updatedCartList))
     } catch (error) {

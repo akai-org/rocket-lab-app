@@ -20,14 +20,15 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItem } from '../../../../../store/Slices/itemsSlice'
 import { categoriesInfo } from '../../../../../store/store'
 import { API_URL } from '../../../../../utils/constants'
 import { fetcher } from '../../../../../utils/requests'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
 
 const ItemsEdit = () => {
-  const router = useRouter()
+  const dispatch = useDispatch()
   const categories = useSelector(categoriesInfo).categories
   const [nameIsValid, setNameIsValid] = useState(true)
   const name = useRef<HTMLInputElement>(null)
@@ -58,7 +59,9 @@ const ItemsEdit = () => {
         },
       })
 
-      router.reload()
+      console.log({ createdItem })
+
+      dispatch(addItem(createdItem))
     } catch (error) {
       console.log(error)
     }

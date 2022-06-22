@@ -117,11 +117,15 @@ export async function deleteItem(id: string) {
 }
 
 export async function addItem(item: Item) {
-  const createdItem = await ItemModel.create(item)
+  const createdItem = await (
+    await ItemModel.create(item)
+  ).populate('categories')
   return createdItem
 }
 
 export async function fetchAllItems() {
-  const items = await ItemModel.find({}).sort({updatedAt: -1}).populate('categories')
+  const items = await ItemModel.find({})
+    .sort({ updatedAt: -1 })
+    .populate('categories')
   return items
 }

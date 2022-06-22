@@ -57,9 +57,8 @@ const ModalEditItem = (props: ModalEditItemProps) => {
     try {
       const updatedItem = await fetcher(API_URL + '/api/items/update', {
         method: 'PUT',
-        body: { id: props.id, item: { name, description, quantity } },
+        body: { id: props.id, item: { name, description, quantity, categories: checkboxes } },
       })
-      router.reload()
       dispatch(updateItem(updatedItem))
     } catch (error) {
       console.log(error)
@@ -74,8 +73,6 @@ const ModalEditItem = (props: ModalEditItemProps) => {
         method: 'DELETE',
         body: { id: props.id },
       })
-
-      router.reload()
       dispatch(removeItem(deletedItem))
     } catch (error) {
       console.log(error)

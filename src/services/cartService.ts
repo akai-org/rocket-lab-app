@@ -17,14 +17,18 @@ export async function createNewCartList(
   return newCartItem
 }
 
-export async function updateCartList(id: string, items: CartItem[]) {
+export async function updateCartList(
+  id: string,
+  items: CartItem[],
+  name: string
+) {
   const mappedItems = items.map((item) => ({
     quantity: item.quantity,
     item: item.item?.id,
   }))
   return await CartListModel.findOneAndUpdate(
     { _id: id },
-    { items: mappedItems },
+    { items: mappedItems, name },
     { new: true }
   ).populate('items.item')
 }
