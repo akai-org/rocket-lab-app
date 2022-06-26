@@ -8,7 +8,6 @@ import {
   MainViewProps,
   sortingType,
 } from '../../../utils/types/frontendGeneral'
-import FiltersGeneral from '../../UI/FiltersGeneral/FiltersGeneral'
 import { useSelector } from 'react-redux'
 import { itemsInfo, storageCartInfo } from '../../../store/store'
 import { HiInformationCircle } from 'react-icons/hi'
@@ -19,6 +18,7 @@ import { ITEMS_QUERY_LIMIT } from '../../../utils/constants'
 import ProductButton from '../../UI/Custom Buttons/ProductButton/ProductButton'
 import { useAddNewList } from '../../../utils/effects/useAddNewList'
 import queryString from 'query-string'
+import MobileWrapper from '../../UI/Wrappers/MobileWrapper/MobileWrapper'
 
 const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
   const router = useRouter()
@@ -99,12 +99,7 @@ const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
   }, [storageCartData.newCartList, isOpenDetails])
 
   return (
-    <Flex
-      flexWrap="wrap"
-      minW="300px"
-      m="10px 0"
-      mb={isFiltersOpen ? '320px' : '60px'}
-    >
+    <MobileWrapper flexDirection="row" flexWrap="wrap" minW="300px" mb="60px">
       <Sorting setListType={setListType} listType={listType} />
       <StorageEdit />
       {listType === 'grid'
@@ -130,7 +125,7 @@ const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
         isOpen={isOpenDetails}
         isCentered
       />
-    </Flex>
+    </MobileWrapper>
   )
 }
 

@@ -4,17 +4,15 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Box,
   Text,
 } from '@chakra-ui/react'
-import CategoryEdit from './CategoryEdit/CategoryEdit'
-import ItemsEdit from './ItemsEdit/ItemsEdit'
+import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 
-const StorageEdit = () => {
+const AddScheme = () => {
   return (
     <Accordion
       w="95%"
-      m="0 auto"
+      m="10px auto"
       borderRadius="6px"
       border="1px solid #C4C4C4"
       allowMultiple
@@ -23,22 +21,20 @@ const StorageEdit = () => {
         <AccordionButton>
           <Text
             flex="1"
+            noOfLines={1}
             fontSize="17px"
             fontWeight="500"
             color="#2D3748"
             textAlign="left"
           >
-            Edycja Magazynu
+            Przedmiot spoza magazynu
           </Text>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel>
-          <ItemsEdit />
-          <CategoryEdit />
-        </AccordionPanel>
+        <AccordionPanel></AccordionPanel>
       </AccordionItem>
     </Accordion>
   )
 }
 
-export default StorageEdit
+export default AddScheme

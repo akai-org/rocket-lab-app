@@ -144,15 +144,14 @@ const Filters: React.FC<Props> = (props) => {
               />
               <Icon h="6" w="6" ml="5px" as={AiOutlineSearch} />
             </Flex>
-            <Flex pt="5px">
-              <Text
-                mr="5px"
-                fontSize="16px"
-                onClick={() => {
-                  onOpen()
-                  props.setIsFiltersOpen(true)
-                }}
-              >
+            <Flex
+              pt="5px"
+              onClick={() => {
+                onOpen()
+                props.setIsFiltersOpen(true)
+              }}
+            >
+              <Text mr="5px" fontSize="16px">
                 Filtry
               </Text>
               <Icon

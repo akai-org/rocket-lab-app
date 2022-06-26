@@ -51,7 +51,7 @@ const List = (props: Props) => {
       justifyContent="center"
     >
       <AccordionItem border="none">
-        <Flex height="45px">
+        <Flex>
           <AccordionButton w="94%" justifyContent="space-between">
             <Text
               fontSize="17px"
