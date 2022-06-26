@@ -73,7 +73,7 @@ const ItemsEdit = () => {
             fontWeight="500"
             color="#2D3748"
             textAlign="left"
-            h="20px"
+            h="25px"
           >
             Dodanie części
           </Box>
@@ -108,7 +108,7 @@ const ItemsEdit = () => {
               h="32px"
               min={1}
               id="amount"
-              defaultValue={15}
+              defaultValue={1}
             >
               <NumberInputField ref={quantity} h="32px" fontSize="14px" />
               <NumberInputStepper>

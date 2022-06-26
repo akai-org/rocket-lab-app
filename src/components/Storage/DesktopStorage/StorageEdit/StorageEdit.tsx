@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Text,
 } from '@chakra-ui/react'
 import CategoryEdit from './CategoryEdit/CategoryEdit'
 import ItemsEdit from './ItemsEdit/ItemsEdit'
@@ -19,16 +20,16 @@ const StorageEdit = () => {
     >
       <AccordionItem border="none">
         <AccordionButton>
-          <Box
+          <Text
             flex="1"
+            m="5px 5px 5px 10px"
             fontSize="20px"
-            p="10px"
-            fontWeight="500"
-            color="#2D3748"
+            fontWeight="600"
+            color="#4A5568"
             textAlign="left"
           >
             Edycja Magazynu
-          </Box>
+          </Text>
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel>
