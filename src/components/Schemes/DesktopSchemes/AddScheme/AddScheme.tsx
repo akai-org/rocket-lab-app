@@ -31,18 +31,14 @@ const AddScheme = () => {
   }
 
   return (
-    <Accordion
-      p="5px 5px 5px 15px"
-      borderRadius="6px"
-      border="1px solid #C4C4C4"
-      allowMultiple
-    >
+    <Accordion borderRadius="6px" border="1px solid #C4C4C4" allowMultiple>
       <AccordionItem border="none">
         <AccordionButton>
           <Text
             flex="1"
             fontSize="20px"
             fontWeight="600"
+            m="5px 5px 5px 15px"
             color="#4A5568"
             textAlign="left"
           >

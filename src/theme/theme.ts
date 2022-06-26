@@ -18,4 +18,7 @@ export const theme = extendTheme({
     heading: 'Montserrat, sans-serif',
     body: 'Inter, sans-serif',
   },
+  components: {
+    Button: { baseStyle: { _focus: { boxShadow: 'none' } } },
+  },
 })
