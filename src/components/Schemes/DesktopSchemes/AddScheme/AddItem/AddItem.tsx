@@ -10,11 +10,10 @@ import {
 import Select from 'react-select'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { itemsInfo, schemeInfo } from '../../../../../store/store'
+import { itemsInfo } from '../../../../../store/store'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
 import { addItem } from '../../../../../store/Slices/schemeSlice'
-import is from '@sindresorhus/is'
-import ItemsList from '../ItemsList/ItemsList'
+import SearchSchemeSelect from '../../../../UI/SearchSchemeSelect/SearchSchemeSelect'
 
 interface SelectedType {
   value: string | null
@@ -28,7 +27,9 @@ interface AddItemProps {
 
 const AddItem = (props: AddItemProps) => {
   const [quantity, setQuantity] = useState(1)
-  const [selectedOption, setSelectedOption] = useState<SelectedType>({
+  const [selectedOption, setSelectedOption] = useState<
+    SelectedType | undefined
+  >({
     value: null,
     label: null,
     id: null,
@@ -48,28 +49,11 @@ const AddItem = (props: AddItemProps) => {
   return (
     <Flex w="100%" direction="column">
       <Flex>
-        <Select
-          styles={{
-            container: (provided) => ({
-              ...provided,
-              width: '100%',
-            }),
-            control: () => ({
-              display: 'flex',
-              border: '1px solid #E2E8F0',
-              borderRadius: '6px',
-              height: '32px',
-              lineHeight: '20px',
-            }),
-            option: (provided) => ({
-              ...provided,
-              height: '32px',
-              lineHeight: '20px',
-            }),
-          }}
-          maxMenuHeight={200}
+        <SearchSchemeSelect
           value={selectedOption}
           onChange={(e) => {
+            console.log(e)
+            // @ts-ignore
             e !== null && setSelectedOption({ ...e })
           }}
           options={options}
@@ -79,6 +63,7 @@ const AddItem = (props: AddItemProps) => {
           h="32px"
           w="20%"
           maxW="100px"
+          minW="67px"
           ml="10px"
           fontSize="16px"
           borderColor="#E2E8F0"
@@ -88,7 +73,7 @@ const AddItem = (props: AddItemProps) => {
           }}
           min={0}
         >
-          <NumberInputField h="32px" />
+          <NumberInputField h="32px" px="5px" />
           <NumberInputStepper>
             <NumberIncrementStepper />
             <NumberDecrementStepper />

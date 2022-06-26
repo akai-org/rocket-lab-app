@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import {
-  Box,
   Flex,
+  HStack,
   Image,
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -16,6 +16,8 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { removeItem } from '../../../../../../store/Slices/schemeSlice'
 import { PopulatedItem } from '../../../../../../mongo/models/item'
+import ModalInfo from '../../../../../UI/Modals/ModalInfo/ModalInfo'
+import { changeItemQuantity } from '../../../../../../store/Slices/storageCartSlice'
 
 interface ItemProps {
   item: PopulatedItem
@@ -30,10 +32,9 @@ const Item = ({ item, key }: ItemProps) => {
     dispatch(removeItem(item))
   }
   return (
-    <Tr fontSize="14px" h="40px" key={key}>
+    <Tr fontSize="14px" h="40px">
       <Td>
         <Flex justifyContent="flex-start" cursor="pointer">
-          <Image src="item.png" w="40px" h="40px" />
           <Text lineHeight="40px" noOfLines={1} ml="10px">
             {item.name}
           </Text>
@@ -50,7 +51,7 @@ const Item = ({ item, key }: ItemProps) => {
           onChange={(e) => setQuantity(+e)}
           min={1}
         >
-          <NumberInputField h="30px" />
+          <NumberInputField px="5px" h="30px" />
           <NumberInputStepper h="30px">
             <NumberIncrementStepper />
             <NumberDecrementStepper />

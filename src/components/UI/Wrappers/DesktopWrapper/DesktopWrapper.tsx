@@ -1,7 +1,7 @@
 import { Flex, FlexProps } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 
-interface DesktopWrapperProps extends FlexProps {
+export interface DesktopWrapperProps extends FlexProps {
   children: ReactNode
 }
 
