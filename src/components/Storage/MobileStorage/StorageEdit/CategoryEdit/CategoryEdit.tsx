@@ -81,7 +81,7 @@ const CategoryEdit = () => {
             fontWeight="500"
             color="#2D3748"
             textAlign="left"
-            h="20px"
+            h="25px"
           >
             Edycja kategorii
           </Box>

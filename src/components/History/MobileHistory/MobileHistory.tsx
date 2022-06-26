@@ -3,13 +3,14 @@ import { IoMdFunnel } from 'react-icons/io'
 import HistoryList from './HistoryList/HistoryList'
 import { useRef } from 'react'
 import FilterDrawer from './FilterDrawer/FilterDrawer'
+import MobileWrapper from '../../UI/Wrappers/MobileWrapper/MobileWrapper'
 
 const MobileHistory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const filterRef = useRef<HTMLDivElement>(null)
 
   return (
-    <Flex mt="6rem" color="black" flexDirection="column">
+    <MobileWrapper color="black">
       <Box textAlign="left">
         <Text fontSize="25px" fontWeight="600" ml="15px" isTruncated>
           Historia
@@ -47,7 +48,7 @@ const MobileHistory = () => {
         </Stack>
       </Flex>
       <HistoryList />
-    </Flex>
+    </MobileWrapper>
   )
 }
 

@@ -2,7 +2,6 @@ import { Button, Flex, Text, useDisclosure, useToast } from '@chakra-ui/react'
 import FiltersControlls from './Filters/Filters'
 import DesktopItemsList from './DesktopItemsList/DesktopItemsList'
 import { MainViewProps } from '../../../utils/types/frontendGeneral'
-import FiltersGeneral from '../../UI/FiltersGeneral/FiltersGeneral'
 import { useSelector } from 'react-redux'
 import { storageCartInfo } from '../../../store/store'
 import { useEffect } from 'react'
@@ -11,6 +10,7 @@ import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
 import Router from 'next/router'
 import StorageEdit from './StorageEdit/StorageEdit'
 import { useAddNewList } from '../../../utils/effects/useAddNewList'
+import DesktopWrapper from '../../UI/Wrappers/DesktopWrapper/DesktopWrapper'
 
 const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
@@ -67,7 +67,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   }, [storageCartData.newCartList.length, isOpenDetails])
 
   return (
-    <Flex flexDirection="row" w="100vw" maxW="2000px" m="75px auto 0 auto">
+    <DesktopWrapper>
       <Flex w="95%" flexDirection="column" ml="223px" p="40px">
         <StorageEdit />
         <FiltersControlls />
@@ -80,7 +80,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         isOpen={isOpenDetails}
         isCentered
       />
-    </Flex>
+    </DesktopWrapper>
   )
 }
 

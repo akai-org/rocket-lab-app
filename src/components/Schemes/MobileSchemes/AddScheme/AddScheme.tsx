@@ -1,18 +1,17 @@
 import {
-  Input,
-  Text,
-  Box,
   Accordion,
-  AccordionItem,
   AccordionButton,
   AccordionIcon,
+  AccordionItem,
   AccordionPanel,
   Flex,
+  Input,
+  Text,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
-import AddItem from './AddItem/AddItem'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
+import AddItem from '../../DesktopSchemes/AddScheme/AddItem/AddItem'
 import ItemsList from './ItemsList/ItemsList'
+import { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { schemeInfo } from '../../../../store/store'
 
@@ -36,10 +35,10 @@ const AddScheme = () => {
         <AccordionButton>
           <Text
             flex="1"
-            fontSize="20px"
-            fontWeight="600"
-            m="5px 5px 5px 15px"
-            color="#4A5568"
+            noOfLines={1}
+            fontSize="17px"
+            fontWeight="500"
+            color="#2D3748"
             textAlign="left"
           >
             Dodaj Schemat

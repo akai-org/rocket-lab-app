@@ -14,7 +14,7 @@ const Sorting: React.FC<{
       justifyContent="space-between"
       w="100%"
       minW="300px"
-      mt="80px"
+      mt="5px"
       mb="20px"
       p="0 10px"
       color="#D5D5D5"

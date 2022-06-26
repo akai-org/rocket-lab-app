@@ -29,16 +29,12 @@ const AddItem = () => {
   }
 
   return (
-    <Accordion
-      p="5px 5px 5px 10px"
-      borderRadius="6px"
-      border="1px solid #C4C4C4"
-      allowMultiple
-    >
+    <Accordion borderRadius="6px" border="1px solid #C4C4C4" allowMultiple>
       <AccordionItem border="none">
         <AccordionButton>
           <Text
             flex="1"
+            m="5px 5px 5px 10px"
             fontSize="20px"
             fontWeight="600"
             color="#4A5568"

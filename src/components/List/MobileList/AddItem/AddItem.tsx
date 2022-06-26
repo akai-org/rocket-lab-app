@@ -43,9 +43,9 @@ const AddItem = () => {
           <Text
             flex="1"
             noOfLines={1}
-            fontSize="20px"
+            fontSize="17px"
             fontWeight="500"
-            color="#4A5568"
+            color="#2D3748"
             textAlign="left"
           >
             Przedmiot spoza magazynu
