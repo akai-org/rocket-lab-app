@@ -1,5 +1,5 @@
 import { Schema, Model, models, model } from 'mongoose'
-import { Item, PopulatedItem } from './item'
+import { PopulatedItem } from './item'
 
 export interface CartList {
   id: string
