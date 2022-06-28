@@ -16,7 +16,7 @@ import { AiOutlineTool } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
 import { GrLogout } from 'react-icons/gr'
-import { IS_DEV } from '../../../../utils/constants'
+import { IS_DEV } from '../../../../../utils/constants'
 
 const MobileSidebar = () => {
   const router = useRouter()
