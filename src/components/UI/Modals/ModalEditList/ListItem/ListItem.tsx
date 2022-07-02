@@ -11,28 +11,32 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from '@chakra-ui/react'
-import { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { CartItem } from '../../../../../mongo/models/cart'
 import ModalInfo from '../../ModalInfo/ModalInfo'
 
 interface ModalEditListProps {
-  item: CartItem
+  cartItem: CartItem
+  changeQuantity: (newQuantity: number, itemId: string) => void
+  onRemoveItem: (itemId: string) => void
 }
 
-const ListItem = ({ item }: ModalEditListProps) => {
-  const [quantity, setQuantity] = useState(1)
+const ListItem = ({
+  cartItem,
+  changeQuantity,
+  onRemoveItem,
+}: ModalEditListProps) => {
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,
     onClose: onCloseInfo,
   } = useDisclosure()
-  return (
+  return cartItem.item ? (
     <Tr fontSize="14px" h="40px">
-      <Td w="60%">
+      <Td>
         <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
-          <Text fontWeight="500" minW="50px" isTruncated>
-            {item.item.name}
+          <Text fontWeight="500" noOfLines={1}>
+            {cartItem.item.name}
           </Text>
         </Flex>
       </Td>
@@ -43,9 +47,9 @@ const ListItem = ({ item }: ModalEditListProps) => {
           h="30px"
           fontSize="16px"
           borderColor="#E2E8F0"
-          defaultValue={quantity}
+          defaultValue={cartItem.quantity}
           onChange={(e) => {
-            setQuantity(parseInt(e))
+            changeQuantity(+e, cartItem.id)
           }}
           min={1}
         >
@@ -58,22 +62,25 @@ const ListItem = ({ item }: ModalEditListProps) => {
       </Td>
       <Td>
         <Flex justifyContent="flex-end">
-          <AiOutlineClose cursor="pointer" />
+          <AiOutlineClose
+            onClick={() => onRemoveItem(cartItem.id)}
+            cursor="pointer"
+          />
         </Flex>
       </Td>
       <ModalInfo
-        categories={item.item.categories}
-        id={item.item.id}
-        name={item.item.name}
-        description={item.item.description}
-        imageUrl={item.item.imageUrl}
-        quantity={item.item.quantity}
+        categories={cartItem.item.categories}
+        id={cartItem.item.id}
+        name={cartItem.item.name}
+        description={cartItem.item.description}
+        imageUrl={cartItem.item.imageUrl}
+        quantity={cartItem.item.quantity}
         onClose={onCloseInfo}
         isOpen={isOpenInfo}
         isCentered
       />
     </Tr>
-  )
+  ) : null
 }
 
 export default ListItem

@@ -13,9 +13,14 @@ const handler: NextApiHandler = async (req, res) => {
 
   if (method === 'DELETE') {
     try {
-      const newCartList = await CartListModel.deleteOne({id: req.body.id})
-      console.log(newCartList)
-      res.status(200).send(newCartList)
+      const deletedCartList = await CartListModel.findByIdAndDelete(
+        req.body.id,
+        {
+          new: true,
+        }
+      )
+      console.log(deletedCartList)
+      res.status(200).send(deletedCartList)
     } catch (error) {
       console.log(error)
       res.status(500).send({ error })

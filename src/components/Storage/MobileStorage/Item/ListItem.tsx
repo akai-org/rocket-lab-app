@@ -1,7 +1,7 @@
 import { Box, Flex, Image, Text, useDisclosure } from '@chakra-ui/react'
 import { AiOutlineCheck, AiOutlinePlus } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { Item } from '../../../../mongo/models/item'
+import { Item, PopulatedItem } from '../../../../mongo/models/item'
 import {
   addToCart,
   removeFromCart,
@@ -12,7 +12,7 @@ import ModalEditItem from '../../../UI/Modals/ModalEditItem/ModalEditItem'
 import ModalInfo from '../../../UI/Modals/ModalInfo/ModalInfo'
 
 interface Props {
-  item: Item
+  item: PopulatedItem
 }
 
 const ListItem = ({ item }: Props) => {
@@ -40,14 +40,19 @@ const ListItem = ({ item }: Props) => {
         <Image
           onClick={onOpenInfo}
           src={item.imageUrl}
-          minH="100px"
-          minW="100px"
-          w="100px"
-          h="100px"
+          minH="90px"
+          minW="90px"
+          w="90px"
+          h="90px"
         />
       </Flex>
       <Box h="100%" w="80%" m="0 auto 0 0" textAlign="left" p="20px">
-        <Text onClick={onOpenInfo} fontSize="16px" fontWeight="500">
+        <Text
+          onClick={onOpenInfo}
+          fontSize="16px"
+          noOfLines={1}
+          fontWeight="500"
+        >
           {item.name}
         </Text>
 
@@ -104,6 +109,7 @@ const ListItem = ({ item }: Props) => {
       <ModalEditItem
         id={item.id}
         name={item.name}
+        categories={item.categories}
         description={item.description}
         imageUrl={item.imageUrl}
         quantity={item.quantity}

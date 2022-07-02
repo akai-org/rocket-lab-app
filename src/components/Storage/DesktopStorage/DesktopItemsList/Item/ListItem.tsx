@@ -1,7 +1,7 @@
 import { Flex, Image, Td, Text, Tr, useDisclosure } from '@chakra-ui/react'
 import { AiOutlineCheck, AiOutlinePlus } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { Item } from '../../../../../mongo/models/item'
+import { PopulatedItem } from '../../../../../mongo/models/item'
 import {
   addToCart,
   removeFromCart,
@@ -12,10 +12,11 @@ import ModalEditItem from '../../../../UI/Modals/ModalEditItem/ModalEditItem'
 import ModalInfo from '../../../../UI/Modals/ModalInfo/ModalInfo'
 
 interface Props {
-  item: Item
+  item: PopulatedItem
 }
 
 const ListItem = ({ item }: Props) => {
+  console.log(item)
   const dispatch = useDispatch()
   const storageCartData = useSelector(storageCartInfo).newCartList
   const {
@@ -30,28 +31,22 @@ const ListItem = ({ item }: Props) => {
   } = useDisclosure()
   return (
     <>
-      <Tr fontSize="14px" w="100%">
-        <Td
-          justifyContent="flex-start"
-          onClick={onOpenInfo}
-          cursor="pointer"
-          w="30%"
-          maxW="250px"
-        >
+      <Tr fontSize="14px">
+        <Td justifyContent="flex-start" onClick={onOpenInfo} cursor="pointer">
           <Flex>
             <Image src={item.imageUrl} w="40px" h="40px" />
-            <Text isTruncated lineHeight="40px" ml="10px">
+            <Text noOfLines={1} lineHeight="40px" ml="10px">
               {item.name}
             </Text>
           </Flex>
         </Td>
-        <Td onClick={onOpenInfo} cursor="pointer" w="50%" maxW="500px">
-          <Text isTruncated>{item.description}</Text>
+        <Td onClick={onOpenInfo} cursor="pointer">
+          <Text noOfLines={1}>{item.description}</Text>
         </Td>
-        <Td textAlign="right" minW="140px">
+        <Td textAlign="right">
           <Text
+            noOfLines={1}
             fontSize="14px"
-            isTruncated
             fontWeight={item.quantity ? '400' : '500'}
             color={item.quantity ? 'inherit' : 'red.500'}
           >
@@ -102,6 +97,7 @@ const ListItem = ({ item }: Props) => {
       <ModalEditItem
         id={item.id}
         name={item.name}
+        categories={item.categories}
         description={item.description}
         imageUrl={item.imageUrl}
         quantity={item.quantity}

@@ -27,33 +27,29 @@ const DesktopItemsList = ({ items, itemsCount }: MainViewProps) => {
       border="1px solid #C4C4C4"
       mt="20px"
     >
-      <PaginationGeneral itemsCount={itemsCount}>
-        {(controlls) => (
-          <PaginationControlls
-            {...controlls}
-            listType={listType}
-            setListType={setListType}
-          />
-        )}
-      </PaginationGeneral>
+      <PaginationControlls
+        listType={listType}
+        setListType={setListType}
+      />
       {listType === 'list' ? (
         <Flex flexWrap="wrap" p="20px">
           <Table p="20px">
             <Thead>
               <Tr fontSize="16px" fontWeight="700">
-                <Th>NAZWA</Th>
+                <Th w="50%">NAZWA</Th>
                 <Th w="50%">OPIS</Th>
-                <Th textAlign="right" w="10%">
-                  ILOŚĆ SZTUK
+                <Th textAlign="right" w="1%">
+                  ILOŚĆ
                 </Th>
-                <Th textAlign="right" w="10%">
+                <Th textAlign="right" w="1%">
                   Akcje
                 </Th>
               </Tr>
             </Thead>
             <Tbody>
-              {items &&
-                items.map((item) => <ListItem item={item} key={item.id} />)}
+              {items!.map((item) =>
+                item ? <ListItem item={item} key={item.id} /> : null
+              )}
             </Tbody>
           </Table>
         </Flex>

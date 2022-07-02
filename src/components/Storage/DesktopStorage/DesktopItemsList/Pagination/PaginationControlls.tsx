@@ -1,11 +1,13 @@
 import { Flex, Select, Icon, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { FIRST_PAGE } from '../../../../../utils/constants'
+import { usePagination } from '../../../../../utils/effects/usePagination'
 import { sortingType } from '../../../../../utils/types/frontendGeneral'
 import { PaginationSettings } from '../../../../UI/PaginationGeneral/PaginationGeneral'
 import Sorting from '../Sorting/Sorting'
@@ -16,19 +18,22 @@ interface Props extends PaginationSettings {
 }
 
 export const PaginationControlls: React.FC<Props> = ({
-  handleOnChangeQuantity,
-  maxPage,
-  minPage,
-  nextPage,
-  previousPage,
-  toDisplay,
-  itemsCount,
   listType,
   setListType,
 }) => {
-  const router = useRouter()
 
-  const query = router.query
+  const {
+    maxPage,
+    minPage,
+    nextPage,
+    onToDisplayChange,
+    previousPage,
+    itemsCount,
+    toDisplay,
+    currentPage,
+    query
+  } = usePagination()
+
 
   let rangeEnd = previousPage * toDisplay
 
@@ -46,7 +51,7 @@ export const PaginationControlls: React.FC<Props> = ({
       <Flex color="#C4C4C4">
         <Flex>
           <Select
-            onChange={handleOnChangeQuantity}
+            onChange={onToDisplayChange}
             color="black"
             variant="flushed"
             h="25px"
@@ -84,7 +89,9 @@ export const PaginationControlls: React.FC<Props> = ({
           </Link>
 
           <Link
-            href={{ query: { ...query, page: nextPage, toDisplay } }}
+            href={{
+              query: { ...query, page: nextPage, toDisplay },
+            }}
             passHref
           >
             <Icon
@@ -110,7 +117,7 @@ export const PaginationControlls: React.FC<Props> = ({
           </Link>
         </Flex>
         <Text color="black" ml="10px" lineHeight="20px">
-          {query.page ? query.page : 1} z {maxPage}
+          {currentPage} z {maxPage}
         </Text>
       </Flex>
       <Flex>

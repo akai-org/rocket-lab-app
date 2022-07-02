@@ -18,28 +18,52 @@ import {
   Text,
   Divider,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItem } from '../../../../../store/Slices/itemsSlice'
+import { categoriesInfo } from '../../../../../store/store'
+import { API_URL } from '../../../../../utils/constants'
+import { fetcher } from '../../../../../utils/requests'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
 
 const ItemsEdit = () => {
+  const dispatch = useDispatch()
+  const categories = useSelector(categoriesInfo).categories
   const [nameIsValid, setNameIsValid] = useState(true)
   const name = useRef<HTMLInputElement>(null)
   const description = useRef<HTMLInputElement>(null)
-  const amount = useRef<HTMLInputElement>(null)
+  const quantity = useRef<HTMLInputElement>(null)
   const [checkboxes, setCheckboxes] = useState([''])
 
-  const submitForm = () => {
+  // FIXME: Not a form handler - misleading name
+  const submitForm = async () => {
     if (name.current!.value) {
       setNameIsValid(true)
-      const data = {
-        name: name.current!.value,
-        description: description ? description.current!.value : '',
-        amount: amount.current!.value,
-        categories: checkboxes,
-        date: new Date(),
-      }
+      await onAddItem()
     } else {
       setNameIsValid(false)
+    }
+  }
+
+  const onAddItem = async () => {
+    try {
+      const createdItem = await fetcher(API_URL + '/api/items/add', {
+        method: 'POST',
+        body: {
+          name: name.current!.value,
+          description: description ? description.current!.value : '',
+          quantity: quantity.current!.value,
+          categories: checkboxes,
+          imageUrl: '/item.png',
+        },
+      })
+
+      console.log({ createdItem })
+
+      dispatch(addItem(createdItem))
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -47,16 +71,16 @@ const ItemsEdit = () => {
     <Accordion allowMultiple>
       <AccordionItem border="none">
         <AccordionButton>
-          <Box
+          <Text
             flex="1"
             fontSize="18px"
             fontWeight="500"
             color="#2D3748"
             textAlign="left"
-            h="20px"
+            h="30px"
           >
             Dodanie części
-          </Box>
+          </Text>
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel borderLeft="1px solid #C4C4C4">
@@ -80,9 +104,9 @@ const ItemsEdit = () => {
               h="32px"
               min={1}
               id="amount"
-              defaultValue={15}
+              defaultValue={1}
             >
-              <NumberInputField ref={amount} h="32px" />
+              <NumberInputField ref={quantity} h="32px" />
               <NumberInputStepper>
                 <NumberIncrementStepper h="32px" />
                 <NumberDecrementStepper h="32px" />
@@ -102,13 +126,11 @@ const ItemsEdit = () => {
               colorScheme="orange"
             >
               <Flex flexDirection="column">
-                <Checkbox value="category1">Kategoria 1</Checkbox>
-                <Checkbox value="category2">Kategoria 2</Checkbox>
-                <Checkbox value="category3">Kategoria 3</Checkbox>
-                <Checkbox value="category4">Kategoria 4</Checkbox>
-                <Checkbox value="category5">Kategoria 5</Checkbox>
-                <Checkbox value="category6">Kategoria 6</Checkbox>
-                <Checkbox value="category7">Kategoria 7</Checkbox>
+                {categories.map((category) => (
+                  <Checkbox key={category.id} value={category.id}>
+                    {category.name}
+                  </Checkbox>
+                ))}
               </Flex>
             </CheckboxGroup>
             <Flex justifyContent="flex-end">

@@ -28,7 +28,6 @@ import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import ChosenListPopover from '../../Popovers/ChosenListPopover'
 import DeletePopover from '../../Popovers/DeletePopover'
 import CheckoutItem from './CheckoutItem'
-import { ExistingCheckoutItem } from './ExistingCheckoutItem'
 
 interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
   items: CartItem[]
@@ -75,9 +74,15 @@ const ModalAddToList = (props: ModalAddToListProps) => {
             <Table>
               <Thead>
                 <Tr fontSize="16px" fontWeight="700">
-                  <Th>NAZWA</Th>
-                  <Th textAlign="right">ILOŚĆ SZTUK</Th>
-                  <Th textAlign="right">Akcje</Th>
+                  <Th w="80%" bgColor="red.200">
+                    NAZWA
+                  </Th>
+                  <Th w="1%" textAlign="right" minW="120px">
+                    ILOŚĆ SZTUK
+                  </Th>
+                  <Th w="1" textAlign="right">
+                    Akcje
+                  </Th>
                 </Tr>
               </Thead>
               <Tbody>

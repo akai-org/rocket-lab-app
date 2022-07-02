@@ -1,7 +1,7 @@
 import React from 'react'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
-import { Flex, Select, Text, ButtonGroup, Icon } from '@chakra-ui/react'
+import { Flex, ButtonGroup, Icon } from '@chakra-ui/react'
 import { sortingType } from '../../../../utils/types/frontendGeneral'
 import { SortingGeneral } from '../../../UI/SortingGeneral/SortingGeneral'
 
@@ -14,7 +14,7 @@ const Sorting: React.FC<{
       justifyContent="space-between"
       w="100%"
       minW="300px"
-      mt="80px"
+      mt="5px"
       mb="20px"
       p="0 10px"
       color="#D5D5D5"

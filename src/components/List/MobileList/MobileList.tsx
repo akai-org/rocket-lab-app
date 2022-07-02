@@ -1,16 +1,20 @@
 import { Flex } from '@chakra-ui/react'
-import { CartListsProps } from '../../../pages/list'
+import { useSelector } from 'react-redux'
+import { storageCartInfo } from '../../../store/store'
+import { IS_DEV } from '../../../utils/constants'
 import AddItem from './AddItem/AddItem'
 import List from './List/List'
+import MobileWrapper from '../../UI/Wrappers/MobileWrapper/MobileWrapper'
 
-const MobileList = ({cartLists}: CartListsProps) => {
+const MobileList = () => {
+  const storageCartData = useSelector(storageCartInfo)
   return (
-    <Flex mt="80px" color="#3F3F3F" flexDirection="column">
-      <AddItem />
-      {cartLists.map((cartList) => (
+    <MobileWrapper pb="150px">
+      {IS_DEV && <AddItem />}
+      {storageCartData.cartLists.map((cartList) => (
         <List {...cartList} key={cartList.id} />
       ))}
-    </Flex>
+    </MobileWrapper>
   )
 }
 

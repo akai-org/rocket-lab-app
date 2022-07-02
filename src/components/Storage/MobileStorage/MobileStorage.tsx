@@ -8,22 +8,21 @@ import {
   MainViewProps,
   sortingType,
 } from '../../../utils/types/frontendGeneral'
-import FiltersGeneral from '../../UI/FiltersGeneral/FiltersGeneral'
-import { useDispatch, useSelector } from 'react-redux'
-import { storageCartInfo } from '../../../store/store'
+import { useSelector } from 'react-redux'
+import { itemsInfo, storageCartInfo } from '../../../store/store'
 import { HiInformationCircle } from 'react-icons/hi'
 import ModalAddToList from '../../UI/Modals/ModalAddToList/ModalAddToList'
-import { Router } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import StorageEdit from './StorageEdit/StorageEdit'
-import { PopulatedCartList, CartItem } from '../../../mongo/models/cart'
-import {
-  updateExistingCartLists,
-  clearCart,
-} from '../../../store/Slices/storageCartSlice'
-import { fetcher } from '../../../utils/requests'
-import { API_URL } from '../../../utils/constants'
+import { ITEMS_QUERY_LIMIT } from '../../../utils/constants'
+import ProductButton from '../../UI/Custom Buttons/ProductButton/ProductButton'
+import { useAddNewList } from '../../../utils/effects/useAddNewList'
+import queryString from 'query-string'
+import MobileWrapper from '../../UI/Wrappers/MobileWrapper/MobileWrapper'
 
-const MobileStorage = ({ items }: MainViewProps) => {
+const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
+  const router = useRouter()
+  const query = queryString.parseUrl(router.asPath).query
   const [listType, setListType] = useState<sortingType>('grid')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
   const storageCartData = useSelector(storageCartInfo)
@@ -34,52 +33,31 @@ const MobileStorage = ({ items }: MainViewProps) => {
     onClose: onCloseDetails,
   } = useDisclosure()
   const id = 'add-to-list-toast'
-
-  const dispatch = useDispatch()
+  const [skip, setSkip] = useState(ITEMS_QUERY_LIMIT)
+  const items = useSelector(itemsInfo).displayItems
 
   Router.events.on('beforeHistoryChange', () => {
     toast.closeAll()
   })
 
-  // TODO: The exact same component is used in DesktopStorage.tsx
-  const addNewList = async (name: string, listToMerge?: PopulatedCartList) => {
-    try {
-      if (!listToMerge) {
-        await fetcher(API_URL+'/api/cart/add', {
-          method: 'POST',
-          body: { name, items: storageCartData.newCartList },
-        })
-      } else {
-        const toAddList = [...storageCartData.newCartList]
-        const newList: CartItem[] = []
-        for (const item of listToMerge.items) {
-          const foundCopyindex = toAddList.findIndex(
-            (cartItem) => cartItem.item.id === item.item.id
-          )
-          const changedItem = { ...item }
-          if (toAddList[foundCopyindex]) {
-            changedItem.quantity += toAddList[foundCopyindex].quantity
+  const addNewList = useAddNewList(onCloseDetails)
 
-            toAddList.splice(foundCopyindex, 1)
-          }
-          newList.push(changedItem)
-        }
-        const updatedList = await fetcher(
-          'http://localhost:3000/api/cart/update',
-          {
-            method: 'PUT',
-            body: { id: listToMerge.id, items: [...toAddList, ...newList] },
-          }
-        )
-        console.log(updatedList)
-        dispatch(updateExistingCartLists(updatedList))
+  const processedItems = [...items].splice(0, skip)
+
+  const loadMoreItems = () => {
+    setSkip((state) => {
+      const newAmount = state + ITEMS_QUERY_LIMIT
+      if (newAmount <= items.length) {
+        return newAmount
+      } else {
+        return items.length
       }
-      dispatch(clearCart())
-      onCloseDetails()
-    } catch (error) {
-      console.log(error)
-    }
+    })
   }
+
+  useEffect(() => {
+    setSkip(ITEMS_QUERY_LIMIT)
+  }, [query.sort])
 
   useEffect(() => {
     if (!toast.isActive(id) && storageCartData.newCartList.length) {
@@ -121,20 +99,25 @@ const MobileStorage = ({ items }: MainViewProps) => {
   }, [storageCartData.newCartList, isOpenDetails])
 
   return (
-    <Flex
-      flexWrap="wrap"
-      minW="300px"
-      m="10px 0"
-      mb={isFiltersOpen ? '320px' : '60px'}
-    >
+    <MobileWrapper flexDirection="row" flexWrap="wrap" minW="300px" mb="60px">
       <Sorting setListType={setListType} listType={listType} />
       <StorageEdit />
       {listType === 'grid'
-        ? items && items.map((item) => <GridItem item={item} key={item.id} />)
-        : items && items.map((item) => <ListItem item={item} key={item.id} />)}
-      <FiltersGeneral>
-        {(props) => <Filters {...props} setIsFiltersOpen={setIsFiltersOpen} />}
-      </FiltersGeneral>
+        ? processedItems.map((item) => <GridItem item={item} key={item.id} />)
+        : processedItems.map((item) => <ListItem item={item} key={item.id} />)}
+      <Flex w="100%" alignItems="center" justifyContent="center">
+        <ProductButton
+          mt="25px"
+          mb="25px"
+          w="250px"
+          h="50px"
+          disabled={skip >= itemsCount}
+          onClick={loadMoreItems}
+        >
+          Załaduj więcej
+        </ProductButton>
+      </Flex>
+      <Filters setIsFiltersOpen={setIsFiltersOpen} />
       <ModalAddToList
         addNewCartList={addNewList}
         items={storageCartData.newCartList}
@@ -142,7 +125,7 @@ const MobileStorage = ({ items }: MainViewProps) => {
         isOpen={isOpenDetails}
         isCentered
       />
-    </Flex>
+    </MobileWrapper>
   )
 }
 

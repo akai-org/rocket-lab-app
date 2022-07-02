@@ -18,28 +18,48 @@ import {
   CheckboxGroup,
   Text,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { categoriesInfo } from '../../../../../store/store'
+import { API_URL } from '../../../../../utils/constants'
+import { fetcher } from '../../../../../utils/requests'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
 
 const ItemsEdit = () => {
+  const router = useRouter()
+  const categories = useSelector(categoriesInfo).categories
   const [nameIsValid, setNameIsValid] = useState(true)
   const name = useRef<HTMLInputElement>(null)
   const description = useRef<HTMLInputElement>(null)
-  const amount = useRef<HTMLInputElement>(null)
+  const quantity = useRef<HTMLInputElement>(null)
   const [checkboxes, setCheckboxes] = useState([''])
 
-  const submitForm = () => {
+  const submitForm = async () => {
     if (name.current!.value) {
       setNameIsValid(true)
-      const data = {
-        name: name.current!.value,
-        description: description ? description.current!.value : '',
-        amount: amount.current!.value,
-        categories: checkboxes,
-        date: new Date(),
-      }
+      await onAddItem()
     } else {
       setNameIsValid(false)
+    }
+  }
+
+  const onAddItem = async () => {
+    try {
+      const createdItem = await fetcher(API_URL + '/api/items/add', {
+        method: 'POST',
+        body: {
+          name: name.current!.value,
+          description: description ? description.current!.value : '',
+          quantity: quantity.current!.value,
+          categories: checkboxes,
+          imageUrl: '/item.png',
+        },
+      })
+
+      router.reload()
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -53,7 +73,7 @@ const ItemsEdit = () => {
             fontWeight="500"
             color="#2D3748"
             textAlign="left"
-            h="20px"
+            h="25px"
           >
             Dodanie części
           </Box>
@@ -88,9 +108,9 @@ const ItemsEdit = () => {
               h="32px"
               min={1}
               id="amount"
-              defaultValue={15}
+              defaultValue={1}
             >
-              <NumberInputField ref={amount} h="32px" fontSize="14px" />
+              <NumberInputField ref={quantity} h="32px" fontSize="14px" />
               <NumberInputStepper>
                 <NumberIncrementStepper h="32px" />
                 <NumberDecrementStepper h="32px" />
@@ -116,27 +136,11 @@ const ItemsEdit = () => {
               colorScheme="orange"
             >
               <Flex flexDirection="column" fontSize="14px">
-                <Checkbox value="category1">
-                  <Text fontSize="14px">Kategoria 1</Text>
-                </Checkbox>
-                <Checkbox value="category2">
-                  <Text fontSize="14px">Kategoria 2</Text>
-                </Checkbox>
-                <Checkbox value="category3">
-                  <Text fontSize="14px">Kategoria 3</Text>
-                </Checkbox>
-                <Checkbox value="category4">
-                  <Text fontSize="14px">Kategoria 4</Text>
-                </Checkbox>
-                <Checkbox value="category5">
-                  <Text fontSize="14px">Kategoria 5</Text>
-                </Checkbox>
-                <Checkbox value="category6">
-                  <Text fontSize="14px">Kategoria 6</Text>
-                </Checkbox>
-                <Checkbox value="category7">
-                  <Text fontSize="14px">Kategoria 7</Text>
-                </Checkbox>
+                {categories.map((category) => (
+                  <Checkbox value={category.id} key={category.id}>
+                    <Text fontSize="14px">{category.name}</Text>
+                  </Checkbox>
+                ))}
               </Flex>
             </CheckboxGroup>
             <Flex justifyContent="flex-end">

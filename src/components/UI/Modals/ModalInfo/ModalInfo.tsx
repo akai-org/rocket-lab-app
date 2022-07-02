@@ -12,14 +12,15 @@ import {
   Flex,
   Box,
 } from '@chakra-ui/react'
+import { Item, PopulatedItem } from '../../../../mongo/models/item'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 
-interface ModalInfoProps extends Omit<ModalProps, 'children'> {
-  name: string
-  description: string
-  imageUrl: string
-  quantity: number
-  categories: string[]
+interface ModalInfoProps
+  extends Omit<ModalProps, 'children'>,
+    Pick<
+      PopulatedItem,
+      'imageUrl' | 'name' | 'quantity' | 'description' | 'categories'
+    > {
   id: string
 }
 
@@ -34,7 +35,7 @@ const ModalInfo = (props: ModalInfoProps) => {
           <Flex>
             <Image src={props.imageUrl} w="80px" h="80px" mr="10px" />
             <Box>
-              <Text fontWeight="500" fontSize="19px">
+              <Text fontWeight="500" noOfLines={2} fontSize="19px">
                 {props.name}
               </Text>
               <Text>Ilość: {props.quantity}</Text>
@@ -47,7 +48,7 @@ const ModalInfo = (props: ModalInfoProps) => {
           <Text mt="5px">
             Kategorie:
             <br />
-            {props.categories.map((category) => `${category}, `)}
+            {props.categories.map((category) => `${category.name}, `)}
           </Text>
         </ModalBody>
         <ModalFooter>

@@ -1,20 +1,18 @@
 import { Button, Flex, Icon, Input, Select, Text } from '@chakra-ui/react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { Category } from '../../../../mongo/models/category'
-import { fetcher } from '../../../../utils/requests'
-import { FiltersControllsProps } from '../../../UI/FiltersGeneral/FiltersGeneral'
+import { useFilters } from '../../../../utils/effects/useFilters'
 
-const Filters: FC<FiltersControllsProps> = ({
-  categories,
-  category,
-  handleSubmit,
-  searchTerm,
-  setCategory,
-  setSearchTerm,
-}) => {
+const Filters: FC = () => {
+  const {
+    categories,
+    category,
+    handleSubmit,
+    searchTerm,
+    setCategory,
+    setSearchTerm,
+    query,
+  } = useFilters()
   return (
     <form onSubmit={handleSubmit}>
       <Flex
@@ -54,7 +52,7 @@ const Filters: FC<FiltersControllsProps> = ({
               h="40px"
               border="1px solid #D4D4D4"
               fontWeight="400"
-              value={category}
+              value={(query.category as string | undefined) || category}
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="all">Wszystkie</option>

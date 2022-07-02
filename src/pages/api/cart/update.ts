@@ -13,7 +13,7 @@ const handler: NextApiHandler = async (req, res) => {
 
   if (method === 'PUT') {
     try {
-      const newCartList = await updateCartList(body.id, body.items)
+      const newCartList = await updateCartList(body.id, body.items, body.name)
       console.log(newCartList)
       res.status(200).send(newCartList)
     } catch (error) {

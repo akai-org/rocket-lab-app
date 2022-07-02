@@ -1,3 +1,4 @@
+import { CartListModel } from '../mongo/models/cart'
 import { Item, ItemModel } from '../mongo/models/item'
 import { ITEMS_QUERY_LIMIT } from '../utils/constants'
 import { validateSortParam } from '../utils/dataValidation/validateSortParam'
@@ -70,17 +71,61 @@ export async function fetchItems(
 
   const filterBySearch = filterOptions?.searchTerm
 
+  //TODO: Delete redundation
   if (filterAlwaysByCategory) {
-    items = ItemModel.aggregate([...parseCategory, ...queryBody])
+    items = await ItemModel.aggregate([...parseCategory, ...queryBody])
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
   } else if (filterBySearch) {
-    items = ItemModel.aggregate([...queryBody])
+    items = await ItemModel.aggregate([...queryBody])
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
   } else {
-    items = ItemModel.find()
+    items = await ItemModel.find().sort(sort).skip(skip).limit(limit)
   }
-  return await items.sort(sort).skip(skip).limit(limit)
+  // return await items.sort(sort).skip(skip).limit(limit)
+  return await ItemModel.populate(items, { path: 'categories' })
 }
 
 export async function fetchItemsCount(): Promise<number> {
   const itemsCount = await ItemModel.count()
   return itemsCount
+}
+
+export async function updateItem(id: string, item: Partial<Item>) {
+  return await ItemModel.findOneAndUpdate(
+    { _id: id },
+    { ...item },
+    { new: true }
+  )
+}
+
+export async function deleteItem(id: string) {
+  await CartListModel.updateMany(
+    {},
+    {
+      $pull: {
+        items: {
+          item: id,
+        },
+      },
+    }
+  )
+  return await ItemModel.findOneAndDelete({ _id: id }, { new: true })
+}
+
+export async function addItem(item: Item) {
+  const createdItem = await (
+    await ItemModel.create(item)
+  ).populate('categories')
+  return createdItem
+}
+
+export async function fetchAllItems() {
+  const items = await ItemModel.find({})
+    .sort({ updatedAt: -1 })
+    .populate('categories')
+  return items
 }

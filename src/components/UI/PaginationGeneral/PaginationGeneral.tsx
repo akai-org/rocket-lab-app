@@ -3,13 +3,13 @@ import { ChangeEvent, FC } from 'react'
 import { ITEMS_QUERY_LIMIT, FIRST_PAGE } from '../../../utils/constants'
 
 export interface PaginationSettings {
-  handleOnChangeQuantity: (e: ChangeEvent<HTMLSelectElement>) => void
-  minPage: number
-  maxPage: number
-  nextPage: number
-  previousPage: number
-  toDisplay: number
-  itemsCount: number
+  handleOnChangeQuantity?: (e: ChangeEvent<HTMLSelectElement>) => void
+  minPage?: number
+  maxPage?: number
+  nextPage?: number
+  previousPage?: number
+  toDisplay?: number
+  itemsCount?: number
 }
 
 interface Props {

@@ -5,32 +5,72 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Checkbox,
   CheckboxGroup,
   Flex,
   FormControl,
-  FormLabel,
   Input,
   Text,
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  addCategory,
+  removeCategories,
+} from '../../../../../store/Slices/categoriesSlice'
+import { categoriesInfo } from '../../../../../store/store'
+import { API_URL } from '../../../../../utils/constants'
+import { fetcher } from '../../../../../utils/requests'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../../../UI/Popovers/DeletePopover'
+import Category from './Category/Category'
 
 const CategoryEdit = () => {
+  const categories = useSelector(categoriesInfo).categories
   const [nameIsValid, setNameIsValid] = useState(true)
   const [checkboxes, setCheckboxes] = useState([''])
+  const dispatch = useDispatch()
   const name = useRef<HTMLInputElement>(null)
-  const submitForm = () => {
+  const submitForm = async () => {
     if (name.current!.value) {
       setNameIsValid(true)
-      const data = {
-        name: name.current!.value,
+      await onAddCategory()
+      if (name.current) {
+        name.current.value = ''
       }
     } else {
       setNameIsValid(false)
     }
   }
+
+  const handleDeleteCategories = async () => {
+    try {
+      const deletedCategories = await fetcher(
+        API_URL + '/api/categories/delete',
+        {
+          method: 'DELETE',
+          body: { categoriesIds: checkboxes },
+        }
+      )
+      console.log({ deletedCategories, checkboxes })
+      setCheckboxes([])
+      dispatch(removeCategories(deletedCategories))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const onAddCategory = async () => {
+    try {
+      const addedCategory = await fetcher(API_URL + '/api/categories/add', {
+        method: 'POST',
+        body: name.current?.value,
+      })
+      dispatch(addCategory(addedCategory))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Accordion allowMultiple>
       <AccordionItem border="none">
@@ -41,7 +81,7 @@ const CategoryEdit = () => {
             fontWeight="500"
             color="#2D3748"
             textAlign="left"
-            h="20px"
+            h="25px"
           >
             Edycja kategorii
           </Box>
@@ -77,37 +117,24 @@ const CategoryEdit = () => {
               colorScheme="orange"
             >
               <Flex flexDirection="column" fontSize="14px">
-                <Checkbox value="category1">
-                  <Text fontSize="14px">Kategoria 1</Text>
-                </Checkbox>
-                <Checkbox value="category2">
-                  <Text fontSize="14px">Kategoria 2</Text>
-                </Checkbox>
-                <Checkbox value="category3">
-                  <Text fontSize="14px">Kategoria 3</Text>
-                </Checkbox>
-                <Checkbox value="category4">
-                  <Text fontSize="14px">Kategoria 4</Text>
-                </Checkbox>
-                <Checkbox value="category5">
-                  <Text fontSize="14px">Kategoria 5</Text>
-                </Checkbox>
-                <Checkbox value="category6">
-                  <Text fontSize="14px">Kategoria 6</Text>
-                </Checkbox>
-                <Checkbox value="category7">
-                  <Text fontSize="14px">Kategoria 7</Text>
-                </Checkbox>
+                {categories.map((category) => (
+                  <Category
+                    categoryName={category.name}
+                    value={category.id}
+                    id={category.id}
+                    key={category.id}
+                  />
+                ))}
               </Flex>
             </CheckboxGroup>
-            <Flex justifyContent="flex-end">
+            <Flex justifyContent="flex-end" mt="15px">
               <DeletePopover
                 width="140px"
                 height="25px"
                 fontSize="14px"
                 label="Czy na pewno chcesz usunąć zaznaczone kategorie?"
                 buttonText="Usuń zaznaczone"
-                onClick={() => {}}
+                onClick={handleDeleteCategories}
                 disabled={!Boolean(...checkboxes)}
               />
             </Flex>

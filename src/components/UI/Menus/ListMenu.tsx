@@ -21,7 +21,7 @@ const ListMenu = (props: ListMenuProps) => {
           <BsThreeDotsVertical />
         </Flex>
       </MenuButton>
-      <MenuList maxW="50px">
+      <MenuList>
         <MenuItem onClick={props.onEdit} closeOnSelect>
           Edytuj
         </MenuItem>

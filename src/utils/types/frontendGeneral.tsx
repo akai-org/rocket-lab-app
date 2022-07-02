@@ -1,5 +1,6 @@
+import { Dispatch, SetStateAction } from 'react'
 import { Category } from '../../mongo/models/category'
-import { Item } from '../../mongo/models/item'
+import { Item, PopulatedItem } from '../../mongo/models/item'
 
 export type sortingType = 'grid' | 'list'
 
@@ -10,8 +11,8 @@ export interface ItemsQueryParams {
 }
 
 export interface MainViewProps {
-  items?: Item[]
-  itemsCount?: number
+  items: PopulatedItem[]
+  itemsCount: number
   categories?: Category[]
+  setItems?: Dispatch<SetStateAction<PopulatedItem[]>>
 }
-
