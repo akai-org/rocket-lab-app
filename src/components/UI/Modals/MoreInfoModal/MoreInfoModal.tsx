@@ -36,12 +36,12 @@ const MoreInfoModal = (props: { isOpen: boolean; onClose: () => void }) => {
             <Stack
               direction="row"
               justifyContent="space-between"
-              m="25px 0 10px 0"
+              m="25px 20px 10px 0"
             >
               <Heading fontSize="sm">Nazwa</Heading>
               <Heading fontSize="sm">Ilość</Heading>
             </Stack>
-            <Stack direction="column" overflow="scroll" maxH="35vh">
+            <Stack direction="column" overflow="overlay" maxH="35vh">
               <ModalListItem />
               <ModalListItem />
               <ModalListItem />
