@@ -74,7 +74,13 @@ const DesktopSidebar = () => {
               <RiDraftLine size={25} />
               <Text ml="10px">Schematy</Text>
             </Flex>
-            <Flex lineHeight="25px" w="85%">
+            <Flex
+              lineHeight="25px"
+              w="85%"
+              onClick={() => {
+                if (router.asPath !== '/settings') router.push('/settings')
+              }}
+            >
               <FiSettings size={25} />
               <Text ml="10px">Ustawienia</Text>
             </Flex>
