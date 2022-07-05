@@ -7,6 +7,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
+import ModalHistory from '../../../UI/Modals/ModalHistory/ModalHistory'
 import HistoryListItemMessage from '../HistoryListItemMessage/HistoryListItemMessage'
 
 const HistoryListItem = () => {
@@ -32,7 +33,7 @@ const HistoryListItem = () => {
             </Stack>
             <Stack direction="row">
               <HistoryListItemMessage />
-              <Text as="u" color="#FF7700" onClick={onOpen}>
+              <Text as="u" color="#FF7700" onClick={onOpen} cursor="pointer">
                 pokaż&nbsp;więcej...
               </Text>
             </Stack>
@@ -47,7 +48,7 @@ const HistoryListItem = () => {
             </Stack>
             <Stack direction="row">
               <HistoryListItemMessage />
-              <Text as="u" color="#FF7700" onClick={onOpen}>
+              <Text as="u" color="#FF7700" onClick={onOpen} cursor="pointer">
                 pokaż&nbsp;więcej...
               </Text>
             </Stack>
@@ -62,7 +63,7 @@ const HistoryListItem = () => {
             </Stack>
             <Stack direction="row">
               <HistoryListItemMessage />
-              <Text as="u" color="#FF7700" onClick={onOpen}>
+              <Text as="u" color="#FF7700" onClick={onOpen} cursor="pointer">
                 pokaż&nbsp;więcej...
               </Text>
             </Stack>
@@ -77,7 +78,7 @@ const HistoryListItem = () => {
             </Stack>
             <Stack direction="row">
               <HistoryListItemMessage />
-              <Text as="u" color="#FF7700" onClick={onOpen}>
+              <Text as="u" color="#FF7700" onClick={onOpen} cursor="pointer">
                 pokaż&nbsp;więcej...
               </Text>
             </Stack>
@@ -97,14 +98,14 @@ const HistoryListItem = () => {
             </Stack>
             <Stack direction="row">
               <HistoryListItemMessage />
-              <Text as="u" color="#FF7700" onClick={onOpen}>
+              <Text as="u" color="#FF7700" onClick={onOpen} cursor="pointer">
                 pokaż&nbsp;więcej...
               </Text>
             </Stack>
           </Stack>
         </Stack>
       </Box>
-      {/* <MoreInfoModal isOpen={isOpen} onClose={onClose} /> */}
+      <ModalHistory isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
 }
