@@ -41,7 +41,7 @@ const MoreInfoModal = (props: { isOpen: boolean; onClose: () => void }) => {
               <Heading fontSize="sm">Nazwa</Heading>
               <Heading fontSize="sm">Ilość</Heading>
             </Stack>
-            <Stack direction="column" overflow="scroll" maxH="35vh">
+            <Stack direction="column" overflowY="scroll" maxH="35vh">
               <ModalListItem />
               <ModalListItem />
               <ModalListItem />
