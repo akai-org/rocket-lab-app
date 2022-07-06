@@ -8,12 +8,13 @@ const config: ThemeConfig = {
 
 export const theme = extendTheme({
   config,
-  breakpoints: createBreakpoints({
-    sm: '320px',
-    md: '768px',
-    lg: '960px',
-    xl: '1200px',
-  }),
+  breakpoints: {
+    sm: '900px',
+    md: '1024px',
+    lg: '1200px',
+    xl: '1400px',
+    '2xl': '1536px',
+  },
   fonts: {
     heading: 'Montserrat, sans-serif',
     body: 'Inter, sans-serif',

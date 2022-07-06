@@ -1,13 +1,8 @@
 import type { NextPage } from 'next'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
-import { useMediaQuery } from '@chakra-ui/react'
-import DesktopSettings from '../../components/Settings/DesktopSettings/DesktopSettings'
+import Settings from '../../components/Settings/Settings'
 
-const Home: NextPage = () => {
-  const [isDesktop] = useMediaQuery('(min-width: 900px)')
-  const Settings = isDesktop ? <DesktopSettings /> : <></>
-  return Settings
-}
+const Home: NextPage = () => <Settings />
 
 export default Home
 
