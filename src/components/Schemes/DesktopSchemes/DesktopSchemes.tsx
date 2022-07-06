@@ -6,10 +6,8 @@ import DesktopWrapper from '../../UI/Wrappers/DesktopWrapper/DesktopWrapper'
 const DesktopSchemes = () => {
   return (
     <DesktopWrapper>
-      <Flex w="100%" flexDirection="column" ml="223px" p="40px">
-        <AddScheme />
-        <Scheme />
-      </Flex>
+      <AddScheme />
+      <Scheme />
     </DesktopWrapper>
   )
 }

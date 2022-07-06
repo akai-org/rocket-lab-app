@@ -4,7 +4,7 @@ import Scheme from './Scheme/Scheme'
 
 const MobileSchemes = () => {
   return (
-    <MobileWrapper pb="150px" mx="10px">
+    <MobileWrapper mx="10px">
       <AddScheme />
       <Scheme />
     </MobileWrapper>

@@ -6,6 +6,8 @@ export type sortingType = 'grid' | 'list'
 
 export type listAddItem = 'custom' | 'existing'
 
+export type Role = 'ADMIN' | 'EDITOR' | 'READER'
+
 export interface ItemsQueryParams {
   page: number
 }
