@@ -1,7 +1,6 @@
 import {
   Input,
   Text,
-  Box,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -9,25 +8,47 @@ import {
   AccordionPanel,
   Flex,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
+import { useContext, useState } from 'react'
 import AddItem from './AddItem/AddItem'
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 import ItemsList from './ItemsList/ItemsList'
-import { useSelector } from 'react-redux'
-import { schemeInfo } from '../../../../store/store'
+import { useDispatch } from 'react-redux'
+import { fetcher } from '../../../../utils/requests'
+import { API_URL } from '../../../../utils/constants'
+import { addSchema } from '../../../../store/Slices/schemasSlice'
+import { SchemasContext } from '../../../../pages/schemes'
 
 const AddScheme = () => {
-  const name = useRef<HTMLInputElement>(null)
+  const context = useContext(SchemasContext)
+
+  const dispatch = useDispatch()
+
   const [nameIsValid, setNameIsValid] = useState(true)
   const [itemsIsValid, setItemsIsValid] = useState(true)
-  const schemeData = useSelector(schemeInfo)
 
-  const handleSubmit = () => {
-    if (name.current!.value) setNameIsValid(true)
+  //FIXME: No submit - there's no form
+  const handleSubmit = async () => {
+    if (context?.name.length !== 0) setNameIsValid(true)
     else setNameIsValid(false)
 
-    if (schemeData.items.length === 0) setItemsIsValid(false)
+    if (context?.items.length === 0) setItemsIsValid(false)
     else setItemsIsValid(true)
+
+    if (nameIsValid && itemsIsValid) {
+      try {
+        const addedSchema = await fetcher(API_URL + '/api/schemas/add', {
+          method: 'POST',
+          body: {
+            name: context?.name,
+            description: context?.description,
+            items: context?.items,
+          },
+        })
+        dispatch(addSchema(addedSchema))
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 
   return (
@@ -48,7 +69,17 @@ const AddScheme = () => {
         </AccordionButton>
         <AccordionPanel>
           <Text fontWeight={500}>Nazwa</Text>
-          <Input ref={name} h="32px" id="name" type="text" />
+          <Input
+            onChange={(e) => {
+              if (context) {
+                context.updateName(e.currentTarget.value)
+              }
+            }}
+            h="32px"
+            id="name"
+            type="text"
+            value={context?.name}
+          />
           {!nameIsValid && (
             <Text fontSize="14px" color="red">
               Wprowadź nazwę
@@ -57,7 +88,17 @@ const AddScheme = () => {
           <Text fontWeight={500} mt="10px">
             Opis
           </Text>
-          <Input h="32px" id="description" type="text" />
+          <Input
+            h="32px"
+            id="description"
+            type="text"
+            onChange={(e) => {
+              if (context) {
+                context.updateDescription(e.currentTarget.value)
+              }
+            }}
+            value={context?.description}
+          />
           <Text fontWeight={500} mt="10px">
             Przedmioty
           </Text>

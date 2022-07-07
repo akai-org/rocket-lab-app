@@ -50,7 +50,7 @@ const Home: NextPage<Props> = ({
     [...reduxItems].splice(0, toDisplay)
   )
 
-  let desktopItems = reduxItems
+  const desktopItems = reduxItems
 
   useEffect(() => {
     dispatch(setCategories(categories || []))
@@ -67,15 +67,15 @@ const Home: NextPage<Props> = ({
 
   useEffect(() => {
     dispatch(setSorting(sort))
-  }, [sort])
+  }, [dispatch, sort])
 
   useEffect(() => {
     dispatch(setCategory(category))
-  }, [category])
+  }, [category, dispatch])
 
   useEffect(() => {
     dispatch(setSearchTerm(searchTerm))
-  }, [searchTerm])
+  }, [dispatch, searchTerm])
 
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
 

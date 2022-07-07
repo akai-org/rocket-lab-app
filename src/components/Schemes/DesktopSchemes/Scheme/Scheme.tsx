@@ -6,7 +6,6 @@ import {
   AccordionItem,
   AccordionPanel,
   Flex,
-  Heading,
   Table,
   Tbody,
   Text,

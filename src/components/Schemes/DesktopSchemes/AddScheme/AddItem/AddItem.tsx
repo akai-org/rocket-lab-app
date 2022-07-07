@@ -7,13 +7,12 @@ import {
   NumberInputStepper,
   Text,
 } from '@chakra-ui/react'
-import Select from 'react-select'
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useContext, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { itemsInfo } from '../../../../../store/store'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
-import { addItem } from '../../../../../store/Slices/schemeSlice'
 import SearchSchemeSelect from '../../../../UI/SearchSchemeSelect/SearchSchemeSelect'
+import { SchemasContext } from '../../../../../pages/schemes'
 
 interface SelectedType {
   value: string | null
@@ -26,6 +25,7 @@ interface AddItemProps {
 }
 
 const AddItem = (props: AddItemProps) => {
+  const context = useContext(SchemasContext)
   const [quantity, setQuantity] = useState(1)
   const [selectedOption, setSelectedOption] = useState<
     SelectedType | undefined
@@ -35,7 +35,6 @@ const AddItem = (props: AddItemProps) => {
     id: null,
   })
   const itemsData = useSelector(itemsInfo)
-  const dispatch = useDispatch()
 
   const options = itemsData.items.map((item) => {
     return { value: item.name, label: item.name, id: item.id }
@@ -43,7 +42,7 @@ const AddItem = (props: AddItemProps) => {
 
   const handleAdd = () => {
     const item = itemsData.items.find((item) => item?.id === selectedOption?.id)
-    item && dispatch(addItem({ ...item, quantity: quantity }))
+    item && context?.addItem({ item, neededQuantity: quantity })
   }
 
   return (

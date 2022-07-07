@@ -29,7 +29,7 @@ const Item = ({ item, key }: ItemProps) => {
   const [quantity, setQuantity] = useState(item.quantity)
 
   const handleDelete = () => {
-    dispatch(removeItem(item))
+    // dispatch(removeItem(item))
   }
   return (
     <Tr fontSize="14px" h="40px">
