@@ -15,10 +15,13 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import SchemeItem from './SchemeItem/SchemeItem'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { itemsInfo, schemeInfo } from '../../../../store/store'
 import SchemeMenu from '../../../UI/Menus/SchemeMenu'
 import { PopulatedSchema } from '../../../../mongo/models/schema'
+import { fetcher } from '../../../../utils/requests'
+import { API_URL } from '../../../../utils/constants'
+import { deleteSchema } from '../../../../store/Slices/schemasSlice'
 
 interface Props {
   schema: PopulatedSchema
@@ -30,11 +33,22 @@ const Scheme = ({ schema }: Props) => {
     onOpen: onOpenEditScheme,
     onClose: onCloseEditScheme,
   } = useDisclosure()
+  const dispatch = useDispatch()
 
   const itemsData = useSelector(itemsInfo)
   const schemeData = useSelector(schemeInfo)
 
-  const handleDelete = () => {}
+  const handleDelete = async () => {
+    try {
+      const deletedSchema = await fetcher(API_URL + '/api/schemas/delete', {
+        method: 'DELETE',
+        body: { id: schema.id },
+      })
+      dispatch(deleteSchema(deletedSchema))
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Accordion

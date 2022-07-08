@@ -18,7 +18,7 @@ export const addSchema = async ({
     item: schemaItem.item.id,
   }))
 
-  console.log({preparedItems})
+  console.log({ preparedItems })
 
   return await (
     await SchemaModel.create({ name, description, items: preparedItems })
@@ -27,4 +27,11 @@ export const addSchema = async ({
 
 export const fetchSchemas = async () => {
   return await SchemaModel.find().populate('items.item')
+}
+
+export const deleteSchema = async (id: string) => {
+  return await SchemaModel.findOneAndDelete(
+    { _id: id },
+    { new: true, populate: 'items.item' }
+  )
 }
