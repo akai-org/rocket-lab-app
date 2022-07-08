@@ -45,6 +45,7 @@ const AddScheme = () => {
           },
         })
         dispatch(addSchema(addedSchema))
+        context?.clear()
       } catch (error) {
         console.log(error)
       }

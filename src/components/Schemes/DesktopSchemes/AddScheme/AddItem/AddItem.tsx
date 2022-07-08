@@ -13,6 +13,7 @@ import { itemsInfo } from '../../../../../store/store'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
 import SearchSchemeSelect from '../../../../UI/SearchSchemeSelect/SearchSchemeSelect'
 import { SchemasContext } from '../../../../../pages/schemes'
+import * as _ from 'lodash'
 
 interface SelectedType {
   value: string | null
@@ -24,25 +25,40 @@ interface AddItemProps {
   itemsValid: boolean
 }
 
+const noOption = {
+  value: null,
+  label: null,
+  id: null,
+}
+
 const AddItem = (props: AddItemProps) => {
   const context = useContext(SchemasContext)
   const [quantity, setQuantity] = useState(1)
   const [selectedOption, setSelectedOption] = useState<
     SelectedType | undefined
-  >({
-    value: null,
-    label: null,
-    id: null,
-  })
+  >(noOption)
   const itemsData = useSelector(itemsInfo)
 
-  const options = itemsData.items.map((item) => {
+  const originalOptions = itemsData.items.map((item) => {
     return { value: item.name, label: item.name, id: item.id }
   })
+
+  const choosenOptions = context
+    ? context.items.map((item) => {
+        return {
+          value: item.item.name,
+          label: item.item.name,
+          id: item.item.id,
+        }
+      })
+    : []
+
+  const options = _.differenceBy(originalOptions, choosenOptions, 'id')
 
   const handleAdd = () => {
     const item = itemsData.items.find((item) => item?.id === selectedOption?.id)
     item && context?.addItem({ item, neededQuantity: quantity })
+    setSelectedOption(noOption)
   }
 
   return (

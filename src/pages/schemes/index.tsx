@@ -27,6 +27,7 @@ interface TemporaryNewSchemaData {
   updateItem: (item: TmpSchemaItem) => void
   updateName: (name: string) => void
   updateDescription: (description: string) => void
+  clear: () => void
 }
 
 export const SchemasContext = createContext<TemporaryNewSchemaData | null>(null)
@@ -62,6 +63,12 @@ const Home: NextPage<Props> = ({ schemas }) => {
 
   const updateDescription = (description: string) => setDescription(description)
 
+  const clear = () => {
+    setName('')
+    setDescription('')
+    setItems([])
+  }
+
   useEffect(() => {
     dispatch(setSchemas(schemas))
   }, [dispatch, schemas])
@@ -78,7 +85,8 @@ const Home: NextPage<Props> = ({ schemas }) => {
         removeItem,
         updateDescription,
         updateName,
-        updateItem
+        updateItem,
+        clear
       }}
     >
       {History}
