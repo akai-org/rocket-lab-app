@@ -95,7 +95,7 @@ const AddItem = (props: AddItemProps) => {
           </NumberInputStepper>
         </NumberInput>
       </Flex>
-      {!props.itemsValid && (
+      {props.itemsValid && (
         <Text fontSize="14px" color="red">
           Wybierz przedmioty
         </Text>

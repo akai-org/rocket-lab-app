@@ -23,16 +23,14 @@ const AddScheme = () => {
 
   const dispatch = useDispatch()
 
-  const [nameIsValid, setNameIsValid] = useState(true)
-  const [itemsIsValid, setItemsIsValid] = useState(true)
+  const nameIsValid = context?.name.length !== 0 ? true : false
+  const itemsIsValid = context?.items.length !== 0 ? true : false
+  const [submitClicked, setSubmitClicked] = useState(false)
 
   //FIXME: No submit - there's no form
   const handleSubmit = async () => {
-    if (context?.name.length !== 0) setNameIsValid(true)
-    else setNameIsValid(false)
 
-    if (context?.items.length === 0) setItemsIsValid(false)
-    else setItemsIsValid(true)
+    setSubmitClicked(true)
 
     if (nameIsValid && itemsIsValid) {
       try {
@@ -46,6 +44,7 @@ const AddScheme = () => {
         })
         dispatch(addSchema(addedSchema))
         context?.clear()
+        setSubmitClicked(false)
       } catch (error) {
         console.log(error)
       }
@@ -81,7 +80,7 @@ const AddScheme = () => {
             type="text"
             value={context?.name}
           />
-          {!nameIsValid && (
+          {!nameIsValid && submitClicked && (
             <Text fontSize="14px" color="red">
               Wprowadź nazwę
             </Text>
@@ -103,7 +102,7 @@ const AddScheme = () => {
           <Text fontWeight={500} mt="10px">
             Przedmioty
           </Text>
-          <AddItem itemsValid={itemsIsValid} />
+          <AddItem itemsValid={!itemsIsValid && submitClicked} />
           <ItemsList />
           <Flex justifyContent="flex-end">
             <ProductButton

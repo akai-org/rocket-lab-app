@@ -11,22 +11,42 @@ import {
 import ProductButton from '../../../UI/Custom Buttons/ProductButton/ProductButton'
 import AddItem from '../../DesktopSchemes/AddScheme/AddItem/AddItem'
 import ItemsList from './ItemsList/ItemsList'
-import { useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { schemeInfo } from '../../../../store/store'
+import { useContext, useState } from 'react'
+import { SchemasContext } from '../../../../pages/schemes'
+import { API_URL } from '../../../../utils/constants'
+import { fetcher } from '../../../../utils/requests'
+import { useDispatch } from 'react-redux'
+import { addSchema } from '../../../../store/Slices/schemasSlice'
 
 const AddScheme = () => {
-  const name = useRef<HTMLInputElement>(null)
-  const [nameIsValid, setNameIsValid] = useState(true)
-  const [itemsIsValid, setItemsIsValid] = useState(true)
-  const schemeData = useSelector(schemeInfo)
+  const dispatch = useDispatch()
+  const context = useContext(SchemasContext)
+  const nameIsValid = context?.name.length !== 0 ? true : false
+  const itemsIsValid = context?.items.length !== 0 ? true : false
+  const [submitClicked, setSubmitClicked] = useState(false)
 
-  const handleSubmit = () => {
-    if (name.current!.value) setNameIsValid(true)
-    else setNameIsValid(false)
 
-    if (schemeData.items.length === 0) setItemsIsValid(false)
-    else setItemsIsValid(true)
+  const handleSubmit = async () => {
+
+    setSubmitClicked(true)
+
+    if (nameIsValid && itemsIsValid) {
+      try {
+        const addedSchema = await fetcher(API_URL + '/api/schemas/add', {
+          method: 'POST',
+          body: {
+            name: context?.name,
+            description: context?.description,
+            items: context?.items,
+          },
+        })
+        dispatch(addSchema(addedSchema))
+        context?.clear()
+        setSubmitClicked(false)
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 
   return (
@@ -47,8 +67,14 @@ const AddScheme = () => {
         </AccordionButton>
         <AccordionPanel>
           <Text fontWeight={500}>Nazwa</Text>
-          <Input ref={name} h="32px" id="name" type="text" />
-          {!nameIsValid && (
+          <Input
+            onChange={(e) => context?.updateName(e.currentTarget.value)}
+            h="32px"
+            id="name"
+            type="text"
+            value={context?.name}
+          />
+          {!nameIsValid && submitClicked && (
             <Text fontSize="14px" color="red">
               Wprowadź nazwę
             </Text>
@@ -56,11 +82,17 @@ const AddScheme = () => {
           <Text fontWeight={500} mt="10px">
             Opis
           </Text>
-          <Input h="32px" id="description" type="text" />
+          <Input
+            onChange={(e) => context?.updateDescription(e.currentTarget.value)}
+            h="32px"
+            id="description"
+            type="text"
+            value={context?.description}
+          />
           <Text fontWeight={500} mt="10px">
             Przedmioty
           </Text>
-          <AddItem itemsValid={itemsIsValid} />
+          <AddItem itemsValid={!itemsIsValid && submitClicked} />
           <ItemsList />
           <Flex justifyContent="flex-end">
             <ProductButton
