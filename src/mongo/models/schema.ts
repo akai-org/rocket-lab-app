@@ -23,8 +23,8 @@ export interface PopulatedSchemaItem extends Omit<SchemaItem, 'item'> {
 
 export type TmpSchemaItem = Omit<PopulatedSchemaItem, 'id'>
 
-export interface PopulatedSchema extends Omit<SchemaItem, 'item'> {
-  item: PopulatedItem
+export interface PopulatedSchema extends Omit<Schema, 'items'> {
+  items: PopulatedSchemaItem[]
 }
 
 const SchemaItemSchema = new MongoSchema<SchemaItem>({
