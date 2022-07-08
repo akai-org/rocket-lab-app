@@ -8,9 +8,9 @@ export interface DesktopWrapperProps extends FlexProps {
 const DesktopWrapper = ({ children, ...restProps }: DesktopWrapperProps) => {
   return (
     <Flex
-      flexDirection="row"
+      flexDirection="column"
       w="100vw"
-      pb="150px"
+      p="40px 40px 150px 263px"
       maxW="2000px"
       m="75px auto 0 auto"
       {...restProps}

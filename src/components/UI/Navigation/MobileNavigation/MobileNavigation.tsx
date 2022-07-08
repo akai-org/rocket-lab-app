@@ -50,7 +50,6 @@ const MobileNavigation = () => {
           </Flex>
           <Flex alignItems="center">
             <Icon fontSize="30px" mr="10px" as={FaUserCircle} />
-
             <MobileSidebar />
           </Flex>
         </Flex>

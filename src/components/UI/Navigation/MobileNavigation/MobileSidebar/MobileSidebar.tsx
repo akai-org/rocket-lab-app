@@ -16,7 +16,7 @@ import { AiOutlineTool } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
 import { GrLogout } from 'react-icons/gr'
-import { IS_DEV } from '../../../../utils/constants'
+import { IS_DEV } from '../../../../../utils/constants'
 
 const MobileSidebar = () => {
   const router = useRouter()
@@ -83,7 +83,13 @@ const MobileSidebar = () => {
                     <RiDraftLine size={30} />
                     <Text ml="10px">Schematy</Text>
                   </Flex>
-                  <Flex lineHeight="30px">
+                  <Flex
+                    lineHeight="30px"
+                    onClick={() => {
+                      if (router.asPath !== '/settings')
+                        router.push('/settings')
+                    }}
+                  >
                     <FiSettings size={30} />
                     <Text ml="10px">Ustawienia</Text>
                   </Flex>

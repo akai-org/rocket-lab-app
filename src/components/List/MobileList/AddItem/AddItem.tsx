@@ -33,7 +33,7 @@ const AddItem = () => {
   return (
     <Accordion
       w="95%"
-      m="10px auto"
+      m="0px auto 10px auto"
       borderRadius="6px"
       border="1px solid #C4C4C4"
       allowMultiple

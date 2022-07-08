@@ -7,7 +7,7 @@ import { schemeInfo } from '../../../store/store'
 const MobileSchemes = () => {
   const schemeData = useSelector(schemeInfo)
   return (
-    <MobileWrapper pb="150px" mx="10px">
+    <MobileWrapper mx="10px">
       <AddScheme />
       {schemeData.schemas.map((schema) => (
         <Scheme schema={schema} key={schema.id} />

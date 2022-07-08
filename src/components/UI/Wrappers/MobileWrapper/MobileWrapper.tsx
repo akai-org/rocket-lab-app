@@ -3,7 +3,13 @@ import { DesktopWrapperProps } from '../DesktopWrapper/DesktopWrapper'
 
 const MobileWrapper = ({ children, ...restProps }: DesktopWrapperProps) => {
   return (
-    <Flex mt="85px" color="#3F3F3F" flexDirection="column" {...restProps}>
+    <Flex
+      mt="85px"
+      pb="150px"
+      color="#3F3F3F"
+      flexDirection="column"
+      {...restProps}
+    >
       {children}
     </Flex>
   )
