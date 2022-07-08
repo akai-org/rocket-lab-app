@@ -59,6 +59,7 @@ const AddItem = (props: AddItemProps) => {
     const item = itemsData.items.find((item) => item?.id === selectedOption?.id)
     item && context?.addItem({ item, neededQuantity: quantity })
     setSelectedOption(noOption)
+    setQuantity(1)
   }
 
   return (
@@ -82,11 +83,11 @@ const AddItem = (props: AddItemProps) => {
           ml="10px"
           fontSize="16px"
           borderColor="#E2E8F0"
-          defaultValue={quantity}
+          value={quantity}
           onChange={(e) => {
             setQuantity(parseInt(e))
           }}
-          min={0}
+          min={1}
         >
           <NumberInputField h="32px" px="5px" />
           <NumberInputStepper>

@@ -8,7 +8,7 @@ export interface Schema {
   updatedAt: Date
   name: string
   items: SchemaItem[]
-  description: string
+  description?: string
 }
 
 export interface SchemaItem {
@@ -45,7 +45,7 @@ const SchemaSchema = new MongoSchema<Schema>(
     items: [SchemaItemSchema],
     description: {
       type: String,
-      required: [true, 'Schema description must be provided'],
+      required: false,
     },
   },
   { timestamps: true }
