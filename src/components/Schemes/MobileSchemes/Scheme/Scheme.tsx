@@ -13,23 +13,42 @@ import {
   Tr,
   useDisclosure,
 } from '@chakra-ui/react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { itemsInfo, schemeInfo } from '../../../../store/store'
 import SchemeMenu from '../../../UI/Menus/SchemeMenu'
 import SchemeItem from './SchemeItem/SchemeItem'
 import React from 'react'
+import { PopulatedSchema } from '../../../../mongo/models/schema'
+import { API_URL } from '../../../../utils/constants'
+import { fetcher } from '../../../../utils/requests'
+import { deleteSchema } from '../../../../store/Slices/schemasSlice'
 
-const Scheme = () => {
+interface Props {
+  schema: PopulatedSchema
+}
+
+const Scheme = ({ schema }: Props) => {
   const {
     isOpen: isOpenEditScheme,
     onOpen: onOpenEditScheme,
     onClose: onCloseEditScheme,
   } = useDisclosure()
+  const dispatch = useDispatch()
 
   const itemsData = useSelector(itemsInfo)
   const schemeData = useSelector(schemeInfo)
 
-  const handleDelete = () => {}
+const handleDelete = async () => {
+    try {
+      const deletedSchema = await fetcher(API_URL + '/api/schemas/delete', {
+        method: 'DELETE',
+        body: { id: schema.id },
+      })
+      dispatch(deleteSchema(deletedSchema))
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Accordion
@@ -49,7 +68,7 @@ const Scheme = () => {
               textAlign="left"
               fontWeight="500"
             >
-              Nazwa Tymczasowa Schema tu
+              {schema.name}
             </Text>
             <AccordionIcon />
           </AccordionButton>
@@ -68,9 +87,14 @@ const Scheme = () => {
                 </Tr>
               </Thead>
               <Tbody overscroll="scroll">
-                <SchemeItem schemeQuantity={10} storageQuantity={15} />
-                <SchemeItem schemeQuantity={10} storageQuantity={5} />
-                <SchemeItem schemeQuantity={10} storageQuantity={0} />
+                {schema.items.map((schemaItem) => (
+                  <SchemeItem
+                    name={schemaItem.item.name}
+                    key={schemaItem.id}
+                    schemeQuantity={schemaItem.neededQuantity}
+                    storageQuantity={schemaItem.item.quantity}
+                  />
+                ))}
               </Tbody>
             </Table>
           </Flex>
