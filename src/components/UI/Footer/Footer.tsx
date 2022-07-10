@@ -4,6 +4,7 @@ const Footer = () => {
   return (
     <Flex
       bg="#FFFFFF"
+      color="#2D3748"
       w="100vw"
       h="2rem"
       borderTop="1px solid #D5D5D5"
