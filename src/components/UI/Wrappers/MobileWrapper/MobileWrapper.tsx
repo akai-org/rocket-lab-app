@@ -5,7 +5,8 @@ const MobileWrapper = ({ children, ...restProps }: DesktopWrapperProps) => {
   return (
     <Flex
       mt="85px"
-      pb="150px"
+      // pb="150px"
+      minH="calc(100vh - 135px)"
       color="#3F3F3F"
       flexDirection="column"
       {...restProps}
