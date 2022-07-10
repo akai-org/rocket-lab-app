@@ -1,12 +1,10 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { schemeInfo } from '../../../../../store/store'
-import { Flex, Table, Tbody, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import React, { useContext } from 'react'
+import { Flex, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react'
 import Item from './Item/Item'
-import ListItem from '../../../../List/DesktopList/ListItem/ListItem'
+import { SchemasContext } from '../../../../../pages/schemes'
 
 const ItemsList = () => {
-  const schemeData = useSelector(schemeInfo)
+  const context = useContext(SchemasContext)
 
   return (
     <Flex direction="column" mt="20px">
@@ -23,8 +21,8 @@ const ItemsList = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {schemeData.items.map((item) => (
-            <Item item={item} key={item.id} />
+          {context?.items.map((schemaItem) => (
+            <Item item={schemaItem} key={schemaItem.item.id} />
           ))}
         </Tbody>
       </Table>

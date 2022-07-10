@@ -14,14 +14,14 @@ import { authReducer } from './Slices/authSlice'
 import { storageCartReducer } from './Slices/storageCartSlice'
 import { categoriesReducer } from './Slices/categoriesSlice'
 import { itemsReducer } from './Slices/itemsSlice'
-import { schemeReducer } from './Slices/schemeSlice'
+import { schemasReducer } from './Slices/schemasSlice'
 
 const reducers = combineReducers({
   authData: authReducer,
   storageCartData: storageCartReducer,
   categoriesData: categoriesReducer,
   itemsData: itemsReducer,
-  schemeData: schemeReducer,
+  schemeData: schemasReducer,
 })
 
 const persistConfig = {

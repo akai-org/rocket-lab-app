@@ -68,11 +68,9 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
 
   return (
     <DesktopWrapper>
-      <Flex w="95%" flexDirection="column" ml="223px" p="40px">
-        <StorageEdit />
-        <FiltersControlls />
-        <DesktopItemsList itemsCount={itemsCount} items={items} />
-      </Flex>
+      <StorageEdit />
+      <FiltersControlls />
+      <DesktopItemsList itemsCount={itemsCount} items={items} />
       <ModalAddToList
         addNewCartList={addNewList}
         items={storageCartData.newCartList}

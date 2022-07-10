@@ -6,7 +6,6 @@ import {
   AccordionItem,
   AccordionPanel,
   Flex,
-  Heading,
   Table,
   Tbody,
   Text,
@@ -16,21 +15,40 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import SchemeItem from './SchemeItem/SchemeItem'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { itemsInfo, schemeInfo } from '../../../../store/store'
 import SchemeMenu from '../../../UI/Menus/SchemeMenu'
+import { PopulatedSchema } from '../../../../mongo/models/schema'
+import { fetcher } from '../../../../utils/requests'
+import { API_URL } from '../../../../utils/constants'
+import { deleteSchema } from '../../../../store/Slices/schemasSlice'
 
-const Scheme = () => {
+interface Props {
+  schema: PopulatedSchema
+}
+
+const Scheme = ({ schema }: Props) => {
   const {
     isOpen: isOpenEditScheme,
     onOpen: onOpenEditScheme,
     onClose: onCloseEditScheme,
   } = useDisclosure()
+  const dispatch = useDispatch()
 
   const itemsData = useSelector(itemsInfo)
   const schemeData = useSelector(schemeInfo)
 
-  const handleDelete = () => {}
+  const handleDelete = async () => {
+    try {
+      const deletedSchema = await fetcher(API_URL + '/api/schemas/delete', {
+        method: 'DELETE',
+        body: { id: schema.id },
+      })
+      dispatch(deleteSchema(deletedSchema))
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Accordion
@@ -51,7 +69,7 @@ const Scheme = () => {
               color="#4A5568"
               fontWeight="500"
             >
-              Nazwa Tymczasowa Schematu
+              {schema.name}
             </Text>
             <AccordionIcon />
           </AccordionButton>
@@ -70,9 +88,14 @@ const Scheme = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                <SchemeItem schemeQuantity={10} storageQuantity={15} />
-                <SchemeItem schemeQuantity={10} storageQuantity={5} />
-                <SchemeItem schemeQuantity={10} storageQuantity={0} />
+                {schema.items.map((schemaItem) => (
+                  <SchemeItem
+                    name={schemaItem.item.name}
+                    key={schemaItem.id}
+                    schemeQuantity={schemaItem.neededQuantity}
+                    storageQuantity={schemaItem.item.quantity}
+                  />
+                ))}
               </Tbody>
             </Table>
           </Flex>

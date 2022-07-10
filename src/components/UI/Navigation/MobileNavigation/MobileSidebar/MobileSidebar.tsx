@@ -83,7 +83,13 @@ const MobileSidebar = () => {
                     <RiDraftLine size={30} />
                     <Text ml="10px">Schematy</Text>
                   </Flex>
-                  <Flex lineHeight="30px">
+                  <Flex
+                    lineHeight="30px"
+                    onClick={() => {
+                      if (router.asPath !== '/settings')
+                        router.push('/settings')
+                    }}
+                  >
                     <FiSettings size={30} />
                     <Text ml="10px">Ustawienia</Text>
                   </Flex>

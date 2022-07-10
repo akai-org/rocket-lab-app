@@ -99,7 +99,7 @@ const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
   }, [storageCartData.newCartList, isOpenDetails])
 
   return (
-    <MobileWrapper flexDirection="row" flexWrap="wrap" minW="300px" mb="60px">
+    <MobileWrapper flexDirection="row" flexWrap="wrap" minW="300px" pb="60px">
       <Sorting setListType={setListType} listType={listType} />
       <StorageEdit />
       {listType === 'grid'

@@ -5,16 +5,17 @@ import QuantityBadge from '../../../../UI/Badges/QuantityBadge'
 interface SchemeItemProps {
   schemeQuantity: number
   storageQuantity: number
+  name: string
 }
 
-const SchemeItem = ({ schemeQuantity, storageQuantity }: SchemeItemProps) => {
+const SchemeItem = ({ schemeQuantity, storageQuantity, name }: SchemeItemProps) => {
   return (
     <Tr fontSize="14px">
       <Td>
-        <Text noOfLines={1}>Nazwa elementu tymczasowego</Text>
+        <Text noOfLines={1}>{name}</Text>
       </Td>
       <Td>
-        <Flex justifyContent="flex-end">27</Flex>
+        <Flex justifyContent="flex-end">{schemeQuantity}</Flex>
       </Td>
       <Td textAlign="right">
         <QuantityBadge
