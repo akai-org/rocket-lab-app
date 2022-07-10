@@ -5,7 +5,7 @@ const Footer = () => {
     <Flex
       bg="#FFFFFF"
       w="100vw"
-      h="3rem"
+      h="2rem"
       borderTop="1px solid #D5D5D5"
       direction="row"
       justifyContent="center"
