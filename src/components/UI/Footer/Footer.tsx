@@ -7,13 +7,12 @@ const Footer = () => {
       color="#2D3748"
       w="100vw"
       h="2rem"
-      borderTop="1px solid #D5D5D5"
       direction="row"
       justifyContent="center"
       alignItems="center"
     >
+      <Text>Powered by </Text>
       <Image src="logo-akai.png" alt="Logo AKAI" />
-      <Text>Powered by AKAI</Text>
     </Flex>
   )
 }
