@@ -5,6 +5,13 @@ import { useMediaQuery } from '@chakra-ui/react'
 import DesktopHistory from '../../components/History/DesktopHistory/DesktopHistory'
 import MobileHistory from '../../components/History/MobileHistory/MobileHistory'
 
+export enum HistoryEvent {
+  ADDED = 'ADDED',
+  EDITED = 'EDITED',
+  REMOVED = 'REMOVED',
+  TAKEN_OUT = 'TAKEN_OUT',
+}
+
 // TO DO fetch data from DB
 
 const Home: NextPage = () => {

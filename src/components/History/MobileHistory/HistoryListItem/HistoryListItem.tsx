@@ -16,7 +16,7 @@ const HistoryListItem = () => {
     <Flex m="10px auto 5px 15px" color="black" flexDirection="column">
       <Stack direction="row">
         <Avatar size="md" backgroundColor="black" />
-        <Stack direction="column">
+        <Stack direction="column" maxW="70vw">
           <Stack direction="row">
             <Heading size="sm">Rafał Walkowiak</Heading>
             <Text fontSize="sm">21:37</Text>
