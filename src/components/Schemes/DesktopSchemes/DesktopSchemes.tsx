@@ -9,7 +9,7 @@ const DesktopSchemes = () => {
   const schemeData = useSelector(schemeInfo)
   return (
     <DesktopWrapper>
-      <Flex w="100%" flexDirection="column" ml="223px" p="40px">
+      <Flex w="100%" flexDirection="column">
         <AddScheme />
         {schemeData.schemas.map((schema) => (
           <Scheme schema={schema} key={schema.id} />

@@ -10,7 +10,7 @@ const DesktopWrapper = ({ children, ...restProps }: DesktopWrapperProps) => {
     <Flex
       flexDirection="column"
       w="100vw"
-      pb="150px"
+      p="40px 40px 150px 263px"
       overflow="visible"
       maxW="2000px"
       minH="calc(100vh - 125px)"
