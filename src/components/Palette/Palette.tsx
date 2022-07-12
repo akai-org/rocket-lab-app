@@ -37,6 +37,7 @@ const Palette = () => {
         <Text color={colors.primary}>Motyw</Text>
         <ColorModeSwitch fontSize="35px" />
       </HStack>
+      <Text as="u">COLORS</Text>
       <Text color={colors.primary}>Primary</Text>
       <Text color={colors.secondary}>Secondary</Text>
       <Text color={colors.neutral}>Neutral</Text>
@@ -44,6 +45,18 @@ const Palette = () => {
       <Rect bgColor={colors.borderPrimary}>BorderPrimary</Rect>
       <Rect bgColor={colors.borderSecondary}>BorderSecondary</Rect>
       <Rect bgColor={colors.shadow}>Shadow</Rect>
+      <Text mt="20px" as="u">
+        FONT SIZES
+      </Text>
+      <Text fontSize="subBase">AaBbCc subBase</Text>
+      <Text fontSize="base">AaBbCc base</Text>
+      <Text fontSize="title">AaBbCc title</Text>
+      <Text fontSize="xxs">AaBbCc xxs</Text>
+      <Text fontSize="xs">AaBbCc xs</Text>
+      <Text fontSize="md">AaBbCc md</Text>
+      <Text fontSize="lg">AaBbCc lg</Text>
+      <Text fontSize="xl">AaBbCc xl</Text>
+      <Text fontSize="xxl">AaBbCc xxl</Text>
     </Wrapper>
   )
 }
