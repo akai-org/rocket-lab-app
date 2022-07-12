@@ -13,8 +13,8 @@ const DesktopWrapper = ({ children, ...restProps }: DesktopWrapperProps) => {
       p="40px 40px 150px 263px"
       overflow="visible"
       maxW="2000px"
-      minH="calc(100vh - 125px)"
-      m="75px auto 0 auto"
+      minH="calc(100vh - 120px)"
+      m="80px auto 0 auto"
       {...restProps}
     >
       {children}
