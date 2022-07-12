@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import { UserProvider } from '@auth0/nextjs-auth0'
 import { Provider } from 'react-redux'
 import { persistStore } from 'redux-persist'
@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ChakraProvider theme={theme}>
+            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             <Layout />
             <RouteGuard>
               <Component {...pageProps} />

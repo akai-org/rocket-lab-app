@@ -1,16 +1,19 @@
 import DesktopWrapper from '../UI/Wrappers/DesktopWrapper/DesktopWrapper'
-import { Avatar, Flex, Switch, Text, useMediaQuery } from '@chakra-ui/react'
+import { Avatar, Flex, Text, useMediaQuery } from '@chakra-ui/react'
 import SearchSchemeSelect from '../UI/SearchSchemeSelect/SearchSchemeSelect'
 import { useState } from 'react'
 import ProductButton from '../UI/Custom Buttons/ProductButton/ProductButton'
 import MobileWrapper from '../UI/Wrappers/MobileWrapper/MobileWrapper'
 import RoleBadge from '../UI/Badges/RoleBadge'
 import { Role } from '../../utils/types/frontendGeneral'
+import { useColors } from '../../theme/useColors'
+import ColorModeSwitch from '../UI/ColorModeSwitch/ColorModeSwitch'
 
 const Settings = () => {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
   const [selectedUser, setSelectedUser] = useState({ value: '', label: '' })
   const [selectedRole, setSelectedRole] = useState({})
+
   const Wrapper = isDesktop ? DesktopWrapper : MobileWrapper
 
   const mockUsersOptions = [
@@ -29,13 +32,15 @@ const Settings = () => {
     setSelectedUser({ value: '', label: '' })
   }
 
+  const colors = useColors()
+
   return (
-    <Wrapper width={['95%', '100%']} mx={['auto', 0]}>
+    <Wrapper width={['95%', '100%']} mx="auto">
       <Flex
         borderRadius="6px"
         p="15px"
         mt={['10px', 0]}
-        color="#4A5568"
+        color={'#4A5568'}
         border="1px solid #C4C4C4"
         flexDirection="column"
       >
@@ -61,9 +66,9 @@ const Settings = () => {
         </Flex>
         <Flex justifyContent="space-between" mt="10px">
           <Text noOfLines={1} fontWeight={500}>
-            Ciemny motyw:
+            Motyw:
           </Text>
-          <Switch my="auto" />
+          <ColorModeSwitch />
         </Flex>
         <Flex flexDirection="column" mt="10px">
           <Text noOfLines={1} fontWeight={500}>
