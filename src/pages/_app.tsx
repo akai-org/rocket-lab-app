@@ -19,10 +19,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <PersistGate loading={null} persistor={persistor}>
           <ChakraProvider theme={theme}>
             <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-            <Layout />
-            <RouteGuard>
-              <Component {...pageProps} />
-            </RouteGuard>
+            <Layout>
+              <RouteGuard>
+                <Component {...pageProps} />
+              </RouteGuard>
+            </Layout>
           </ChakraProvider>
         </PersistGate>
       </Provider>

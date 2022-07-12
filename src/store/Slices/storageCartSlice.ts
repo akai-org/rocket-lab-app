@@ -1,18 +1,19 @@
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { PopulatedCartList } from '../../mongo/models/cart'
-import { Item, PopulatedItem } from '../../mongo/models/item'
+import { PopulatedItem } from '../../mongo/models/item'
+
 export interface CartItem {
   item: PopulatedItem
   quantity: number
 }
 
-type state = {
+interface State {
   cartLists: PopulatedCartList[]
   newCartList: CartItem[]
 }
 
-const initialState: state = {
+const initialState: State = {
   cartLists: [],
   newCartList: [],
 }

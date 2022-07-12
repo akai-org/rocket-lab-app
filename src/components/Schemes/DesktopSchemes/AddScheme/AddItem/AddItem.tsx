@@ -7,13 +7,13 @@ import {
   NumberInputStepper,
   Text,
 } from '@chakra-ui/react'
-import Select from 'react-select'
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useContext, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { itemsInfo } from '../../../../../store/store'
 import ProductButton from '../../../../UI/Custom Buttons/ProductButton/ProductButton'
-import { addItem } from '../../../../../store/Slices/schemeSlice'
 import SearchSchemeSelect from '../../../../UI/SearchSchemeSelect/SearchSchemeSelect'
+import { SchemasContext } from '../../../../../pages/schemes'
+import * as _ from 'lodash'
 
 interface SelectedType {
   value: string | null
@@ -25,25 +25,41 @@ interface AddItemProps {
   itemsValid: boolean
 }
 
+const noOption = {
+  value: null,
+  label: null,
+  id: null,
+}
+
 const AddItem = (props: AddItemProps) => {
+  const context = useContext(SchemasContext)
   const [quantity, setQuantity] = useState(1)
   const [selectedOption, setSelectedOption] = useState<
     SelectedType | undefined
-  >({
-    value: null,
-    label: null,
-    id: null,
-  })
+  >(noOption)
   const itemsData = useSelector(itemsInfo)
-  const dispatch = useDispatch()
 
-  const options = itemsData.items.map((item) => {
+  const originalOptions = itemsData.items.map((item) => {
     return { value: item.name, label: item.name, id: item.id }
   })
 
+  const choosenOptions = context
+    ? context.items.map((item) => {
+        return {
+          value: item.item.name,
+          label: item.item.name,
+          id: item.item.id,
+        }
+      })
+    : []
+
+  const options = _.differenceBy(originalOptions, choosenOptions, 'id')
+
   const handleAdd = () => {
     const item = itemsData.items.find((item) => item?.id === selectedOption?.id)
-    item && dispatch(addItem({ ...item, quantity: quantity }))
+    item && context?.addItem({ item, neededQuantity: quantity })
+    setSelectedOption(noOption)
+    setQuantity(1)
   }
 
   return (
@@ -67,11 +83,11 @@ const AddItem = (props: AddItemProps) => {
           ml="10px"
           fontSize="16px"
           borderColor="#E2E8F0"
-          defaultValue={quantity}
+          value={quantity}
           onChange={(e) => {
             setQuantity(parseInt(e))
           }}
-          min={0}
+          min={1}
         >
           <NumberInputField h="32px" px="5px" />
           <NumberInputStepper>
@@ -80,7 +96,7 @@ const AddItem = (props: AddItemProps) => {
           </NumberInputStepper>
         </NumberInput>
       </Flex>
-      {!props.itemsValid && (
+      {props.itemsValid && (
         <Text fontSize="14px" color="red">
           Wybierz przedmioty
         </Text>

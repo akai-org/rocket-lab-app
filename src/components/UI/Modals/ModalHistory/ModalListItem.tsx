@@ -2,7 +2,12 @@ import { Stack, Image, Text } from '@chakra-ui/react'
 
 const ElementInfo = () => {
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="center">
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      p="0 20px 0 0"
+    >
       <Stack direction="row" alignItems="center">
         <Image
           boxSize="40px"
