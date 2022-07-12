@@ -1,10 +1,12 @@
 import { Flex, Text, Image } from '@chakra-ui/react'
+import { useColors } from '../../../theme/useColors'
 
 const Footer = () => {
+  const colors = useColors()
+
   return (
     <Flex
-      bg="#FFFFFF"
-      color="#2D3748"
+      bg={colors.background}
       w="100vw"
       h="40px"
       direction="row"

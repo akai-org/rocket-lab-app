@@ -12,7 +12,7 @@ export const useColors = () => {
   const shadow = mode ? '#D5D5D5' : 'black'
   const background = mode ? 'white' : '#1A202C'
 
-  const borderPrimary = '#C4C4C4'
+  const borderPrimary = mode ? '#C4C4C4' : 'black'
   const borderSecondary = '#D4D4D4'
 
   return {

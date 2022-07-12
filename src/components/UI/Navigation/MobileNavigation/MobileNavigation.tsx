@@ -6,7 +6,8 @@ import MobileSidebar from './MobileSidebar/MobileSidebar'
 import { useColors } from '../../../../theme/useColors'
 
 const MobileNavigation = () => {
-  const [isSideBarVisible, setIsSideBarVisible] = useState(false)
+  const colors = useColors()
+
   return (
     <Box
       position="fixed"
@@ -14,8 +15,8 @@ const MobileNavigation = () => {
       top="0"
       w="100vw"
       minW="300px"
-      borderBottom="1px solid #D5D5D5"
-      bgColor="white"
+      borderBottom={`1px solid ${colors.shadow}`}
+      bgColor={colors.background}
       zIndex="1"
     >
       <Flex
@@ -25,7 +26,7 @@ const MobileNavigation = () => {
         w="100%"
         m="0 auto"
         p="0 20px"
-        boxShadow="0 -10px 40px 2px #D5D5D5"
+        boxShadow={`0 -10px 40px 2px ${colors.shadow}`}
       >
         <Flex alignItems="center">
           <Image h="34px" src="/logo-mobile.png" alt="logo-mobile" />

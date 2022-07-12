@@ -11,17 +11,18 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import Hamburger from 'hamburger-react'
-import { FiSettings } from 'react-icons/fi'
+import { FiSettings, FiLogOut } from 'react-icons/fi'
 import { AiOutlineTool } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
-import { GrLogout } from 'react-icons/gr'
 import { IS_DEV } from '../../../../../utils/constants'
+import { useColors } from '../../../../../theme/useColors'
 
 const MobileSidebar = () => {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef(null)
+  const colors = useColors()
 
   return (
     <>
@@ -35,7 +36,11 @@ const MobileSidebar = () => {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay bgColor="transparent" />
-        <DrawerContent mt="76px">
+        <DrawerContent
+          mt="76px"
+          bgColor={colors.background}
+          borderLeft={`1px solid ${colors.shadow}`}
+        >
           <DrawerBody w="100%">
             <Flex
               flexDirection="column"
@@ -101,7 +106,7 @@ const MobileSidebar = () => {
                   router.push('/api/auth/logout')
                 }}
               >
-                <GrLogout size={30} />
+                <FiLogOut size={30} />
                 <Text ml="10px">Wyloguj</Text>
               </Flex>
             </Flex>

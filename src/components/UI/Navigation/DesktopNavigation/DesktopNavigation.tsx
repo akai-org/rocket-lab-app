@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { Box, Image, Flex, Heading, Icon, Button } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
 import DesktopSidebar from './DesktopSidebar/DesktopSidebar'
+import { useColors } from '../../../../theme/useColors'
 
 const DesktopNavigation = () => {
+  const colors = useColors()
+
   return (
     <>
       <Box
@@ -11,9 +14,9 @@ const DesktopNavigation = () => {
         left="0"
         top="0"
         w="100vw"
-        borderBottom="1px solid #D5D5D5"
-        boxShadow="0 -15px 40px 2px #D5D5D5"
-        bgColor="white"
+        borderBottom={`1px solid ${colors.shadow}`}
+        boxShadow={`0 -15px 40px 2px ${colors.shadow}`}
+        bgColor={colors.background}
         zIndex="2"
       >
         <Flex
@@ -48,7 +51,12 @@ const DesktopNavigation = () => {
             </Box>
           </Flex>
           <Flex alignItems="center">
-            <Icon as={FaUserCircle} mr="10px" fontSize="40px" />
+            <Icon
+              as={FaUserCircle}
+              mr="10px"
+              color={colors.primary}
+              fontSize="40px"
+            />
           </Flex>
         </Flex>
       </Box>

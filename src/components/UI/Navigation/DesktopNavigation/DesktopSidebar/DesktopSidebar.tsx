@@ -1,15 +1,17 @@
 import { useRouter } from 'next/router'
 import { IS_DEV } from '../../../../../utils/constants'
 import { Flex, Text } from '@chakra-ui/react'
-import { FiSettings } from 'react-icons/fi'
+import { FiSettings, FiLogOut } from 'react-icons/fi'
 import { AiOutlineTool } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
-import { GrLogout } from 'react-icons/gr'
 import s from './sidebar.module.scss'
+import { useColors } from '../../../../../theme/useColors'
 
 const DesktopSidebar = () => {
   const router = useRouter()
+  const colors = useColors()
+
   return (
     <Flex
       position="absolute"
@@ -19,9 +21,9 @@ const DesktopSidebar = () => {
       w="223px"
       h="100vh"
       mt="75px"
-      bgColor="white"
       maxH="calc(100vh - 80px)"
-      boxShadow="0 0 10px 0.2px #DDDDDD"
+      bgColor={colors.background}
+      boxShadow={`0 0 10px 0.2px ${colors.shadow}`}
       zIndex="1"
     >
       <Flex
@@ -93,7 +95,7 @@ const DesktopSidebar = () => {
           }}
           w="85%"
         >
-          <GrLogout size={25} />
+          <FiLogOut size={25} />
           <Text ml="10px">Wyloguj</Text>
         </Flex>
       </Flex>
