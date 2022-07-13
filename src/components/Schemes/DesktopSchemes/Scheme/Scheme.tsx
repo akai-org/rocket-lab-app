@@ -22,6 +22,7 @@ import { PopulatedSchema } from '../../../../mongo/models/schema'
 import { fetcher } from '../../../../utils/requests'
 import { API_URL } from '../../../../utils/constants'
 import { deleteSchema } from '../../../../store/Slices/schemasSlice'
+import ModalEditScheme from '../../../UI/Modals/ModalEditScheme/ModalEditScheme'
 
 interface Props {
   schema: PopulatedSchema
@@ -101,6 +102,11 @@ const Scheme = ({ schema }: Props) => {
           </Flex>
         </AccordionPanel>
       </AccordionItem>
+      <ModalEditScheme
+        onClose={onCloseEditScheme}
+        isOpen={isOpenEditScheme}
+        isCentered
+      />
     </Accordion>
   )
 }

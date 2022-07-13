@@ -8,7 +8,11 @@ interface SchemeItemProps {
   name: string
 }
 
-const SchemeItem = ({ schemeQuantity, storageQuantity, name }: SchemeItemProps) => {
+const SchemeItem = ({
+  schemeQuantity,
+  storageQuantity,
+  name,
+}: SchemeItemProps) => {
   return (
     <Tr fontSize="14px">
       <Td>
