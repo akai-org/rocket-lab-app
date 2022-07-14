@@ -22,6 +22,7 @@ import { PopulatedSchema } from '../../../../mongo/models/schema'
 import { API_URL } from '../../../../utils/constants'
 import { fetcher } from '../../../../utils/requests'
 import { deleteSchema } from '../../../../store/Slices/schemasSlice'
+import ModalEditScheme from '../../../UI/Modals/ModalEditScheme/ModalEditScheme'
 
 interface Props {
   schema: PopulatedSchema
@@ -38,7 +39,7 @@ const Scheme = ({ schema }: Props) => {
   const itemsData = useSelector(itemsInfo)
   const schemeData = useSelector(schemeInfo)
 
-const handleDelete = async () => {
+  const handleDelete = async () => {
     try {
       const deletedSchema = await fetcher(API_URL + '/api/schemas/delete', {
         method: 'DELETE',
@@ -100,6 +101,11 @@ const handleDelete = async () => {
           </Flex>
         </AccordionPanel>
       </AccordionItem>
+      <ModalEditScheme
+        onClose={onCloseEditScheme}
+        isOpen={isOpenEditScheme}
+        isCentered
+      />
     </Accordion>
   )
 }
