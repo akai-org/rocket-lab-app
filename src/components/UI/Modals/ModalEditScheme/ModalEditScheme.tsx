@@ -9,13 +9,17 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalProps,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
   Table,
   Tbody,
   Td,
   Th,
   Thead,
   Tr,
-  useDisclosure,
 } from '@chakra-ui/react'
 import { AiOutlineClose } from 'react-icons/ai'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
@@ -59,12 +63,26 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
               <Tbody>
                 {/* <SchemeItem /> */}
                 <Tr fontSize="14px" h="40px">
-                  <Td>
-                    {/* <Text>Item 1</Text> */}
-                    Item 1
+                  <Td>Item 1</Td>
+                  <Td w="1%" minW="120px" textAlign="right">
+                    <NumberInput
+                      allowMouseWheel
+                      display="inline"
+                      h="30px"
+                      fontSize="16px"
+                      borderColor="#E2E8F0"
+                      min={1}
+                    >
+                      <NumberInputField h="30px" minW="80px" />
+                      <NumberInputStepper h="30px">
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                      </NumberInputStepper>
+                    </NumberInput>
                   </Td>
-                  <Td>500</Td>
-                  <Td textAlign="right">Dostępny</Td>
+                  <Td w="18%" textAlign="right">
+                    Dostępny
+                  </Td>
                   <Td>
                     <Flex justifyContent="flex-end">
                       <AiOutlineClose cursor="pointer" />
