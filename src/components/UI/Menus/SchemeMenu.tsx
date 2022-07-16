@@ -4,7 +4,7 @@ import DeletePopover from '../Popovers/DeletePopover'
 
 export interface SchemeMenuProps {
   onDelete: () => void
-  onEdit: () => void
+  onOpenInfo: () => void
 }
 
 const SchemeMenu = (props: SchemeMenuProps) => {
@@ -22,9 +22,8 @@ const SchemeMenu = (props: SchemeMenuProps) => {
         </Flex>
       </MenuButton>
       <MenuList maxW="50px">
-        <MenuItem closeOnSelect>Więcej</MenuItem>
-        <MenuItem onClick={props.onEdit} closeOnSelect>
-          Edytuj
+        <MenuItem onClick={props.onOpenInfo} closeOnSelect>
+          Więcej
         </MenuItem>
         <MenuItem>
           <DeletePopover

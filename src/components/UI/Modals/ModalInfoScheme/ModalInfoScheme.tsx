@@ -1,6 +1,6 @@
 import {
   Flex,
-  Input,
+  Text,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -9,44 +9,39 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalProps,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
   Table,
   Tbody,
   Td,
   Th,
   Thead,
   Tr,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { AiOutlineClose } from 'react-icons/ai'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
+import ModalEditScheme from '../ModalEditScheme/ModalEditScheme'
 
-interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
+interface ModalInfoSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
 }
 
-const ModalEditScheme = (props: ModalEditSchemeProps) => {
+const ModalInfoScheme = (props: ModalInfoSchemeProps) => {
+  const {
+    isOpen: isOpenEditScheme,
+    onOpen: onOpenEditScheme,
+    onClose: onCloseEditScheme,
+  } = useDisclosure()
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
       <ModalContent maxW="40rem">
-        <ModalHeader pr="50px">
-          <Input
-            h="30px"
-            pl="5px"
-            mb="5px"
-            value="Nazwa schematu"
-            fontWeight="500"
-            fontSize="19px"
-          />
-        </ModalHeader>
+        <ModalHeader>Informacje o schemacie</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Flex flexDirection="column" maxH="350px" overflowY="scroll" w="100%">
+            <Text fontWeight="500" noOfLines={2} fontSize="19px">
+              Nazwa schematu
+            </Text>
             <Table>
               <Thead>
                 <Tr fontSize="16px" fontWeight="700">
@@ -57,9 +52,6 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
                   <Th w="18%" textAlign="right">
                     DOSTĘPNOŚĆ
                   </Th>
-                  <Th w="1%" textAlign="right">
-                    AKCJE
-                  </Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -67,28 +59,19 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
                 <Tr fontSize="14px" h="40px">
                   <Td>Item 1</Td>
                   <Td w="1%" minW="120px" textAlign="right">
-                    <NumberInput
-                      allowMouseWheel
-                      display="inline"
-                      h="30px"
-                      fontSize="16px"
-                      borderColor="#E2E8F0"
-                      min={1}
-                    >
-                      <NumberInputField h="30px" minW="80px" />
-                      <NumberInputStepper h="30px">
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                      </NumberInputStepper>
-                    </NumberInput>
+                    55
                   </Td>
                   <Td w="18%" textAlign="right">
                     Dostępny
                   </Td>
-                  <Td>
-                    <Flex justifyContent="flex-end">
-                      <AiOutlineClose cursor="pointer" />
-                    </Flex>
+                </Tr>
+                <Tr fontSize="14px" h="40px">
+                  <Td>Item 2</Td>
+                  <Td w="1%" minW="120px" textAlign="right">
+                    1255
+                  </Td>
+                  <Td w="18%" textAlign="right">
+                    Częściowo
                   </Td>
                 </Tr>
               </Tbody>
@@ -96,8 +79,13 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
           </Flex>
         </ModalBody>
         <ModalFooter>
-          <ProductButton fontSize="16px" w="80px" ml="10px">
-            Zapisz
+          <ProductButton
+            onClick={onOpenEditScheme}
+            fontSize="16px"
+            w="80px"
+            ml="10px"
+          >
+            Edytuj
           </ProductButton>
           <ProductButton
             onClick={props.onClose}
@@ -107,10 +95,19 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
           >
             Zamknij
           </ProductButton>
+          <DeletePopover
+            label="Czy na pewno chcesz usunąć ten schemat?"
+            onClick={() => console.log('USUNIĘTO SCHEMAT')}
+          />
         </ModalFooter>
       </ModalContent>
+      <ModalEditScheme
+        onClose={onCloseEditScheme}
+        isOpen={isOpenEditScheme}
+        isCentered
+      />
     </Modal>
   )
 }
 
-export default ModalEditScheme
+export default ModalInfoScheme

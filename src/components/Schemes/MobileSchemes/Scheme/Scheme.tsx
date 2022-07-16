@@ -22,7 +22,7 @@ import { PopulatedSchema } from '../../../../mongo/models/schema'
 import { API_URL } from '../../../../utils/constants'
 import { fetcher } from '../../../../utils/requests'
 import { deleteSchema } from '../../../../store/Slices/schemasSlice'
-import ModalEditScheme from '../../../UI/Modals/ModalEditScheme/ModalEditScheme'
+import ModalInfoScheme from '../../../UI/Modals/ModalInfoScheme/ModalInfoScheme'
 
 interface Props {
   schema: PopulatedSchema
@@ -30,9 +30,9 @@ interface Props {
 
 const Scheme = ({ schema }: Props) => {
   const {
-    isOpen: isOpenEditScheme,
-    onOpen: onOpenEditScheme,
-    onClose: onCloseEditScheme,
+    isOpen: isOpenInfoScheme,
+    onOpen: onOpenInfoScheme,
+    onClose: onCloseInfoScheme,
   } = useDisclosure()
   const dispatch = useDispatch()
 
@@ -74,7 +74,7 @@ const Scheme = ({ schema }: Props) => {
             <AccordionIcon />
           </AccordionButton>
           <Flex pt="5px" mr="20px">
-            <SchemeMenu onEdit={onOpenEditScheme} onDelete={handleDelete} />
+            <SchemeMenu onOpenInfo={onOpenInfoScheme} onDelete={handleDelete} />
           </Flex>
         </Flex>
         <AccordionPanel>
@@ -101,9 +101,9 @@ const Scheme = ({ schema }: Props) => {
           </Flex>
         </AccordionPanel>
       </AccordionItem>
-      <ModalEditScheme
-        onClose={onCloseEditScheme}
-        isOpen={isOpenEditScheme}
+      <ModalInfoScheme
+        onClose={onCloseInfoScheme}
+        isOpen={isOpenInfoScheme}
         isCentered
       />
     </Accordion>
