@@ -6,6 +6,7 @@ import { schemeInfo } from '../../../../store/store'
 
 const MobileSchemes = () => {
   const schemeData = useSelector(schemeInfo)
+
   return (
     <MobileWrapper mx="10px">
       <AddScheme />

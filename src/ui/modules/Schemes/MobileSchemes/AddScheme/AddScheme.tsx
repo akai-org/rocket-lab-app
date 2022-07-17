@@ -17,6 +17,7 @@ import { API_URL } from '../../../../../utils/constants'
 import { fetcher } from '../../../../../utils/requests'
 import { useDispatch } from 'react-redux'
 import { addSchema } from '../../../../../store/Slices/schemasSlice'
+import { useColors } from '../../../../../theme/useColors'
 
 const AddScheme = () => {
   const dispatch = useDispatch()
@@ -24,10 +25,9 @@ const AddScheme = () => {
   const nameIsValid = context?.name.length !== 0 ? true : false
   const itemsIsValid = context?.items.length !== 0 ? true : false
   const [submitClicked, setSubmitClicked] = useState(false)
-
+  const colors = useColors()
 
   const handleSubmit = async () => {
-
     setSubmitClicked(true)
 
     if (nameIsValid && itemsIsValid) {
@@ -56,17 +56,17 @@ const AddScheme = () => {
           <Text
             flex="1"
             noOfLines={1}
-            fontSize="17px"
-            fontWeight="500"
-            color="#2D3748"
+            fontSize="md"
+            fontWeight="normal"
+            color={colors.fontSecondary}
             textAlign="left"
           >
             Dodaj Schemat
           </Text>
-          <AccordionIcon />
+          <AccordionIcon color={colors.fontSecondary} />
         </AccordionButton>
-        <AccordionPanel>
-          <Text fontWeight={500}>Nazwa</Text>
+        <AccordionPanel color={colors.fontSecondary}>
+          <Text fontWeight="normal">Nazwa</Text>
           <Input
             onChange={(e) => context?.updateName(e.currentTarget.value)}
             h="32px"
@@ -75,11 +75,11 @@ const AddScheme = () => {
             value={context?.name}
           />
           {!nameIsValid && submitClicked && (
-            <Text fontSize="14px" color="red">
+            <Text fontSize="xs" color="red">
               Wprowadź nazwę
             </Text>
           )}
-          <Text fontWeight={500} mt="10px">
+          <Text fontWeight="normal" mt="10px">
             Opis
           </Text>
           <Input
@@ -89,7 +89,7 @@ const AddScheme = () => {
             type="text"
             value={context?.description}
           />
-          <Text fontWeight={500} mt="10px">
+          <Text fontWeight="normal" mt="10px">
             Przedmioty
           </Text>
           <AddItem itemsValid={!itemsIsValid && submitClicked} />
@@ -97,7 +97,7 @@ const AddScheme = () => {
           <Flex justifyContent="flex-end">
             <ProductButton
               mt="20px"
-              fontSize="16px"
+              fontSize="sm"
               onClick={handleSubmit}
               w="150px"
             >

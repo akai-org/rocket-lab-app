@@ -14,6 +14,7 @@ import {
 import { AiOutlineClose } from 'react-icons/ai'
 import { TmpSchemaItem } from '../../../../../../../mongo/models/schema'
 import { SchemasContext } from '../../../../../../../pages/schemes'
+import { useColors } from '../../../../../../../theme/useColors'
 
 interface ItemProps {
   item: TmpSchemaItem
@@ -21,12 +22,13 @@ interface ItemProps {
 
 const Item = ({ item: schemaItem }: ItemProps) => {
   const context = useContext(SchemasContext)
+  const colors = useColors()
 
   const handleDelete = () => {
     context?.removeItem(schemaItem)
   }
   return (
-    <Tr fontSize="14px" h="40px">
+    <Tr fontSize="xs" h="40px">
       <Td>
         <Flex justifyContent="flex-start" cursor="pointer">
           <Image src="item.png" w="40px" h="40px" alt={schemaItem.item.name} />
@@ -40,8 +42,7 @@ const Item = ({ item: schemaItem }: ItemProps) => {
           allowMouseWheel
           display="inline"
           h="30px"
-          fontSize="16px"
-          borderColor="#E2E8F0"
+          fontSize="sm"
           defaultValue={schemaItem.neededQuantity}
           onChange={(e) =>
             context?.updateItem({ ...schemaItem, neededQuantity: +e })
@@ -61,6 +62,7 @@ const Item = ({ item: schemaItem }: ItemProps) => {
             cursor="pointer"
             display="block"
             onClick={handleDelete}
+            color={colors.fontSecondary}
           />
         </Flex>
       </Td>

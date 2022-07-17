@@ -10,9 +10,9 @@ const ItemsList = () => {
     <Flex direction="column" mt="20px">
       <Table p="20px">
         <Thead>
-          <Tr fontSize="16px" fontWeight="700">
+          <Tr fontSize="sm" fontWeight="bold">
             <Th w="80%">NAZWA</Th>
-            <Th textAlign="right" w="1%" minW="140px">
+            <Th textAlign="right" w="1%" minW="150px">
               ILOŚĆ SZTUK
             </Th>
             <Th w="1%" textAlign="right">

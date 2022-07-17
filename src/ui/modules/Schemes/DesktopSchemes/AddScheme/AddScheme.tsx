@@ -17,19 +17,19 @@ import { fetcher } from '../../../../../utils/requests'
 import { API_URL } from '../../../../../utils/constants'
 import { addSchema } from '../../../../../store/Slices/schemasSlice'
 import { SchemasContext } from '../../../../../pages/schemes'
+import { useColors } from '../../../../../theme/useColors'
 
 const AddScheme = () => {
   const context = useContext(SchemasContext)
 
   const dispatch = useDispatch()
-
+  const colors = useColors()
   const nameIsValid = context?.name.length !== 0 ? true : false
   const itemsIsValid = context?.items.length !== 0 ? true : false
   const [submitClicked, setSubmitClicked] = useState(false)
 
   //FIXME: No submit - there's no form
   const handleSubmit = async () => {
-
     setSubmitClicked(true)
 
     if (nameIsValid && itemsIsValid) {
@@ -52,15 +52,19 @@ const AddScheme = () => {
   }
 
   return (
-    <Accordion borderRadius="6px" border="1px solid #C4C4C4" allowMultiple>
+    <Accordion
+      borderRadius="6px"
+      border={`1px solid ${colors.borderPrimary}`}
+      allowMultiple
+    >
       <AccordionItem border="none">
         <AccordionButton>
           <Text
             flex="1"
-            fontSize="20px"
-            fontWeight="600"
+            fontSize="lg"
+            fontWeight="normal"
             m="5px 5px 5px 15px"
-            color="#4A5568"
+            color={colors.fontSecondary}
             textAlign="left"
           >
             Dodaj Schemat
@@ -68,7 +72,7 @@ const AddScheme = () => {
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel>
-          <Text fontWeight={500}>Nazwa</Text>
+          <Text fontWeight="normal">Nazwa</Text>
           <Input
             onChange={(e) => {
               if (context) {
@@ -81,11 +85,11 @@ const AddScheme = () => {
             value={context?.name}
           />
           {!nameIsValid && submitClicked && (
-            <Text fontSize="14px" color="red">
+            <Text fontSize="xs" color={colors.errorPrimary}>
               Wprowadź nazwę
             </Text>
           )}
-          <Text fontWeight={500} mt="10px">
+          <Text fontWeight="normal" mt="10px">
             Opis
           </Text>
           <Input
@@ -99,7 +103,7 @@ const AddScheme = () => {
             }}
             value={context?.description}
           />
-          <Text fontWeight={500} mt="10px">
+          <Text fontWeight="normal" mt="10px">
             Przedmioty
           </Text>
           <AddItem itemsValid={!itemsIsValid && submitClicked} />
@@ -107,7 +111,7 @@ const AddScheme = () => {
           <Flex justifyContent="flex-end">
             <ProductButton
               mt="20px"
-              fontSize="16px"
+              fontSize="sm"
               onClick={handleSubmit}
               w="150px"
             >

@@ -14,6 +14,7 @@ import ProductButton from '../../../../../components/Custom Buttons/ProductButto
 import SearchSchemeSelect from '../../../../../components/SearchSchemeSelect/SearchSchemeSelect'
 import { SchemasContext } from '../../../../../../pages/schemes'
 import * as _ from 'lodash'
+import { useColors } from '../../../../../../theme/useColors'
 
 interface SelectedType {
   value: string | null
@@ -34,6 +35,7 @@ const noOption = {
 const AddItem = (props: AddItemProps) => {
   const context = useContext(SchemasContext)
   const [quantity, setQuantity] = useState(1)
+  const colors = useColors()
   const [selectedOption, setSelectedOption] = useState<
     SelectedType | undefined
   >(noOption)
@@ -81,8 +83,7 @@ const AddItem = (props: AddItemProps) => {
           maxW="100px"
           minW="67px"
           ml="10px"
-          fontSize="16px"
-          borderColor="#E2E8F0"
+          fontSize="sm"
           value={quantity}
           onChange={(e) => {
             setQuantity(parseInt(e))
@@ -97,13 +98,13 @@ const AddItem = (props: AddItemProps) => {
         </NumberInput>
       </Flex>
       {props.itemsValid && (
-        <Text fontSize="14px" color="red">
+        <Text fontSize="xs" color={colors.errorPrimary}>
           Wybierz przedmioty
         </Text>
       )}
       <ProductButton
         m="20px 0 0 auto"
-        fontSize="16px"
+        fontSize="sm"
         onClick={handleAdd}
         w="150px"
       >

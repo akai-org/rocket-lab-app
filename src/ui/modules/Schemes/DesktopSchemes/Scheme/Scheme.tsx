@@ -15,13 +15,13 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import SchemeItem from './SchemeItem/SchemeItem'
-import { useDispatch, useSelector } from 'react-redux'
-import { itemsInfo, schemeInfo } from '../../../../../store/store'
+import { useDispatch } from 'react-redux'
 import SchemeMenu from '../../../../components/Menus/SchemeMenu'
 import { PopulatedSchema } from '../../../../../mongo/models/schema'
 import { fetcher } from '../../../../../utils/requests'
 import { API_URL } from '../../../../../utils/constants'
 import { deleteSchema } from '../../../../../store/Slices/schemasSlice'
+import { useColors } from '../../../../../theme/useColors'
 
 interface Props {
   schema: PopulatedSchema
@@ -34,9 +34,7 @@ const Scheme = ({ schema }: Props) => {
     onClose: onCloseEditScheme,
   } = useDisclosure()
   const dispatch = useDispatch()
-
-  const itemsData = useSelector(itemsInfo)
-  const schemeData = useSelector(schemeInfo)
+  const colors = useColors()
 
   const handleDelete = async () => {
     try {
@@ -54,24 +52,24 @@ const Scheme = ({ schema }: Props) => {
     <Accordion
       allowMultiple
       borderRadius="6px"
-      bgColor="white"
-      border="1px solid #C4C4C4"
+      bgColor={colors.backgroundPrimary}
+      border={`1px solid ${colors.borderPrimary}`}
       mt="20px"
     >
       <AccordionItem border="none">
         <Flex>
           <AccordionButton w="100%" justifyContent="space-between">
             <Text
-              fontSize="20px"
+              fontSize="lg"
               lineHeight="10px"
               my="15px"
               ml="15px"
-              color="#4A5568"
-              fontWeight="500"
+              color={colors.fontSecondary}
+              fontWeight="light"
             >
               {schema.name}
             </Text>
-            <AccordionIcon />
+            <AccordionIcon color={colors.fontSecondary} />
           </AccordionButton>
           <Flex pt="5px" mr="20px">
             <SchemeMenu onEdit={onOpenEditScheme} onDelete={handleDelete} />
