@@ -1,6 +1,6 @@
 import DesktopWrapper from '../../components/Wrappers/DesktopWrapper/DesktopWrapper'
 import { Avatar, Flex, Text, useMediaQuery } from '@chakra-ui/react'
-import SearchSchemeSelect from '../../components/SearchSchemeSelect/SearchSchemeSelect'
+import SearchSelect from '../../components/SearchSelect/SearchSelect'
 import { useState } from 'react'
 import ProductButton from '../../components/Custom Buttons/ProductButton/ProductButton'
 import MobileWrapper from '../../components/Wrappers/MobileWrapper/MobileWrapper'
@@ -40,18 +40,18 @@ const Settings = () => {
         borderRadius="6px"
         p="15px"
         mt={['10px', 0]}
-        color={'#4A5568'}
-        border="1px solid #C4C4C4"
+        color={colors.fontSecondary}
+        border={`1px solid ${colors.borderPrimary}`}
         flexDirection="column"
       >
         <Flex>
           <Avatar size="sm" />
           <Text
             noOfLines={1}
-            fontSize="18px"
+            fontSize="md"
             lineHeight="30px"
             pl="10px"
-            fontWeight="600"
+            fontWeight="bold"
           >
             Imię Nazwisko
           </Text>
@@ -65,17 +65,17 @@ const Settings = () => {
           />
         </Flex>
         <Flex justifyContent="space-between" mt="10px">
-          <Text noOfLines={1} fontWeight={500}>
+          <Text noOfLines={1} fontWeight="normal">
             Motyw:
           </Text>
           <ColorModeSwitch />
         </Flex>
         <Flex flexDirection="column" mt="10px">
-          <Text noOfLines={1} fontWeight={500}>
+          <Text noOfLines={1} fontWeight="normal">
             Edycja ról:
           </Text>
           <Text noOfLines={1}>Wybierz użytkownika:</Text>
-          <SearchSchemeSelect
+          <SearchSelect
             value={selectedUser}
             onChange={(e) => {
               const b = e as { value: string; label: string; role: Role }
@@ -90,7 +90,7 @@ const Settings = () => {
               <Text>{'Email: ' + 'replaceme@gmail.com'}</Text>
               <Text>
                 Rola:
-                <SearchSchemeSelect
+                <SearchSelect
                   value={selectedRole}
                   onChange={(e) => {
                     const b = e as { value: string; label: string }
@@ -100,10 +100,10 @@ const Settings = () => {
                 />
               </Text>
               <Flex justifyContent="flex-end" gap="10px" mt="15px">
-                <ProductButton fontSize="16px" w="70px">
+                <ProductButton fontSize="sm" w="70px">
                   Zapisz
                 </ProductButton>
-                <ProductButton onClick={handleClear} fontSize="16px" w="70px">
+                <ProductButton onClick={handleClear} fontSize="sm" w="70px">
                   Anuluj
                 </ProductButton>
               </Flex>
