@@ -22,8 +22,10 @@ import {
   Thead,
   Tr,
   Text,
+  Select,
 } from '@chakra-ui/react'
 import { AiOutlineClose } from 'react-icons/ai'
+import AddItem from '../../../Schemes/DesktopSchemes/AddScheme/AddItem/AddItem'
 import QuantityBadge from '../../Badges/QuantityBadge'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
@@ -47,11 +49,43 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
               pl="5px"
               mb="5px"
               placeholder="Wprowadź nazwę schematu"
-              fontWeight="500"
               fontSize="19px"
             />
             <Text>Opis:</Text>
             <Textarea p="5px" placeholder="Wprowadź opis" />
+            <Text mt="10px">Przedmioty</Text>
+            <Flex alignItems="center">
+              <Select placeholder="Wybierz przedmiot">
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+              </Select>
+              <NumberInput
+                allowMouseWheel
+                h="32px"
+                w="20%"
+                maxW="100px"
+                minW="67px"
+                ml="10px"
+                fontSize="16px"
+                borderColor="#E2E8F0"
+                min={1}
+              >
+                <NumberInputField h="32px" px="5px" />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </Flex>
+            <ProductButton
+              m="20px 0 0 auto"
+              fontSize="16px"
+              // onClick={}
+              w="150px"
+            >
+              Dodaj przedmiot
+            </ProductButton>
             <Table>
               <Thead>
                 <Tr fontSize="16px" fontWeight="700">
