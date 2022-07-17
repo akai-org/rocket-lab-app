@@ -6,22 +6,29 @@ export const useColors = () => {
 
   //First value for light mode
   //Second value for dark mode
-  const primary = mode ? 'black' : 'white'
-  const secondary = mode ? '#3F3F3F' : '#C0C0C0'
-  const neutral = mode ? '#2D3748' : '#D5D7CA'
-  const shadow = mode ? '#D5D5D5' : 'black'
-  const background = mode ? 'white' : '#1A202C'
 
+  //font colors
+  const fontPrimary = mode ? 'black' : 'white'
+  const fontSecondary = mode ? '#2D3748' : '#D5D7CA'
+  const fontNeutral = mode ? '#3F3F3F' : '#C0C0C0'
+
+  //border colors
   const borderPrimary = mode ? '#C4C4C4' : 'black'
   const borderSecondary = '#D4D4D4'
 
+  //shadow colors
+  const shadowPrimary = mode ? '#D5D5D5' : 'black'
+
+  //background colors
+  const backgroundPrimary = mode ? 'white' : '#1A202C'
+
   return {
-    primary,
-    secondary,
-    neutral,
-    shadow,
-    background,
+    fontPrimary,
+    fontSecondary,
+    fontNeutral,
     borderPrimary,
     borderSecondary,
+    shadowPrimary,
+    backgroundPrimary,
   }
 }

@@ -7,8 +7,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 import store from '../store/store'
 import '../styles/globals.css'
 import { theme } from '../theme/theme'
-import { RouteGuard } from '../components/routeGuard'
-import Layout from '../components/UI/Layout'
+import { RouteGuard } from '../ui/routeGuard'
+import Layout from '../ui/components/Layout'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const persistor = persistStore(store)

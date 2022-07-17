@@ -1,5 +1,4 @@
 import { extendTheme, type ThemeConfig } from '@chakra-ui/react'
-import { createBreakpoints } from '@chakra-ui/theme-tools'
 
 const config: ThemeConfig = {
   useSystemColorMode: false,
@@ -8,6 +7,10 @@ const config: ThemeConfig = {
 
 export const theme = extendTheme({
   config,
+  fonts: {
+    heading: 'Montserrat, sans-serif',
+    body: 'Inter, sans-serif',
+  },
   breakpoints: {
     sm: '900px',
     md: '1024px',
@@ -15,20 +18,13 @@ export const theme = extendTheme({
     xl: '1400px',
     '2xl': '1536px',
   },
-  fonts: {
-    heading: 'Montserrat, sans-serif',
-    body: 'Inter, sans-serif',
-  },
   fontSizes: {
     xxs: '11px',
     xs: '14px',
     md: '16px',
-    lg: '20px',
-    xl: '22px',
-    xxl: '40px',
-    subBase: '14px',
-    base: '16px',
-    title: '20px',
+    lg: '18px',
+    xl: '20px',
+    xxl: '22px',
   },
   components: {
     Button: { baseStyle: { _focus: { boxShadow: 'none' } } },
