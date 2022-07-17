@@ -11,7 +11,7 @@ import { useContext, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { itemsInfo } from '../../../../../../store/store'
 import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
-import SearchSchemeSelect from '../../../../../components/SearchSchemeSelect/SearchSchemeSelect'
+import SearchSelect from '../../../../../components/SearchSelect/SearchSelect'
 import { SchemasContext } from '../../../../../../pages/schemes'
 import * as _ from 'lodash'
 import { useColors } from '../../../../../../theme/useColors'
@@ -67,7 +67,7 @@ const AddItem = (props: AddItemProps) => {
   return (
     <Flex w="100%" direction="column">
       <Flex>
-        <SearchSchemeSelect
+        <SearchSelect
           value={selectedOption}
           onChange={(e) => {
             console.log(e)

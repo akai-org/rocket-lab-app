@@ -2,7 +2,7 @@ import React from 'react'
 import Select, { Props } from 'react-select'
 import { useColors } from '../../../theme/useColors'
 
-const SearchSchemeSelect = ({ ...restProps }: Props) => {
+const SearchSelect = ({ ...restProps }: Props) => {
   const colors = useColors()
 
   return (
@@ -46,4 +46,4 @@ const SearchSchemeSelect = ({ ...restProps }: Props) => {
   )
 }
 
-export default SearchSchemeSelect
+export default SearchSelect
