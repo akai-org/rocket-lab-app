@@ -4,21 +4,23 @@ import HistoryList from './HistoryList/HistoryList'
 import { useRef } from 'react'
 import FilterDrawer from './FilterDrawer/FilterDrawer'
 import MobileWrapper from '../../../components/Wrappers/MobileWrapper/MobileWrapper'
+import { useColors } from '../../../../theme/useColors'
 
 const MobileHistory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const filterRef = useRef<HTMLDivElement>(null)
+  const colors = useColors()
 
   return (
-    <MobileWrapper color="black">
+    <MobileWrapper color={colors.fontPrimary}>
       <Box textAlign="left">
-        <Text fontSize="25px" fontWeight="600" ml="15px" isTruncated>
+        <Text fontSize="xl" fontWeight="bold" ml="15px" isTruncated>
           Historia
         </Text>
       </Box>
       <Flex
         flexDirection="row"
-        border="1px solid #D4D4D4"
+        border={`1px solid ${colors.borderSecondary}`}
         borderRadius="5px"
         m="5px auto 10px"
         w="95%"
@@ -27,11 +29,16 @@ const MobileHistory = () => {
         justifyContent="space-between"
       >
         <Stack direction="row">
-          <Text color="gray">sortuj:</Text>
+          <Text color={colors.fontSecondary}>sortuj:</Text>
           {
             // TODO: History sorting
           }
-          <Select size="md" variant="unstyled" placeholder="wybierz">
+          <Select
+            color={colors.fontPrimary}
+            size="md"
+            variant="unstyled"
+            placeholder="wybierz"
+          >
             <option value="najnowsze">najnowsze</option>
             <option value="najstarsze">najstarsze</option>
           </Select>
@@ -43,8 +50,8 @@ const MobileHistory = () => {
           ref={filterRef}
         >
           <FilterDrawer isOpen={isOpen} onClose={onClose} />
-          <Text>Filtry</Text>
-          <IoMdFunnel color="black" />
+          <Text color={colors.fontPrimary}>Filtry</Text>
+          <IoMdFunnel color={colors.fontPrimary} />
         </Stack>
       </Flex>
       <HistoryList />
