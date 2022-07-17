@@ -10,6 +10,7 @@ import { storageCartInfo } from '../../../../../store/store'
 import ProductButton from '../../../../components/Custom Buttons/ProductButton/ProductButton'
 import ModalEditItem from '../../../../components/Modals/ModalEditItem/ModalEditItem'
 import ModalInfo from '../../../../components/Modals/ModalInfo/ModalInfo'
+import { useColors } from '../../../../../theme/useColors'
 
 interface Props {
   item: PopulatedItem
@@ -18,6 +19,7 @@ interface Props {
 const GridItem = ({ item }: Props) => {
   const dispatch = useDispatch()
   const storageCartData = useSelector(storageCartInfo).newCartList
+  const colors = useColors()
   const {
     isOpen: isOpenDetails,
     onOpen: onOpenDetails,
@@ -38,16 +40,16 @@ const GridItem = ({ item }: Props) => {
         m="5px auto"
         alt=""
       />
-      <Box textAlign="center" w="90%" m="0 auto">
-        <Text onClick={onOpenInfo} fontSize="16px" isTruncated fontWeight="500">
+      <Box textAlign="center" color={colors.fontSecondary} w="90%" m="0 auto">
+        <Text onClick={onOpenInfo} fontSize="sm" isTruncated fontWeight="500">
           {item.name}
         </Text>
         <Box w="100%" mb="5px">
           <Text
-            fontSize="14px"
+            fontSize="xs"
             isTruncated
-            fontWeight={item.quantity ? '400' : '500'}
-            color={item.quantity ? 'inherit' : 'red.500'}
+            fontWeight={item.quantity ? 'light' : 'normal'}
+            color={item.quantity ? 'inherit' : colors.errorPrimary}
           >
             {item.quantity ? `Ilość: ${item.quantity}` : 'Brak w magazynie'}
           </Text>
@@ -57,7 +59,7 @@ const GridItem = ({ item }: Props) => {
             mr="10px"
             w="80px"
             onClick={onOpenDetails}
-            fontSize="16px"
+            fontSize="sm"
           >
             Edytuj
           </ProductButton>

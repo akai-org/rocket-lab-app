@@ -9,12 +9,15 @@ export const useColors = () => {
 
   //font colors
   const fontPrimary = mode ? 'black' : 'white'
-  const fontSecondary = mode ? '#2D3748' : '#D5D7CA'
-  const fontNeutral = mode ? '#3F3F3F' : '#C0C0C0'
+  const fontPrimaryOpposite = mode ? 'white' : 'black'
+  const fontSecondary = mode ? '#2D3748' : 'white'
+  const fontNeutral = mode ? '#C4C4C4' : '#C4C4C4'
 
   //border colors
-  const borderPrimary = mode ? '#C4C4C4' : 'black'
-  const borderSecondary = '#D4D4D4'
+  //borders of containers
+  const borderPrimary = mode ? '#C4C4C4' : 'white'
+  //borders of inputs
+  const borderSecondary = mode ? '#D4D4D4' : '#b5b5b5'
 
   //shadow colors
   const shadowPrimary = mode ? '#D5D5D5' : 'black'
@@ -22,13 +25,20 @@ export const useColors = () => {
   //background colors
   const backgroundPrimary = mode ? 'white' : '#1A202C'
 
+  //others
+  const orangePrimary = '#FF7700'
+  const errorPrimary = 'red'
+
   return {
     fontPrimary,
+    fontPrimaryOpposite,
     fontSecondary,
     fontNeutral,
     borderPrimary,
     borderSecondary,
     shadowPrimary,
     backgroundPrimary,
+    orangePrimary,
+    errorPrimary,
   }
 }

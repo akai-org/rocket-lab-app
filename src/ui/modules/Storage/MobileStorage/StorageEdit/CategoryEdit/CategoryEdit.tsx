@@ -23,9 +23,11 @@ import { fetcher } from '../../../../../../utils/requests'
 import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../../../../components/Popovers/DeletePopover'
 import Category from './Category/Category'
+import { useColors } from '../../../../../../theme/useColors'
 
 const CategoryEdit = () => {
   const categories = useSelector(categoriesInfo).categories
+  const colors = useColors()
   const [nameIsValid, setNameIsValid] = useState(true)
   const [checkboxes, setCheckboxes] = useState([''])
   const dispatch = useDispatch()
@@ -77,9 +79,9 @@ const CategoryEdit = () => {
         <AccordionButton>
           <Box
             flex="1"
-            fontSize="16px"
-            fontWeight="500"
-            color="#2D3748"
+            fontSize="sm"
+            fontWeight="normal"
+            color={colors.fontSecondary}
             textAlign="left"
             h="25px"
           >
@@ -88,13 +90,13 @@ const CategoryEdit = () => {
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel>
-          <FormControl fontSize="14px">
-            <Text fontWeight={500} fontSize="14px">
+          <FormControl color={colors.fontSecondary} fontSize="xs">
+            <Text fontWeight="normal" fontSize="xs">
               Nazwa
             </Text>
-            <Input ref={name} h="32px" fontSize="14px" id="name" type="text" />
+            <Input ref={name} h="32px" fontSize="xs" id="name" type="text" />
             {!nameIsValid && (
-              <Text fontSize="14px" color="red">
+              <Text fontSize="xs" color={colors.errorPrimary}>
                 Wprowadź nazwę
               </Text>
             )}
@@ -102,21 +104,21 @@ const CategoryEdit = () => {
               <ProductButton
                 onClick={submitForm}
                 mt="10px"
-                fontSize="14px"
+                fontSize="xs"
                 h="25px"
                 w="80px"
               >
                 Dodaj
               </ProductButton>
             </Flex>
-            <Text fontWeight={500} fontSize="14px">
+            <Text fontWeight="normal" fontSize="xs">
               Lista kategorii
             </Text>
             <CheckboxGroup
               onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
               colorScheme="orange"
             >
-              <Flex flexDirection="column" fontSize="14px">
+              <Flex flexDirection="column" fontSize="xs">
                 {categories.map((category) => (
                   <Category
                     categoryName={category.name}
@@ -131,7 +133,7 @@ const CategoryEdit = () => {
               <DeletePopover
                 width="140px"
                 height="25px"
-                fontSize="14px"
+                fontSize="xs"
                 label="Czy na pewno chcesz usunąć zaznaczone kategorie?"
                 buttonText="Usuń zaznaczone"
                 onClick={handleDeleteCategories}

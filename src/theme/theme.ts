@@ -21,10 +21,15 @@ export const theme = extendTheme({
   fontSizes: {
     xxs: '11px',
     xs: '14px',
-    md: '16px',
-    lg: '18px',
-    xl: '20px',
-    xxl: '22px',
+    sm: '16px',
+    md: '18px',
+    lg: '20px',
+    xl: '22px',
+  },
+  fontWeights: {
+    light: '400',
+    normal: '500',
+    bold: '600',
   },
   components: {
     Button: { baseStyle: { _focus: { boxShadow: 'none' } } },

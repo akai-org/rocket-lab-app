@@ -14,9 +14,10 @@ const DesktopNavigation = () => {
         left="0"
         top="0"
         w="100vw"
-        borderBottom={`1px solid ${colors.shadow}`}
-        boxShadow={`0 -15px 40px 2px ${colors.shadow}`}
-        bgColor={colors.background}
+        color={colors.fontPrimary}
+        borderBottom={`1px solid ${colors.shadowPrimary}`}
+        boxShadow={`0 -15px 40px 2px ${colors.shadowPrimary}`}
+        bgColor={colors.backgroundPrimary}
         zIndex="2"
       >
         <Flex
@@ -33,8 +34,8 @@ const DesktopNavigation = () => {
               <Heading
                 mt="18px"
                 lineHeight="11px"
-                fontSize="11px"
-                fontWeight="400"
+                fontSize="xxs"
+                fontWeight="light"
                 letterSpacing="1px"
               >
                 PUT
@@ -43,8 +44,8 @@ const DesktopNavigation = () => {
                 mt="2px"
                 lineHeight="22px"
                 letterSpacing="4px"
-                fontSize="22px"
-                fontWeight="600"
+                fontSize="xl"
+                fontWeight="bold"
               >
                 ROCKETLAB
               </Heading>
@@ -54,7 +55,7 @@ const DesktopNavigation = () => {
             <Icon
               as={FaUserCircle}
               mr="10px"
-              color={colors.primary}
+              color={colors.fontPrimary}
               fontSize="40px"
             />
           </Flex>

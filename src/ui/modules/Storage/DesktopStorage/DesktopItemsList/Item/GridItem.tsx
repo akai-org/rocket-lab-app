@@ -1,8 +1,7 @@
 import { Flex, Image, Text, Box, useDisclosure } from '@chakra-ui/react'
 import { AiOutlineCheck, AiOutlinePlus } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { Item, PopulatedItem } from '../../../../../../mongo/models/item'
-import categories from '../../../../../../pages/api/categories'
+import { PopulatedItem } from '../../../../../../mongo/models/item'
 import {
   addToCart,
   removeFromCart,
@@ -11,6 +10,7 @@ import { storageCartInfo } from '../../../../../../store/store'
 import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
 import ModalEditItem from '../../../../../components/Modals/ModalEditItem/ModalEditItem'
 import ModalInfo from '../../../../../components/Modals/ModalInfo/ModalInfo'
+import { useColors } from '../../../../../../theme/useColors'
 
 interface Props {
   item: PopulatedItem
@@ -19,6 +19,7 @@ interface Props {
 const GridItem = ({ item }: Props) => {
   const dispatch = useDispatch()
   const storageCartData = useSelector(storageCartInfo).newCartList
+  const colors = useColors()
   const {
     isOpen: isOpenDetails,
     onOpen: onOpenDetails,
@@ -38,22 +39,28 @@ const GridItem = ({ item }: Props) => {
         w="154px"
         m="5px auto"
       />
-      <Box textAlign="center" w="95%" overflow="elipsis" m="0 auto">
+      <Box
+        textAlign="center"
+        w="95%"
+        color={colors.fontSecondary}
+        overflow="elipsis"
+        m="0 auto"
+      >
         <Text
           onClick={onOpenInfo}
           cursor="pointer"
-          fontSize="16px"
+          fontSize="sm"
           isTruncated
-          fontWeight="400"
+          fontWeight="light"
         >
           {item.name}
         </Text>
         <Box w="100%" mb="5px">
           <Text
-            fontSize="14px"
+            fontSize="xs"
             isTruncated
-            fontWeight={item.quantity ? '400' : '500'}
-            color={item.quantity ? 'inherit' : 'red.500'}
+            fontWeight={item.quantity ? 'light' : 'normal'}
+            color={item.quantity ? colors.fontSecondary : colors.errorPrimary}
           >
             {item.quantity ? `Ilość: ${item.quantity}` : 'Brak w magazynie'}
           </Text>
@@ -62,7 +69,7 @@ const GridItem = ({ item }: Props) => {
           <ProductButton
             w="80px"
             onClick={onOpenDetails}
-            fontSize="16px"
+            fontSize="sm"
             mr="10px"
           >
             Edytuj

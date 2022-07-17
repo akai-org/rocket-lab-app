@@ -1,7 +1,7 @@
 import { Box, Flex, Image, Text, useDisclosure } from '@chakra-ui/react'
 import { AiOutlineCheck, AiOutlinePlus } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { Item, PopulatedItem } from '../../../../../mongo/models/item'
+import { PopulatedItem } from '../../../../../mongo/models/item'
 import {
   addToCart,
   removeFromCart,
@@ -10,6 +10,7 @@ import { storageCartInfo } from '../../../../../store/store'
 import ProductButton from '../../../../components/Custom Buttons/ProductButton/ProductButton'
 import ModalEditItem from '../../../../components/Modals/ModalEditItem/ModalEditItem'
 import ModalInfo from '../../../../components/Modals/ModalInfo/ModalInfo'
+import { useColors } from '../../../../../theme/useColors'
 
 interface Props {
   item: PopulatedItem
@@ -18,6 +19,7 @@ interface Props {
 const ListItem = ({ item }: Props) => {
   const dispatch = useDispatch()
   const storageCartData = useSelector(storageCartInfo).newCartList
+  const colors = useColors()
   const {
     isOpen: isOpenDetails,
     onOpen: onOpenDetails,
@@ -46,21 +48,28 @@ const ListItem = ({ item }: Props) => {
           h="90px"
         />
       </Flex>
-      <Box h="100%" w="80%" m="0 auto 0 0" textAlign="left" p="20px">
+      <Box
+        h="100%"
+        w="80%"
+        color={colors.fontSecondary}
+        m="0 auto 0 0"
+        textAlign="left"
+        p="20px"
+      >
         <Text
           onClick={onOpenInfo}
-          fontSize="16px"
+          fontSize="sm"
           noOfLines={1}
-          fontWeight="500"
+          fontWeight="normal"
         >
           {item.name}
         </Text>
 
         <Text
-          fontSize="15px"
+          fontSize="xs"
           isTruncated
-          fontWeight={item.quantity ? '400' : '500'}
-          color={item.quantity ? 'inherit' : 'red.500'}
+          fontWeight={item.quantity ? 'light' : 'normal'}
+          color={item.quantity ? colors.fontSecondary : colors.errorPrimary}
         >
           {item.quantity ? `Ilość: ${item.quantity}` : 'Brak w magazynie'}
         </Text>
@@ -69,7 +78,7 @@ const ListItem = ({ item }: Props) => {
             <ProductButton
               w="70px"
               onClick={onOpenDetails}
-              fontSize="16px"
+              fontSize="sm"
               mr="5px"
             >
               Edytuj

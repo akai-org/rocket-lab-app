@@ -37,13 +37,16 @@ const Palette = () => {
         <ColorModeSwitch fontSize="25px" />
       </HStack>
       <Text as="u">COLORS</Text>
-      <Text color={colors.fontPrimary}>Primary</Text>
-      <Text color={colors.fontSecondary}>Secondary</Text>
-      <Text color={colors.fontNeutral}>Neutral</Text>
-      <Rect bgColor={colors.backgroundPrimary}>Background</Rect>
+      <Text color={colors.fontPrimary}>FontPrimary</Text>
+      <Text bgColor={colors.fontPrimary} color={colors.fontPrimaryOpposite}>FontPrimaryOpposite</Text>
+      <Text color={colors.fontSecondary}>FontSecondary</Text>
+      <Text color={colors.fontNeutral}>FontNeutral</Text>
+      <Rect bgColor={colors.backgroundPrimary}>BackgroundPrimary</Rect>
       <Rect bgColor={colors.borderPrimary}>BorderPrimary</Rect>
       <Rect bgColor={colors.borderSecondary}>BorderSecondary</Rect>
-      <Rect bgColor={colors.shadowPrimary}>Shadow</Rect>
+      <Rect bgColor={colors.shadowPrimary}>ShadowPrimary</Rect>
+      <Rect bgColor={colors.orangePrimary}>OrangePrimary</Rect>
+      <Rect bgColor={colors.errorPrimary}>OrangePrimary</Rect>
       <Text mt="20px" as="u">
         FONT SIZES
       </Text>

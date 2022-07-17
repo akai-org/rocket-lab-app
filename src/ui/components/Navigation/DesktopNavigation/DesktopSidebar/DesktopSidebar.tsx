@@ -7,6 +7,7 @@ import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
 import s from './sidebar.module.scss'
 import { useColors } from '../../../../../theme/useColors'
+import ColorModeSwitch from "../../../ColorModeSwitch/ColorModeSwitch";
 
 const DesktopSidebar = () => {
   const router = useRouter()
@@ -22,14 +23,16 @@ const DesktopSidebar = () => {
       h="100vh"
       mt="75px"
       maxH="calc(100vh - 80px)"
-      bgColor={colors.background}
-      boxShadow={`0 0 10px 0.2px ${colors.shadow}`}
+      color={colors.fontSecondary}
+      bgColor={colors.backgroundPrimary}
+      boxShadow={`0 0 10px 0.2px ${colors.shadowPrimary}`}
       zIndex="1"
     >
+      <ColorModeSwitch/>
       <Flex
         flexDirection="column"
         className={s.underline}
-        fontSize="18px"
+        fontSize="md"
         rowGap={6}
         p="20px 30px"
       >

@@ -23,6 +23,7 @@ import { fetcher } from '../../../../../../utils/requests'
 import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../../../../components/Popovers/DeletePopover'
 import Category from './Category/Category'
+import {useColors} from "../../../../../../theme/useColors";
 
 const CategoryEdit = () => {
   const categories = useSelector(categoriesInfo).categories
@@ -30,6 +31,7 @@ const CategoryEdit = () => {
   const [checkboxes, setCheckboxes] = useState<string[]>([])
   const dispatch = useDispatch()
   const name = useRef<HTMLInputElement>(null)
+  const colors = useColors()
 
   const submitForm = async () => {
     if (name.current!.value) {
@@ -78,9 +80,9 @@ const CategoryEdit = () => {
         <AccordionButton>
           <Box
             flex="1"
-            fontSize="18px"
-            fontWeight="500"
-            color="#2D3748"
+            fontSize="md"
+            fontWeight="normal"
+            color={colors.fontSecondary}
             textAlign="left"
             h="30px"
           >
@@ -88,12 +90,12 @@ const CategoryEdit = () => {
           </Box>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel borderLeft="1px solid #C4C4C4">
-          <FormControl fontSize="16px">
-            <Text fontWeight={500}>Nazwa</Text>
+        <AccordionPanel borderLeft={`1px solid ${colors.borderPrimary}`}>
+          <FormControl fontSize="sm" color={colors.fontSecondary}>
+            <Text fontWeight='normal'>Nazwa</Text>
             <Input ref={name} h="32px" id="name" type="text" />
             {!nameIsValid && (
-              <Text fontSize="14px" color="red">
+              <Text fontSize="xs" color={colors.errorPrimary}>
                 Wprowadź nazwę
               </Text>
             )}
@@ -101,13 +103,13 @@ const CategoryEdit = () => {
               <ProductButton
                 onClick={submitForm}
                 mt="10px"
-                fontSize="16px"
+                fontSize="sm"
                 w="100px"
               >
                 Dodaj
               </ProductButton>
             </Flex>
-            <Text fontWeight={500}>Lista kategorii</Text>
+            <Text fontWeight='normal'>Lista kategorii</Text>
             <CheckboxGroup
               onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
               colorScheme="orange"

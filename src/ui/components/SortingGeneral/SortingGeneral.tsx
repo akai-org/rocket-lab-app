@@ -4,10 +4,12 @@ import { SortType } from '../../../services/itemsService'
 import { validateSortParam } from '../../../utils/dataValidation/validateSortParam'
 import queryString from 'query-string'
 import { FIRST_PAGE } from '../../../utils/constants'
+import { useColors } from '../../../theme/useColors'
 
 export const SortingGeneral = () => {
   const router = useRouter()
   const query = queryString.parseUrl(router.asPath).query
+  const colors = useColors()
 
   let sort: SortType
 
@@ -26,13 +28,13 @@ export const SortingGeneral = () => {
 
   return (
     <Flex flexDirection="row">
-      <Text>sortuj po:</Text>
+      <Text color={colors.fontNeutral}>sortuj po:</Text>
       <Select
         onChange={handleChange}
         variant="unstyled"
         w="140px"
         ml="10px"
-        color="black"
+        color={colors.fontSecondary}
         value={sort}
       >
         {/* TODO: Display options smarter */}

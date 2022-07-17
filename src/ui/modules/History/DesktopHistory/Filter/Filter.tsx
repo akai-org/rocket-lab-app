@@ -1,6 +1,9 @@
 import { Flex, Input, Select, Stack, Text } from '@chakra-ui/react'
+import { useColors } from '../../../../../theme/useColors'
 
 const Filter = () => {
+  const colors = useColors()
+
   return (
     <Flex
       flexDirection="row"

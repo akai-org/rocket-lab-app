@@ -9,13 +9,16 @@ import {
 } from '@chakra-ui/react'
 import CategoryEdit from './CategoryEdit/CategoryEdit'
 import ItemsEdit from './ItemsEdit/ItemsEdit'
+import {useColors} from "../../../../../theme/useColors";
 
 const StorageEdit = () => {
+  const colors = useColors()
+
   return (
     <Accordion
       borderRadius="6px"
       mb="20px"
-      border="1px solid #C4C4C4"
+      border={`1px solid ${colors.borderPrimary}`}
       allowMultiple
     >
       <AccordionItem border="none">
@@ -23,9 +26,9 @@ const StorageEdit = () => {
           <Text
             flex="1"
             m="5px 5px 5px 10px"
-            fontSize="20px"
-            fontWeight="600"
-            color="#4A5568"
+            fontSize="lg"
+            fontWeight="normal"
+            color={colors.fontSecondary}
             textAlign="left"
           >
             Edycja Magazynu

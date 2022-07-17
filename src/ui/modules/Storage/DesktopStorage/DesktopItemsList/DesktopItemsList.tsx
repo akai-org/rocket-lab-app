@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Table,
-  Tbody,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react'
+import { Box, Flex, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import ListItem from './Item/ListItem'
 import GridItem from './Item/GridItem'
@@ -15,27 +6,26 @@ import {
   MainViewProps,
   sortingType,
 } from '../../../../../utils/types/frontendGeneral'
-import { PaginationGeneral } from '../../../../components/PaginationGeneral/PaginationGeneral'
 import { PaginationControlls } from './Pagination/PaginationControlls'
+import { useColors } from '../../../../../theme/useColors'
 
-const DesktopItemsList = ({ items, itemsCount }: MainViewProps) => {
+const DesktopItemsList = ({ items }: MainViewProps) => {
+  const colors = useColors()
   const [listType, setListType] = useState<sortingType>('grid')
+
   return (
     <Box
       borderRadius="6px"
-      bgColor="white"
-      border="1px solid #C4C4C4"
+      bgColor={colors.backgroundPrimary}
+      border={`1px solid ${colors.borderPrimary}`}
       mt="20px"
     >
-      <PaginationControlls
-        listType={listType}
-        setListType={setListType}
-      />
+      <PaginationControlls listType={listType} setListType={setListType} />
       {listType === 'list' ? (
-        <Flex flexWrap="wrap" p="20px">
+        <Flex flexWrap="wrap" color={colors.fontSecondary} p="20px">
           <Table p="20px">
             <Thead>
-              <Tr fontSize="16px" fontWeight="700">
+              <Tr fontSize="sm" fontWeight="bold">
                 <Th w="50%">NAZWA</Th>
                 <Th w="50%">OPIS</Th>
                 <Th textAlign="right" w="1%">

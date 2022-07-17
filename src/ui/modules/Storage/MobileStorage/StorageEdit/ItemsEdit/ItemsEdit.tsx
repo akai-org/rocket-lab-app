@@ -6,7 +6,6 @@ import {
   AccordionPanel,
   Box,
   FormControl,
-  FormLabel,
   Input,
   NumberInput,
   NumberInputField,
@@ -25,9 +24,11 @@ import { categoriesInfo } from '../../../../../../store/store'
 import { API_URL } from '../../../../../../utils/constants'
 import { fetcher } from '../../../../../../utils/requests'
 import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
+import { useColors } from '../../../../../../theme/useColors'
 
 const ItemsEdit = () => {
   const router = useRouter()
+  const colors = useColors()
   const categories = useSelector(categoriesInfo).categories
   const [nameIsValid, setNameIsValid] = useState(true)
   const name = useRef<HTMLInputElement>(null)
@@ -69,9 +70,9 @@ const ItemsEdit = () => {
         <AccordionButton>
           <Box
             flex="1"
-            fontSize="16px"
-            fontWeight="500"
-            color="#2D3748"
+            fontSize="sm"
+            fontWeight="normal"
+            color={colors.fontSecondary}
             textAlign="left"
             h="25px"
           >
@@ -80,27 +81,27 @@ const ItemsEdit = () => {
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel>
-          <FormControl fontSize="14px">
-            <Text fontWeight={500} fontSize="14px">
+          <FormControl color={colors.fontSecondary} fontSize="xs">
+            <Text fontWeight="normal" fontSize="xs">
               Nazwa
             </Text>
-            <Input ref={name} h="32px" id="name" type="text" fontSize="14px" />
+            <Input ref={name} h="32px" id="name" type="text" fontSize="xs" />
             {!nameIsValid && (
-              <Text fontSize="12px" color="red">
+              <Text fontSize="xxs" color={colors.errorPrimary}>
                 Wprowadź nazwę
               </Text>
             )}
-            <Text fontWeight={500} mt="5px" fontSize="14px">
+            <Text fontWeight="normal" mt="5px" fontSize="xs">
               Opis
             </Text>
             <Input
               h="32px"
-              fontSize="14px"
+              fontSize="xs"
               id="description"
               ref={description}
               type="text"
             />
-            <Text fontWeight={500} mt="5px" fontSize="14px">
+            <Text fontWeight="normal" mt="5px" fontSize="xs">
               Ilość
             </Text>
             <NumberInput
@@ -110,35 +111,29 @@ const ItemsEdit = () => {
               id="amount"
               defaultValue={1}
             >
-              <NumberInputField ref={quantity} h="32px" fontSize="14px" />
+              <NumberInputField ref={quantity} h="32px" fontSize="xs" />
               <NumberInputStepper>
                 <NumberIncrementStepper h="32px" />
                 <NumberDecrementStepper h="32px" />
               </NumberInputStepper>
             </NumberInput>
-            <Text fontWeight={500} mt="5px" fontSize="14px">
+            <Text fontWeight="normal" mt="5px" fontSize="xs">
               Obraz
             </Text>
-            <ProductButton
-              id="photo"
-              disabled
-              fontSize="14px"
-              h="25px"
-              w="80px"
-            >
+            <ProductButton id="photo" disabled fontSize="xs" h="25px" w="80px">
               Wgraj
             </ProductButton>
-            <Text fontWeight={500} mt="5px" fontSize="14px">
+            <Text fontWeight="normal" mt="5px" fontSize="xs">
               Kategorie
             </Text>
             <CheckboxGroup
               onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
               colorScheme="orange"
             >
-              <Flex flexDirection="column" fontSize="14px">
+              <Flex flexDirection="column" fontSize="xs">
                 {categories.map((category) => (
                   <Checkbox value={category.id} key={category.id}>
-                    <Text fontSize="14px">{category.name}</Text>
+                    <Text fontSize="xs">{category.name}</Text>
                   </Checkbox>
                 ))}
               </Flex>
@@ -146,7 +141,7 @@ const ItemsEdit = () => {
             <Flex justifyContent="flex-end">
               <ProductButton
                 onClick={submitForm}
-                fontSize="16px"
+                fontSize="sm"
                 h="25px"
                 w="80px"
               >

@@ -1,12 +1,13 @@
 import React from 'react'
-import { Box, Flex, Select, Text } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
+import { Box } from '@chakra-ui/react'
 import { SortingGeneral } from '../../../../../components/SortingGeneral/SortingGeneral'
+import { useColors } from '../../../../../../theme/useColors'
 
 const Sorting = () => {
+  const colors = useColors()
 
   return (
-    <Box w="100%" mr="10px" color="#D5D5D5">
+    <Box w="100%" mr="10px" color={colors.fontNeutral}>
       <SortingGeneral />
     </Box>
   )

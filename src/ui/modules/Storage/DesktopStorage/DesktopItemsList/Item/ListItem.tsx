@@ -10,13 +10,14 @@ import { storageCartInfo } from '../../../../../../store/store'
 import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
 import ModalEditItem from '../../../../../components/Modals/ModalEditItem/ModalEditItem'
 import ModalInfo from '../../../../../components/Modals/ModalInfo/ModalInfo'
+import { useColors } from '../../../../../../theme/useColors'
 
 interface Props {
   item: PopulatedItem
 }
 
 const ListItem = ({ item }: Props) => {
-  console.log(item)
+  const colors = useColors()
   const dispatch = useDispatch()
   const storageCartData = useSelector(storageCartInfo).newCartList
   const {
@@ -31,7 +32,7 @@ const ListItem = ({ item }: Props) => {
   } = useDisclosure()
   return (
     <>
-      <Tr fontSize="14px">
+      <Tr fontSize="xs">
         <Td justifyContent="flex-start" onClick={onOpenInfo} cursor="pointer">
           <Flex>
             <Image src={item.imageUrl} w="40px" h="40px" />
@@ -46,9 +47,9 @@ const ListItem = ({ item }: Props) => {
         <Td textAlign="right">
           <Text
             noOfLines={1}
-            fontSize="14px"
-            fontWeight={item.quantity ? '400' : '500'}
-            color={item.quantity ? 'inherit' : 'red.500'}
+            fontSize="xs"
+            fontWeight={item.quantity ? 'light' : 'normal'}
+            color={item.quantity ? colors.fontSecondary : colors.errorPrimary}
           >
             {item.quantity ? item.quantity : 'Brak w magazynie'}
           </Text>
@@ -58,7 +59,7 @@ const ListItem = ({ item }: Props) => {
             <ProductButton
               w="80px"
               onClick={onOpenDetails}
-              fontSize="16px"
+              fontSize="sm"
               mx="5px"
             >
               Edytuj

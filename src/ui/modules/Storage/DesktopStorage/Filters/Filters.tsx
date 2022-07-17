@@ -2,6 +2,7 @@ import { Button, Flex, Icon, Input, Select, Text } from '@chakra-ui/react'
 import React, { FC } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useFilters } from '../../../../../utils/effects/useFilters'
+import { useColors } from '../../../../../theme/useColors'
 
 const Filters: FC = () => {
   const {
@@ -13,32 +14,34 @@ const Filters: FC = () => {
     setSearchTerm,
     query,
   } = useFilters()
+  const colors = useColors()
+
   return (
     <form onSubmit={handleSubmit}>
       <Flex
         flexDirection="column"
         p="20px"
         borderRadius="6px"
-        border="1px solid #C4C4C4"
+        border={`1px solid ${colors.borderPrimary}`}
       >
-        <Text fontSize="20px" fontWeight="500" color="#2D3748">
+        <Text fontSize="lg" fontWeight="normal" color={colors.fontSecondary}>
           Wyszukaj części w magazynie
         </Text>
         <Flex
           flexDirection="row"
           justifyContent="flex-start"
           mt="15px"
-          fontSize="16px"
-          fontWeight="500"
-          color="#2D3748"
+          fontSize="sm"
+          fontWeight="normal"
+          color={colors.fontSecondary}
         >
           <Flex flexDirection="column" w="30%">
             <Text>Nazwa</Text>
             <Flex>
               <Input
                 h="40px"
-                border="1px solid #D4D4D4"
-                fontWeight="400"
+                border={`1px solid ${colors.borderSecondary}`}
+                fontWeight="light"
                 placeholder="Nazwa Produktu"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -50,8 +53,8 @@ const Filters: FC = () => {
             <Text>Kategoria</Text>
             <Select
               h="40px"
-              border="1px solid #D4D4D4"
-              fontWeight="400"
+              border={`1px solid ${colors.borderSecondary}`}
+              fontWeight="light"
               value={(query.category as string | undefined) || category}
               onChange={(e) => setCategory(e.target.value)}
             >
@@ -69,7 +72,7 @@ const Filters: FC = () => {
             type="submit"
             w="120px"
             h="40px"
-            bgColor="#FF7700"
+            bgColor={colors.orangePrimary}
             color="white"
           >
             Wyszukaj

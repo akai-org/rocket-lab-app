@@ -11,9 +11,11 @@ import Router from 'next/router'
 import StorageEdit from './StorageEdit/StorageEdit'
 import { useAddNewList } from '../../../../utils/effects/useAddNewList'
 import DesktopWrapper from '../../../components/Wrappers/DesktopWrapper/DesktopWrapper'
+import { useColors } from '../../../../theme/useColors'
 
 const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
+  const colors = useColors()
   const storageCartData = useSelector(storageCartInfo)
   const {
     isOpen: isOpenDetails,
@@ -34,7 +36,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
         position: 'top',
         render: () => (
           <Button
-            bgColor="#FF7700"
+            bgColor={colors.orangePrimary}
             w="300px"
             p="15px"
             borderRadius="10px"
@@ -48,11 +50,11 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
             <Flex flexDirection="column" w="100%" justifyContent="flex-start">
               <Flex lineHeight="20px" alignItems="center">
                 <HiInformationCircle size="22px" />
-                <Text fontWeight="500" fontSize="18px" ml="5px">
+                <Text fontWeight="normal" fontSize="lg" ml="5px">
                   Wybrano przedmioty
                 </Text>
               </Flex>
-              <Text fontSize="17px" fontWeight="400" ml="30px" textAlign="left">
+              <Text fontSize="sm" fontWeight="light" ml="30px" textAlign="left">
                 Kliknij aby wybrać listę
               </Text>
             </Flex>

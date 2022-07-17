@@ -17,6 +17,7 @@ import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
 import { IS_DEV } from '../../../../../utils/constants'
 import { useColors } from '../../../../../theme/useColors'
+import ColorModeSwitch from '../../../ColorModeSwitch/ColorModeSwitch'
 
 const MobileSidebar = () => {
   const router = useRouter()
@@ -38,14 +39,14 @@ const MobileSidebar = () => {
         <DrawerOverlay bgColor="transparent" />
         <DrawerContent
           mt="76px"
-          bgColor={colors.background}
-          borderLeft={`1px solid ${colors.shadow}`}
+          bgColor={colors.backgroundPrimary}
+          borderLeft={`1px solid ${colors.shadowPrimary}`}
         >
           <DrawerBody w="100%">
             <Flex
               flexDirection="column"
               onClick={onClose}
-              fontSize="22px"
+              fontSize="xl"
               rowGap={10}
               p="20px"
             >

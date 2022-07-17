@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   Flex,
   Icon,
@@ -14,9 +14,9 @@ import {
 } from '@chakra-ui/react'
 import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai'
 import { IoFilterSharp } from 'react-icons/io5'
-import { FiltersControllsProps } from '../../../../components/FiltersGeneral/FiltersGeneral'
 import ProductButton from '../../../../components/Custom Buttons/ProductButton/ProductButton'
 import { useFilters } from '../../../../../utils/effects/useFilters'
+import { useColors } from '../../../../../theme/useColors'
 
 interface Props {
   setIsFiltersOpen: (isOpen: boolean) => void
@@ -24,6 +24,7 @@ interface Props {
 
 const Filters: React.FC<Props> = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const colors = useColors()
   const {
     categories,
     category,
@@ -42,9 +43,10 @@ const Filters: React.FC<Props> = (props) => {
       h="60px"
       w="100%"
       minW="300px"
-      border="1px solid #D4D4D4"
+      border={`1px solid ${colors.shadowPrimary}`}
       borderRadius="6px"
-      bgColor="white"
+      bgColor={colors.backgroundPrimary}
+      color={colors.fontSecondary}
     >
       <Flex flexDirection="column" justifyContent="space-between" h="60px">
         {isOpen ? (
@@ -60,7 +62,7 @@ const Filters: React.FC<Props> = (props) => {
                   }}
                 >
                   <Flex my="10px" justifyContent="space-between">
-                    <Text fontWeight="500" noOfLines={1}>
+                    <Text fontWeight="normal" noOfLines={1}>
                       Filtruj obiekty
                     </Text>
                     <Flex m="auto 10px" lineHeight="20px">
@@ -86,7 +88,7 @@ const Filters: React.FC<Props> = (props) => {
                       placeholder="Wyszukaj"
                       h="32px"
                       w="100%"
-                      border="1px solid #D4D4D4"
+                      border={`1px solid ${colors.borderSecondary}`}
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -95,9 +97,9 @@ const Filters: React.FC<Props> = (props) => {
                   <Select
                     onChange={(e) => setCategory(e.target.value)}
                     value={(query.category as string | undefined) || category}
-                    fontSize="14px"
                     h="32px"
                     mt="20px"
+                    fontSize="sm"
                   >
                     <option value="all">Wszystkie</option>
                     {categories.map(({ name, id }) => (
@@ -112,10 +114,10 @@ const Filters: React.FC<Props> = (props) => {
                       h="32px"
                       w="90px"
                       mt="20px"
-                      bgColor="#FF7700"
+                      bgColor={colors.orangePrimary}
                       color="white"
-                      fontSize="14px"
-                      fontWeight="600"
+                      fontSize="xs"
+                      fontWeight="bold"
                       lineHeight="32px"
                       type="submit"
                     >
@@ -138,7 +140,7 @@ const Filters: React.FC<Props> = (props) => {
                 placeholder="Wyszukaj"
                 h="30px"
                 w="200px"
-                border="1px solid #D4D4D4"
+                border={`1px solid ${colors.borderSecondary}`}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -151,7 +153,7 @@ const Filters: React.FC<Props> = (props) => {
                 props.setIsFiltersOpen(true)
               }}
             >
-              <Text mr="5px" fontSize="16px">
+              <Text mr="5px" fontSize="sm">
                 Filtry
               </Text>
               <Icon

@@ -1,16 +1,14 @@
 import { Flex, Select, Icon, Text } from '@chakra-ui/react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
-import { FIRST_PAGE } from '../../../../../../utils/constants'
 import { usePagination } from '../../../../../../utils/effects/usePagination'
 import { sortingType } from '../../../../../../utils/types/frontendGeneral'
 import { PaginationSettings } from '../../../../../components/PaginationGeneral/PaginationGeneral'
 import Sorting from '../Sorting/Sorting'
+import { useColors } from '../../../../../../theme/useColors'
 
 interface Props extends PaginationSettings {
   setListType: (type: sortingType) => void
@@ -21,7 +19,6 @@ export const PaginationControlls: React.FC<Props> = ({
   listType,
   setListType,
 }) => {
-
   const {
     maxPage,
     minPage,
@@ -31,9 +28,9 @@ export const PaginationControlls: React.FC<Props> = ({
     itemsCount,
     toDisplay,
     currentPage,
-    query
+    query,
   } = usePagination()
-
+  const colors = useColors()
 
   let rangeEnd = previousPage * toDisplay
 
@@ -48,12 +45,12 @@ export const PaginationControlls: React.FC<Props> = ({
       h="45px"
       p="12px 20px"
     >
-      <Flex color="#C4C4C4">
+      <Flex color={colors.fontNeutral}>
         <Flex>
           <Select
             onChange={onToDisplayChange}
-            color="black"
-            variant="flushed"
+            color={colors.fontSecondary}
+            variant="unstyled"
             h="25px"
             w="70px"
           >
@@ -62,7 +59,7 @@ export const PaginationControlls: React.FC<Props> = ({
             <option value="117">117</option>
           </Select>
         </Flex>
-        <Flex fontSize="20px" ml="10px" w="120px" justifyContent="space-around">
+        <Flex fontSize="lg" ml="10px" w="120px" justifyContent="space-around">
           <Link
             href={{ query: { ...query, page: minPage, toDisplay } }}
             passHref
@@ -70,7 +67,7 @@ export const PaginationControlls: React.FC<Props> = ({
             <Icon
               cursor="pointer"
               _hover={{
-                color: 'black',
+                color: colors.fontPrimary,
               }}
               as={BiArrowToLeft}
             />
@@ -82,7 +79,7 @@ export const PaginationControlls: React.FC<Props> = ({
             <Icon
               cursor="pointer"
               _hover={{
-                color: 'black',
+                color: colors.fontPrimary,
               }}
               as={IoIosArrowBack}
             />
@@ -97,7 +94,7 @@ export const PaginationControlls: React.FC<Props> = ({
             <Icon
               cursor="pointer"
               _hover={{
-                color: 'black',
+                color: colors.fontPrimary,
               }}
               as={IoIosArrowForward}
             />
@@ -110,13 +107,13 @@ export const PaginationControlls: React.FC<Props> = ({
             <Icon
               cursor="pointer"
               _hover={{
-                color: 'black',
+                color: colors.fontPrimary,
               }}
               as={BiArrowToRight}
             />
           </Link>
         </Flex>
-        <Text color="black" ml="10px" lineHeight="20px">
+        <Text color={colors.fontSecondary} ml="10px" lineHeight="20px">
           {currentPage} z {maxPage}
         </Text>
       </Flex>
@@ -124,8 +121,10 @@ export const PaginationControlls: React.FC<Props> = ({
         <Sorting />
         <Icon
           cursor="pointer"
-          color={listType === 'grid' ? 'black' : '#C4C4C4'}
-          fontSize="20px"
+          color={
+            listType === 'grid' ? colors.fontSecondary : colors.fontNeutral
+          }
+          fontSize="lg"
           mr="10px"
           onClick={() => {
             setListType('grid')
@@ -134,8 +133,10 @@ export const PaginationControlls: React.FC<Props> = ({
         />
         <Icon
           cursor="pointer"
-          color={listType === 'list' ? 'black' : '#C4C4C4'}
-          fontSize="20px"
+          color={
+            listType === 'list' ? colors.fontSecondary : colors.fontNeutral
+          }
+          fontSize="lg"
           onClick={() => {
             setListType('list')
           }}

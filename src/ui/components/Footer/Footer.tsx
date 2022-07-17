@@ -6,7 +6,7 @@ const Footer = () => {
 
   return (
     <Flex
-      bg={colors.background}
+      bg={colors.backgroundPrimary}
       w="100vw"
       h="40px"
       direction="row"

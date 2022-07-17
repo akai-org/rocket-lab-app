@@ -19,6 +19,7 @@ import ProductButton from '../../../components/Custom Buttons/ProductButton/Prod
 import { useAddNewList } from '../../../../utils/effects/useAddNewList'
 import queryString from 'query-string'
 import MobileWrapper from '../../../components/Wrappers/MobileWrapper/MobileWrapper'
+import { useColors } from '../../../../theme/useColors'
 
 const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
   const router = useRouter()
@@ -26,6 +27,7 @@ const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
   const [listType, setListType] = useState<sortingType>('grid')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
   const storageCartData = useSelector(storageCartInfo)
+  const colors = useColors()
   const toast = useToast()
   const {
     isOpen: isOpenDetails,
@@ -66,7 +68,7 @@ const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
         position: 'top-left',
         render: () => (
           <Button
-            bgColor="#FF7700"
+            bgColor={colors.orangePrimary}
             w="260px"
             p="15px"
             borderRadius="10px"
@@ -80,11 +82,11 @@ const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
             <Flex flexDirection="column" w="100%" justifyContent="flex-start">
               <Flex lineHeight="20px" alignItems="center">
                 <HiInformationCircle size="22px" />
-                <Text fontWeight="500" fontSize="18px" ml="5px">
+                <Text fontWeight="normal" fontSize="md" ml="5px">
                   Wybrano przedmioty
                 </Text>
               </Flex>
-              <Text fontSize="17px" fontWeight="400" ml="30px" textAlign="left">
+              <Text fontSize="sm" fontWeight="light" ml="30px" textAlign="left">
                 Kliknij aby wybrać listę
               </Text>
             </Flex>

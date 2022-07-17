@@ -9,8 +9,11 @@ import {
 } from '@chakra-ui/react'
 import CategoryEdit from './CategoryEdit/CategoryEdit'
 import ItemsEdit from './ItemsEdit/ItemsEdit'
+import { useColors } from '../../../../../theme/useColors'
 
 const StorageEdit = () => {
+  const colors = useColors()
+
   return (
     <Accordion
       w="95%"
@@ -23,9 +26,9 @@ const StorageEdit = () => {
         <AccordionButton>
           <Text
             flex="1"
-            fontSize="17px"
-            fontWeight="500"
-            color="#2D3748"
+            fontSize="md"
+            fontWeight="normal"
+            color={colors.fontSecondary}
             textAlign="left"
           >
             Edycja Magazynu

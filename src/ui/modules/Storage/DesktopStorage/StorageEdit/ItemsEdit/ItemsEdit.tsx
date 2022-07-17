@@ -4,7 +4,6 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Box,
   FormControl,
   Input,
   NumberInput,
@@ -16,9 +15,7 @@ import {
   Checkbox,
   CheckboxGroup,
   Text,
-  Divider,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem } from '../../../../../../store/Slices/itemsSlice'
@@ -26,10 +23,12 @@ import { categoriesInfo } from '../../../../../../store/store'
 import { API_URL } from '../../../../../../utils/constants'
 import { fetcher } from '../../../../../../utils/requests'
 import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
+import {useColors} from "../../../../../../theme/useColors";
 
 const ItemsEdit = () => {
   const dispatch = useDispatch()
   const categories = useSelector(categoriesInfo).categories
+  const colors = useColors()
   const [nameIsValid, setNameIsValid] = useState(true)
   const name = useRef<HTMLInputElement>(null)
   const description = useRef<HTMLInputElement>(null)
@@ -73,9 +72,9 @@ const ItemsEdit = () => {
         <AccordionButton>
           <Text
             flex="1"
-            fontSize="18px"
-            fontWeight="500"
-            color="#2D3748"
+            fontSize='md'
+            fontWeight="normal"
+            color={colors.fontSecondary}
             textAlign="left"
             h="30px"
           >
@@ -83,20 +82,20 @@ const ItemsEdit = () => {
           </Text>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel borderLeft="1px solid #C4C4C4">
-          <FormControl fontSize="16px">
-            <Text fontWeight={500}>Nazwa</Text>
+        <AccordionPanel borderLeft={`1px solid ${colors.borderPrimary}`}>
+          <FormControl fontSize="sm" color={colors.fontSecondary}>
+            <Text fontWeight='normal'>Nazwa</Text>
             <Input ref={name} h="32px" id="name" type="text" />
             {!nameIsValid && (
-              <Text fontSize="14px" color="red">
+              <Text fontSize="xs" color={colors.errorPrimary}>
                 Wprowadź nazwę
               </Text>
             )}
-            <Text mt="5px" fontWeight={500}>
+            <Text mt="5px" fontWeight='normal'>
               Opis
             </Text>
             <Input h="32px" id="description" ref={description} type="text" />
-            <Text mt="5px" fontWeight={500}>
+            <Text mt="5px" fontWeight='normal'>
               Ilość
             </Text>
             <NumberInput
@@ -112,18 +111,18 @@ const ItemsEdit = () => {
                 <NumberDecrementStepper h="32px" />
               </NumberInputStepper>
             </NumberInput>
-            <Text mt="5px" fontWeight={500}>
+            <Text mt="5px" fontWeight='normal'>
               Obraz
             </Text>
-            <ProductButton id="photo" disabled fontSize="16px" w="100px">
+            <ProductButton id="photo" disabled fontSize="sm" w="100px">
               Wgraj
             </ProductButton>
-            <Text mt="5px" fontWeight={500}>
+            <Text mt="5px" fontWeight='normal'>
               Kategorie
             </Text>
             <CheckboxGroup
               onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
-              colorScheme="orange"
+              colorScheme='orange'
             >
               <Flex flexDirection="column">
                 {categories.map((category) => (
@@ -134,7 +133,7 @@ const ItemsEdit = () => {
               </Flex>
             </CheckboxGroup>
             <Flex justifyContent="flex-end">
-              <ProductButton onClick={submitForm} fontSize="16px" w="100px">
+              <ProductButton onClick={submitForm} fontSize="sm" w="100px">
                 Dodaj
               </ProductButton>
             </Flex>
