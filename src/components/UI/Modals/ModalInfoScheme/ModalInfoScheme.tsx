@@ -17,6 +17,7 @@ import {
   Tr,
   useDisclosure,
 } from '@chakra-ui/react'
+import QuantityBadge from '../../Badges/QuantityBadge'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
 import ModalEditScheme from '../ModalEditScheme/ModalEditScheme'
@@ -40,7 +41,11 @@ const ModalInfoScheme = (props: ModalInfoSchemeProps) => {
         <ModalBody>
           <Flex flexDirection="column" maxH="350px" overflowY="scroll" w="100%">
             <Text fontWeight="500" noOfLines={2} fontSize="19px">
-              Nazwa schematu
+              Schemat nr 1 - nazwa schematu
+            </Text>
+            <Text m="5px 0 15px 0">
+              Opis:
+              <br /> Tutaj jest opis schematu.
             </Text>
             <Table>
               <Thead>
@@ -62,7 +67,7 @@ const ModalInfoScheme = (props: ModalInfoSchemeProps) => {
                     55
                   </Td>
                   <Td w="18%" textAlign="right">
-                    Dostępny
+                    <QuantityBadge schemeQuantity={101} storageQuantity={100} />
                   </Td>
                 </Tr>
                 <Tr fontSize="14px" h="40px">
@@ -71,7 +76,7 @@ const ModalInfoScheme = (props: ModalInfoSchemeProps) => {
                     1255
                   </Td>
                   <Td w="18%" textAlign="right">
-                    Częściowo
+                    <QuantityBadge schemeQuantity={10} storageQuantity={50} />
                   </Td>
                 </Tr>
               </Tbody>

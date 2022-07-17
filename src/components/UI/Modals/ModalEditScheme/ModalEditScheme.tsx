@@ -17,11 +17,14 @@ import {
   Table,
   Tbody,
   Td,
+  Textarea,
   Th,
   Thead,
   Tr,
+  Text,
 } from '@chakra-ui/react'
 import { AiOutlineClose } from 'react-icons/ai'
+import QuantityBadge from '../../Badges/QuantityBadge'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
 
@@ -34,19 +37,21 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
       <ModalContent maxW="40rem">
-        <ModalHeader pr="50px">
-          <Input
-            h="30px"
-            pl="5px"
-            mb="5px"
-            value="Nazwa schematu"
-            fontWeight="500"
-            fontSize="19px"
-          />
-        </ModalHeader>
+        <ModalHeader>Edycja schematu</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Flex flexDirection="column" maxH="350px" overflowY="scroll" w="100%">
+            <Text>Nazwa schematu</Text>
+            <Input
+              h="30px"
+              pl="5px"
+              mb="5px"
+              placeholder="Wprowadź nazwę schematu"
+              fontWeight="500"
+              fontSize="19px"
+            />
+            <Text>Opis:</Text>
+            <Textarea p="5px" placeholder="Wprowadź opis" />
             <Table>
               <Thead>
                 <Tr fontSize="16px" fontWeight="700">
@@ -83,7 +88,7 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
                     </NumberInput>
                   </Td>
                   <Td w="18%" textAlign="right">
-                    Dostępny
+                    <QuantityBadge schemeQuantity={10} storageQuantity={50} />
                   </Td>
                   <Td>
                     <Flex justifyContent="flex-end">
