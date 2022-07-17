@@ -1,5 +1,6 @@
 import { Button, ButtonProps } from '@chakra-ui/react'
 import React from 'react'
+import { useColors } from '../../../../theme/useColors'
 
 export interface ProductButtonProps extends ButtonProps {
   onClick?: () => void
@@ -15,15 +16,17 @@ const ProductButton = ({
   children,
   ...restProps
 }: ProductButtonProps) => {
+  const colors = useColors()
+
   return (
     <Button
       w={w}
       h={h}
       borderRadius="6px"
-      fontWeight="400"
+      fontWeight="light"
       fontSize={fontSize}
       color="white"
-      bgColor="#FF7700"
+      bgColor={colors.orangePrimary}
       {...restProps}
     >
       {children}

@@ -17,12 +17,14 @@ import {
 } from '@chakra-ui/react'
 import { IoIosAt, IoIosLock } from 'react-icons/io'
 import { FcGoogle } from 'react-icons/fc'
+import { useColors } from '../../../theme/useColors'
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [logIn, setLogIn] = useState(false)
   const [emailIsCorrect, setEmailIsCorrect] = useState(true)
   const [passwordIsCorrect, setPasswordIsCorrect] = useState(true)
+  const colors = useColors()
 
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -74,7 +76,7 @@ const LoginForm = () => {
         p="25px"
       >
         <Avatar bg="#FF7700" />
-        <Heading color="#FF7700" size="lg">
+        <Heading color={colors.orangePrimary} size="lg">
           Its-not-rocket-science
         </Heading>
         <Box
@@ -85,7 +87,7 @@ const LoginForm = () => {
             <Stack
               spacing={4}
               p="1rem"
-              backgroundColor="whiteAlpha.900"
+              backgroundColor={colors.backgroundPrimary}
               boxShadow="md"
               alignItems="center"
             >
@@ -93,7 +95,7 @@ const LoginForm = () => {
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents="none"
-                    children={<IoIosAt color="gray" />}
+                    children={<IoIosAt color={colors.fontSecondary} />}
                   />
                   <Input
                     type="email"
@@ -102,7 +104,11 @@ const LoginForm = () => {
                   />
                 </InputGroup>
                 {!emailIsCorrect && (
-                  <FormHelperText textAlign="center" color="red" fontSize="md">
+                  <FormHelperText
+                    textAlign="center"
+                    color={colors.errorPrimary}
+                    fontSize="md"
+                  >
                     Email is incorrect!
                   </FormHelperText>
                 )}
@@ -111,8 +117,8 @@ const LoginForm = () => {
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents="none"
-                    color="gray.300"
-                    children={<IoIosLock color="gray.300" />}
+                    color={colors.fontSecondary}
+                    children={<IoIosLock color={colors.fontSecondary} />}
                   />
                   <Input
                     type={showPassword ? 'text' : 'password'}
@@ -137,7 +143,7 @@ const LoginForm = () => {
                 {!passwordIsCorrect && (
                   <FormHelperText
                     textAlign="center"
-                    color="red"
+                    color={colors.errorPrimary}
                     fontSize="md"
                     textDecoration="bold"
                   >
@@ -149,12 +155,12 @@ const LoginForm = () => {
                 borderRadius={0}
                 type="submit"
                 variant="solid"
-                colorScheme="orange"
+                colorScheme={colors.orangePrimary}
                 width="full"
               >
                 {logIn ? 'Log In' : 'Sign Up'}
               </Button>
-              <Text size="xs" color="gray.300">
+              <Text size="xs" color={colors.fontSecondary}>
                 OR
               </Text>
               <Button
@@ -168,9 +174,13 @@ const LoginForm = () => {
             </Stack>
           </form>
         </Box>
-        <Box color="black">
+        <Box color={colors.fontSecondary}>
           {logIn ? 'New to us? ' : 'You already have an account. '}
-          <Link color="#FF7700" href="#" onClick={logOrSignHandler}>
+          <Link
+            color={colors.orangePrimary}
+            href="#"
+            onClick={logOrSignHandler}
+          >
             {logIn ? 'Sign Up' : 'Log In'}
           </Link>
         </Box>

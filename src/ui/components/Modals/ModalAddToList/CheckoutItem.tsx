@@ -19,6 +19,7 @@ import {
   removeFromCart,
 } from '../../../../store/Slices/storageCartSlice'
 import ModalInfo from '../ModalInfo/ModalInfo'
+import { useColors } from '../../../../theme/useColors'
 
 export type CheckoutItemProps = {
   item: CartItem
@@ -30,14 +31,15 @@ const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
     onOpen: onOpenInfo,
     onClose: onCloseInfo,
   } = useDisclosure()
+  const colors = useColors()
 
   const dispatch = useDispatch()
 
   return (
-    <Tr fontSize="16px" fontWeight="700">
+    <Tr fontSize="sm" fontWeight="bold">
       <Td>
         <Text
-          fontWeight="500"
+          fontWeight="normal"
           noOfLines={1}
           onClick={onOpenInfo}
           cursor="pointer"
@@ -50,8 +52,8 @@ const CheckoutItem = ({ item: cartItem }: CheckoutItemProps) => {
           allowMouseWheel
           display="inline"
           h="30px"
-          fontSize="16px"
-          borderColor="#E2E8F0"
+          fontSize="sm"
+          borderColor={colors.borderSecondary}
           defaultValue={cartItem.quantity}
           onChange={(e) => {
             dispatch(changeItemQuantity({ id: cartItem.item.id, quantity: +e }))

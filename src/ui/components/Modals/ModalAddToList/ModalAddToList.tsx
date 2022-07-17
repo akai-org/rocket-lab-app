@@ -16,8 +16,6 @@ import {
   Text,
   Select,
   Input,
-  Heading,
-  Box,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -28,6 +26,7 @@ import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import ChosenListPopover from '../../Popovers/ChosenListPopover'
 import DeletePopover from '../../Popovers/DeletePopover'
 import CheckoutItem from './CheckoutItem'
+import { useColors } from '../../../../theme/useColors'
 
 interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
   items: CartItem[]
@@ -43,6 +42,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
   const [selectedList, setSelectedList] = useState('add_new')
   const [listName, setListName] = useState('')
   const [exsitingList, setExistingList] = useState<PopulatedCartList>()
+  const colors = useColors()
 
   const storageCartData = useSelector(storageCartInfo)
 
@@ -66,17 +66,15 @@ const ModalAddToList = (props: ModalAddToListProps) => {
       }}
     >
       <ModalOverlay backdropFilter="blur(3px)" />
-      <ModalContent maxW="40rem">
+      <ModalContent maxW="40rem" bgColor={colors.backgroundPrimary}>
         <ModalHeader>Dodanie do listy</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Flex flexDirection="column" maxH="250px" overflowY="scroll" w="100%">
             <Table>
               <Thead>
-                <Tr fontSize="16px" fontWeight="700">
-                  <Th w="80%" bgColor="red.200">
-                    NAZWA
-                  </Th>
+                <Tr fontSize="sm" fontWeight="bold">
+                  <Th w="80%">NAZWA</Th>
                   <Th w="1%" textAlign="right" minW="120px">
                     ILOŚĆ SZTUK
                   </Th>
@@ -95,7 +93,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
           <Text my="10px">Wybierz listę:</Text>
           <Select
             h="30px"
-            borderColor="#D5D5D5"
+            borderColor={colors.borderSecondary}
             defaultValue="add_new"
             onChange={(e) => setSelectedList(e.target.value)}
           >
@@ -115,9 +113,10 @@ const ModalAddToList = (props: ModalAddToListProps) => {
           )}
           {selectedList === 'add_new' && (
             <Input
+              borderColor={colors.borderSecondary}
               mt="15px"
               h="30px"
-              fontSize="16px"
+              fontSize="sm"
               placeholder="Nazwa listy"
               value={listName}
               onChange={(e) => setListName(e.target.value)}
@@ -130,7 +129,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
               props.addNewCartList(listName, exsitingList)
               setSelectedList('add_new')
             }}
-            fontSize="16px"
+            fontSize="sm"
             w="120px"
           >
             {exsitingList ? 'Dodaj do listy' : 'Dodaj listę'}
@@ -140,7 +139,7 @@ const ModalAddToList = (props: ModalAddToListProps) => {
             onClick={() => {}}
           />
           <ProductButton
-            fontSize="16px"
+            fontSize="sm"
             colorScheme="blue"
             ml="10px"
             w="80px"

@@ -13,22 +13,19 @@ import {
   Th,
   Table,
   Tbody,
-  Text,
   Input,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { CartItem, PopulatedCartList } from '../../../../mongo/models/cart'
-import {
-  removeExisitngCartList,
-  updateExistingCartLists,
-} from '../../../../store/Slices/storageCartSlice'
+import { PopulatedCartList } from '../../../../mongo/models/cart'
+import { updateExistingCartLists } from '../../../../store/Slices/storageCartSlice'
 import { API_URL } from '../../../../utils/constants'
 import { useDeleteCartList } from '../../../../utils/effects/useDeleteCartList'
 import { fetcher } from '../../../../utils/requests'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
 import ListItem from './ListItem/ListItem'
+import { useColors } from '../../../../theme/useColors'
 
 interface ModalEditListProps extends Omit<ModalProps, 'children'> {
   cartList: PopulatedCartList
@@ -40,6 +37,7 @@ const ModalEditList = (props: ModalEditListProps) => {
 
   const [cartList, setCartList] = useState(props.cartList)
   const [listName, setListName] = useState(cartList.name)
+  const colors = useColors()
 
   const deleteCartList = useDeleteCartList()
 
@@ -75,9 +73,10 @@ const ModalEditList = (props: ModalEditListProps) => {
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
-      <ModalContent maxW="40rem">
+      <ModalContent maxW="40rem" bgColor={colors.backgroundPrimary}>
         <ModalHeader pr="50px">
           <Input
+            borderColor={colors.borderSecondary}
             h="30px"
             pl="5px"
             mb="5px"
@@ -85,8 +84,8 @@ const ModalEditList = (props: ModalEditListProps) => {
             onChange={(e) => {
               setListName(e.currentTarget.value)
             }}
-            fontWeight="500"
-            fontSize="19px"
+            fontWeight="normal"
+            fontSize="md"
           />
         </ModalHeader>
         <ModalCloseButton />
@@ -94,7 +93,7 @@ const ModalEditList = (props: ModalEditListProps) => {
           <Flex flexDirection="column" maxH="350px" overflowY="scroll" w="100%">
             <Table>
               <Thead>
-                <Tr fontSize="16px" fontWeight="700">
+                <Tr fontSize="sm" fontWeight="bold">
                   <Th w="80%">NAZWA</Th>
                   <Th w="1%" minW="120px" textAlign="right">
                     ILOŚĆ SZTUK
@@ -123,7 +122,7 @@ const ModalEditList = (props: ModalEditListProps) => {
               updateCartList()
               props.onClose()
             }}
-            fontSize="16px"
+            fontSize="sm"
             w="80px"
             ml="10px"
           >
@@ -134,7 +133,7 @@ const ModalEditList = (props: ModalEditListProps) => {
               setCartList(props.cartList)
               props.onClose()
             }}
-            fontSize="16px"
+            fontSize="sm"
             w="80px"
             ml="10px"
           >

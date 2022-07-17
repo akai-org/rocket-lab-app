@@ -2,7 +2,6 @@ import {
   Flex,
   Tr,
   Td,
-  Image,
   Text,
   useDisclosure,
   NumberInput,
@@ -14,6 +13,7 @@ import {
 import { AiOutlineClose } from 'react-icons/ai'
 import { CartItem } from '../../../../../mongo/models/cart'
 import ModalInfo from '../../ModalInfo/ModalInfo'
+import { useColors } from '../../../../../theme/useColors'
 
 interface ModalEditListProps {
   cartItem: CartItem
@@ -31,11 +31,13 @@ const ListItem = ({
     onOpen: onOpenInfo,
     onClose: onCloseInfo,
   } = useDisclosure()
+  const colors = useColors()
+
   return cartItem.item ? (
-    <Tr fontSize="14px" h="40px">
+    <Tr fontSize="xs" h="40px">
       <Td>
         <Flex lineHeight="40px" onClick={onOpenInfo} cursor="pointer">
-          <Text fontWeight="500" noOfLines={1}>
+          <Text fontWeight="normal" noOfLines={1}>
             {cartItem.item.name}
           </Text>
         </Flex>
@@ -45,8 +47,8 @@ const ListItem = ({
           allowMouseWheel
           display="inline"
           h="30px"
-          fontSize="16px"
-          borderColor="#E2E8F0"
+          fontSize="sm"
+          borderColor={colors.borderSecondary}
           defaultValue={cartItem.quantity}
           onChange={(e) => {
             changeQuantity(+e, cartItem.id)

@@ -15,7 +15,7 @@ export const useColors = () => {
 
   //border colors
   //borders of containers
-  const borderPrimary = mode ? '#C4C4C4' : 'white'
+  const borderPrimary = mode ? '#C4C4C4' : '#505970'
   //borders of inputs
   const borderSecondary = mode ? '#D4D4D4' : '#333f57'
 
@@ -27,7 +27,7 @@ export const useColors = () => {
 
   //others
   const orangePrimary = '#FF7700'
-  const errorPrimary = 'red'
+  const errorPrimary = 'red.500'
 
   return {
     fontPrimary,

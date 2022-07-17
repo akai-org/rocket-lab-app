@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { PopulatedCartList } from '../../../mongo/models/cart'
+import { useColors } from '../../../theme/useColors'
 
 interface ChosenListPopoverProps extends PopoverProps {
   onClick: () => void
@@ -29,6 +30,7 @@ const ChosenListPopover = (props: ChosenListPopoverProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const open = () => setIsOpen(!isOpen)
   const close = () => setIsOpen(false)
+  const colors = useColors()
 
   return (
     <>
@@ -40,7 +42,7 @@ const ChosenListPopover = (props: ChosenListPopoverProps) => {
                 props.onClick()
                 open()
               }}
-              fontSize="15px"
+              fontSize="sm"
               as="u"
               color="#FF7700"
             >
@@ -48,8 +50,8 @@ const ChosenListPopover = (props: ChosenListPopoverProps) => {
             </Text>
           </Box>
         </PopoverTrigger>
-        <PopoverContent>
-          <PopoverHeader fontWeight="semibold">{props.name}</PopoverHeader>
+        <PopoverContent bgColor={colors.backgroundPrimary}>
+          <PopoverHeader fontWeight="normal">{props.name}</PopoverHeader>
           <PopoverArrow />
           <PopoverCloseButton />
           <PopoverBody>

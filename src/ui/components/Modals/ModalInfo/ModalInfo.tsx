@@ -12,8 +12,9 @@ import {
   Flex,
   Box,
 } from '@chakra-ui/react'
-import { Item, PopulatedItem } from '../../../../mongo/models/item'
+import { PopulatedItem } from '../../../../mongo/models/item'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
+import { useColors } from '../../../../theme/useColors'
 
 interface ModalInfoProps
   extends Omit<ModalProps, 'children'>,
@@ -25,17 +26,19 @@ interface ModalInfoProps
 }
 
 const ModalInfo = (props: ModalInfoProps) => {
+  const colors = useColors()
+
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
-      <ModalContent maxW="40rem">
+      <ModalContent maxW="40rem" bgColor={colors.backgroundPrimary}>
         <ModalHeader>Informacje o produkcie</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Flex>
             <Image src={props.imageUrl} w="80px" h="80px" mr="10px" />
             <Box>
-              <Text fontWeight="500" noOfLines={2} fontSize="19px">
+              <Text fontWeight="normal" noOfLines={2} fontSize="md">
                 {props.name}
               </Text>
               <Text>Ilość: {props.quantity}</Text>
@@ -53,7 +56,7 @@ const ModalInfo = (props: ModalInfoProps) => {
         </ModalBody>
         <ModalFooter>
           <ProductButton
-            fontSize="16px"
+            fontSize="sm"
             colorScheme="blue"
             ml="10px"
             w="80px"

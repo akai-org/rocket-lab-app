@@ -14,12 +14,10 @@ const SearchSelect = ({ ...restProps }: Props) => {
         }),
         control: () => ({
           display: 'flex',
-          //  TODO
-          border: `1px solid #E2E8F0`,
+          border: `1px solid ${colors.borderSecondary}`,
           borderRadius: '6px',
           height: '32px',
           lineHeight: '20px',
-          borderColor: colors.borderSecondary,
         }),
         singleValue: (provided) => ({
           ...provided,

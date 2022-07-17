@@ -14,6 +14,7 @@ import {
 import { useState } from 'react'
 import { Box } from '@chakra-ui/react'
 import ProductButton from '../Custom Buttons/ProductButton/ProductButton'
+import { useColors } from '../../../theme/useColors'
 
 interface DeletePopoverProps extends PopoverProps {
   onClick: () => void
@@ -30,6 +31,8 @@ const DeletePopover = (props: DeletePopoverProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const open = () => setIsOpen(!isOpen)
   const close = () => setIsOpen(false)
+  const colors = useColors()
+
   return (
     <>
       <Popover onClose={close} isOpen={isOpen} placement="top">
@@ -47,8 +50,8 @@ const DeletePopover = (props: DeletePopoverProps) => {
             ) : (
               <ProductButton
                 ml="10px"
-                fontSize={props.fontSize ? props.fontSize : '16px'}
-                bgColor="red.500"
+                fontSize={props.fontSize ? props.fontSize : 'sm'}
+                bgColor={colors.errorPrimary}
                 w={props.width ? props.width : '80px'}
                 h={props.height ? props.height : '32px'}
                 onClick={() => {
@@ -62,7 +65,7 @@ const DeletePopover = (props: DeletePopoverProps) => {
           </Box>
         </PopoverTrigger>
         <PopoverContent>
-          <PopoverHeader fontWeight="semibold">Uwaga</PopoverHeader>
+          <PopoverHeader fontWeight="normal">Uwaga</PopoverHeader>
           <PopoverArrow />
           <PopoverCloseButton />
           <PopoverBody>{props.label}</PopoverBody>
@@ -72,7 +75,7 @@ const DeletePopover = (props: DeletePopoverProps) => {
                 Anuluj
               </Button>
               <Button
-                colorScheme="red"
+                colorScheme={colors.errorPrimary}
                 onClick={() => {
                   props.onClick()
                   close()

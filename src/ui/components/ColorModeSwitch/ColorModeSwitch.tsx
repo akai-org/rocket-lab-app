@@ -6,7 +6,7 @@ import { IconBaseProps } from 'react-icons'
 const ColorModeSwitch = (props: IconBaseProps) => {
   const { toggleColorMode, colorMode } = useColorMode()
   const mergedProps = {
-    fontSize: '20px',
+    fontSize: 'lg',
     cursor: 'pointer',
     onClick: toggleColorMode,
     ...props,

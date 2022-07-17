@@ -31,6 +31,7 @@ import { API_URL } from '../../../../utils/constants'
 import { fetcher } from '../../../../utils/requests'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../Popovers/DeletePopover'
+import { useColors } from '../../../../theme/useColors'
 
 interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
   name: string
@@ -42,7 +43,6 @@ interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
 }
 
 const ModalEditItem = (props: ModalEditItemProps) => {
-  const router = useRouter()
   const dispatch = useDispatch()
   const categoriesData = useSelector(categoriesInfo)
   const [isEdit, setIsEdit] = useState(false)
@@ -52,12 +52,16 @@ const ModalEditItem = (props: ModalEditItemProps) => {
   const [checkboxes, setCheckboxes] = useState<string[]>(
     props.categories.map((category) => category.id)
   )
+  const colors = useColors()
 
   const initUpdateItem = async () => {
     try {
       const updatedItem = await fetcher(API_URL + '/api/items/update', {
         method: 'PUT',
-        body: { id: props.id, item: { name, description, quantity, categories: checkboxes } },
+        body: {
+          id: props.id,
+          item: { name, description, quantity, categories: checkboxes },
+        },
       })
       dispatch(updateItem(updatedItem))
     } catch (error) {
@@ -84,7 +88,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
-      <ModalContent maxW="40rem">
+      <ModalContent maxW="40rem" bgColor={colors.backgroundPrimary}>
         <ModalHeader>Edycja produktu</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -92,6 +96,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
             <Image src={props.imageUrl} w="80px" h="80px" mr="10px" />
             <Box w="100%">
               <Input
+                borderColor={colors.borderSecondary}
                 h="30px"
                 pl="5px"
                 mb="5px"
@@ -100,19 +105,19 @@ const ModalEditItem = (props: ModalEditItemProps) => {
                 onChange={(e) => {
                   setName(e.currentTarget.value)
                 }}
-                fontWeight="500"
-                fontSize="19px"
+                fontWeight="normal"
+                fontSize="md"
               />
               <Flex lineHeight="30px" mt="5px">
                 <Text>Ilość:</Text>
                 <NumberInput
+                  borderColor={colors.borderSecondary}
                   allowMouseWheel
                   display="inline"
                   h="30px"
                   w="84px"
                   ml="10px"
-                  fontSize="16px"
-                  borderColor="#E2E8F0"
+                  fontSize="sm"
                   defaultValue={quantity}
                   onChange={(e) => {
                     setQuantity(parseInt(e))
@@ -131,6 +136,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
           <Flex flexDirection="column">
             <Text mt="5px">Opis:</Text>
             <Textarea
+              borderColor={colors.borderSecondary}
               p="5px"
               value={description}
               placeholder="Wprowadź opis"
@@ -166,7 +172,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
               setIsEdit(false)
               initUpdateItem()
             }}
-            fontSize="16px"
+            fontSize="sm"
             w="80px"
             ml="10px"
           >
@@ -177,7 +183,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
               props.onClose()
               setIsEdit(true)
             }}
-            fontSize="16px"
+            fontSize="sm"
             w="80px"
             ml="10px"
           >

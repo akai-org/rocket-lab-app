@@ -1,14 +1,18 @@
 import { Flex, FlexProps } from '@chakra-ui/react'
 import { ReactNode } from 'react'
+import { useColors } from '../../../../theme/useColors'
 
 export interface DesktopWrapperProps extends FlexProps {
   children: ReactNode
 }
 
 const DesktopWrapper = ({ children, ...restProps }: DesktopWrapperProps) => {
+  const colors = useColors()
+
   return (
     <Flex
       flexDirection="column"
+      color={colors.fontSecondary}
       w="100vw"
       p="40px 40px 150px 263px"
       overflow="visible"

@@ -12,12 +12,15 @@ import {
 } from '@chakra-ui/react'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import ModalListItem from './ModalListItem'
+import { useColors } from '../../../../theme/useColors'
 
 const MoreInfoModal = (props: { isOpen: boolean; onClose: () => void }) => {
+  const colors = useColors()
+
   return (
     <Modal {...props} isCentered>
       <ModalOverlay backdropFilter="blur(1px)" />
-      <ModalContent maxW="40rem">
+      <ModalContent maxW="40rem" bgColor={colors.backgroundPrimary}>
         <ModalCloseButton />
         <ModalBody mt="10px">
           <Stack direction="row" alignItems="center">
