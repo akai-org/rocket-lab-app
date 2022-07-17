@@ -1,4 +1,3 @@
-import { Flex } from '@chakra-ui/react'
 import { useSelector } from 'react-redux'
 import { storageCartInfo } from '../../../../store/store'
 import { IS_DEV } from '../../../../utils/constants'

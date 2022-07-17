@@ -1,6 +1,5 @@
 import {
   Flex,
-  Heading,
   useDisclosure,
   Accordion,
   AccordionItem,
@@ -17,11 +16,13 @@ import { useDispatch } from 'react-redux'
 import { removeExisitngCartList } from '../../../../../store/Slices/storageCartSlice'
 import { fetcher } from '../../../../../utils/requests'
 import { API_URL } from '../../../../../utils/constants'
+import { useColors } from '../../../../../theme/useColors'
 
 export interface Props extends PopulatedCartList {}
 
 const List = (props: Props) => {
   const dispatch = useDispatch()
+  const colors = useColors()
 
   const deleteCartList = async () => {
     try {
@@ -44,7 +45,7 @@ const List = (props: Props) => {
       allowMultiple
       flexDir="column"
       w="95%"
-      border="1px solid #C4C4C4"
+      border={`1px solid ${colors.borderPrimary}`}
       borderRadius="6px"
       mx="auto"
       my="10px"
@@ -54,15 +55,15 @@ const List = (props: Props) => {
         <Flex>
           <AccordionButton w="94%" justifyContent="space-between">
             <Text
-              fontSize="17px"
+              fontSize="md"
               noOfLines={1}
-              color="#4A5568"
+              color={colors.fontSecondary}
               textAlign="left"
-              fontWeight="500"
+              fontWeight="light"
             >
               {props.name}
             </Text>
-            <AccordionIcon />
+            <AccordionIcon color={colors.fontSecondary} />
           </AccordionButton>
           <Flex pt="5px" w="4%" justifyContent="flex-end">
             <ListMenu onEdit={onOpenEditList} onDelete={deleteCartList} />

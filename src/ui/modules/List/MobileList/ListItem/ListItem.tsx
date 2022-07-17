@@ -1,9 +1,10 @@
 import { Box, Flex, Image, Text, useDisclosure } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React from 'react'
 
 import ModalInfo from '../../../../components/Modals/ModalInfo/ModalInfo'
 import { CartItem } from '../../../../../mongo/models/cart'
 import { Category } from '../../../../../mongo/models/category'
+import { useColors } from '../../../../../theme/useColors'
 
 const ListItem = (props: CartItem) => {
   const {
@@ -11,21 +12,24 @@ const ListItem = (props: CartItem) => {
     onOpen: onOpenInfo,
     onClose: onCloseInfo,
   } = useDisclosure()
+  const colors = useColors()
+
   return props.item ? (
     <Flex
       w="100%"
       m="0 auto"
       borderBottom="2px solid #D5D5D5"
       onClick={onOpenInfo}
+      color={colors.fontSecondary}
     >
-      <Flex ml=" 10px" my="auto">
+      <Flex ml="10px" my="auto">
         <Image src={props.item.imageUrl} w="50px" h="50px" />
       </Flex>
-      <Box h="80px" w="80%" m="0 auto 0 0" textAlign="left" p="20px">
-        <Text fontSize="16px" noOfLines={1} fontWeight="600">
+      <Box w="80%" textAlign="left" p="20px">
+        <Text fontSize="sm" noOfLines={1} fontWeight="bold">
           {props.item.name}
         </Text>
-        <Text fontSize="14px" fontWeight="500">
+        <Text fontSize="xs" fontWeight="normal">
           Ilość: {props.quantity}
         </Text>
       </Box>

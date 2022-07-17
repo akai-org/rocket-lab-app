@@ -1,6 +1,5 @@
 import {
   Flex,
-  Heading,
   Table,
   Tbody,
   Th,
@@ -22,6 +21,7 @@ import { useDispatch } from 'react-redux'
 import { removeExisitngCartList } from '../../../../../store/Slices/storageCartSlice'
 import ListMenu from '../../../../components/Menus/ListMenu'
 import { API_URL } from '../../../../../utils/constants'
+import { useColors } from '../../../../../theme/useColors'
 
 interface Props extends PopulatedCartList {}
 
@@ -31,9 +31,8 @@ const List = (props: Props) => {
     onOpen: onOpenEditList,
     onClose: onCloseEditList,
   } = useDisclosure()
-
   const dispatch = useDispatch()
-
+  const colors = useColors()
   const deleteCartList = async () => {
     try {
       const deletedCartList = await fetcher(API_URL + '/api/cart/delete', {
@@ -50,22 +49,22 @@ const List = (props: Props) => {
     <Accordion
       allowMultiple
       borderRadius="6px"
-      bgColor="white"
-      border="1px solid #C4C4C4"
+      bgColor={colors.backgroundPrimary}
+      border={`1px solid ${colors.borderPrimary}`}
       mt="20px"
     >
       <AccordionItem border="none">
         <Flex>
           <AccordionButton w="100%" justifyContent="space-between">
             <Text
-              fontSize="20px"
+              fontSize="lg"
               lineHeight="25px"
               noOfLines={1}
               textAlign="left"
               my="5px"
               ml="10px"
-              color="#4A5568"
-              fontWeight="500"
+              color={colors.fontSecondary}
+              fontWeight="light"
             >
               {props.name}
             </Text>
@@ -80,10 +79,10 @@ const List = (props: Props) => {
             {/* TODO: Usuwanie listy */}
             <Table p="20px">
               <Thead>
-                <Tr fontSize="16px" fontWeight="700">
+                <Tr fontSize="sm" fontWeight="normal">
                   <Th w="50%">NAZWA</Th>
                   <Th w="50%">OPIS</Th>
-                  <Th textAlign="right" w="1%" minW="140px">
+                  <Th textAlign="right" w="1%" minW="150px">
                     ILOŚĆ SZTUK
                   </Th>
                 </Tr>

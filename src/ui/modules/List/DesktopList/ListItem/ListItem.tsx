@@ -1,8 +1,8 @@
 import { Flex, Image, Td, Text, Tr, useDisclosure } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React from 'react'
 import { CartItem } from '../../../../../mongo/models/cart'
-import { Item } from '../../../../../mongo/models/item'
 import ModalInfo from '../../../../components/Modals/ModalInfo/ModalInfo'
+import { useColors } from '../../../../../theme/useColors'
 
 interface Props extends CartItem {}
 
@@ -12,8 +12,10 @@ const ListItem = (props: Props) => {
     onOpen: onOpenInfo,
     onClose: onCloseInfo,
   } = useDisclosure()
+  const colors = useColors()
+
   return props.item ? (
-    <Tr fontSize="14px" h="40px">
+    <Tr fontSize="xs" color={colors.fontSecondary} h="40px">
       <Td>
         <Flex justifyContent="flex-start" cursor="pointer" onClick={onOpenInfo}>
           <Image src="item.png" w="40px" h="40px" />
@@ -26,7 +28,7 @@ const ListItem = (props: Props) => {
         <Text noOfLines={1}>{props.item.description}</Text>
       </Td>
       <Td textAlign="right">
-        <Text color={props.quantity ? 'inherit' : 'red.500'}>
+        <Text color={props.quantity ? 'inherit' : colors.errorPrimary}>
           {props.quantity ? props.quantity : 'brak w magazynie'}
         </Text>
       </Td>

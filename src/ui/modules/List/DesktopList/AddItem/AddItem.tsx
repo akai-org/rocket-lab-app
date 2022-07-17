@@ -6,7 +6,6 @@ import {
   NumberInputField,
   NumberInputStepper,
   Text,
-  Box,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -17,11 +16,13 @@ import {
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
 import ProductButton from '../../../../components/Custom Buttons/ProductButton/ProductButton'
+import { useColors } from '../../../../../theme/useColors'
 
 const AddItem = () => {
   const name = useRef<HTMLInputElement>(null)
   const [nameIsValid, setNameIsValid] = useState(true)
   const [quantity, setQuantity] = useState(1)
+  const colors = useColors()
 
   const submitForm = () => {
     if (name.current!.value) setNameIsValid(true)
@@ -35,9 +36,9 @@ const AddItem = () => {
           <Text
             flex="1"
             m="5px 5px 5px 10px"
-            fontSize="20px"
-            fontWeight="600"
-            color="#4A5568"
+            fontSize="lg"
+            fontWeight="normal"
+            color={colors.fontSecondary}
             textAlign="left"
           >
             Dodaj do listy przedmiot spoza magazynu
@@ -45,18 +46,18 @@ const AddItem = () => {
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel>
-          <Text fontWeight={500}>Nazwa</Text>
+          <Text fontWeight="normal">Nazwa</Text>
           <Input ref={name} h="32px" id="name" type="text" />
           {!nameIsValid && (
-            <Text fontSize="14px" color="red">
+            <Text fontSize="xs" color={colors.errorPrimary}>
               Wprowadź nazwę
             </Text>
           )}
-          <Text fontWeight={500} mt="10px">
+          <Text fontWeight="normal" mt="10px">
             Opis
           </Text>
           <Input h="32px" id="description" type="text" />
-          <Text fontWeight={500} mt="10px">
+          <Text fontWeight="normal" mt="10px">
             Ilość
           </Text>
           <NumberInput
@@ -66,7 +67,6 @@ const AddItem = () => {
             onChange={(e) => {
               setQuantity(parseInt(e))
             }}
-            borderColor="#D5D5D5"
             defaultValue={1}
             min={1}
           >
@@ -81,7 +81,7 @@ const AddItem = () => {
               <NumberDecrementStepper />
             </NumberInputStepper>
           </NumberInput>
-          <Text fontWeight={500} mt="10px">
+          <Text fontWeight="normal" mt="10px">
             Lista
           </Text>
           <Select h="32px">
@@ -93,7 +93,7 @@ const AddItem = () => {
             <ProductButton
               ml="auto"
               onClick={submitForm}
-              fontSize="16px"
+              fontSize="sm"
               w="90px"
               mt="20px"
             >
