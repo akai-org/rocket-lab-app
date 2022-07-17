@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Box, Image, Flex, Heading, Icon } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
-import { Squash as Hamburger } from 'hamburger-react'
 import MobileSidebar from './MobileSidebar/MobileSidebar'
 import { useColors } from '../../../../theme/useColors'
-import ColorModeSwitch from '../../ColorModeSwitch/ColorModeSwitch'
 
 const MobileNavigation = () => {
   const colors = useColors()
@@ -52,7 +50,6 @@ const MobileNavigation = () => {
           </Box>
         </Flex>
         <Flex alignItems="center">
-          <ColorModeSwitch />
           <Icon fontSize="30px" mr="10px" as={FaUserCircle} />
           <MobileSidebar />
         </Flex>
