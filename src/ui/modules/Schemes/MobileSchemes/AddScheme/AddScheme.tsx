@@ -68,6 +68,7 @@ const AddScheme = () => {
         <AccordionPanel color={colors.fontSecondary}>
           <Text fontWeight="normal">Nazwa</Text>
           <Input
+            borderColor={colors.borderSecondary}
             onChange={(e) => context?.updateName(e.currentTarget.value)}
             h="32px"
             id="name"
@@ -83,6 +84,7 @@ const AddScheme = () => {
             Opis
           </Text>
           <Input
+            borderColor={colors.borderSecondary}
             onChange={(e) => context?.updateDescription(e.currentTarget.value)}
             h="32px"
             id="description"

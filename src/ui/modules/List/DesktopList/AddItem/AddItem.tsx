@@ -47,7 +47,13 @@ const AddItem = () => {
         </AccordionButton>
         <AccordionPanel>
           <Text fontWeight="normal">Nazwa</Text>
-          <Input ref={name} h="32px" id="name" type="text" />
+          <Input
+            borderColor={colors.borderSecondary}
+            ref={name}
+            h="32px"
+            id="name"
+            type="text"
+          />
           {!nameIsValid && (
             <Text fontSize="xs" color={colors.errorPrimary}>
               Wprowadź nazwę
@@ -56,11 +62,17 @@ const AddItem = () => {
           <Text fontWeight="normal" mt="10px">
             Opis
           </Text>
-          <Input h="32px" id="description" type="text" />
+          <Input
+            borderColor={colors.borderSecondary}
+            h="32px"
+            id="description"
+            type="text"
+          />
           <Text fontWeight="normal" mt="10px">
             Ilość
           </Text>
           <NumberInput
+            borderColor={colors.borderSecondary}
             allowMouseWheel
             h="32px"
             w="100%"
@@ -84,7 +96,7 @@ const AddItem = () => {
           <Text fontWeight="normal" mt="10px">
             Lista
           </Text>
-          <Select h="32px">
+          <Select borderColor={colors.borderSecondary} h="32px">
             <option>Lista 1</option>
             <option>Lista 2</option>
             <option>Lista 3</option>

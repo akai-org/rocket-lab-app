@@ -77,6 +77,7 @@ const AddItem = (props: AddItemProps) => {
           options={options}
         />
         <NumberInput
+          borderColor={colors.borderSecondary}
           allowMouseWheel
           h="32px"
           w="20%"

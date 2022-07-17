@@ -94,7 +94,14 @@ const CategoryEdit = () => {
             <Text fontWeight="normal" fontSize="xs">
               Nazwa
             </Text>
-            <Input ref={name} h="32px" fontSize="xs" id="name" type="text" />
+            <Input
+              ref={name}
+              borderColor={colors.borderSecondary}
+              h="32px"
+              fontSize="xs"
+              id="name"
+              type="text"
+            />
             {!nameIsValid && (
               <Text fontSize="xs" color={colors.errorPrimary}>
                 Wprowadź nazwę

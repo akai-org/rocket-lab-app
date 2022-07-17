@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { updateCategory } from '../../../../../../../store/Slices/categoriesSlice'
 import { API_URL } from '../../../../../../../utils/constants'
 import { fetcher } from '../../../../../../../utils/requests'
+import { useColors } from '../../../../../../../theme/useColors'
 
 interface CategoryProps {
   id: string
@@ -16,6 +17,7 @@ const Category = ({ id, value, categoryName }: CategoryProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState(categoryName)
   const dispatch = useDispatch()
+  const colors = useColors()
 
   const editCategory = async () => {
     try {
@@ -39,6 +41,7 @@ const Category = ({ id, value, categoryName }: CategoryProps) => {
       {isEditing ? (
         <Flex justifyContent="space-between" w="100%">
           <Input
+            borderColor={colors.borderSecondary}
             ml="10px"
             h="30px"
             value={name}

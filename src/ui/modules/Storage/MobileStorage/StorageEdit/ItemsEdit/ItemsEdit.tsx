@@ -85,7 +85,14 @@ const ItemsEdit = () => {
             <Text fontWeight="normal" fontSize="xs">
               Nazwa
             </Text>
-            <Input ref={name} h="32px" id="name" type="text" fontSize="xs" />
+            <Input
+              borderColor={colors.borderSecondary}
+              ref={name}
+              h="32px"
+              id="name"
+              type="text"
+              fontSize="xs"
+            />
             {!nameIsValid && (
               <Text fontSize="xxs" color={colors.errorPrimary}>
                 Wprowadź nazwę
@@ -95,6 +102,7 @@ const ItemsEdit = () => {
               Opis
             </Text>
             <Input
+              borderColor={colors.borderSecondary}
               h="32px"
               fontSize="xs"
               id="description"
@@ -106,6 +114,7 @@ const ItemsEdit = () => {
             </Text>
             <NumberInput
               allowMouseWheel
+              borderColor={colors.borderSecondary}
               h="32px"
               min={1}
               id="amount"

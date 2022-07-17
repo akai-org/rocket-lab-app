@@ -23,7 +23,7 @@ import { fetcher } from '../../../../../../utils/requests'
 import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
 import DeletePopover from '../../../../../components/Popovers/DeletePopover'
 import Category from './Category/Category'
-import {useColors} from "../../../../../../theme/useColors";
+import { useColors } from '../../../../../../theme/useColors'
 
 const CategoryEdit = () => {
   const categories = useSelector(categoriesInfo).categories
@@ -92,8 +92,14 @@ const CategoryEdit = () => {
         </AccordionButton>
         <AccordionPanel borderLeft={`1px solid ${colors.borderPrimary}`}>
           <FormControl fontSize="sm" color={colors.fontSecondary}>
-            <Text fontWeight='normal'>Nazwa</Text>
-            <Input ref={name} h="32px" id="name" type="text" />
+            <Text fontWeight="normal">Nazwa</Text>
+            <Input
+              borderColor={colors.borderSecondary}
+              ref={name}
+              h="32px"
+              id="name"
+              type="text"
+            />
             {!nameIsValid && (
               <Text fontSize="xs" color={colors.errorPrimary}>
                 Wprowadź nazwę
@@ -109,7 +115,7 @@ const CategoryEdit = () => {
                 Dodaj
               </ProductButton>
             </Flex>
-            <Text fontWeight='normal'>Lista kategorii</Text>
+            <Text fontWeight="normal">Lista kategorii</Text>
             <CheckboxGroup
               onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
               colorScheme="orange"

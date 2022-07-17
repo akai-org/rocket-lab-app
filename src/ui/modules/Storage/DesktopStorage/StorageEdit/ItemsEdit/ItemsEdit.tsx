@@ -23,7 +23,7 @@ import { categoriesInfo } from '../../../../../../store/store'
 import { API_URL } from '../../../../../../utils/constants'
 import { fetcher } from '../../../../../../utils/requests'
 import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
-import {useColors} from "../../../../../../theme/useColors";
+import { useColors } from '../../../../../../theme/useColors'
 
 const ItemsEdit = () => {
   const dispatch = useDispatch()
@@ -72,7 +72,7 @@ const ItemsEdit = () => {
         <AccordionButton>
           <Text
             flex="1"
-            fontSize='md'
+            fontSize="md"
             fontWeight="normal"
             color={colors.fontSecondary}
             textAlign="left"
@@ -84,21 +84,34 @@ const ItemsEdit = () => {
         </AccordionButton>
         <AccordionPanel borderLeft={`1px solid ${colors.borderPrimary}`}>
           <FormControl fontSize="sm" color={colors.fontSecondary}>
-            <Text fontWeight='normal'>Nazwa</Text>
-            <Input ref={name} h="32px" id="name" type="text" />
+            <Text fontWeight="normal">Nazwa</Text>
+            <Input
+              borderColor={colors.borderSecondary}
+              ref={name}
+              h="32px"
+              id="name"
+              type="text"
+            />
             {!nameIsValid && (
               <Text fontSize="xs" color={colors.errorPrimary}>
                 Wprowadź nazwę
               </Text>
             )}
-            <Text mt="5px" fontWeight='normal'>
+            <Text mt="5px" fontWeight="normal">
               Opis
             </Text>
-            <Input h="32px" id="description" ref={description} type="text" />
-            <Text mt="5px" fontWeight='normal'>
+            <Input
+              borderColor={colors.borderSecondary}
+              h="32px"
+              id="description"
+              ref={description}
+              type="text"
+            />
+            <Text mt="5px" fontWeight="normal">
               Ilość
             </Text>
             <NumberInput
+              borderColor={colors.borderSecondary}
               allowMouseWheel
               h="32px"
               min={1}
@@ -111,18 +124,18 @@ const ItemsEdit = () => {
                 <NumberDecrementStepper h="32px" />
               </NumberInputStepper>
             </NumberInput>
-            <Text mt="5px" fontWeight='normal'>
+            <Text mt="5px" fontWeight="normal">
               Obraz
             </Text>
             <ProductButton id="photo" disabled fontSize="sm" w="100px">
               Wgraj
             </ProductButton>
-            <Text mt="5px" fontWeight='normal'>
+            <Text mt="5px" fontWeight="normal">
               Kategorie
             </Text>
             <CheckboxGroup
               onChange={(e) => setCheckboxes(e.map((el) => el.toString()))}
-              colorScheme='orange'
+              colorScheme="orange"
             >
               <Flex flexDirection="column">
                 {categories.map((category) => (

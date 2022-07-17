@@ -17,7 +17,7 @@ export const useColors = () => {
   //borders of containers
   const borderPrimary = mode ? '#C4C4C4' : 'white'
   //borders of inputs
-  const borderSecondary = mode ? '#D4D4D4' : '#b5b5b5'
+  const borderSecondary = mode ? '#D4D4D4' : '#333f57'
 
   //shadow colors
   const shadowPrimary = mode ? '#D5D5D5' : 'black'

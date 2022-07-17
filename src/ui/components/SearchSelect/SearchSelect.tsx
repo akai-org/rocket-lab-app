@@ -19,6 +19,7 @@ const SearchSelect = ({ ...restProps }: Props) => {
           borderRadius: '6px',
           height: '32px',
           lineHeight: '20px',
+          borderColor: colors.borderSecondary,
         }),
         singleValue: (provided) => ({
           ...provided,

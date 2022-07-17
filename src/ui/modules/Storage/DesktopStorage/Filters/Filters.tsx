@@ -40,7 +40,7 @@ const Filters: FC = () => {
             <Flex>
               <Input
                 h="40px"
-                border={`1px solid ${colors.borderSecondary}`}
+                borderColor={colors.borderSecondary}
                 fontWeight="light"
                 placeholder="Nazwa Produktu"
                 value={searchTerm}
@@ -53,6 +53,7 @@ const Filters: FC = () => {
             <Text>Kategoria</Text>
             <Select
               h="40px"
+              borderColor={colors.borderSecondary}
               border={`1px solid ${colors.borderSecondary}`}
               fontWeight="light"
               value={(query.category as string | undefined) || category}

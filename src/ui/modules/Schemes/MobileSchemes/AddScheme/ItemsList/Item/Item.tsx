@@ -37,6 +37,7 @@ const Item = ({ schemaItem }: ItemProps) => {
       </Td>
       <Td>
         <NumberInput
+          borderColor={colors.borderSecondary}
           allowMouseWheel
           display="inline"
           h="30px"

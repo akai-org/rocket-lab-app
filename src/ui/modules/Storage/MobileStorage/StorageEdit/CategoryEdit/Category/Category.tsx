@@ -22,6 +22,7 @@ const Category = ({ id, value, categoryName }: CategoryProps) => {
       {isEditing ? (
         <Flex justifyContent="space-between" w="100%">
           <Input
+            borderColor={colors.borderSecondary}
             ml="10px"
             h="30px"
             fontSize="xs"

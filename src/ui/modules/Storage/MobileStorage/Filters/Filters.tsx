@@ -88,7 +88,7 @@ const Filters: React.FC<Props> = (props) => {
                       placeholder="Wyszukaj"
                       h="32px"
                       w="100%"
-                      border={`1px solid ${colors.borderSecondary}`}
+                      borderColor={colors.borderSecondary}
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -100,6 +100,7 @@ const Filters: React.FC<Props> = (props) => {
                     h="32px"
                     mt="20px"
                     fontSize="sm"
+                    borderColor={colors.borderSecondary}
                   >
                     <option value="all">Wszystkie</option>
                     {categories.map(({ name, id }) => (
@@ -140,7 +141,7 @@ const Filters: React.FC<Props> = (props) => {
                 placeholder="Wyszukaj"
                 h="30px"
                 w="200px"
-                border={`1px solid ${colors.borderSecondary}`}
+                borderColor={colors.borderSecondary}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
