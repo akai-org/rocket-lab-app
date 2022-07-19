@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { useMediaQuery } from '@chakra-ui/react'
-import DesktopSchemes from '../../components/Schemes/DesktopSchemes/DesktopSchemes'
-import MobileSchemes from '../../components/Schemes/MobileSchemes/MobileSchemes'
+import DesktopSchemes from '../../ui/modules/Schemes/DesktopSchemes/DesktopSchemes'
+import MobileSchemes from '../../ui/modules/Schemes/MobileSchemes/MobileSchemes'
 import {
   PopulatedSchema,
   SchemaModel,
