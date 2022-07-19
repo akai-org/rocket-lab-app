@@ -22,6 +22,7 @@ import { API_URL } from '../../../../../utils/constants'
 import { fetcher } from '../../../../../utils/requests'
 import { deleteSchema } from '../../../../../store/Slices/schemasSlice'
 import { useColors } from '../../../../../theme/useColors'
+import ModalInfoScheme from '../../../../components/Modals/ModalInfoScheme/ModalInfoScheme'
 
 interface Props {
   schema: PopulatedSchema
@@ -29,9 +30,9 @@ interface Props {
 
 const Scheme = ({ schema }: Props) => {
   const {
-    isOpen: isOpenEditScheme,
-    onOpen: onOpenEditScheme,
-    onClose: onCloseEditScheme,
+    isOpen: isOpenInfoScheme,
+    onOpen: onOpenInfoScheme,
+    onClose: onCloseInfoScheme,
   } = useDisclosure()
   const dispatch = useDispatch()
   const colors = useColors()
@@ -71,7 +72,7 @@ const Scheme = ({ schema }: Props) => {
             <AccordionIcon color={colors.fontSecondary} />
           </AccordionButton>
           <Flex pt="5px" mr="20px">
-            <SchemeMenu onEdit={onOpenEditScheme} onDelete={handleDelete} />
+            <SchemeMenu onOpenInfo={onOpenInfoScheme} onDelete={handleDelete} />
           </Flex>
         </Flex>
         <AccordionPanel>
@@ -98,6 +99,11 @@ const Scheme = ({ schema }: Props) => {
           </Flex>
         </AccordionPanel>
       </AccordionItem>
+      <ModalInfoScheme
+        onClose={onCloseInfoScheme}
+        isOpen={isOpenInfoScheme}
+        isCentered
+      />
     </Accordion>
   )
 }

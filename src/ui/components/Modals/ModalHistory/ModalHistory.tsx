@@ -8,11 +8,12 @@ import {
   Text,
   Stack,
   Heading,
-  Avatar,
+  Icon,
 } from '@chakra-ui/react'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import ModalListItem from './ModalListItem'
 import { useColors } from '../../../../theme/useColors'
+import { FaUserCircle } from 'react-icons/fa'
 
 const MoreInfoModal = (props: { isOpen: boolean; onClose: () => void }) => {
   const colors = useColors()
@@ -20,11 +21,20 @@ const MoreInfoModal = (props: { isOpen: boolean; onClose: () => void }) => {
   return (
     <Modal {...props} isCentered>
       <ModalOverlay backdropFilter="blur(1px)" />
-      <ModalContent maxW="40rem" bgColor={colors.backgroundPrimary}>
+      <ModalContent
+        color={colors.fontPrimary}
+        maxW="40rem"
+        bgColor={colors.backgroundPrimary}
+      >
         <ModalCloseButton />
         <ModalBody mt="10px">
           <Stack direction="row" alignItems="center">
-            <Avatar size="lg" backgroundColor="black" />
+            <Icon
+              as={FaUserCircle}
+              mr="5px"
+              color={colors.fontPrimary}
+              fontSize="70px"
+            />
             <Stack direction="column">
               <Stack direction="row">
                 <Heading size="sm">Rafał Walkowiak</Heading>
@@ -61,7 +71,6 @@ const MoreInfoModal = (props: { isOpen: boolean; onClose: () => void }) => {
         <ModalFooter>
           <ProductButton
             fontSize="16px"
-            colorScheme="orange"
             ml="10px"
             w="80px"
             onClick={props.onClose}
