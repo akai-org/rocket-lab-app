@@ -40,7 +40,7 @@ const ModalInfoScheme = (props: ModalInfoSchemeProps) => {
         <ModalCloseButton />
         <ModalBody>
           <Flex flexDirection="column" maxH="350px" overflowY="scroll" w="100%">
-            <Text fontWeight="500" noOfLines={2} fontSize="19px">
+            <Text fontWeight="normal" noOfLines={2} fontSize="lg">
               Schemat nr 1 - nazwa schematu
             </Text>
             <Text m="5px 0 15px 0">
@@ -61,7 +61,7 @@ const ModalInfoScheme = (props: ModalInfoSchemeProps) => {
               </Thead>
               <Tbody>
                 {/* <SchemeItem /> */}
-                <Tr fontSize="14px" h="40px">
+                <Tr fontSize="xs" h="40px">
                   <Td>Item 1</Td>
                   <Td w="1%" minW="120px" textAlign="right">
                     55
@@ -70,7 +70,7 @@ const ModalInfoScheme = (props: ModalInfoSchemeProps) => {
                     <QuantityBadge schemeQuantity={101} storageQuantity={100} />
                   </Td>
                 </Tr>
-                <Tr fontSize="14px" h="40px">
+                <Tr fontSize="xs" h="40px">
                   <Td>Item 2</Td>
                   <Td w="1%" minW="120px" textAlign="right">
                     1255
@@ -86,7 +86,7 @@ const ModalInfoScheme = (props: ModalInfoSchemeProps) => {
         <ModalFooter>
           <ProductButton
             onClick={onOpenEditScheme}
-            fontSize="16px"
+            fontSize="sm"
             w="80px"
             ml="10px"
           >
@@ -94,7 +94,7 @@ const ModalInfoScheme = (props: ModalInfoSchemeProps) => {
           </ProductButton>
           <ProductButton
             onClick={props.onClose}
-            fontSize="16px"
+            fontSize="sm"
             w="80px"
             ml="10px"
           >
