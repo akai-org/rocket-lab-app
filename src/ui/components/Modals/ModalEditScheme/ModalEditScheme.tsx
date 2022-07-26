@@ -27,11 +27,23 @@ import {
 import { AiOutlineClose } from 'react-icons/ai'
 import QuantityBadge from '../../Badges/QuantityBadge'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
+import useLongPressGesture from '../../Gestures/useLongPressGesture'
+import DeletePopover from '../../Popovers/DeletePopover'
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
 }
 
 const ModalEditScheme = (props: ModalEditSchemeProps) => {
+  function onLongPress() {
+    // Delete Popover
+  }
+
+  const defaultOptions = {
+    shouldPreventDefault: true,
+    delay: 500,
+  }
+  const longPressEvent = useLongPressGesture(onLongPress, defaultOptions)
+
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
@@ -82,7 +94,7 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
                 Dodaj przedmiot
               </ProductButton>
             </Flex>
-            <Table>
+            <Table w="100%">
               <Thead>
                 <Tr fontSize="sm" fontWeight="bold">
                   <Th w="80%">NAZWA</Th>
@@ -92,14 +104,11 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
                   <Th w="18%" textAlign="right">
                     DOSTĘPNOŚĆ
                   </Th>
-                  <Th w="1%" textAlign="right">
-                    AKCJE
-                  </Th>
                 </Tr>
               </Thead>
               <Tbody>
                 {/* <SchemeItem /> */}
-                <Tr fontSize="xs" h="40px">
+                <Tr fontSize="xs" h="40px" {...longPressEvent}>
                   <Td w="80%">Item 1</Td>
                   <Td w="1%" textAlign="right">
                     <NumberInput
@@ -117,11 +126,6 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
                   </Td>
                   <Td w="18%" textAlign="right">
                     <QuantityBadge schemeQuantity={10} storageQuantity={50} />
-                  </Td>
-                  <Td w="1%">
-                    <Flex justifyContent="flex-end">
-                      <AiOutlineClose cursor="pointer" />
-                    </Flex>
                   </Td>
                 </Tr>
               </Tbody>
