@@ -25,14 +25,14 @@ export const useColors = () => {
   //background colors
   const backgroundPrimary = mode ? 'white' : '#1A202C'
 
+  //others
+  const orangePrimary = '#FF7700'
+  const errorPrimary = 'red.500'
+
   //logo AKAI
   const logoAkai = mode
     ? 'logo-akai-light-theme.png'
     : 'logo-akai-dark-theme.png'
-
-  //others
-  const orangePrimary = '#FF7700'
-  const errorPrimary = 'red.500'
 
   return {
     fontPrimary,
