@@ -75,7 +75,7 @@ const DeletePopover = (props: DeletePopoverProps) => {
                 Anuluj
               </Button>
               <Button
-                colorScheme={colors.errorPrimary}
+                backgroundColor={colors.errorPrimary}
                 onClick={() => {
                   props.onClick()
                   close()
