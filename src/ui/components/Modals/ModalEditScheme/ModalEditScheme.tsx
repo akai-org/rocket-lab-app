@@ -34,15 +34,13 @@ interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
 }
 
 const ModalEditScheme = (props: ModalEditSchemeProps) => {
-  function onLongPress() {
-    // Delete Popover
-  }
+  const onLongPress = () => console.log('asdsad')
 
   const defaultOptions = {
     shouldPreventDefault: true,
     delay: 500,
   }
-  const longPressEvent = useLongPressGesture(onLongPress, defaultOptions)
+  const longPressEvent = useLongPressGesture({ onLongPress }, defaultOptions)
 
   return (
     <Modal {...props}>
