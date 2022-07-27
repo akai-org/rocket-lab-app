@@ -29,6 +29,11 @@ export const useColors = () => {
   const orangePrimary = '#FF7700'
   const errorPrimary = 'red.500'
 
+  //logo AKAI
+  const logoAkai = mode
+    ? 'logo-akai-light-theme.png'
+    : 'logo-akai-dark-theme.png'
+
   return {
     fontPrimary,
     fontPrimaryOpposite,
@@ -40,5 +45,6 @@ export const useColors = () => {
     backgroundPrimary,
     orangePrimary,
     errorPrimary,
+    logoAkai,
   }
 }
