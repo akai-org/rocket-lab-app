@@ -120,6 +120,9 @@ export async function addItem(item: Item) {
   const createdItem = await (
     await ItemModel.create(item)
   ).populate('categories')
+
+    
+
   return createdItem
 }
 

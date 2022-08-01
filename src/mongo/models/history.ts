@@ -6,7 +6,6 @@ export type ResourceType = 'item' | 'schema' | 'cartList'
 
 export interface Resource {
   name: string
-  id: string
   type: ResourceType
   description?: string
 }
@@ -30,9 +29,11 @@ const HistoryLogSchema = new Schema<HistoryLog>(
   {
     author: { type: String, required: [true, 'Author name must be provided'] },
     resource: HistoryResourceSchema,
+    type: { type: String, required: [true, 'Please, provide log type'] },
   },
   { timestamps: true }
 )
 
-export const SchemaModel =
-  (models.HistoryLog as Model<HistoryLog>) || model('HistoryLog', HistoryLogSchema)
+export const HistoryModel =
+  (models.HistoryLog as Model<HistoryLog>) ||
+  model('HistoryLog', HistoryLogSchema)
