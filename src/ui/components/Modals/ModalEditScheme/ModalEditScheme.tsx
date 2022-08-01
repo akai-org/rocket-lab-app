@@ -24,23 +24,25 @@ import {
   Text,
   Select,
 } from '@chakra-ui/react'
-import { AiOutlineClose } from 'react-icons/ai'
 import QuantityBadge from '../../Badges/QuantityBadge'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
 import useLongPressGesture from '../../Gestures/useLongPressGesture'
 import DeletePopover from '../../Popovers/DeletePopover'
+import ModalInfoScheme from '../ModalInfoScheme/ModalInfoScheme'
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
 }
 
 const ModalEditScheme = (props: ModalEditSchemeProps) => {
-  const onLongPress = () => console.log('asdsad')
-
   const defaultOptions = {
-    shouldPreventDefault: true,
+    onLongPress: () => {
+      console.log('TEST')
+      return <ModalInfoScheme onClose={() => {}} isOpen={true} />
+    },
     delay: 500,
+    shouldPreventDefault: true,
   }
-  const longPressEvent = useLongPressGesture({ onLongPress }, defaultOptions)
+  const longPressEvent = useLongPressGesture(defaultOptions)
 
   return (
     <Modal {...props}>

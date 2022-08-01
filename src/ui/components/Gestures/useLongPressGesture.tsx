@@ -11,20 +11,17 @@ const preventDefault = (e: Event) => {
 export const isTouchEvent = (e: Event): e is TouchEvent => {
   return e && 'touches' in e
 }
-
-interface PressHandlers<T> {
+interface longPressGestureProps<T> {
   onLongPress: (e: React.MouseEvent<T> | React.TouchEvent<T>) => void
-}
-
-interface Options {
   delay?: number
   shouldPreventDefault?: boolean
 }
 
-export default function useLongPressGesture<T>(
-  { onLongPress }: PressHandlers<T>,
-  { delay = 300, shouldPreventDefault = true }: Options = {}
-) {
+export default function useLongPressGesture<T>({
+  onLongPress,
+  delay,
+  shouldPreventDefault,
+}: longPressGestureProps<T>) {
   const [longPressTriggered, setLongPressTriggered] = useState(false)
   const timeout = useRef<NodeJS.Timeout>()
   const target = useRef<EventTarget>()
@@ -50,10 +47,7 @@ export default function useLongPressGesture<T>(
   )
 
   const clear = useCallback(
-    (
-      e: React.MouseEvent<T> | React.TouchEvent<T>,
-      shouldTriggerClick = true
-    ) => {
+    (shouldTriggerClick = true) => {
       timeout.current && clearTimeout(timeout.current)
       shouldTriggerClick && !longPressTriggered
 
@@ -70,7 +64,7 @@ export default function useLongPressGesture<T>(
     onMouseDown: (e: React.MouseEvent<T>) => start(e),
     onTouchStart: (e: React.TouchEvent<T>) => start(e),
     onMouseUp: (e: React.MouseEvent<T>) => clear(e),
-    onMouseLeave: (e: React.MouseEvent<T>) => clear(e, false),
+    onMouseLeave: () => clear(false),
     onTouchEnd: (e: React.TouchEvent<T>) => clear(e),
   }
 }
