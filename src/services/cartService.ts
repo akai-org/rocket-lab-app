@@ -44,15 +44,11 @@ export async function fetchCartLists(populate?: boolean) {
 }
 
 export async function removeCartListItem(listId: string, itemId: string) {
-  return await CartListModel.updateOne(
-    { id: listId },
-    {
-      $pull: {
-        items: {
-          item: itemId,
-        },
+  return await CartListModel.findByIdAndUpdate(listId, {
+    $pull: {
+      items: {
+        item: itemId,
       },
     },
-    { new: true }
-  ).populate('items')
+  }).populate('items')
 }
