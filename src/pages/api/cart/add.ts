@@ -10,10 +10,6 @@ import { withMiddleware } from '../../../utils/middlewares'
 const handler: NextApiHandler = async (req, res) => {
   const method = req.method
 
-  const body = req.body
-
-  console.log(body)
-
   if (method === 'POST') {
     try {
       const session = validateSession(req, res)
