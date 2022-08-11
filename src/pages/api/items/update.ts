@@ -14,7 +14,6 @@ const handler: NextApiHandler = async (req, res) => {
     try {
       const session = validateSession(req, res)
       const oldItem = await itemsService.fetchItem(body.id)
-      console.log({ oldItem })
       const updatedItem = await itemsService.updateItem(body.id, body.item)
       if (!updatedItem) throw new Error('No item updated')
       if (!oldItem) throw new Error('No item found in DB')
@@ -25,7 +24,6 @@ const handler: NextApiHandler = async (req, res) => {
           description: updatedItem.description,
         })
       }
-
       const itemHasBeenModified = checkIfItemHasBeenModified(
         oldItem,
         updatedItem
