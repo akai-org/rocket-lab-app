@@ -1,10 +1,10 @@
 import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 import { NextApiHandler } from 'next/types'
-import { CartListModel } from '../../../mongo/models/cart'
+import { removeCartListItem } from '../../../services/cartService'
 import {
-  createNewCartList,
-  removeCartListItem,
-} from '../../../services/cartService'
+  createHistoryLog,
+  validateSession,
+} from '../../../services/historyService'
 import { withMiddleware } from '../../../utils/middlewares'
 
 const handler: NextApiHandler = async (req, res) => {
@@ -16,8 +16,14 @@ const handler: NextApiHandler = async (req, res) => {
 
   if (method === 'DELETE') {
     try {
-      const updateCartList = await removeCartListItem(body.listId, body.itemId)
-      res.status(200).send(updateCartList)
+      const session = validateSession(req, res)
+      const updatedCartList = await removeCartListItem(body.listId, body.itemId)
+      if (!updatedCartList) throw new Error('No deleted Cart List')
+      await createHistoryLog(session.user.email, 'removed', {
+        name: updatedCartList.name,
+        type: 'cartList',
+      })
+      res.status(200).send(updatedCartList)
     } catch (error) {
       console.log(error)
       res.status(500).send({ error })

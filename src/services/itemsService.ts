@@ -120,6 +120,7 @@ export async function addItem(item: Item) {
   const createdItem = await (
     await ItemModel.create(item)
   ).populate('categories')
+
   return createdItem
 }
 
@@ -128,4 +129,8 @@ export async function fetchAllItems() {
     .sort({ updatedAt: -1 })
     .populate('categories')
   return items
+}
+
+export async function fetchItem(id: string) {
+  return await ItemModel.findById(id)
 }
