@@ -4,9 +4,9 @@ import HistoryList from './HistoryList/HistoryList'
 import { useRef } from 'react'
 import FilterDrawer from './FilterDrawer/FilterDrawer'
 import MobileWrapper from '../../../components/Wrappers/MobileWrapper/MobileWrapper'
-import { useColors } from '../../../../theme/useColors'
+import { useColors } from '../../../theme/useColors'
 
-const MobileHistory = () => {
+export const MobileHistory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const filterRef = useRef<HTMLDivElement>(null)
   const colors = useColors()
@@ -58,5 +58,3 @@ const MobileHistory = () => {
     </MobileWrapper>
   )
 }
-
-export default MobileHistory

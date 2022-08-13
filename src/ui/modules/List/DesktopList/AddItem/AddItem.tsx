@@ -15,8 +15,8 @@ import {
   Select,
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
-import ProductButton from '../../../../components/Custom Buttons/ProductButton/ProductButton'
-import { useColors } from '../../../../../theme/useColors'
+import ProductButton from '../../../../components/CustomButtons/ProductButton/ProductButton'
+import { useColors } from '../../../../theme/useColors'
 
 const AddItem = () => {
   const name = useRef<HTMLInputElement>(null)

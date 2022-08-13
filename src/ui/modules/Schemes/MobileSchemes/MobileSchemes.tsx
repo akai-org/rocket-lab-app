@@ -4,7 +4,7 @@ import Scheme from './Scheme/Scheme'
 import { useSelector } from 'react-redux'
 import { schemeInfo } from '../../../../store/store'
 
-const MobileSchemes = () => {
+export const MobileSchemes = () => {
   const schemeData = useSelector(schemeInfo)
 
   return (
@@ -16,5 +16,3 @@ const MobileSchemes = () => {
     </MobileWrapper>
   )
 }
-
-export default MobileSchemes

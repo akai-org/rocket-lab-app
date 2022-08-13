@@ -2,7 +2,7 @@ import { Flex, Image, Td, Text, Tr, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { CartItem } from '../../../../../mongo/models/cart'
 import ModalInfo from '../../../../components/Modals/ModalInfo/ModalInfo'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from '../../../../theme/useColors'
 
 interface Props extends CartItem {}
 

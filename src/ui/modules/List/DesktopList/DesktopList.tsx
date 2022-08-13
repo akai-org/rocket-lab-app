@@ -3,9 +3,9 @@ import { storageCartInfo } from '../../../../store/store'
 import { IS_DEV } from '../../../../utils/constants'
 import AddItem from './AddItem/AddItem'
 import List from './List/List'
-import DesktopWrapper from '../../../components/Wrappers/DesktopWrapper/DesktopWrapper'
+import { DesktopWrapper } from 'ui/components'
 
-const DesktopList = () => {
+export const DesktopList = () => {
   const storageCartData = useSelector(storageCartInfo)
 
   return (
@@ -17,5 +17,3 @@ const DesktopList = () => {
     </DesktopWrapper>
   )
 }
-
-export default DesktopList

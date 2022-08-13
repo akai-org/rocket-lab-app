@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 import DesktopWrapper from '../../components/Wrappers/DesktopWrapper/DesktopWrapper'
 import MobileWrapper from '../../components/Wrappers/MobileWrapper/MobileWrapper'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from '../../theme/useColors'
 import ColorModeSwitch from '../../components/ColorModeSwitch/ColorModeSwitch'
 
 const Rect = (rectProps: BoxProps) => (
@@ -25,7 +25,7 @@ const Rect = (rectProps: BoxProps) => (
   </Box>
 )
 
-const Palette = () => {
+export const Palette = () => {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
   const Wrapper = isDesktop ? DesktopWrapper : MobileWrapper
   const colors = useColors()
@@ -38,7 +38,9 @@ const Palette = () => {
       </HStack>
       <Text as="u">COLORS</Text>
       <Text color={colors.fontPrimary}>FontPrimary</Text>
-      <Text bgColor={colors.fontPrimary} color={colors.fontPrimaryOpposite}>FontPrimaryOpposite</Text>
+      <Text bgColor={colors.fontPrimary} color={colors.fontPrimaryOpposite}>
+        FontPrimaryOpposite
+      </Text>
       <Text color={colors.fontSecondary}>FontSecondary</Text>
       <Text color={colors.fontNeutral}>FontNeutral</Text>
       <Rect bgColor={colors.backgroundPrimary}>BackgroundPrimary</Rect>
@@ -59,5 +61,3 @@ const Palette = () => {
     </Wrapper>
   )
 }
-
-export default Palette

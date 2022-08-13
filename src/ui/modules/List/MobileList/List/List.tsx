@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux'
 import { removeExisitngCartList } from '../../../../../store/Slices/storageCartSlice'
 import { fetcher } from '../../../../../utils/requests'
 import { API_URL } from '../../../../../utils/constants'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from '../../../../theme/useColors'
 
 export interface Props extends PopulatedCartList {}
 

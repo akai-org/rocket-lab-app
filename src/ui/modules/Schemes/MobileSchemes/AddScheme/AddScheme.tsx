@@ -8,7 +8,7 @@ import {
   Input,
   Text,
 } from '@chakra-ui/react'
-import ProductButton from '../../../../components/Custom Buttons/ProductButton/ProductButton'
+import ProductButton from '../../../../components/CustomButtons/ProductButton/ProductButton'
 import AddItem from '../../DesktopSchemes/AddScheme/AddItem/AddItem'
 import ItemsList from './ItemsList/ItemsList'
 import { useContext, useState } from 'react'
@@ -17,7 +17,7 @@ import { API_URL } from '../../../../../utils/constants'
 import { fetcher } from '../../../../../utils/requests'
 import { useDispatch } from 'react-redux'
 import { addSchema } from '../../../../../store/Slices/schemasSlice'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from '../../../../theme/useColors'
 
 const AddScheme = () => {
   const dispatch = useDispatch()

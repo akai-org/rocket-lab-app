@@ -5,7 +5,7 @@ import DesktopWrapper from '../../../components/Wrappers/DesktopWrapper/DesktopW
 import { useSelector } from 'react-redux'
 import { schemeInfo } from '../../../../store/store'
 
-const DesktopSchemes = () => {
+export const DesktopSchemes = () => {
   const schemeData = useSelector(schemeInfo)
   return (
     <DesktopWrapper>
@@ -18,5 +18,3 @@ const DesktopSchemes = () => {
     </DesktopWrapper>
   )
 }
-
-export default DesktopSchemes

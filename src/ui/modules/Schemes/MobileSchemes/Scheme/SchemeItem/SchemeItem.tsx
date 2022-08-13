@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Td, Text, Tr } from '@chakra-ui/react'
 import QuantityBadge from '../../../../../components/Badges/QuantityBadge'
-import { useColors } from '../../../../../../theme/useColors'
+import { useColors } from '../../../../../theme/useColors'
 
 interface SchemeItemProps {
   schemeQuantity: number
