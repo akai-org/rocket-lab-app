@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { ChangeEvent } from 'react'
 import { useSelector } from 'react-redux'
-import { itemsInfo } from '../../store/store'
+import { itemsInfo } from 'store'
 import { FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../constants'
 import queryString from 'query-string'
 

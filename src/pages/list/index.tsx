@@ -35,11 +35,7 @@ const Home: NextPage<Props> = ({ cartLists, items }) => {
 export default Home
 
 export const getServerSideProps = withPageAuthRequired({
-  getServerSideProps: async ({
-    req,
-    res,
-    query,
-  }): Promise<{ props: Props }> => {
+  getServerSideProps: async ({ req, res }): Promise<{ props: Props }> => {
     try {
       await connectDB()
       await Credentials.withReader(req, res)

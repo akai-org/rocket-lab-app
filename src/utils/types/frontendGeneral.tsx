@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-import { Category } from '../../mongo/models/category'
-import { Item, PopulatedItem } from '../../mongo/models/item'
+import { Category, PopulatedItem } from 'mongo'
 
 export type sortingType = 'grid' | 'list'
 

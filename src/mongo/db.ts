@@ -5,7 +5,7 @@ const MONGODB_URI: string = process.env.MONGODB_URI || ''
 
 if (!MONGODB_URI) {
   throw new Error(
-    'Please provide correct MongoDB connection string in your .env(.local) file'
+    'Please provide correct MongoDB connection string in your .env.local(.local) file'
   )
 }
 

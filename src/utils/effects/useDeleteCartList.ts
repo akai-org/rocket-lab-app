@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { removeExisitngCartList } from '../../store/Slices/storageCartSlice'
+import { removeExisitngCartList } from 'store'
 import { API_URL } from '../constants'
 import { fetcher } from '../requests'
 

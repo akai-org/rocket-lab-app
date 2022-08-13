@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import { Category } from '../../mongo/models/category'
+import { Category } from 'mongo'
 import { API_URL } from '../constants'
 import { fetcher } from '../requests'
 import queryString from 'query-string'
@@ -66,6 +66,6 @@ export function useFilters() {
     searchTerm,
     setSearchTerm,
     handleSubmit,
-    query
+    query,
   }
 }

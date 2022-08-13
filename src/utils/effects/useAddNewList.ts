@@ -1,10 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { PopulatedCartList, CartItem } from '../../mongo/models/cart'
-import {
-  updateExistingCartLists,
-  clearCart,
-} from '../../store/Slices/storageCartSlice'
-import { storageCartInfo } from '../../store/store'
+import { PopulatedCartList, CartItem } from 'mongo'
+import { updateExistingCartLists, clearCart, storageCartInfo } from 'store'
 import { API_URL } from '../constants'
 import { fetcher } from '../requests'
 

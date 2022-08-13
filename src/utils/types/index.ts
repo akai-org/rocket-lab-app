@@ -1,2 +1,2 @@
-export * from './backendGeneral';
-export * from './frontendGeneral';
+export * from './backendGeneral'
+export * from './frontendGeneral'

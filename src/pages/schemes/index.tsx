@@ -2,16 +2,11 @@ import type { NextPage } from 'next'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { useMediaQuery } from '@chakra-ui/react'
 import { DesktopSchemes, MobileSchemes } from 'ui/modules'
-import {
-  PopulatedSchema,
-  SchemaModel,
-  TmpSchemaItem,
-} from '../../mongo/models/schema'
-import { connectDB } from '../../mongo/db'
-import { Credentials } from '../../utils/credentials'
+import { PopulatedSchema, SchemaModel, TmpSchemaItem, connectDB } from 'mongo'
+import { Credentials } from 'utils'
 import { createContext, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setSchemas } from '../../store/Slices/schemasSlice'
+import { setSchemas } from 'store'
 
 interface Props {
   schemas: PopulatedSchema[]
