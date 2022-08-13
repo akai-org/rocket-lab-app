@@ -5,10 +5,10 @@ import {
 import { Box } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { useState } from 'react'
-import { UsersList } from '../../ui/modules/Management/usersList'
-import { connectDB } from '../../mongo/db'
-import { User } from '../../mongo/models/user'
-import { Credentials } from '../../utils/credentials'
+import { UsersList } from 'ui/modules'
+import { connectDB } from 'mongo'
+import { User } from 'mongo'
+import { Credentials } from 'utils'
 import * as userService from '../../services/userService'
 
 export interface Error {

@@ -1,8 +1,7 @@
 import type { NextPage } from 'next'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { useMediaQuery } from '@chakra-ui/react'
-import DesktopSchemes from '../../ui/modules/Schemes/DesktopSchemes/DesktopSchemes'
-import MobileSchemes from '../../ui/modules/Schemes/MobileSchemes/MobileSchemes'
+import { DesktopSchemes, MobileSchemes } from 'ui/modules'
 import {
   PopulatedSchema,
   SchemaModel,
@@ -86,7 +85,7 @@ const Home: NextPage<Props> = ({ schemas }) => {
         updateDescription,
         updateName,
         updateItem,
-        clear
+        clear,
       }}
     >
       {History}
