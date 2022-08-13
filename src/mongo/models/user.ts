@@ -1,5 +1,5 @@
 import { Schema, Model, models, model } from 'mongoose'
-import { adminRoles as userRoles } from '../../utils/types/backendGeneral'
+import { adminRoles as userRoles } from 'utils'
 
 export interface User {
   id: string
