@@ -7,9 +7,9 @@ import {
   Box,
   Text,
 } from '@chakra-ui/react'
-import CategoryEdit from './CategoryEdit/CategoryEdit'
-import ItemsEdit from './ItemsEdit/ItemsEdit'
-import {useColors} from "../../../../../theme/useColors";
+import { CategoryEdit } from './CategoryEdit'
+import { ItemsEdit } from './ItemsEdit'
+import { useColors } from 'ui/theme'
 
 const StorageEdit = () => {
   const colors = useColors()

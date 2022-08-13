@@ -1,10 +1,10 @@
 import { Button, Flex, Icon, Input, Select, Text } from '@chakra-ui/react'
 import React, { FC } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { useFilters } from '../../../../../utils/effects/useFilters'
-import { useColors } from '../../../../../theme/useColors'
+import { useFilters } from 'utils'
+import { useColors } from 'ui/theme'
 
-const Filters: FC = () => {
+export const FiltersControlls: FC = () => {
   const {
     categories,
     category,
@@ -83,5 +83,3 @@ const Filters: FC = () => {
     </form>
   )
 }
-
-export default Filters

@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Flex, Text, useDisclosure, useToast } from '@chakra-ui/react'
-import Filters from './Filters/Filters'
-import Sorting from './Sorting/Sorting'
-import GridItem from './Item/GridItem'
-import ListItem from './Item/ListItem'
+import { Filters } from './Filters'
+import { Sorting } from './Sorting'
+import { GridItem, ListItem } from './Item'
 import {
   MainViewProps,
   sortingType,
-} from '../../../../utils/types/frontendGeneral'
+  ITEMS_QUERY_LIMIT,
+  useAddNewList,
+} from 'utils'
 import { useSelector } from 'react-redux'
-import { itemsInfo, storageCartInfo } from '../../../../store/store'
+import { itemsInfo, storageCartInfo } from 'store'
 import { HiInformationCircle } from 'react-icons/hi'
-import ModalAddToList from '../../../components/Modals/ModalAddToList/ModalAddToList'
+import { ModalAddToList, ProductButton, MobileWrapper } from 'ui/components'
 import { Router, useRouter } from 'next/router'
-import StorageEdit from './StorageEdit/StorageEdit'
-import { ITEMS_QUERY_LIMIT } from '../../../../utils/constants'
-import ProductButton from '../../../components/Custom Buttons/ProductButton/ProductButton'
-import { useAddNewList } from '../../../../utils/effects/useAddNewList'
+import { StorageEdit } from './StorageEdit'
 import queryString from 'query-string'
-import MobileWrapper from '../../../components/Wrappers/MobileWrapper/MobileWrapper'
-import { useColors } from '../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
-const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
+export const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
   const router = useRouter()
   const query = queryString.parseUrl(router.asPath).query
   const [listType, setListType] = useState<sortingType>('grid')
@@ -130,5 +127,3 @@ const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
     </MobileWrapper>
   )
 }
-
-export default MobileStorage

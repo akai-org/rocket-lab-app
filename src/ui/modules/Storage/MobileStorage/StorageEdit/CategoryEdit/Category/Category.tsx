@@ -1,7 +1,7 @@
 import { Box, ButtonGroup, Checkbox, Flex, Input } from '@chakra-ui/react'
 import { useState } from 'react'
 import { AiOutlineCheck, AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
-import { useColors } from '../../../../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 interface CategoryProps {
   // FIXME: nie wolno używać key jako propsów
@@ -10,7 +10,7 @@ interface CategoryProps {
   categoryName: string
 }
 
-const Category = ({ id, value, categoryName }: CategoryProps) => {
+export const Category = ({ id, value, categoryName }: CategoryProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState(categoryName)
   const colors = useColors()

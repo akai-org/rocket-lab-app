@@ -2,11 +2,11 @@ import React from 'react'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { Flex, ButtonGroup, Icon } from '@chakra-ui/react'
-import { sortingType } from '../../../../../utils/types/frontendGeneral'
-import { SortingGeneral } from '../../../../components/SortingGeneral/SortingGeneral'
-import { useColors } from '../../../../../theme/useColors'
+import { sortingType } from 'utils'
+import { SortingGeneral } from 'ui/components'
+import { useColors } from 'ui/theme'
 
-const Sorting: React.FC<{
+export const Sorting: React.FC<{
   setListType: (type: sortingType) => void
   listType: sortingType
 }> = (props) => {
@@ -56,5 +56,3 @@ const Sorting: React.FC<{
     </Flex>
   )
 }
-
-export default Sorting

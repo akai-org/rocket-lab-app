@@ -14,15 +14,15 @@ import {
 } from '@chakra-ui/react'
 import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai'
 import { IoFilterSharp } from 'react-icons/io5'
-import ProductButton from '../../../../components/Custom Buttons/ProductButton/ProductButton'
-import { useFilters } from '../../../../../utils/effects/useFilters'
-import { useColors } from '../../../../../theme/useColors'
+import { ProductButton } from 'ui/components'
+import { useFilters } from 'utils'
+import { useColors } from 'ui/theme'
 
 interface Props {
   setIsFiltersOpen: (isOpen: boolean) => void
 }
 
-const Filters: React.FC<Props> = (props) => {
+export const Filters: React.FC<Props> = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const colors = useColors()
   const {
@@ -172,5 +172,3 @@ const Filters: React.FC<Props> = (props) => {
     </Flex>
   )
 }
-
-export default Filters
