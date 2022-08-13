@@ -13,8 +13,9 @@ import {
   Box,
 } from '@chakra-ui/react'
 import { PopulatedItem } from '../../../../mongo/models/item'
-import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
-import { useColors } from '../../../../theme/useColors'
+import ProductButton from '../../CustomButtons/ProductButton/ProductButton'
+import { useColors } from '../../../theme/useColors'
+import { memo } from 'react'
 
 interface ModalInfoProps
   extends Omit<ModalProps, 'children'>,
@@ -25,7 +26,7 @@ interface ModalInfoProps
   id: string
 }
 
-const ModalInfo = (props: ModalInfoProps) => {
+export const ModalInfo = memo((props: ModalInfoProps) => {
   const colors = useColors()
 
   return (
@@ -68,6 +69,4 @@ const ModalInfo = (props: ModalInfoProps) => {
       </ModalContent>
     </Modal>
   )
-}
-
-export default ModalInfo
+})

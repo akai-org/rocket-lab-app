@@ -4,9 +4,10 @@ import { SortType } from '../../../services/itemsService'
 import { validateSortParam } from '../../../utils/dataValidation/validateSortParam'
 import queryString from 'query-string'
 import { FIRST_PAGE } from '../../../utils/constants'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from '../../theme/useColors'
+import { memo } from 'react'
 
-export const SortingGeneral = () => {
+export const SortingGeneral = memo(() => {
   const router = useRouter()
   const query = queryString.parseUrl(router.asPath).query
   const colors = useColors()
@@ -44,4 +45,4 @@ export const SortingGeneral = () => {
       </Select>
     </Flex>
   )
-}
+})

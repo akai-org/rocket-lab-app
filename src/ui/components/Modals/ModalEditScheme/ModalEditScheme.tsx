@@ -25,13 +25,14 @@ import {
   Select,
 } from '@chakra-ui/react'
 import { AiOutlineClose } from 'react-icons/ai'
-import QuantityBadge from '../../Badges/QuantityBadge'
-import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
+import { QuantityBadge } from '../../Badges/QuantityBadge'
+import ProductButton from '../../CustomButtons/ProductButton/ProductButton'
+import { memo } from 'react'
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
 }
 
-const ModalEditScheme = (props: ModalEditSchemeProps) => {
+export const ModalEditScheme = memo((props: ModalEditSchemeProps) => {
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
@@ -144,6 +145,4 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
       </ModalContent>
     </Modal>
   )
-}
-
-export default ModalEditScheme
+})

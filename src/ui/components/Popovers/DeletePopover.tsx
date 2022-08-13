@@ -11,10 +11,10 @@ import {
   ButtonGroup,
   PopoverProps,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { Box } from '@chakra-ui/react'
-import ProductButton from '../Custom Buttons/ProductButton/ProductButton'
-import { useColors } from '../../../theme/useColors'
+import ProductButton from '../CustomButtons/ProductButton/ProductButton'
+import { useColors } from '../../theme/useColors'
 
 interface DeletePopoverProps extends PopoverProps {
   onClick: () => void
@@ -27,7 +27,7 @@ interface DeletePopoverProps extends PopoverProps {
   styles?: boolean
 }
 
-const DeletePopover = (props: DeletePopoverProps) => {
+export const DeletePopover = memo((props: DeletePopoverProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const open = () => setIsOpen(!isOpen)
   const close = () => setIsOpen(false)
@@ -89,6 +89,4 @@ const DeletePopover = (props: DeletePopoverProps) => {
       </Popover>
     </>
   )
-}
-
-export default DeletePopover
+})

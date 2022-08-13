@@ -1,14 +1,15 @@
 import { Menu, MenuButton, MenuList, MenuItem, Flex } from '@chakra-ui/react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import DeletePopover from '../Popovers/DeletePopover'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from '../../theme/useColors'
+import { memo } from 'react'
 
 export interface SchemeMenuProps {
   onDelete: () => void
   onOpenInfo: () => void
 }
 
-const SchemeMenu = (props: SchemeMenuProps) => {
+export const SchemeMenu = memo((props: SchemeMenuProps) => {
   const colors = useColors()
 
   return (
@@ -38,6 +39,4 @@ const SchemeMenu = (props: SchemeMenuProps) => {
       </MenuList>
     </Menu>
   )
-}
-
-export default SchemeMenu
+})

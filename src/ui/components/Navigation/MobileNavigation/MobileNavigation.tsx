@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Box, Image, Flex, Heading, Icon } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
 import MobileSidebar from './MobileSidebar/MobileSidebar'
-import { useColors } from '../../../../theme/useColors'
+import { useColors } from '../../../theme/useColors'
 
-const MobileNavigation = () => {
+export const MobileNavigation = memo(() => {
   const colors = useColors()
 
   return (
@@ -56,6 +56,4 @@ const MobileNavigation = () => {
       </Flex>
     </Box>
   )
-}
-
-export default MobileNavigation
+})

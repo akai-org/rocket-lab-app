@@ -1,11 +1,12 @@
 import { Badge, BadgeProps } from '@chakra-ui/react'
 import { Role } from '../../../utils/types/frontendGeneral'
+import { memo } from 'react'
 
 interface RoleBadgeProps extends BadgeProps {
   role: Role
 }
 
-const RoleBadge = ({ role, ...restProps }: RoleBadgeProps) => {
+export const RoleBadge = memo(({ role, ...restProps }: RoleBadgeProps) => {
   let option
   switch (role) {
     case 'ADMIN':
@@ -25,6 +26,4 @@ const RoleBadge = ({ role, ...restProps }: RoleBadgeProps) => {
       {role}
     </Badge>
   )
-}
-
-export default RoleBadge
+})

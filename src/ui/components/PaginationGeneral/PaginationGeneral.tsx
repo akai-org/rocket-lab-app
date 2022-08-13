@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { ChangeEvent, FC } from 'react'
+import { ChangeEvent, memo } from 'react'
 import { ITEMS_QUERY_LIMIT, FIRST_PAGE } from '../../../utils/constants'
 
 export interface PaginationSettings {
@@ -17,7 +17,7 @@ interface Props {
   children: (controls: PaginationSettings) => JSX.Element
 }
 
-export const PaginationGeneral: FC<Props> = (props) => {
+export const PaginationGeneral = memo((props: Props) => {
   const sanitizePage = (
     page: number,
     toDisplay: number,
@@ -76,4 +76,4 @@ export const PaginationGeneral: FC<Props> = (props) => {
     previousPage,
     toDisplay,
   })
-}
+})
