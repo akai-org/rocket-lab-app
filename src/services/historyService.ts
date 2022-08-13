@@ -1,6 +1,6 @@
 import { getSession } from '@auth0/nextjs-auth0'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { HistoryLogType, HistoryModel, Resource } from '../mongo/models/history'
+import { HistoryLogType, HistoryModel, Resource } from 'mongo'
 
 export async function createHistoryLog(
   author: string,

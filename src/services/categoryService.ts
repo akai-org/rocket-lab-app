@@ -1,5 +1,4 @@
-import { CategoryModel, Category } from '../mongo/models/category'
-import { Types } from 'mongoose'
+import { CategoryModel, Category } from 'mongo'
 
 export async function fetchCategories(): Promise<Category[]> {
   const categories = await CategoryModel.find()

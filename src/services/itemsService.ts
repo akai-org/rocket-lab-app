@@ -1,7 +1,5 @@
-import { CartListModel } from '../mongo/models/cart'
-import { Item, ItemModel } from '../mongo/models/item'
-import { ITEMS_QUERY_LIMIT } from '../utils/constants'
-import { validateSortParam } from '../utils/dataValidation/validateSortParam'
+import { CartListModel, ItemModel, Item } from 'mongo'
+import { ITEMS_QUERY_LIMIT, validateSortParam } from 'utils'
 
 export type SortType = 'newest' | 'oldest' | 'alphabetically'
 

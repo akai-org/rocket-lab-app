@@ -1,5 +1,5 @@
-import { User, userModel as UserModel } from '../mongo/models/user'
-import { ITEMS_QUERY_LIMIT } from '../utils/constants'
+import { User, userModel as UserModel } from 'mongo'
+import { ITEMS_QUERY_LIMIT } from 'utils'
 
 export async function updateUsersRoles(users: User[]) {
   // updating users
@@ -16,9 +16,7 @@ export async function updateUsersRoles(users: User[]) {
 }
 
 export async function fetchUsers(skip: number): Promise<User[]> {
-  const users = await UserModel.find()
-    .skip(skip)
-    .limit(ITEMS_QUERY_LIMIT)
+  const users = await UserModel.find().skip(skip).limit(ITEMS_QUERY_LIMIT)
 
   return users
 }
