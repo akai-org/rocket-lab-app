@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { PopulatedCartList } from '../../mongo/models/cart'
-import { PopulatedItem } from '../../mongo/models/item'
+import { PopulatedItem, PopulatedCartList } from 'mongo'
 
 export interface CartItem {
   item: PopulatedItem

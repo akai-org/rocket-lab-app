@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PopulatedSchema } from '../../mongo/models/schema'
+import { PopulatedSchema } from 'mongo'
 import * as _ from 'lodash'
 
 interface State {

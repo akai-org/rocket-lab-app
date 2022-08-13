@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Category } from '../../mongo/models/category'
+import { Category } from 'mongo'
 
 interface State {
   categories: Category[]
