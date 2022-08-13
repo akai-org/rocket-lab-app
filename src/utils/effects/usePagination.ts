@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { ChangeEvent, useEffect } from 'react'
+import { ChangeEvent } from 'react'
 import { useSelector } from 'react-redux'
 import { itemsInfo } from '../../store/store'
 import { FIRST_PAGE, ITEMS_QUERY_LIMIT } from '../constants'
@@ -74,6 +74,6 @@ export function usePagination(): {
     itemsCount,
     toDisplay,
     currentPage,
-    query
+    query,
   }
 }
