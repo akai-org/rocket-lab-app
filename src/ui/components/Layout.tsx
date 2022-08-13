@@ -1,7 +1,5 @@
 import { useMediaQuery } from '@chakra-ui/react'
-import { DesktopNavigation } from './Navigation/DesktopNavigation/DesktopNavigation'
-import { MobileNavigation } from './Navigation/MobileNavigation/MobileNavigation'
-import { Footer } from './/Footer/Footer'
+import { Footer, MobileNavigation, DesktopNavigation } from 'ui/components'
 import { memo, ReactNode } from 'react'
 
 interface Props {

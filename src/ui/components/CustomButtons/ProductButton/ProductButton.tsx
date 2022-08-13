@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from '@chakra-ui/react'
 import React, { memo } from 'react'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 export interface ProductButtonProps extends ButtonProps {
   onClick?: () => void

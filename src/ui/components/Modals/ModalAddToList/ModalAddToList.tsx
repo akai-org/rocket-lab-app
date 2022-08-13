@@ -19,14 +19,11 @@ import {
 } from '@chakra-ui/react'
 import { memo, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { PopulatedCartList } from '../../../../mongo/models/cart'
-import { CartItem } from '../../../../store/Slices/storageCartSlice'
-import { storageCartInfo } from '../../../../store/store'
-import ProductButton from '../../CustomButtons/ProductButton/ProductButton'
-import ChosenListPopover from '../../Popovers/ChosenListPopover'
-import DeletePopover from '../../Popovers/DeletePopover'
+import { PopulatedCartList } from 'mongo'
+import { CartItem, storageCartInfo } from 'store'
+import { ProductButton, ChosenListPopover, DeletePopover } from 'ui/components'
 import { CheckoutItem } from './CheckoutItem'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
   items: CartItem[]

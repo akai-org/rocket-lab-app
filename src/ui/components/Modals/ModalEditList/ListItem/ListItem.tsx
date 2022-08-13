@@ -11,9 +11,9 @@ import {
   NumberDecrementStepper,
 } from '@chakra-ui/react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { CartItem } from '../../../../../mongo/models/cart'
-import ModalInfo from '../../ModalInfo/ModalInfo'
-import { useColors } from '../../../../theme/useColors'
+import { CartItem } from 'mongo'
+import { ModalInfo } from 'ui/components'
+import { useColors } from 'ui/theme'
 import { memo } from 'react'
 
 interface ModalEditListProps {

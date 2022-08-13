@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
-import { IS_DEV } from '../../../../../utils/constants'
+import { IS_DEV } from 'utils'
 import { Flex, Text } from '@chakra-ui/react'
 import { FiSettings, FiLogOut } from 'react-icons/fi'
 import { AiOutlineTool } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
 import s from './sidebar.module.scss'
-import { useColors } from '../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 import { memo } from 'react'
 
 export const DesktopSidebar = memo(() => {

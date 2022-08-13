@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import Select, { Props } from 'react-select'
-import { useColors } from '../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 export const SearchSelect = memo(({ ...restProps }: Props) => {
   const colors = useColors()

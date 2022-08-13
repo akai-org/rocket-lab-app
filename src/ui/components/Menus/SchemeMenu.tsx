@@ -1,7 +1,7 @@
 import { Menu, MenuButton, MenuList, MenuItem, Flex } from '@chakra-ui/react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import DeletePopover from '../Popovers/DeletePopover'
-import { useColors } from '../../theme/useColors'
+import { DeletePopover } from 'ui/components'
+import { useColors } from 'ui/theme'
 import { memo } from 'react'
 
 export interface SchemeMenuProps {

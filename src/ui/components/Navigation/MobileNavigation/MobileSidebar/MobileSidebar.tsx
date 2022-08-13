@@ -15,8 +15,8 @@ import { FiSettings, FiLogOut } from 'react-icons/fi'
 import { AiOutlineTool } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
-import { IS_DEV } from '../../../../../utils/constants'
-import { useColors } from '../../../../theme/useColors'
+import { IS_DEV } from 'utils'
+import { useColors } from 'ui/theme'
 
 export const MobileSidebar = memo(() => {
   const router = useRouter()

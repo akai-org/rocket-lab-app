@@ -23,14 +23,11 @@ import {
 } from '@chakra-ui/react'
 import { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Category } from '../../../../mongo/models/category'
-import { removeItem, updateItem } from '../../../../store/Slices/itemsSlice'
-import { categoriesInfo } from '../../../../store/store'
-import { API_URL } from '../../../../utils/constants'
-import { fetcher } from '../../../../utils/requests'
-import ProductButton from '../../CustomButtons/ProductButton/ProductButton'
-import DeletePopover from '../../Popovers/DeletePopover'
-import { useColors } from '../../../theme/useColors'
+import { Category } from 'mongo'
+import { removeItem, updateItem, categoriesInfo } from 'store'
+import { API_URL, fetcher } from 'utils'
+import { ProductButton, DeletePopover } from 'ui/components'
+import { useColors } from 'ui/theme'
 
 interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
   name: string

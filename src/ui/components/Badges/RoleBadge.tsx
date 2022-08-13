@@ -1,5 +1,5 @@
 import { Badge, BadgeProps } from '@chakra-ui/react'
-import { Role } from '../../../utils/types/frontendGeneral'
+import { Role } from 'utils'
 import { memo } from 'react'
 
 interface RoleBadgeProps extends BadgeProps {

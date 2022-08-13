@@ -10,13 +10,13 @@ import {
   Heading,
   Icon,
 } from '@chakra-ui/react'
-import ProductButton from '../../CustomButtons/ProductButton/ProductButton'
+import { ProductButton } from 'ui/components'
 import { ElementInfo } from './ModalListItem'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from 'ui/theme'
 import { FaUserCircle } from 'react-icons/fa'
 import { memo } from 'react'
 
-export const MoreInfoModal = memo(
+export const ModalHistory = memo(
   (props: { isOpen: boolean; onClose: () => void }) => {
     const colors = useColors()
 

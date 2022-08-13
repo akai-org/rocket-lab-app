@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { memo, useEffect, useState } from 'react'
-import { Category } from '../../../mongo/models/category'
-import { API_URL } from '../../../utils/constants'
-import { fetcher } from '../../../utils/requests'
+import { Category } from 'mongo'
+import { fetcher, API_URL } from 'utils'
 
 interface Query {
   category?: string

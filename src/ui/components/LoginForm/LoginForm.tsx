@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { IoIosAt, IoIosLock } from 'react-icons/io'
 import { FcGoogle } from 'react-icons/fc'
-import { useColors } from '../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 export const LoginForm = memo(() => {
   const [showPassword, setShowPassword] = useState(false)

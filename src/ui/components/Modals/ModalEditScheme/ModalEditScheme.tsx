@@ -25,9 +25,9 @@ import {
   Select,
 } from '@chakra-ui/react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { QuantityBadge } from '../../Badges/QuantityBadge'
-import ProductButton from '../../CustomButtons/ProductButton/ProductButton'
+import { QuantityBadge, ProductButton } from 'ui/components'
 import { memo } from 'react'
+
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
 }

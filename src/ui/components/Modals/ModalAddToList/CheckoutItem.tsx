@@ -13,13 +13,9 @@ import {
 import React, { memo } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
-import {
-  CartItem,
-  changeItemQuantity,
-  removeFromCart,
-} from '../../../../store/Slices/storageCartSlice'
-import ModalInfo from '../ModalInfo/ModalInfo'
-import { useColors } from '../../../theme/useColors'
+import { CartItem, changeItemQuantity, removeFromCart } from 'store'
+import { ModalInfo } from 'ui/components'
+import { useColors } from 'ui/theme'
 
 export type CheckoutItemProps = {
   item: CartItem

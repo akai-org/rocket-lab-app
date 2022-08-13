@@ -12,8 +12,8 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import { memo, useState } from 'react'
-import { PopulatedCartList } from '../../../mongo/models/cart'
-import { useColors } from '../../theme/useColors'
+import { PopulatedCartList } from 'mongo'
+import { useColors } from 'ui/theme'
 
 interface ChosenListPopoverProps extends PopoverProps {
   onClick: () => void

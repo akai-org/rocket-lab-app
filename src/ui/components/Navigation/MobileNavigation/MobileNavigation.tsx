@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
 import { Box, Image, Flex, Heading, Icon } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
-import MobileSidebar from './MobileSidebar/MobileSidebar'
-import { useColors } from '../../../theme/useColors'
+import { MobileSidebar } from 'ui/components'
+import { useColors } from 'ui/theme'
 
 export const MobileNavigation = memo(() => {
   const colors = useColors()

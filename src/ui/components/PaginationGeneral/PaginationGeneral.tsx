@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { ChangeEvent, memo } from 'react'
-import { ITEMS_QUERY_LIMIT, FIRST_PAGE } from '../../../utils/constants'
+import { ITEMS_QUERY_LIMIT, FIRST_PAGE } from 'utils'
 
 export interface PaginationSettings {
   handleOnChangeQuantity?: (e: ChangeEvent<HTMLSelectElement>) => void

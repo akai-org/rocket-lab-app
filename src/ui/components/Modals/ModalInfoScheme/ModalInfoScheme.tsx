@@ -17,10 +17,12 @@ import {
   Tr,
   useDisclosure,
 } from '@chakra-ui/react'
-import { QuantityBadge } from '../../Badges'
-import ProductButton from '../../CustomButtons/ProductButton/ProductButton'
-import DeletePopover from '../../Popovers/DeletePopover'
-import { ModalEditScheme } from '../ModalEditScheme/ModalEditScheme'
+import {
+  QuantityBadge,
+  ProductButton,
+  DeletePopover,
+  ModalEditScheme,
+} from 'ui/components'
 import { memo } from 'react'
 
 interface ModalInfoSchemeProps extends Omit<ModalProps, 'children'> {
