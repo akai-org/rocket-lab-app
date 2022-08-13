@@ -1,13 +1,15 @@
-import DesktopWrapper from '../../components/Wrappers/DesktopWrapper/DesktopWrapper'
+import {
+  DesktopWrapper,
+  SearchSelect,
+  ProductButton,
+  MobileWrapper,
+  RoleBadge,
+  ColorModeSwitch,
+} from 'ui/components'
 import { Avatar, Flex, Text, useMediaQuery } from '@chakra-ui/react'
-import SearchSelect from '../../components/SearchSelect/SearchSelect'
 import { useState } from 'react'
-import ProductButton from '../../components/CustomButtons/ProductButton/ProductButton'
-import MobileWrapper from '../../components/Wrappers/MobileWrapper/MobileWrapper'
-import RoleBadge from '../../components/Badges/RoleBadge'
-import { Role } from '../../../utils/types/frontendGeneral'
-import { useColors } from '../../theme/useColors'
-import ColorModeSwitch from '../../components/ColorModeSwitch/ColorModeSwitch'
+import { Role } from 'utils'
+import { useColors } from 'ui/theme'
 
 export const Settings = () => {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')

@@ -8,19 +8,17 @@ import {
   AccordionIcon,
   Text,
 } from '@chakra-ui/react'
-import ListItem from '../ListItem/ListItem'
-import ModalEditList from '../../../../components/Modals/ModalEditList/ModalEditList'
-import { PopulatedCartList } from '../../../../../mongo/models/cart'
-import ListMenu from '../../../../components/Menus/ListMenu'
+import { ListItem } from '../ListItem'
+import { ModalEditList, ListMenu } from 'ui/components'
+import { PopulatedCartList } from 'mongo'
 import { useDispatch } from 'react-redux'
-import { removeExisitngCartList } from '../../../../../store/Slices/storageCartSlice'
-import { fetcher } from '../../../../../utils/requests'
-import { API_URL } from '../../../../../utils/constants'
-import { useColors } from '../../../../theme/useColors'
+import { removeExisitngCartList } from 'store'
+import { fetcher, API_URL } from 'util'
+import { useColors } from 'ui/theme'
 
 export interface Props extends PopulatedCartList {}
 
-const List = (props: Props) => {
+export const List = (props: Props) => {
   const dispatch = useDispatch()
   const colors = useColors()
 
@@ -85,5 +83,3 @@ const List = (props: Props) => {
     </Accordion>
   )
 }
-
-export default List

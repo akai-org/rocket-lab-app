@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Flex, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react'
-import Item from './Item/Item'
-import { SchemasContext } from '../../../../../../pages/schemes'
+import { Item } from './Item'
+import { SchemasContext } from 'pages/schemes'
 
-const ItemsList = () => {
+export const ItemsList = () => {
   const context = useContext(SchemasContext)
 
   return (
@@ -29,5 +29,3 @@ const ItemsList = () => {
     </Flex>
   )
 }
-
-export default ItemsList

@@ -1,15 +1,6 @@
-import {
-  BoxProps,
-  HStack,
-  Text,
-  useColorMode,
-  Box,
-  useMediaQuery,
-} from '@chakra-ui/react'
-import DesktopWrapper from '../../components/Wrappers/DesktopWrapper/DesktopWrapper'
-import MobileWrapper from '../../components/Wrappers/MobileWrapper/MobileWrapper'
-import { useColors } from '../../theme/useColors'
-import ColorModeSwitch from '../../components/ColorModeSwitch/ColorModeSwitch'
+import { BoxProps, HStack, Text, Box, useMediaQuery } from '@chakra-ui/react'
+import { DesktopWrapper, MobileWrapper, ColorModeSwitch } from 'ui/components'
+import { useColors } from 'ui/theme'
 
 const Rect = (rectProps: BoxProps) => (
   <Box

@@ -14,15 +14,14 @@ import {
   Tr,
   useDisclosure,
 } from '@chakra-ui/react'
-import SchemeItem from './SchemeItem/SchemeItem'
+import { SchemeItem } from './SchemeItem'
 import { useDispatch } from 'react-redux'
-import SchemeMenu from '../../../../components/Menus/SchemeMenu'
-import { PopulatedSchema } from '../../../../../mongo/models/schema'
-import { fetcher } from '../../../../../utils/requests'
-import { API_URL } from '../../../../../utils/constants'
-import { deleteSchema } from '../../../../../store/Slices/schemasSlice'
-import { useColors } from '../../../../theme/useColors'
-import ModalInfoScheme from '../../../../components/Modals/ModalInfoScheme/ModalInfoScheme'
+import { SchemeMenu, ModalInfoScheme } from 'ui/components'
+import { PopulatedSchema } from 'mongo'
+import { fetcher, API_URL } from 'utils'
+import { deleteSchema } from 'store'
+import { useColors } from 'ui/theme'
+
 interface Props {
   schema: PopulatedSchema
 }

@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux'
 import { storageCartInfo } from 'store'
 import { IS_DEV } from 'utils'
-import AddItem from './AddItem/AddItem'
-import List from './List/List'
+import { AddItem } from './AddItem'
+import { List } from './List'
 import { MobileWrapper } from 'ui/components'
 
 export const MobileList = () => {

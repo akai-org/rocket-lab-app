@@ -1,6 +1,6 @@
 import { Text } from '@chakra-ui/react'
 
-const HistoryListItemMessage = () => {
+export const HistoryListItemMessage = () => {
   return (
     <Text fontSize="sm" isTruncated>
       Wyciągnięto z magazynu: Silnik od malucha x1, Śruba lewoskrętna x25,
@@ -13,5 +13,3 @@ const HistoryListItemMessage = () => {
     </Text>
   )
 }
-
-export default HistoryListItemMessage

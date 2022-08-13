@@ -1,8 +1,8 @@
 import { Flex, Text, Box } from '@chakra-ui/react'
-import Filter from './Filter/Filter'
-import HistoryList from './HistoryList/HistoryList'
-import { useColors } from '../../../theme/useColors'
-import DesktopWrapper from '../../../components/Wrappers/DesktopWrapper/DesktopWrapper'
+import { Filter } from './Filter'
+import { HistoryList } from './HistoryList'
+import { useColors } from 'ui/theme'
+import { DesktopWrapper } from 'ui/components'
 
 export const DesktopHistory = () => {
   const colors = useColors()

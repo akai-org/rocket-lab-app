@@ -1,9 +1,9 @@
 import { Flex } from '@chakra-ui/react'
-import AddScheme from './AddScheme/AddScheme'
+import { AddScheme } from './AddScheme'
 import Scheme from './Scheme/Scheme'
-import DesktopWrapper from '../../../components/Wrappers/DesktopWrapper/DesktopWrapper'
+import { DesktopWrapper } from 'ui/components'
 import { useSelector } from 'react-redux'
-import { schemeInfo } from '../../../../store/store'
+import { schemeInfo } from 'store'
 
 export const DesktopSchemes = () => {
   const schemeData = useSelector(schemeInfo)

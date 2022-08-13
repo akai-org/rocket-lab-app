@@ -1,12 +1,12 @@
 import { Flex, Image, Td, Text, Tr, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
-import { CartItem } from '../../../../../mongo/models/cart'
-import ModalInfo from '../../../../components/Modals/ModalInfo/ModalInfo'
-import { useColors } from '../../../../theme/useColors'
+import { CartItem } from 'mongo'
+import { ModalInfo } from 'ui/components'
+import { useColors } from 'ui/theme'
 
 interface Props extends CartItem {}
 
-const ListItem = (props: Props) => {
+export const ListItem = (props: Props) => {
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,
@@ -46,5 +46,3 @@ const ListItem = (props: Props) => {
     </Tr>
   ) : null
 }
-
-export default ListItem
