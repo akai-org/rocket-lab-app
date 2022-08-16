@@ -21,46 +21,44 @@ const DeleteItemDialog = (props: DeleteItemDialogProps) => {
   const colors = useColors()
 
   return (
-    <>
-      <AlertDialog
-        isOpen={props.isOpenDialog}
-        leastDestructiveRef={cancelRef}
-        onClose={props.onCloseDialog}
-        isCentered
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Usuwanie elementu ze schematu
-            </AlertDialogHeader>
-            <AlertDialogBody>
-              Czy na pewno chcesz usunąć ten element ze schematu?
-            </AlertDialogBody>
-            <AlertDialogFooter>
-              <ProductButton
-                onClick={props.onCloseDialog}
-                fontSize="sm"
-                w="80px"
-                ml="10px"
-              >
-                Anuluj
-              </ProductButton>
-              <ProductButton
-                backgroundColor={colors.errorPrimary}
-                onClick={() => {
-                  /*USUWANIE*/
-                }}
-                fontSize="sm"
-                w="80px"
-                ml="10px"
-              >
-                Usuń
-              </ProductButton>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
-    </>
+    <AlertDialog
+      isOpen={props.isOpenDialog}
+      leastDestructiveRef={cancelRef}
+      onClose={props.onCloseDialog}
+      isCentered
+    >
+      <AlertDialogOverlay>
+        <AlertDialogContent>
+          <AlertDialogHeader fontSize="lg" fontWeight="bold">
+            Usuwanie elementu ze schematu
+          </AlertDialogHeader>
+          <AlertDialogBody>
+            Czy na pewno chcesz usunąć ten element ze schematu?
+          </AlertDialogBody>
+          <AlertDialogFooter>
+            <ProductButton
+              onClick={props.onCloseDialog}
+              fontSize="sm"
+              w="80px"
+              ml="10px"
+            >
+              Anuluj
+            </ProductButton>
+            <ProductButton
+              backgroundColor={colors.errorPrimary}
+              onClick={() => {
+                /*USUWANIE*/
+              }}
+              fontSize="sm"
+              w="80px"
+              ml="10px"
+            >
+              Usuń
+            </ProductButton>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialogOverlay>
+    </AlertDialog>
   )
 }
 
