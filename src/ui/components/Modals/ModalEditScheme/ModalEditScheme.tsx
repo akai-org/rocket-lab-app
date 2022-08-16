@@ -23,15 +23,19 @@ import {
   Tr,
   Text,
   Select,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { AiOutlineClose } from 'react-icons/ai'
+import DeleteItemDialog from '../../AlertDialogs/DeleteItemDialog'
 import QuantityBadge from '../../Badges/QuantityBadge'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
+
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
 }
 
 const ModalEditScheme = (props: ModalEditSchemeProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
@@ -82,7 +86,7 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
                 Dodaj przedmiot
               </ProductButton>
             </Flex>
-            <Table>
+            <Table w="100%">
               <Thead>
                 <Tr fontSize="sm" fontWeight="bold">
                   <Th w="80%">NAZWA</Th>
@@ -92,15 +96,14 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
                   <Th w="18%" textAlign="right">
                     DOSTĘPNOŚĆ
                   </Th>
-                  <Th w="1%" textAlign="right">
-                    AKCJE
-                  </Th>
                 </Tr>
               </Thead>
               <Tbody>
                 {/* <SchemeItem /> */}
                 <Tr fontSize="xs" h="40px">
-                  <Td w="80%">Item 1</Td>
+                  <Td w="80%" onClick={onOpen} cursor="pointer">
+                    Item 1
+                  </Td>
                   <Td w="1%" textAlign="right">
                     <NumberInput
                       allowMouseWheel
@@ -117,11 +120,6 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
                   </Td>
                   <Td w="18%" textAlign="right">
                     <QuantityBadge schemeQuantity={10} storageQuantity={50} />
-                  </Td>
-                  <Td w="1%">
-                    <Flex justifyContent="flex-end">
-                      <AiOutlineClose cursor="pointer" />
-                    </Flex>
                   </Td>
                 </Tr>
               </Tbody>
@@ -142,6 +140,7 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
           </ProductButton>
         </ModalFooter>
       </ModalContent>
+      <DeleteItemDialog isOpenDialog={isOpen} onCloseDialog={onClose} />
     </Modal>
   )
 }
