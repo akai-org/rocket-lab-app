@@ -23,26 +23,18 @@ import {
   Tr,
   Text,
   Select,
+  useDisclosure,
 } from '@chakra-ui/react'
+import DeleteItemDialog from '../../AlertDialogs/DeleteItemDialog'
 import QuantityBadge from '../../Badges/QuantityBadge'
 import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
-import useLongPressGesture from '../../Gestures/useLongPressGesture'
-import DeletePopover from '../../Popovers/DeletePopover'
-import ModalInfoScheme from '../ModalInfoScheme/ModalInfoScheme'
+
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
 }
 
 const ModalEditScheme = (props: ModalEditSchemeProps) => {
-  const defaultOptions = {
-    onLongPress: () => {
-      console.log('TEST')
-      return <ModalInfoScheme onClose={() => {}} isOpen={true} />
-    },
-    delay: 500,
-    shouldPreventDefault: true,
-  }
-  const longPressEvent = useLongPressGesture(defaultOptions)
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <Modal {...props}>
@@ -108,8 +100,10 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
               </Thead>
               <Tbody>
                 {/* <SchemeItem /> */}
-                <Tr fontSize="xs" h="40px" {...longPressEvent}>
-                  <Td w="80%">Item 1</Td>
+                <Tr fontSize="xs" h="40px">
+                  <Td w="80%" onClick={onOpen} cursor="pointer">
+                    Item 1
+                  </Td>
                   <Td w="1%" textAlign="right">
                     <NumberInput
                       allowMouseWheel
@@ -146,6 +140,7 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
           </ProductButton>
         </ModalFooter>
       </ModalContent>
+      <DeleteItemDialog isOpenDialog={isOpen} onCloseDialog={onClose} />
     </Modal>
   )
 }
