@@ -12,6 +12,11 @@ import { useColors } from '../../../../../theme/useColors'
 import ModalHistory from '../../../../components/Modals/ModalHistory/ModalHistory'
 import HistoryListItemMessage from '../HistoryListItemMessage/HistoryListItemMessage'
 
+interface Props {
+  date: Date
+  author: string
+}
+
 const HistoryListItem = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const colors = useColors()

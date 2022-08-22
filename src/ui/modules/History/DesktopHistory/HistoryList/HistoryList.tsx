@@ -1,7 +1,10 @@
 import { Flex } from '@chakra-ui/react'
-import HistoryListItem from '../HistoryListItem/HistoryListItem'
+import { useSelector } from 'react-redux'
+import { historyInfo } from '../../../../../store/store'
+import  HistoryListItem  from '../HistoryListItem/HistoryListItem'
 
 const HistoryList = () => {
+  const logs = useSelector(historyInfo).logs
   return (
     <Flex
       flexDir="column"
@@ -11,11 +14,9 @@ const HistoryList = () => {
       justifyContent="center"
       maxW="2000px"
     >
-      <HistoryListItem />
-      <HistoryListItem />
-      <HistoryListItem />
-      <HistoryListItem />
-      <HistoryListItem />
+      {logs.map((log) => (
+        <HistoryListItem key={log.id} />
+      ))}
     </Flex>
   )
 }

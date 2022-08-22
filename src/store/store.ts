@@ -15,6 +15,7 @@ import { storageCartReducer } from './Slices/storageCartSlice'
 import { categoriesReducer } from './Slices/categoriesSlice'
 import { itemsReducer } from './Slices/itemsSlice'
 import { schemasReducer } from './Slices/schemasSlice'
+import { historyReducer } from './Slices/historySlice'
 
 const reducers = combineReducers({
   authData: authReducer,
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   categoriesData: categoriesReducer,
   itemsData: itemsReducer,
   schemeData: schemasReducer,
+  historyData: historyReducer,
 })
 
 const persistConfig = {
@@ -50,3 +52,4 @@ export const storageCartInfo = (state: RootState) => state.storageCartData
 export const categoriesInfo = (state: RootState) => state.categoriesData
 export const schemeInfo = (state: RootState) => state.schemeData
 export const itemsInfo = (state: RootState) => state.itemsData
+export const historyInfo = (state: RootState) => state.historyData
