@@ -4,7 +4,7 @@ import HistoryList from './HistoryList/HistoryList'
 import { useRef } from 'react'
 import FilterDrawer from './FilterDrawer/FilterDrawer'
 import MobileWrapper from '../../../components/Wrappers/MobileWrapper/MobileWrapper'
-import { useColors } from '../../../../theme/useColors'
+import { useColors } from '../../../theme/useColors'
 
 const MobileHistory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()

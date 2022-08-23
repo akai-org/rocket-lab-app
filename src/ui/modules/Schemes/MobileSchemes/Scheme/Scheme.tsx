@@ -21,7 +21,7 @@ import { PopulatedSchema } from '../../../../../mongo/models/schema'
 import { API_URL } from '../../../../../utils/constants'
 import { fetcher } from '../../../../../utils/requests'
 import { deleteSchema } from '../../../../../store/Slices/schemasSlice'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from '../../../../theme/useColors'
 import ModalInfoScheme from '../../../../components/Modals/ModalInfoScheme/ModalInfoScheme'
 
 interface Props {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box } from '@chakra-ui/react'
-import { SortingGeneral } from '../../../../../components/SortingGeneral/SortingGeneral'
-import { useColors } from '../../../../../../theme/useColors'
+import { SortingGeneral } from 'ui/components'
+import { useColors } from 'ui/theme'
 
 const Sorting = () => {
   const colors = useColors()

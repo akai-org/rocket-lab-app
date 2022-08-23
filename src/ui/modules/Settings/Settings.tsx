@@ -2,11 +2,11 @@ import DesktopWrapper from '../../components/Wrappers/DesktopWrapper/DesktopWrap
 import { Avatar, Flex, Text, useMediaQuery } from '@chakra-ui/react'
 import SearchSelect from '../../components/SearchSelect/SearchSelect'
 import { useState } from 'react'
-import ProductButton from '../../components/Custom Buttons/ProductButton/ProductButton'
+import ProductButton from '../../components/CustomButtons/ProductButton/ProductButton'
 import MobileWrapper from '../../components/Wrappers/MobileWrapper/MobileWrapper'
 import RoleBadge from '../../components/Badges/RoleBadge'
 import { Role } from '../../../utils/types/frontendGeneral'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from '../../theme/useColors'
 import ColorModeSwitch from '../../components/ColorModeSwitch/ColorModeSwitch'
 
 const Settings = () => {

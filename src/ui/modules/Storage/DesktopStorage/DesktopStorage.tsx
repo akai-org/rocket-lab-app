@@ -6,12 +6,11 @@ import { useSelector } from 'react-redux'
 import { storageCartInfo } from '../../../../store/store'
 import { useEffect } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
-import ModalAddToList from '../../../components/Modals/ModalAddToList/ModalAddToList'
+import { ModalAddToList, DesktopWrapper } from 'ui/components'
 import Router from 'next/router'
 import StorageEdit from './StorageEdit/StorageEdit'
 import { useAddNewList } from '../../../../utils/effects/useAddNewList'
-import DesktopWrapper from '../../../components/Wrappers/DesktopWrapper/DesktopWrapper'
-import { useColors } from '../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()

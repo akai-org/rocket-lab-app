@@ -1,6 +1,6 @@
 import React from 'react'
 import { sortingType } from '../../../../../../utils/types/frontendGeneral'
-import { PaginationGeneral } from '../../../../../components/PaginationGeneral/PaginationGeneral'
+import { PaginationGeneral } from 'ui/components'
 import { PaginationControlls } from './PaginationControlls'
 
 export const Sorting: React.FC<{
@@ -10,9 +10,7 @@ export const Sorting: React.FC<{
 }> = (props) => {
   return (
     <PaginationGeneral itemsCount={props.itemsCount}>
-      {(controlls) => (
-          <PaginationControlls {...controlls} {...props} />
-      )}
+      {(controlls) => <PaginationControlls {...controlls} {...props} />}
     </PaginationGeneral>
   )
 }

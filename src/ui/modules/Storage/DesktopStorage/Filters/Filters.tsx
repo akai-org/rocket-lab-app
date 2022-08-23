@@ -2,7 +2,7 @@ import { Button, Flex, Icon, Input, Select, Text } from '@chakra-ui/react'
 import React, { FC } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useFilters } from '../../../../../utils/effects/useFilters'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 const Filters: FC = () => {
   const {

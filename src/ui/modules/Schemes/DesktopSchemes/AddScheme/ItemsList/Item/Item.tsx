@@ -14,7 +14,7 @@ import {
 import { AiOutlineClose } from 'react-icons/ai'
 import { TmpSchemaItem } from '../../../../../../../mongo/models/schema'
 import { SchemasContext } from '../../../../../../../pages/schemes'
-import { useColors } from '../../../../../../../theme/useColors'
+import { useColors } from '../../../../../../theme/useColors'
 
 interface ItemProps {
   item: TmpSchemaItem

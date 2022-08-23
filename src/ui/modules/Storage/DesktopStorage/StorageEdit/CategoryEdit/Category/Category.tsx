@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { updateCategory } from '../../../../../../../store/Slices/categoriesSlice'
 import { API_URL } from '../../../../../../../utils/constants'
 import { fetcher } from '../../../../../../../utils/requests'
-import { useColors } from '../../../../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 interface CategoryProps {
   id: string

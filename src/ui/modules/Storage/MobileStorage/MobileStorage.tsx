@@ -11,15 +11,13 @@ import {
 import { useSelector } from 'react-redux'
 import { itemsInfo, storageCartInfo } from '../../../../store/store'
 import { HiInformationCircle } from 'react-icons/hi'
-import ModalAddToList from '../../../components/Modals/ModalAddToList/ModalAddToList'
+import { ModalAddToList, ProductButton, MobileWrapper } from 'ui/components'
 import { Router, useRouter } from 'next/router'
 import StorageEdit from './StorageEdit/StorageEdit'
 import { ITEMS_QUERY_LIMIT } from '../../../../utils/constants'
-import ProductButton from '../../../components/Custom Buttons/ProductButton/ProductButton'
 import { useAddNewList } from '../../../../utils/effects/useAddNewList'
 import queryString from 'query-string'
-import MobileWrapper from '../../../components/Wrappers/MobileWrapper/MobileWrapper'
-import { useColors } from '../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 const MobileStorage = ({ setItems, itemsCount }: MainViewProps) => {
   const router = useRouter()

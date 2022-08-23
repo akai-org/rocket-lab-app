@@ -14,9 +14,9 @@ import {
 } from '@chakra-ui/react'
 import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai'
 import { IoFilterSharp } from 'react-icons/io5'
-import ProductButton from '../../../../components/Custom Buttons/ProductButton/ProductButton'
+import { ProductButton } from 'ui/components'
 import { useFilters } from '../../../../../utils/effects/useFilters'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 interface Props {
   setIsFiltersOpen: (isOpen: boolean) => void

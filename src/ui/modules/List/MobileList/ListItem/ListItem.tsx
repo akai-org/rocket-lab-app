@@ -4,7 +4,7 @@ import React from 'react'
 import ModalInfo from '../../../../components/Modals/ModalInfo/ModalInfo'
 import { CartItem } from '../../../../../mongo/models/cart'
 import { Category } from '../../../../../mongo/models/category'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from '../../../../theme/useColors'
 
 const ListItem = (props: CartItem) => {
   const {

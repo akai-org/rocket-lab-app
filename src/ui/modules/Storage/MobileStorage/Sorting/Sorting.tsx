@@ -3,8 +3,8 @@ import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { Flex, ButtonGroup, Icon } from '@chakra-ui/react'
 import { sortingType } from '../../../../../utils/types/frontendGeneral'
-import { SortingGeneral } from '../../../../components/SortingGeneral/SortingGeneral'
-import { useColors } from '../../../../../theme/useColors'
+import { SortingGeneral } from 'ui/components'
+import { useColors } from 'ui/theme'
 
 const Sorting: React.FC<{
   setListType: (type: sortingType) => void

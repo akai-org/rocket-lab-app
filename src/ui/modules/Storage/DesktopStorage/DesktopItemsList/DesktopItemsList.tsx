@@ -7,7 +7,7 @@ import {
   sortingType,
 } from '../../../../../utils/types/frontendGeneral'
 import { PaginationControlls } from './Pagination/PaginationControlls'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 const DesktopItemsList = ({ items }: MainViewProps) => {
   const colors = useColors()

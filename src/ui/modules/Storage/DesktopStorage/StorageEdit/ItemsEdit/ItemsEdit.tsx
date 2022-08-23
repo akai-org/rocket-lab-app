@@ -22,8 +22,8 @@ import { addItem } from '../../../../../../store/Slices/itemsSlice'
 import { categoriesInfo } from '../../../../../../store/store'
 import { API_URL } from '../../../../../../utils/constants'
 import { fetcher } from '../../../../../../utils/requests'
-import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
-import { useColors } from '../../../../../../theme/useColors'
+import { ProductButton } from 'ui/components'
+import { useColors } from 'ui/theme'
 
 const ItemsEdit = () => {
   const dispatch = useDispatch()

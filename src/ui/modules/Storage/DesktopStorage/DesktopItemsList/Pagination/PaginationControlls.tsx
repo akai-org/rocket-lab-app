@@ -8,7 +8,7 @@ import { usePagination } from '../../../../../../utils/effects/usePagination'
 import { sortingType } from '../../../../../../utils/types/frontendGeneral'
 import { PaginationSettings } from '../../../../../components/PaginationGeneral/PaginationGeneral'
 import Sorting from '../Sorting/Sorting'
-import { useColors } from '../../../../../../theme/useColors'
+import { useColors } from '../../../../../theme/useColors'
 
 interface Props extends PaginationSettings {
   setListType: (type: sortingType) => void

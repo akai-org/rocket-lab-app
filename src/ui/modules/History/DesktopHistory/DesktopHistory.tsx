@@ -1,7 +1,7 @@
 import { Flex, Text, Box } from '@chakra-ui/react'
 import Filter from './Filter/Filter'
 import HistoryList from './HistoryList/HistoryList'
-import { useColors } from '../../../../theme/useColors'
+import { useColors } from '../../../theme/useColors'
 import DesktopWrapper from '../../../components/Wrappers/DesktopWrapper/DesktopWrapper'
 
 const DesktopHistory = () => {

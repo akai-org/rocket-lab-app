@@ -20,10 +20,9 @@ import {
 import { categoriesInfo } from '../../../../../../store/store'
 import { API_URL } from '../../../../../../utils/constants'
 import { fetcher } from '../../../../../../utils/requests'
-import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
-import DeletePopover from '../../../../../components/Popovers/DeletePopover'
+import { ProductButton, DeletePopover } from 'ui/components'
 import Category from './Category/Category'
-import { useColors } from '../../../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 const CategoryEdit = () => {
   const categories = useSelector(categoriesInfo).categories

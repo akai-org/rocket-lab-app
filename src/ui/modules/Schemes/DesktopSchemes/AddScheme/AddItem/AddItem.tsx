@@ -10,11 +10,11 @@ import {
 import { useContext, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { itemsInfo } from '../../../../../../store/store'
-import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
+import ProductButton from '../../../../../components/CustomButtons/ProductButton/ProductButton'
 import SearchSelect from '../../../../../components/SearchSelect/SearchSelect'
 import { SchemasContext } from '../../../../../../pages/schemes'
 import * as _ from 'lodash'
-import { useColors } from '../../../../../../theme/useColors'
+import { useColors } from '../../../../../theme/useColors'
 
 interface SelectedType {
   value: string | null

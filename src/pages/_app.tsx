@@ -6,7 +6,7 @@ import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import store from '../store/store'
 import '../styles/globals.css'
-import { theme } from '../theme/theme'
+import { theme } from '../ui/theme/theme'
 import { RouteGuard } from '../ui/routeGuard'
 import Layout from '../ui/components/Layout'
 

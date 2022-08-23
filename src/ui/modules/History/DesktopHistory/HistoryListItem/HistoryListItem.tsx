@@ -8,7 +8,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from '../../../../theme/useColors'
 import ModalHistory from '../../../../components/Modals/ModalHistory/ModalHistory'
 import HistoryListItemMessage from '../HistoryListItemMessage/HistoryListItemMessage'
 

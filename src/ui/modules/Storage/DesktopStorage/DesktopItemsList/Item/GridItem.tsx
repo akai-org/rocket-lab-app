@@ -7,10 +7,10 @@ import {
   removeFromCart,
 } from '../../../../../../store/Slices/storageCartSlice'
 import { storageCartInfo } from '../../../../../../store/store'
-import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
-import ModalEditItem from '../../../../../components/Modals/ModalEditItem/ModalEditItem'
-import ModalInfo from '../../../../../components/Modals/ModalInfo/ModalInfo'
-import { useColors } from '../../../../../../theme/useColors'
+import { ProductButton } from '../../../../../components/CustomButtons/ProductButton/ProductButton'
+import { ModalEditItem } from '../../../../../components/Modals/ModalEditItem/ModalEditItem'
+import { ModalInfo } from '../../../../../components/Modals/ModalInfo/ModalInfo'
+import { useColors } from '../../../../../theme/useColors'
 
 interface Props {
   item: PopulatedItem
