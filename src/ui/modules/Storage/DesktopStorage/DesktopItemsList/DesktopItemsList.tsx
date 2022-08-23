@@ -1,15 +1,11 @@
 import { Box, Flex, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import ListItem from './Item/ListItem'
-import GridItem from './Item/GridItem'
-import {
-  MainViewProps,
-  sortingType,
-} from '../../../../../utils/types/frontendGeneral'
-import { PaginationControlls } from './Pagination/PaginationControlls'
+import { ListItem, GridItem } from './Item'
+import { MainViewProps, sortingType } from 'utils'
+import { PaginationControlls } from './Pagination'
 import { useColors } from 'ui/theme'
 
-const DesktopItemsList = ({ items }: MainViewProps) => {
+export const DesktopItemsList = ({ items }: MainViewProps) => {
   const colors = useColors()
   const [listType, setListType] = useState<sortingType>('grid')
 
@@ -51,5 +47,3 @@ const DesktopItemsList = ({ items }: MainViewProps) => {
     </Box>
   )
 }
-
-export default DesktopItemsList
