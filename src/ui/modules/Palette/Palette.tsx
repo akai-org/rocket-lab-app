@@ -1,17 +1,8 @@
-import {
-  BoxProps,
-  HStack,
-  Text,
-  useColorMode,
-  Box,
-  useMediaQuery,
-} from '@chakra-ui/react'
-import DesktopWrapper from '../../components/Wrappers/DesktopWrapper/DesktopWrapper'
-import MobileWrapper from '../../components/Wrappers/MobileWrapper/MobileWrapper'
-import { useColors } from '../../theme/useColors'
-import ColorModeSwitch from '../../components/ColorModeSwitch/ColorModeSwitch'
+import { BoxProps, HStack, Text, Box, useMediaQuery } from '@chakra-ui/react'
+import { useColors } from 'ui/theme'
+import { ColorModeSwitch, MobileWrapper, DesktopWrapper } from 'ui/components'
 
-const Rect = (rectProps: BoxProps) => (
+export const Rect = (rectProps: BoxProps) => (
   <Box
     w="100%"
     h="4rem"
@@ -25,7 +16,7 @@ const Rect = (rectProps: BoxProps) => (
   </Box>
 )
 
-const Palette = () => {
+export const Palette = () => {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
   const Wrapper = isDesktop ? DesktopWrapper : MobileWrapper
   const colors = useColors()
@@ -61,5 +52,3 @@ const Palette = () => {
     </Wrapper>
   )
 }
-
-export default Palette
