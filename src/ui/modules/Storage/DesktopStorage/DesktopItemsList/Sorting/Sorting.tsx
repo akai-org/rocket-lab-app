@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react'
 import { SortingGeneral } from 'ui/components'
 import { useColors } from 'ui/theme'
 
-const Sorting = () => {
+export const Sorting = () => {
   const colors = useColors()
 
   return (
@@ -12,5 +12,3 @@ const Sorting = () => {
     </Box>
   )
 }
-
-export default Sorting

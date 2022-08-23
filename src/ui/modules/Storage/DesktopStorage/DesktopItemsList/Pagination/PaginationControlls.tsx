@@ -4,11 +4,12 @@ import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+//this shortened import causes an error
 import { usePagination } from '../../../../../../utils/effects/usePagination'
-import { sortingType } from '../../../../../../utils/types/frontendGeneral'
-import { PaginationSettings } from '../../../../../components/PaginationGeneral/PaginationGeneral'
-import Sorting from '../Sorting/Sorting'
-import { useColors } from '../../../../../theme/useColors'
+import { sortingType } from 'utils'
+import { PaginationSettings } from 'ui/components'
+import { Sorting } from '../Sorting'
+import { useColors } from 'ui/theme'
 
 interface Props extends PaginationSettings {
   setListType: (type: sortingType) => void
