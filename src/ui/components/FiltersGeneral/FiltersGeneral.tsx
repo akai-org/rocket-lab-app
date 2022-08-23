@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { Category } from '../../../mongo/models/category'
 import { API_URL } from '../../../utils/constants'
 import { fetcher } from '../../../utils/requests'
@@ -22,7 +22,7 @@ interface Props {
   children: (controlls: FiltersControllsProps) => JSX.Element
 }
 
-const FiltersGeneral: React.FC<Props> = ({ children }) => {
+export const FiltersGeneral: React.FC<Props> = memo(({ children }) => {
   const router = useRouter()
   const query = router.query
 
@@ -79,6 +79,4 @@ const FiltersGeneral: React.FC<Props> = ({ children }) => {
     setSearchTerm,
     handleSubmit,
   })
-}
-
-export default FiltersGeneral
+})

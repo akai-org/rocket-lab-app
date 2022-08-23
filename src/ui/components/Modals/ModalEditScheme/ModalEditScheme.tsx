@@ -25,15 +25,16 @@ import {
   Select,
   useDisclosure,
 } from '@chakra-ui/react'
-import DeleteItemDialog from '../../AlertDialogs/DeleteItemDialog'
-import QuantityBadge from '../../Badges/QuantityBadge'
-import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
+import { DeleteItemDialog } from '../../AlertDialogs/DeleteItemDialog'
+import { QuantityBadge } from '../../Badges/QuantityBadge'
+import { ProductButton } from '../../CustomButtons/ProductButton/ProductButton'
+import { memo } from 'react'
 
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
 }
 
-const ModalEditScheme = (props: ModalEditSchemeProps) => {
+export const ModalEditScheme = memo((props: ModalEditSchemeProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -143,6 +144,4 @@ const ModalEditScheme = (props: ModalEditSchemeProps) => {
       <DeleteItemDialog isOpenDialog={isOpen} onCloseDialog={onClose} />
     </Modal>
   )
-}
-
-export default ModalEditScheme
+})

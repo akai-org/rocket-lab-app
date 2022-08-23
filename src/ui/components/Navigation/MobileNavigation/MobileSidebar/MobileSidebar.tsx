@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { memo, useRef } from 'react'
 import {
   Box,
   Drawer,
@@ -16,10 +16,9 @@ import { AiOutlineTool } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
 import { IS_DEV } from '../../../../../utils/constants'
-import { useColors } from '../../../../../theme/useColors'
-import ColorModeSwitch from '../../../ColorModeSwitch/ColorModeSwitch'
+import { useColors } from '../../../../theme/useColors'
 
-const MobileSidebar = () => {
+export const MobileSidebar = memo(() => {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef(null)
@@ -116,6 +115,4 @@ const MobileSidebar = () => {
       </Drawer>
     </>
   )
-}
-
-export default MobileSidebar
+})

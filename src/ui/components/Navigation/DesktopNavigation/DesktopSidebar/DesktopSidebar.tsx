@@ -6,9 +6,10 @@ import { AiOutlineTool } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
 import s from './sidebar.module.scss'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from '../../../../theme/useColors'
+import { memo } from 'react'
 
-const DesktopSidebar = () => {
+export const DesktopSidebar = memo(() => {
   const router = useRouter()
   const colors = useColors()
 
@@ -102,6 +103,4 @@ const DesktopSidebar = () => {
       </Flex>
     </Flex>
   )
-}
-
-export default DesktopSidebar
+})

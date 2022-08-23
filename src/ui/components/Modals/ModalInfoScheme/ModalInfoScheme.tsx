@@ -17,16 +17,17 @@ import {
   Tr,
   useDisclosure,
 } from '@chakra-ui/react'
-import QuantityBadge from '../../Badges/QuantityBadge'
-import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
-import DeletePopover from '../../Popovers/DeletePopover'
-import ModalEditScheme from '../ModalEditScheme/ModalEditScheme'
+import { QuantityBadge } from '../../Badges/QuantityBadge'
+import { ProductButton } from '../../CustomButtons/ProductButton/ProductButton'
+import { DeletePopover } from '../../Popovers/DeletePopover'
+import { ModalEditScheme } from '../ModalEditScheme/ModalEditScheme'
+import { memo } from 'react'
 
 interface ModalInfoSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
 }
 
-const ModalInfoScheme = (props: ModalInfoSchemeProps) => {
+export const ModalInfoScheme = memo((props: ModalInfoSchemeProps) => {
   const {
     isOpen: isOpenEditScheme,
     onOpen: onOpenEditScheme,
@@ -113,6 +114,4 @@ const ModalInfoScheme = (props: ModalInfoSchemeProps) => {
       />
     </Modal>
   )
-}
-
-export default ModalInfoScheme
+})

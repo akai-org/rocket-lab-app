@@ -11,9 +11,9 @@ import {
   Text,
   Flex,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { PopulatedCartList } from '../../../mongo/models/cart'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from '../../theme/useColors'
 
 interface ChosenListPopoverProps extends PopoverProps {
   onClick: () => void
@@ -26,7 +26,7 @@ interface ChosenListPopoverProps extends PopoverProps {
   list: PopulatedCartList
 }
 
-const ChosenListPopover = (props: ChosenListPopoverProps) => {
+export const ChosenListPopover = memo((props: ChosenListPopoverProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const open = () => setIsOpen(!isOpen)
   const close = () => setIsOpen(false)
@@ -68,6 +68,4 @@ const ChosenListPopover = (props: ChosenListPopoverProps) => {
       </Popover>
     </>
   )
-}
-
-export default ChosenListPopover
+})

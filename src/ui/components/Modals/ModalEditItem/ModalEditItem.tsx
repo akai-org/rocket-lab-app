@@ -21,17 +21,16 @@ import {
   CheckboxGroup,
   Checkbox,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Category } from '../../../../mongo/models/category'
 import { removeItem, updateItem } from '../../../../store/Slices/itemsSlice'
 import { categoriesInfo } from '../../../../store/store'
 import { API_URL } from '../../../../utils/constants'
 import { fetcher } from '../../../../utils/requests'
-import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
-import DeletePopover from '../../Popovers/DeletePopover'
-import { useColors } from '../../../../theme/useColors'
+import { ProductButton } from '../../CustomButtons/ProductButton/ProductButton'
+import { DeletePopover } from '../../Popovers/DeletePopover'
+import { useColors } from '../../../theme/useColors'
 
 interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
   name: string
@@ -42,7 +41,7 @@ interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
   categories: Category[]
 }
 
-const ModalEditItem = (props: ModalEditItemProps) => {
+export const ModalEditItem = memo((props: ModalEditItemProps) => {
   const dispatch = useDispatch()
   const categoriesData = useSelector(categoriesInfo)
   const [isEdit, setIsEdit] = useState(false)
@@ -197,6 +196,4 @@ const ModalEditItem = (props: ModalEditItemProps) => {
       </ModalContent>
     </Modal>
   )
-}
-
-export default ModalEditItem
+})
