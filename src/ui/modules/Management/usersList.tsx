@@ -1,9 +1,9 @@
 import { Button, UnorderedList } from '@chakra-ui/react'
 import { FormEvent, useState } from 'react'
-import { User } from '../../../mongo/models/user'
-import { API_URL } from '../../../utils/constants'
-import { fetcher } from '../../../utils/requests'
-import { adminRoles } from '../../../utils/types/backendGeneral'
+import { User } from 'mongo'
+import { API_URL } from 'utils/constants'
+import { fetcher } from 'utils/requests'
+import { adminRoles } from 'utils/types/backendGeneral'
 import { UserItem } from './userItem'
 
 interface Props {
