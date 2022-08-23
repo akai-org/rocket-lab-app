@@ -1,12 +1,8 @@
 import { Box, Flex, Image, Text, useDisclosure } from '@chakra-ui/react'
 import { AiOutlineCheck, AiOutlinePlus } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { PopulatedItem } from '../../../../../mongo/models/item'
-import {
-  addToCart,
-  removeFromCart,
-} from '../../../../../store/Slices/storageCartSlice'
-import { storageCartInfo } from '../../../../../store/store'
+import { PopulatedItem } from 'mongo'
+import { addToCart, removeFromCart, storageCartInfo } from 'store'
 import { ProductButton, ModalEditItem, ModalInfo } from 'ui/components'
 import { useColors } from 'ui/theme'
 
@@ -14,7 +10,7 @@ interface Props {
   item: PopulatedItem
 }
 
-const ListItem = ({ item }: Props) => {
+export const ListItem = ({ item }: Props) => {
   const dispatch = useDispatch()
   const storageCartData = useSelector(storageCartInfo).newCartList
   const colors = useColors()
@@ -127,5 +123,3 @@ const ListItem = ({ item }: Props) => {
     </Flex>
   )
 }
-
-export default ListItem

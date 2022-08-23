@@ -10,7 +10,7 @@ interface CategoryProps {
   categoryName: string
 }
 
-const Category = ({ id, value, categoryName }: CategoryProps) => {
+export const Category = ({ id, value, categoryName }: CategoryProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState(categoryName)
   const colors = useColors()
@@ -43,5 +43,3 @@ const Category = ({ id, value, categoryName }: CategoryProps) => {
     </Flex>
   )
 }
-
-export default Category

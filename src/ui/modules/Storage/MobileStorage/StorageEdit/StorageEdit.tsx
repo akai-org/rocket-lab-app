@@ -6,11 +6,11 @@ import {
   AccordionPanel,
   Text,
 } from '@chakra-ui/react'
-import CategoryEdit from './CategoryEdit/CategoryEdit'
-import ItemsEdit from './ItemsEdit/ItemsEdit'
+import { CategoryEdit } from './CategoryEdit'
+import { ItemsEdit } from './ItemsEdit'
 import { useColors } from 'ui/theme'
 
-const StorageEdit = () => {
+export const StorageEdit = () => {
   const colors = useColors()
 
   return (
@@ -42,5 +42,3 @@ const StorageEdit = () => {
     </Accordion>
   )
 }
-
-export default StorageEdit
