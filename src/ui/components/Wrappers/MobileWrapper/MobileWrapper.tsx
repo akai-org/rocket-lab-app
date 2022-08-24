@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react'
-import { DesktopWrapperProps } from '../DesktopWrapper/DesktopWrapper'
-import { useColors } from '../../../theme/useColors'
+import { DesktopWrapperProps } from '../DesktopWrapper'
+import { useColors } from 'ui/theme'
 import { memo } from 'react'
 
 export const MobileWrapper = memo(

@@ -10,8 +10,8 @@ import {
   Heading,
   Icon,
 } from '@chakra-ui/react'
-import { ProductButton } from '../../CustomButtons/ProductButton/ProductButton'
-import { useColors } from '../../../theme/useColors'
+import { ProductButton } from 'ui/components'
+import { useColors } from 'ui/theme'
 import { FaUserCircle } from 'react-icons/fa'
 import { memo } from 'react'
 import { ElementInfo } from './ModalListItem'

@@ -12,9 +12,9 @@ import {
   Flex,
   Box,
 } from '@chakra-ui/react'
-import { PopulatedItem } from '../../../../mongo/models/item'
-import { ProductButton } from '../../CustomButtons/ProductButton/ProductButton'
-import { useColors } from '../../../theme/useColors'
+import { PopulatedItem } from 'mongo'
+import { ProductButton } from 'ui/components'
+import { useColors } from 'ui/theme'
 import { memo } from 'react'
 
 interface ModalInfoProps

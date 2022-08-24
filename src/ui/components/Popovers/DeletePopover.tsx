@@ -13,8 +13,8 @@ import {
 } from '@chakra-ui/react'
 import { memo, useState } from 'react'
 import { Box } from '@chakra-ui/react'
-import { ProductButton } from '../CustomButtons/ProductButton/ProductButton'
-import { useColors } from '../../theme/useColors'
+import { ProductButton } from 'ui/components'
+import { useColors } from 'ui/theme'
 
 interface DeletePopoverProps extends PopoverProps {
   onClick: () => void

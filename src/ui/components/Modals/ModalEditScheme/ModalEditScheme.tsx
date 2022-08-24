@@ -25,9 +25,7 @@ import {
   Select,
   useDisclosure,
 } from '@chakra-ui/react'
-import { DeleteItemDialog } from '../../AlertDialogs/DeleteItemDialog'
-import { QuantityBadge } from '../../Badges/QuantityBadge'
-import { ProductButton } from '../../CustomButtons/ProductButton/ProductButton'
+import { DeleteItemDialog, QuantityBadge, ProductButton } from 'ui/components'
 import { memo } from 'react'
 
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {

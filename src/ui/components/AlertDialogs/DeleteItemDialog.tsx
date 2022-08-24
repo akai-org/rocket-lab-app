@@ -7,8 +7,8 @@ import {
   AlertDialogOverlay,
 } from '@chakra-ui/react'
 import React, { memo, useRef } from 'react'
-import { useColors } from '../../theme/useColors'
-import ProductButton from '../CustomButtons/ProductButton/ProductButton'
+import { useColors } from 'ui/theme'
+import { ProductButton } from 'ui/components'
 
 interface DeleteItemDialogProps {
   isOpenDialog: boolean

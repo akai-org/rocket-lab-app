@@ -1,6 +1,6 @@
 import { Flex, FlexProps } from '@chakra-ui/react'
 import { memo, ReactNode } from 'react'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 export interface DesktopWrapperProps extends FlexProps {
   children: ReactNode
