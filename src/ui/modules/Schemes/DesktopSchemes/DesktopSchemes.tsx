@@ -1,11 +1,11 @@
 import { Flex } from '@chakra-ui/react'
-import AddScheme from './AddScheme/AddScheme'
-import Scheme from './Scheme/Scheme'
-import DesktopWrapper from '../../../components/Wrappers/DesktopWrapper/DesktopWrapper'
+import { AddScheme } from './AddScheme'
+import { Scheme } from './Scheme'
+import { DesktopWrapper } from 'ui/components'
 import { useSelector } from 'react-redux'
-import { schemeInfo } from '../../../../store/store'
+import { schemeInfo } from 'store'
 
-const DesktopSchemes = () => {
+export const DesktopSchemes = () => {
   const schemeData = useSelector(schemeInfo)
   return (
     <DesktopWrapper>
@@ -18,5 +18,3 @@ const DesktopSchemes = () => {
     </DesktopWrapper>
   )
 }
-
-export default DesktopSchemes

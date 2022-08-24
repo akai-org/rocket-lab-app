@@ -8,18 +8,18 @@ import {
   Input,
   Text,
 } from '@chakra-ui/react'
-import ProductButton from '../../../../components/CustomButtons/ProductButton/ProductButton'
-import AddItem from '../../DesktopSchemes/AddScheme/AddItem/AddItem'
-import ItemsList from './ItemsList/ItemsList'
+import { ProductButton } from 'ui/components'
+import { AddItem } from '../../DesktopSchemes/AddScheme/AddItem'
+import { ItemsList } from './ItemsList'
 import { useContext, useState } from 'react'
-import { SchemasContext } from '../../../../../pages/schemes'
-import { API_URL } from '../../../../../utils/constants'
-import { fetcher } from '../../../../../utils/requests'
+import { SchemasContext } from 'pages/schemes'
+import { API_URL } from 'utils/constants'
+import { fetcher } from 'utils/requests'
 import { useDispatch } from 'react-redux'
-import { addSchema } from '../../../../../store/Slices/schemasSlice'
-import { useColors } from '../../../../theme/useColors'
+import { addSchema } from 'store'
+import { useColors } from 'ui/theme'
 
-const AddScheme = () => {
+export const AddScheme = () => {
   const dispatch = useDispatch()
   const context = useContext(SchemasContext)
   const nameIsValid = context?.name.length !== 0 ? true : false
@@ -111,5 +111,3 @@ const AddScheme = () => {
     </Accordion>
   )
 }
-
-export default AddScheme

@@ -12,15 +12,15 @@ import {
   Tr,
 } from '@chakra-ui/react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { TmpSchemaItem } from '../../../../../../../mongo/models/schema'
-import { SchemasContext } from '../../../../../../../pages/schemes'
-import { useColors } from '../../../../../../theme/useColors'
+import { TmpSchemaItem } from 'mongo'
+import { SchemasContext } from 'pages/schemes'
+import { useColors } from 'ui/theme'
 
 interface ItemProps {
   item: TmpSchemaItem
 }
 
-const Item = ({ item: schemaItem }: ItemProps) => {
+export const Item = ({ item: schemaItem }: ItemProps) => {
   const context = useContext(SchemasContext)
   const colors = useColors()
 
@@ -70,5 +70,3 @@ const Item = ({ item: schemaItem }: ItemProps) => {
     </Tr>
   )
 }
-
-export default Item

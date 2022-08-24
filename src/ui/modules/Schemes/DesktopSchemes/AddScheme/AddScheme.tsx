@@ -9,17 +9,17 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import { useContext, useState } from 'react'
-import AddItem from './AddItem/AddItem'
-import ProductButton from '../../../../components/CustomButtons/ProductButton/ProductButton'
-import ItemsList from './ItemsList/ItemsList'
+import { AddItem } from './AddItem'
+import { ProductButton } from 'ui/components'
+import { ItemsList } from './ItemsList'
 import { useDispatch } from 'react-redux'
-import { fetcher } from '../../../../../utils/requests'
-import { API_URL } from '../../../../../utils/constants'
-import { addSchema } from '../../../../../store/Slices/schemasSlice'
-import { SchemasContext } from '../../../../../pages/schemes'
-import { useColors } from '../../../../theme/useColors'
+import { fetcher } from 'utils/requests'
+import { API_URL } from 'utils/constants'
+import { addSchema } from 'store'
+import { SchemasContext } from 'pages/schemes'
+import { useColors } from 'ui/theme'
 
-const AddScheme = () => {
+export const AddScheme = () => {
   const context = useContext(SchemasContext)
 
   const dispatch = useDispatch()
@@ -125,5 +125,3 @@ const AddScheme = () => {
     </Accordion>
   )
 }
-
-export default AddScheme
