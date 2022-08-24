@@ -20,8 +20,8 @@ Section dedicated to store and edit items. Here we are capable of grouping items
 shopping lists.
 
 ![img.png](assets/img.png)
-![img_1.png](.next/img_1.png)
-![img.png](img.png)
+![img_1.png](assets/img_9.png)
+![img.png](assets/img_8.png)
 
 ### Lists
 Section dedicated to keeping shopping lists in case of lack in supplies. Here we are able to modify lists or add to
