@@ -13,9 +13,6 @@ const HistoryList = () => {
     >
       <HistoryListItem />
       <HistoryListItem />
-      <HistoryListItem />
-      <HistoryListItem />
-      <HistoryListItem />
     </Flex>
   )
 }
