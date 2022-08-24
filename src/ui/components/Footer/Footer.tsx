@@ -1,7 +1,8 @@
 import { Flex, Text, Image } from '@chakra-ui/react'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from 'ui/theme'
+import { memo } from 'react'
 
-const Footer = () => {
+export const Footer = memo(() => {
   const colors = useColors()
 
   return (
@@ -17,6 +18,4 @@ const Footer = () => {
       <Image src={colors.logoAkai} alt="Logo AKAI" />
     </Flex>
   )
-}
-
-export default Footer
+})

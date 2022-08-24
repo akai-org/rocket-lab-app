@@ -13,19 +13,18 @@ import {
   AccordionIcon,
   Text,
 } from '@chakra-ui/react'
-import ModalEditList from '../../../../components/Modals/ModalEditList/ModalEditList'
-import { PopulatedCartList } from '../../../../../mongo/models/cart'
-import ListItem from '../ListItem/ListItem'
-import { fetcher } from '../../../../../utils/requests'
+import { ModalEditList, ListMenu } from 'ui/components'
+import { PopulatedCartList } from 'mongo'
+import { ListItem } from '../ListItem'
+import { fetcher } from 'utils/requests'
 import { useDispatch } from 'react-redux'
-import { removeExisitngCartList } from '../../../../../store/Slices/storageCartSlice'
-import ListMenu from '../../../../components/Menus/ListMenu'
-import { API_URL } from '../../../../../utils/constants'
-import { useColors } from '../../../../../theme/useColors'
+import { removeExisitngCartList } from 'store'
+import { API_URL } from 'utils/constants'
+import { useColors } from 'ui/theme'
 
 interface Props extends PopulatedCartList {}
 
-const List = (props: Props) => {
+export const List = (props: Props) => {
   const {
     isOpen: isOpenEditList,
     onOpen: onOpenEditList,
@@ -106,5 +105,3 @@ const List = (props: Props) => {
     </Accordion>
   )
 }
-
-export default List

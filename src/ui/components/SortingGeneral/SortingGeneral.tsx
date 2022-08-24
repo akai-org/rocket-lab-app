@@ -1,12 +1,13 @@
 import { Flex, Select, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { SortType } from '../../../services/itemsService'
-import { validateSortParam } from '../../../utils/dataValidation/validateSortParam'
+import { SortType } from 'services'
+import { validateSortParam } from 'utils/dataValidation/validateSortParam'
 import queryString from 'query-string'
-import { FIRST_PAGE } from '../../../utils/constants'
-import { useColors } from '../../../theme/useColors'
+import { FIRST_PAGE } from 'utils/constants'
+import { useColors } from 'ui/theme'
+import { memo } from 'react'
 
-export const SortingGeneral = () => {
+export const SortingGeneral = memo(() => {
   const router = useRouter()
   const query = queryString.parseUrl(router.asPath).query
   const colors = useColors()
@@ -44,4 +45,4 @@ export const SortingGeneral = () => {
       </Select>
     </Flex>
   )
-}
+})

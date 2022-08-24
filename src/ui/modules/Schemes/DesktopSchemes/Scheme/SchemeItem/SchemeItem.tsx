@@ -1,6 +1,6 @@
 import React from 'react'
 import { Td, Text, Tr } from '@chakra-ui/react'
-import QuantityBadge from '../../../../../components/Badges/QuantityBadge'
+import { QuantityBadge } from 'ui/components'
 
 interface SchemeItemProps {
   schemeQuantity: number
@@ -8,7 +8,7 @@ interface SchemeItemProps {
   name: string
 }
 
-const SchemeItem = ({
+export const SchemeItem = ({
   schemeQuantity,
   storageQuantity,
   name,
@@ -28,5 +28,3 @@ const SchemeItem = ({
     </Tr>
   )
 }
-
-export default SchemeItem

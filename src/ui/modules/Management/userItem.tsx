@@ -1,6 +1,6 @@
 import { ListItem, Select } from '@chakra-ui/react'
-import { User } from '../../../mongo/models/user'
-import { adminRoles } from '../../../utils/types/backendGeneral'
+import { User } from 'mongo'
+import { adminRoles } from 'utils/types/backendGeneral'
 
 const options: adminRoles[] = ['reader', 'editor', 'admin']
 

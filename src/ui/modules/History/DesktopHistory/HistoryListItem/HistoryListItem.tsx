@@ -1,9 +1,9 @@
 import { Badge, Box, Flex, Heading, Icon, Stack, Text } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
-import { useColors } from '../../../../../theme/useColors'
-import HistoryListItemMessage from '../HistoryListItemMessage/HistoryListItemMessage'
+import { useColors } from 'ui/theme'
+import { HistoryListItemMessage } from '../HistoryListItemMessage'
 
-const HistoryListItem = () => {
+export const HistoryListItem = () => {
   const colors = useColors()
 
   return (
@@ -132,5 +132,3 @@ const HistoryListItem = () => {
     </Flex>
   )
 }
-
-export default HistoryListItem

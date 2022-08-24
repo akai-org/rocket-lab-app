@@ -8,10 +8,13 @@ import {
   DrawerBody,
   Input,
 } from '@chakra-ui/react'
-import { useColors } from '../../../../../theme/useColors'
-import ProductButton from '../../../../components/Custom Buttons/ProductButton/ProductButton'
+import { useColors } from 'ui/theme'
+import { ProductButton } from 'ui/components'
 
-const FilterDrawer = (props: { isOpen: boolean; onClose: () => void }) => {
+export const FilterDrawer = (props: {
+  isOpen: boolean
+  onClose: () => void
+}) => {
   const colors = useColors()
 
   return (
@@ -35,5 +38,3 @@ const FilterDrawer = (props: { isOpen: boolean; onClose: () => void }) => {
     </Drawer>
   )
 }
-
-export default FilterDrawer

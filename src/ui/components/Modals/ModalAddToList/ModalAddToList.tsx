@@ -17,16 +17,13 @@ import {
   Select,
   Input,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { PopulatedCartList } from '../../../../mongo/models/cart'
-import { CartItem } from '../../../../store/Slices/storageCartSlice'
-import { storageCartInfo } from '../../../../store/store'
-import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
-import ChosenListPopover from '../../Popovers/ChosenListPopover'
-import DeletePopover from '../../Popovers/DeletePopover'
-import CheckoutItem from './CheckoutItem'
-import { useColors } from '../../../../theme/useColors'
+import { PopulatedCartList } from 'mongo'
+import { CartItem, storageCartInfo } from 'store'
+import { ProductButton, ChosenListPopover, DeletePopover } from 'ui/components'
+import { CheckoutItem } from './CheckoutItem'
+import { useColors } from 'ui/theme'
 
 interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
   items: CartItem[]
@@ -36,7 +33,7 @@ interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
   ) => Promise<void>
 }
 
-const ModalAddToList = (props: ModalAddToListProps) => {
+export const ModalAddToList = memo((props: ModalAddToListProps) => {
   // TODO: delete these hardcoded 'add_new'
 
   const [selectedList, setSelectedList] = useState('add_new')
@@ -154,6 +151,4 @@ const ModalAddToList = (props: ModalAddToListProps) => {
       </ModalContent>
     </Modal>
   )
-}
-
-export default ModalAddToList
+})

@@ -1,14 +1,12 @@
 import { useMediaQuery } from '@chakra-ui/react'
-import DesktopNavigation from './Navigation/DesktopNavigation/DesktopNavigation'
-import MobileNavigation from './Navigation/MobileNavigation/MobileNavigation'
-import Footer from './/Footer/Footer'
-import { ReactNode } from 'react'
+import { Footer, MobileNavigation, DesktopNavigation } from 'ui/components'
+import { memo, ReactNode } from 'react'
 
 interface Props {
   children?: ReactNode
 }
 
-const Layout = ({ children }: Props) => {
+export const Layout = memo(({ children }: Props) => {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
   return (
     <>
@@ -17,6 +15,4 @@ const Layout = ({ children }: Props) => {
       <Footer />
     </>
   )
-}
-
-export default Layout
+})

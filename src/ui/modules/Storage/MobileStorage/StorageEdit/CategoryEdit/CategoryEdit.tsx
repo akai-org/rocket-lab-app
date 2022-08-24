@@ -13,19 +13,14 @@ import {
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  addCategory,
-  removeCategories,
-} from '../../../../../../store/Slices/categoriesSlice'
-import { categoriesInfo } from '../../../../../../store/store'
-import { API_URL } from '../../../../../../utils/constants'
-import { fetcher } from '../../../../../../utils/requests'
-import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
-import DeletePopover from '../../../../../components/Popovers/DeletePopover'
-import Category from './Category/Category'
-import { useColors } from '../../../../../../theme/useColors'
+import { addCategory, removeCategories, categoriesInfo } from 'store'
+import { API_URL } from 'utils/constants'
+import { fetcher } from 'utils/requests'
+import { ProductButton, DeletePopover } from 'ui/components'
+import { Category } from './Category'
+import { useColors } from 'ui/theme'
 
-const CategoryEdit = () => {
+export const CategoryEdit = () => {
   const categories = useSelector(categoriesInfo).categories
   const colors = useColors()
   const [nameIsValid, setNameIsValid] = useState(true)
@@ -153,5 +148,3 @@ const CategoryEdit = () => {
     </Accordion>
   )
 }
-
-export default CategoryEdit

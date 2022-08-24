@@ -2,10 +2,10 @@ import { Box, ButtonGroup, Checkbox, Flex, Input } from '@chakra-ui/react'
 import { useState } from 'react'
 import { AiOutlineCheck, AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
-import { updateCategory } from '../../../../../../../store/Slices/categoriesSlice'
-import { API_URL } from '../../../../../../../utils/constants'
-import { fetcher } from '../../../../../../../utils/requests'
-import { useColors } from '../../../../../../../theme/useColors'
+import { updateCategory } from 'store'
+import { API_URL } from 'utils/constants'
+import { fetcher } from 'utils/requests'
+import { useColors } from 'ui/theme'
 
 interface CategoryProps {
   id: string
@@ -13,7 +13,7 @@ interface CategoryProps {
   categoryName: string
 }
 
-const Category = ({ id, value, categoryName }: CategoryProps) => {
+export const Category = ({ id, value, categoryName }: CategoryProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState(categoryName)
   const dispatch = useDispatch()
@@ -61,5 +61,3 @@ const Category = ({ id, value, categoryName }: CategoryProps) => {
     </Flex>
   )
 }
-
-export default Category

@@ -1,19 +1,18 @@
 import { Button, Flex, Text, useDisclosure, useToast } from '@chakra-ui/react'
-import FiltersControlls from './Filters/Filters'
-import DesktopItemsList from './DesktopItemsList/DesktopItemsList'
-import { MainViewProps } from '../../../../utils/types/frontendGeneral'
+import { Filters } from './Filters'
+import { DesktopItemsList } from './DesktopItemsList'
+import { MainViewProps } from 'utils/types/frontendGeneral'
 import { useSelector } from 'react-redux'
-import { storageCartInfo } from '../../../../store/store'
+import { storageCartInfo } from 'store'
 import { useEffect } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
-import ModalAddToList from '../../../components/Modals/ModalAddToList/ModalAddToList'
+import { ModalAddToList, DesktopWrapper } from 'ui/components'
 import Router from 'next/router'
-import StorageEdit from './StorageEdit/StorageEdit'
-import { useAddNewList } from '../../../../utils/effects/useAddNewList'
-import DesktopWrapper from '../../../components/Wrappers/DesktopWrapper/DesktopWrapper'
-import { useColors } from '../../../../theme/useColors'
+import { StorageEdit } from './StorageEdit'
+import { useAddNewList } from 'utils/effects/useAddNewList'
+import { useColors } from 'ui/theme'
 
-const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
+export const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
   const colors = useColors()
   const storageCartData = useSelector(storageCartInfo)
@@ -71,7 +70,7 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
   return (
     <DesktopWrapper>
       <StorageEdit />
-      <FiltersControlls />
+      <Filters />
       <DesktopItemsList itemsCount={itemsCount} items={items} />
       <ModalAddToList
         addNewCartList={addNewList}
@@ -83,5 +82,3 @@ const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
     </DesktopWrapper>
   )
 }
-
-export default DesktopStorage

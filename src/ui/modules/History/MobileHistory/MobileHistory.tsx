@@ -1,12 +1,12 @@
 import { Flex, Box, Text, Stack, Select, useDisclosure } from '@chakra-ui/react'
 import { IoMdFunnel } from 'react-icons/io'
-import HistoryList from './HistoryList/HistoryList'
+import { HistoryList } from './HistoryList'
 import { useRef } from 'react'
-import FilterDrawer from './FilterDrawer/FilterDrawer'
-import MobileWrapper from '../../../components/Wrappers/MobileWrapper/MobileWrapper'
-import { useColors } from '../../../../theme/useColors'
+import { FilterDrawer } from './FilterDrawer'
+import { MobileWrapper } from 'ui/components'
+import { useColors } from 'ui/theme'
 
-const MobileHistory = () => {
+export const MobileHistory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const filterRef = useRef<HTMLDivElement>(null)
   const colors = useColors()
@@ -58,5 +58,3 @@ const MobileHistory = () => {
     </MobileWrapper>
   )
 }
-
-export default MobileHistory

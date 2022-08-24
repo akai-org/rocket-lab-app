@@ -1,28 +1,26 @@
 import type { NextPage } from 'next'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { MainViewProps } from '../utils/types/frontendGeneral'
-import MobileStorage from '../ui/modules/Storage/MobileStorage/MobileStorage'
+import { MobileStorage, DesktopStorage } from 'ui/modules'
 import { useMediaQuery } from '@chakra-ui/react'
-import DesktopStorage from '../ui/modules/Storage/DesktopStorage/DesktopStorage'
-import { connectDB } from '../mongo/db'
+import { connectDB, PopulatedItem } from 'mongo'
 import { Text } from '@chakra-ui/react'
 import * as itemsService from '../services/itemsService'
-import { Credentials } from '../utils/credentials'
-import { API_URL } from '../utils/constants'
-import { fetchCategories } from '../services/categoryService'
+import { Credentials } from 'utils/credentials'
+import { API_URL } from 'utils/constants'
+import { fetchCategories } from 'services'
 import { useEffect, useState } from 'react'
-import { setExistingCartLists } from '../store/Slices/storageCartSlice'
-import { fetcher } from '../utils/requests'
-import { setCategories } from '../store/Slices/categoriesSlice'
-import { useDispatch, useSelector } from 'react-redux'
 import {
+  setExistingCartLists,
+  setCategories,
   setCategory,
   setItems,
   setSearchTerm,
+  itemsInfo,
   setSorting,
-} from '../store/Slices/itemsSlice'
-import { PopulatedItem } from '../mongo/models/item'
-import { itemsInfo } from '../store/store'
+} from 'store'
+import { fetcher } from 'utils/requests'
+import { useDispatch, useSelector } from 'react-redux'
 
 interface Props extends MainViewProps {
   error?: Error

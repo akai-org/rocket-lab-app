@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { memo } from 'react'
 import { Box, Image, Flex, Heading, Icon, Button } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
-import DesktopSidebar from './DesktopSidebar/DesktopSidebar'
-import { useColors } from '../../../../theme/useColors'
+import { DesktopSidebar } from './DesktopSidebar'
+import { useColors } from 'ui/theme'
 
-const DesktopNavigation = () => {
+export const DesktopNavigation = memo(() => {
   const colors = useColors()
 
   return (
@@ -68,6 +68,4 @@ const DesktopNavigation = () => {
       </Box>
     </>
   )
-}
-
-export default DesktopNavigation
+})

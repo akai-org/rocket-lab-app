@@ -14,21 +14,20 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { useDispatch } from 'react-redux'
-import SchemeMenu from '../../../../components/Menus/SchemeMenu'
-import SchemeItem from './SchemeItem/SchemeItem'
+import { SchemeMenu, ModalInfoScheme } from 'ui/components'
+import { SchemeItem } from './SchemeItem'
 import React from 'react'
-import { PopulatedSchema } from '../../../../../mongo/models/schema'
-import { API_URL } from '../../../../../utils/constants'
-import { fetcher } from '../../../../../utils/requests'
-import { deleteSchema } from '../../../../../store/Slices/schemasSlice'
-import { useColors } from '../../../../../theme/useColors'
-import ModalInfoScheme from '../../../../components/Modals/ModalInfoScheme/ModalInfoScheme'
+import { PopulatedSchema } from 'mongo'
+import { API_URL } from 'utils/constants'
+import { fetcher } from 'utils/requests'
+import { deleteSchema } from 'store'
+import { useColors } from 'ui/theme'
 
 interface Props {
   schema: PopulatedSchema
 }
 
-const Scheme = ({ schema }: Props) => {
+export const Scheme = ({ schema }: Props) => {
   const {
     isOpen: isOpenInfoScheme,
     onOpen: onOpenInfoScheme,
@@ -107,5 +106,3 @@ const Scheme = ({ schema }: Props) => {
     </Accordion>
   )
 }
-
-export default Scheme

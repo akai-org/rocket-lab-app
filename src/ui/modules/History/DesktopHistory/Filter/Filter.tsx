@@ -1,7 +1,7 @@
 import { Flex, Input, Select, Stack, Text } from '@chakra-ui/react'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
-const Filter = () => {
+export const Filter = () => {
   const colors = useColors()
 
   return (
@@ -39,5 +39,3 @@ const Filter = () => {
     </Flex>
   )
 }
-
-export default Filter
