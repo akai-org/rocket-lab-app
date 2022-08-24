@@ -27,14 +27,14 @@ shopping lists.
 Section dedicated to keeping shopping lists in case of lack in supplies. Here we are able to modify lists or add to
 list items that are not currently in our storage.
 
-![img_2.png](img_2.png)
-![img_3.png](img_3.png)
+![img_2.png](assets/img_2.png)
+![img_3.png](assets/img_3.png)
 
 ### Schemes
 Section dedicated to keeping schemas with elements that are needed for building for instance an engine of a rocket.
 
-![img_6.png](img_6.png)
-![img_7.png](img_7.png)
+![img_6.png](assets/img_6.png)
+![img_7.png](assets/img_7.png)
 ### History
 ```IN PROGRESS```
 
