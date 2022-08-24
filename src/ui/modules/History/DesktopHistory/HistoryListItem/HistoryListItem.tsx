@@ -1,15 +1,6 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  Icon,
-  Stack,
-  Text,
-  useDisclosure,
-} from '@chakra-ui/react'
+import { Badge, Box, Flex, Heading, Icon, Stack, Text } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
 import { useColors } from '../../../../../theme/useColors'
-import ModalHistory from '../../../../components/Modals/ModalHistory/ModalHistory'
 import HistoryListItemMessage from '../HistoryListItemMessage/HistoryListItemMessage'
 
 interface Props {
@@ -18,7 +9,6 @@ interface Props {
 }
 
 const HistoryListItem = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const colors = useColors()
 
   return (
@@ -44,17 +34,13 @@ const HistoryListItem = () => {
             <Stack direction="row">
               <Heading size="sm">Rafał Walkowiak</Heading>
               <Text fontSize="sm">21:37</Text>
+              <Badge variant="solid" colorScheme="orange" color="white">
+                ITEM
+                {/* props type */}
+              </Badge>
             </Stack>
             <Stack direction="row">
               <HistoryListItemMessage />
-              <Text
-                as="u"
-                color={colors.orangePrimary}
-                onClick={onOpen}
-                cursor="pointer"
-              >
-                pokaż&nbsp;więcej...
-              </Text>
             </Stack>
           </Stack>
         </Stack>
@@ -68,18 +54,14 @@ const HistoryListItem = () => {
           <Stack direction="column" w="90%" maxW="1600px">
             <Stack direction="row">
               <Heading size="sm">Rafał Walkowiak</Heading>
-              <Text fontSize="sm">21:37</Text>
+              <Text fontSize="sm">21:37</Text>{' '}
+              <Badge variant="solid" colorScheme="orange" color="white">
+                ITEM
+                {/* props type */}
+              </Badge>
             </Stack>
             <Stack direction="row">
               <HistoryListItemMessage />
-              <Text
-                as="u"
-                color={colors.orangePrimary}
-                onClick={onOpen}
-                cursor="pointer"
-              >
-                pokaż&nbsp;więcej...
-              </Text>
             </Stack>
           </Stack>
         </Stack>
@@ -93,18 +75,14 @@ const HistoryListItem = () => {
           <Stack direction="column" w="90%" maxW="1600px">
             <Stack direction="row">
               <Heading size="sm">Rafał Walkowiak</Heading>
-              <Text fontSize="sm">21:37</Text>
+              <Text fontSize="sm">21:37</Text>{' '}
+              <Badge variant="solid" colorScheme="orange" color="white">
+                SCHEMA
+                {/* props type */}
+              </Badge>
             </Stack>
             <Stack direction="row">
               <HistoryListItemMessage />
-              <Text
-                as="u"
-                color={colors.orangePrimary}
-                onClick={onOpen}
-                cursor="pointer"
-              >
-                pokaż&nbsp;więcej...
-              </Text>
             </Stack>
           </Stack>
         </Stack>
@@ -118,18 +96,14 @@ const HistoryListItem = () => {
           <Stack direction="column" w="90%" maxW="1600px">
             <Stack direction="row">
               <Heading size="sm">Rafał Walkowiak</Heading>
-              <Text fontSize="sm">21:37</Text>
+              <Text fontSize="sm">21:37</Text>{' '}
+              <Badge variant="solid" colorScheme="orange" color="white">
+                LIST
+                {/* props type */}
+              </Badge>
             </Stack>
             <Stack direction="row">
               <HistoryListItemMessage />
-              <Text
-                as="u"
-                color={colors.orangePrimary}
-                onClick={onOpen}
-                cursor="pointer"
-              >
-                pokaż&nbsp;więcej...
-              </Text>
             </Stack>
           </Stack>
         </Stack>
@@ -148,23 +122,18 @@ const HistoryListItem = () => {
           <Stack direction="column" w="90%" maxW="1600px">
             <Stack direction="row">
               <Heading size="sm">Rafał Walkowiak</Heading>
-              <Text fontSize="sm">21:37</Text>
+              <Text fontSize="sm">21:37</Text>{' '}
+              <Badge variant="solid" colorScheme="orange" color="white">
+                ITEM
+                {/* props type */}
+              </Badge>
             </Stack>
             <Stack direction="row">
               <HistoryListItemMessage />
-              <Text
-                as="u"
-                color={colors.orangePrimary}
-                onClick={onOpen}
-                cursor="pointer"
-              >
-                pokaż&nbsp;więcej...
-              </Text>
             </Stack>
           </Stack>
         </Stack>
       </Box>
-      <ModalHistory isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
 }
