@@ -1,9 +1,7 @@
 import type { NextPage } from 'next'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { useMediaQuery } from '@chakra-ui/react'
-
-import DesktopHistory from '../../ui/modules/History/DesktopHistory/DesktopHistory'
-import MobileHistory from '../../ui/modules/History/MobileHistory/MobileHistory'
+import { DesktopHistory, MobileHistory } from 'ui/modules'
 
 export enum HistoryEvent {
   ADDED = 'ADDED',

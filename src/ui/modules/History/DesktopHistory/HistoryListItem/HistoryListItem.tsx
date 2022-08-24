@@ -8,11 +8,11 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
-import { useColors } from '../../../../theme/useColors'
-import ModalHistory from '../../../../components/Modals/ModalHistory/ModalHistory'
-import HistoryListItemMessage from '../HistoryListItemMessage/HistoryListItemMessage'
+import { useColors } from 'ui/theme'
+import { ModalHistory } from 'ui/components'
+import { HistoryListItemMessage } from '../HistoryListItemMessage'
 
-const HistoryListItem = () => {
+export const HistoryListItem = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const colors = useColors()
 
@@ -163,5 +163,3 @@ const HistoryListItem = () => {
     </Flex>
   )
 }
-
-export default HistoryListItem

@@ -16,7 +16,7 @@ import { FaUserCircle } from 'react-icons/fa'
 import { memo } from 'react'
 import { ElementInfo } from './ModalListItem'
 
-export const MoreInfoModal = memo(
+export const ModalHistory = memo(
   (props: { isOpen: boolean; onClose: () => void }) => {
     const colors = useColors()
 
