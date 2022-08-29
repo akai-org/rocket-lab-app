@@ -21,10 +21,11 @@ import { useDispatch } from 'react-redux'
 import { removeExisitngCartList } from 'store'
 import { API_URL } from 'utils/constants'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
 interface Props extends PopulatedCartList {}
 
-export const List = (props: Props) => {
+export const List = memo((props: Props) => {
   const {
     isOpen: isOpenEditList,
     onOpen: onOpenEditList,
@@ -104,4 +105,4 @@ export const List = (props: Props) => {
       />
     </Accordion>
   )
-}
+})

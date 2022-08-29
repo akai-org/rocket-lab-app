@@ -17,10 +17,11 @@ import {
 import { useRef, useState } from 'react'
 import { ProductButton } from 'ui/components'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
 export type item = 'custom' | 'existing'
 
-export const AddItem = () => {
+export const AddItem = memo(() => {
   const name = useRef<HTMLInputElement>(null)
   const [nameIsValid, setNameIsValid] = useState(true)
   const [quantity, setQuantity] = useState(1)
@@ -124,4 +125,4 @@ export const AddItem = () => {
       </AccordionItem>
     </Accordion>
   )
-}
+})

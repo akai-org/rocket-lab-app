@@ -16,10 +16,11 @@ import { removeExisitngCartList } from 'store'
 import { fetcher } from 'utils/requests'
 import { API_URL } from 'utils/constants'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
 export interface Props extends PopulatedCartList {}
 
-export const List = (props: Props) => {
+export const List = memo((props: Props) => {
   const dispatch = useDispatch()
   const colors = useColors()
 
@@ -83,6 +84,4 @@ export const List = (props: Props) => {
       />
     </Accordion>
   )
-}
-
-export default List
+})
