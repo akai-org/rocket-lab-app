@@ -5,8 +5,9 @@ import { useRef } from 'react'
 import { FilterDrawer } from './FilterDrawer'
 import { MobileWrapper } from 'ui/components'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
-export const MobileHistory = () => {
+export const MobileHistory = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const filterRef = useRef<HTMLDivElement>(null)
   const colors = useColors()
@@ -57,4 +58,4 @@ export const MobileHistory = () => {
       <HistoryList />
     </MobileWrapper>
   )
-}
+})

@@ -2,8 +2,9 @@ import { Badge, Box, Flex, Heading, Icon, Stack, Text } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
 import { useColors } from 'ui/theme'
 import { HistoryListItemMessage } from '../HistoryListItemMessage'
+import React, { memo } from 'react'
 
-export const HistoryListItem = () => {
+export const HistoryListItem = memo(() => {
   const colors = useColors()
 
   return (
@@ -131,4 +132,4 @@ export const HistoryListItem = () => {
       </Box>
     </Flex>
   )
-}
+})

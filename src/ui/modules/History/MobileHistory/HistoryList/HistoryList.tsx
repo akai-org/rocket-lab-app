@@ -1,7 +1,8 @@
 import { Flex } from '@chakra-ui/react'
 import { HistoryListItem } from '../HistoryListItem'
+import React, { memo } from 'react'
 
-export const HistoryList = () => {
+export const HistoryList = memo(() => {
   return (
     <Flex
       flexDir="column"
@@ -18,4 +19,4 @@ export const HistoryList = () => {
       <HistoryListItem />
     </Flex>
   )
-}
+})

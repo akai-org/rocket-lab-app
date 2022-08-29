@@ -10,8 +10,9 @@ import { FaUserCircle } from 'react-icons/fa'
 import { useColors } from 'ui/theme'
 import { ModalHistory } from 'ui/components'
 import { NameAndQuantityElement } from '../NameAndQuantityElement'
+import React, { memo } from 'react'
 
-export const HistoryListItem = () => {
+export const HistoryListItem = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const colors = useColors()
 
@@ -50,4 +51,4 @@ export const HistoryListItem = () => {
       <ModalHistory isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
-}
+})
