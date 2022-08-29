@@ -17,11 +17,14 @@ const handler: NextApiHandler = async (req, res) => {
       const updatedItem = await itemsService.updateItem(body.id, body.item)
       if (!updatedItem) throw new Error('No item updated')
       if (!oldItem) throw new Error('No item found in DB')
+      console.log(Math.abs(oldItem.quantity - body.item.quantity) ?? undefined)
       if (oldItem.quantity > body.item.quantity) {
         await createHistoryLog(session.user.email, 'distributed', {
           name: updatedItem.name,
           type: 'item',
           description: updatedItem.description,
+          changedQuantity:
+            Math.abs(oldItem.quantity - body.item.quantity),
         })
       }
       const itemHasBeenModified = checkIfItemHasBeenModified(
@@ -33,6 +36,8 @@ const handler: NextApiHandler = async (req, res) => {
           name: updatedItem.name,
           type: 'item',
           description: updatedItem.description,
+          changedQuantity:
+            Math.abs(oldItem.quantity - body.item.quantity) ?? undefined,
         })
       }
 
@@ -53,7 +58,6 @@ function checkIfItemHasBeenModified(oldItem: Item, updatedItem: Item) {
     oldItem.categories,
     updatedItem.categories
   )
-  console.log(oldItem.categories)
   if (
     changedQuantity ||
     changedName ||
@@ -71,7 +75,9 @@ function arrayEquals(a: string[], b: string[]) {
     Array.isArray(a) &&
     Array.isArray(b) &&
     a.length === b.length &&
-    a.every((val, index) => val.toString() === b[index].toString())
+    a.every(
+      (val, index) => val && val.toString() === b[index] && b[index].toString()
+    )
   )
 }
 

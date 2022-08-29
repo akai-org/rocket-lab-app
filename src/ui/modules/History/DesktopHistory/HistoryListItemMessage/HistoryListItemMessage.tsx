@@ -2,14 +2,17 @@ import { Text } from '@chakra-ui/react'
 
 const HistoryListItemMessage = ({
   name,
-  quantity,
+  changedQuantity,
 }: {
   name: string
-  quantity: number
+  changedQuantity?: number
 }) => {
+  console.log(changedQuantity)
   return (
     <Text fontSize="sm" isTruncated>
-      {`Wyciągnięto z magazynu: ${name} x ${quantity}`}
+      {`Wyciągnięto z magazynu: ${name} ${
+        changedQuantity ? `x ${changedQuantity}` : ''
+      }`}
     </Text>
   )
 }

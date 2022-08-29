@@ -8,6 +8,7 @@ export interface Resource {
   name: string
   type: ResourceType
   description?: string
+  changedQuantity?: number
 }
 
 export interface HistoryLog {
@@ -23,6 +24,12 @@ const HistoryResourceSchema = new Schema<Resource>({
   description: { type: String, required: false },
   type: { type: String, required: [true, 'Please, provide resource type'] },
   name: { type: String, required: [true, 'Please, provide resource name'] },
+  changedQuantity: {
+    type: Number,
+    required: false,
+    min: 1,
+    max: 100000,
+  },
 })
 
 const HistoryLogSchema = new Schema<HistoryLog>(

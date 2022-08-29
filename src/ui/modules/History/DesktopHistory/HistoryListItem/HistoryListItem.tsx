@@ -49,7 +49,7 @@ const HistoryListItem: FC<Props> = ({ groupDate }) => {
                       </Badge>
                     </Stack>
                     <Stack direction="row">
-                      <HistoryListItemMessage name={log.resource.name} />
+                      <HistoryListItemMessage changedQuantity={log.resource.changedQuantity} name={log.resource.name} />
                     </Stack>
                   </Stack>
                 </Stack>
