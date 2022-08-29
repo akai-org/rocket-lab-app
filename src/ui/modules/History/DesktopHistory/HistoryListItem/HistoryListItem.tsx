@@ -45,11 +45,14 @@ const HistoryListItem: FC<Props> = ({ groupDate }) => {
                       </Text>
                       <Badge variant="solid" colorScheme="orange" color="white">
                         {log.resource.type}
-                        {/* props type */}
                       </Badge>
                     </Stack>
                     <Stack direction="row">
-                      <HistoryListItemMessage changedQuantity={log.resource.changedQuantity} name={log.resource.name} />
+                      <HistoryListItemMessage
+                        resourceType={log.type}
+                        changedQuantity={log.resource.changedQuantity}
+                        name={log.resource.name}
+                      />
                     </Stack>
                   </Stack>
                 </Stack>

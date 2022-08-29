@@ -1,16 +1,21 @@
 import { Text } from '@chakra-ui/react'
+import { HistoryLogType } from '../../../../../mongo/models/history'
+import { createTypesMap } from '../../../../../utils/helpers'
+
+const typesMap = createTypesMap()
 
 const HistoryListItemMessage = ({
   name,
   changedQuantity,
+  resourceType,
 }: {
   name: string
   changedQuantity?: number
+  resourceType: HistoryLogType
 }) => {
-  console.log(changedQuantity)
   return (
     <Text fontSize="sm" isTruncated>
-      {`Wyciągnięto z magazynu: ${name} ${
+      {`${typesMap.get(resourceType)} ${name} ${
         changedQuantity ? `x ${changedQuantity}` : ''
       }`}
     </Text>
@@ -18,3 +23,5 @@ const HistoryListItemMessage = ({
 }
 
 export default HistoryListItemMessage
+
+
