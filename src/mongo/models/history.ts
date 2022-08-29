@@ -15,8 +15,8 @@ export interface HistoryLog {
   id: string
   author: string
   resource: Resource
-  created_at: Date
-  modified_at: Date
+  createdAt: Date
+  modifiedAt: Date
 }
 
 const HistoryResourceSchema = new Schema<Resource>({

@@ -20,4 +20,4 @@ export const historySlice = createSlice({
 
 export const historyReducer = historySlice.reducer
 
-export const {setLogs} = historySlice.actions
+export const { setLogs } = historySlice.actions

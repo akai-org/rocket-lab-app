@@ -8,6 +8,9 @@ import { connectDB } from '../../mongo/db'
 import { HistoryLog } from '../../mongo/models/history'
 import { Credentials } from '../../utils/credentials'
 import { fetchLogs } from '../../services/historyService'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setLogs } from '../../store/Slices/historySlice'
 
 export enum HistoryEvent {
   ADDED = 'ADDED',
@@ -21,7 +24,12 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ logs }) => {
-  console.log(logs)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setLogs(logs))
+  }, [logs, dispatch])
+
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
   const History = isDesktop ? <DesktopHistory /> : <MobileHistory />
   return History
