@@ -5,13 +5,13 @@ import { API_URL } from 'utils/constants'
 import { fetcher } from 'utils/requests'
 import { adminRoles } from 'utils/types/backendGeneral'
 import { UserItem } from './userItem'
-
+import React, { memo } from 'react'
 interface Props {
   users: User[]
   updateUsers: (users: User[]) => void
 }
 
-export const UsersList: React.FC<Props> = ({ users, updateUsers }) => {
+export const UsersList: React.FC<Props> = memo(({ users, updateUsers }) => {
   const [formUsers, setFormUsers] = useState(users)
 
   const handleSelectorChange = (id: string, role: adminRoles) => {
@@ -56,4 +56,4 @@ export const UsersList: React.FC<Props> = ({ users, updateUsers }) => {
       </Button>
     </form>
   )
-}
+})
