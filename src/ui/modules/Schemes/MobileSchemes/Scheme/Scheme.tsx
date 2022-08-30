@@ -16,7 +16,7 @@ import {
 import { useDispatch } from 'react-redux'
 import { SchemeMenu, ModalInfoScheme } from 'ui/components'
 import { SchemeItem } from './SchemeItem'
-import React from 'react'
+import React, { memo } from 'react'
 import { PopulatedSchema } from 'mongo'
 import { API_URL } from 'utils/constants'
 import { fetcher } from 'utils/requests'
@@ -27,7 +27,7 @@ interface Props {
   schema: PopulatedSchema
 }
 
-export const Scheme = ({ schema }: Props) => {
+export const Scheme = memo(({ schema }: Props) => {
   const {
     isOpen: isOpenInfoScheme,
     onOpen: onOpenInfoScheme,
@@ -105,4 +105,4 @@ export const Scheme = ({ schema }: Props) => {
       />
     </Accordion>
   )
-}
+})

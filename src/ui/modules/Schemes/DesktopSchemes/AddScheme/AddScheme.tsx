@@ -18,8 +18,9 @@ import { API_URL } from 'utils/constants'
 import { addSchema } from 'store'
 import { SchemasContext } from 'pages/schemes'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
-export const AddScheme = () => {
+export const AddScheme = memo(() => {
   const context = useContext(SchemasContext)
 
   const dispatch = useDispatch()
@@ -124,4 +125,4 @@ export const AddScheme = () => {
       </AccordionItem>
     </Accordion>
   )
-}
+})

@@ -18,8 +18,9 @@ import { fetcher } from 'utils/requests'
 import { useDispatch } from 'react-redux'
 import { addSchema } from 'store'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
-export const AddScheme = () => {
+export const AddScheme = memo(() => {
   const dispatch = useDispatch()
   const context = useContext(SchemasContext)
   const nameIsValid = context?.name.length !== 0 ? true : false
@@ -110,4 +111,4 @@ export const AddScheme = () => {
       </AccordionItem>
     </Accordion>
   )
-}
+})

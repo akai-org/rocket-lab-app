@@ -14,6 +14,7 @@ import { ProductButton, SearchSelect } from 'ui/components'
 import { SchemasContext } from 'pages/schemes'
 import * as _ from 'lodash'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
 interface SelectedType {
   value: string | null
@@ -31,7 +32,7 @@ const noOption = {
   id: null,
 }
 
-export const AddItem = (props: AddItemProps) => {
+export const AddItem = memo((props: AddItemProps) => {
   const context = useContext(SchemasContext)
   const [quantity, setQuantity] = useState(1)
   const colors = useColors()
@@ -112,4 +113,4 @@ export const AddItem = (props: AddItemProps) => {
       </ProductButton>
     </Flex>
   )
-}
+})
