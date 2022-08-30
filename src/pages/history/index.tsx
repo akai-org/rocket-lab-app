@@ -11,6 +11,7 @@ import { fetchLogs } from '../../services/historyService'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setLogs } from '../../store/Slices/historySlice'
+import { useFilters } from '../../utils/effects/useFilters'
 
 export enum HistoryEvent {
   ADDED = 'ADDED',
@@ -25,6 +26,7 @@ interface Props {
 
 const Home: NextPage<Props> = ({ logs }) => {
   const dispatch = useDispatch()
+
 
   useEffect(() => {
     dispatch(setLogs(logs))
