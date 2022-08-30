@@ -5,12 +5,13 @@ import { PopulatedItem } from 'mongo'
 import { addToCart, removeFromCart, storageCartInfo } from 'store'
 import { ProductButton, ModalEditItem, ModalInfo } from 'ui/components'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
 interface Props {
   item: PopulatedItem
 }
 
-export const ListItem = ({ item }: Props) => {
+export const ListItem = memo(({ item }: Props) => {
   const dispatch = useDispatch()
   const storageCartData = useSelector(storageCartInfo).newCartList
   const colors = useColors()
@@ -122,4 +123,4 @@ export const ListItem = ({ item }: Props) => {
       />
     </Flex>
   )
-}
+})

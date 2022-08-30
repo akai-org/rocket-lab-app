@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Box } from '@chakra-ui/react'
 import { SortingGeneral } from 'ui/components'
 import { useColors } from 'ui/theme'
 
-export const Sorting = () => {
+export const Sorting = memo(() => {
   const colors = useColors()
 
   return (
@@ -11,4 +11,4 @@ export const Sorting = () => {
       <SortingGeneral />
     </Box>
   )
-}
+})

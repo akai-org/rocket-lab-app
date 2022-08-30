@@ -23,8 +23,9 @@ import { API_URL } from 'utils/constants'
 import { fetcher } from 'utils/requests'
 import { ProductButton } from 'ui/components'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
-export const ItemsEdit = () => {
+export const ItemsEdit = memo(() => {
   const dispatch = useDispatch()
   const categories = useSelector(categoriesInfo).categories
   const colors = useColors()
@@ -154,4 +155,4 @@ export const ItemsEdit = () => {
       </AccordionItem>
     </Accordion>
   )
-}
+})

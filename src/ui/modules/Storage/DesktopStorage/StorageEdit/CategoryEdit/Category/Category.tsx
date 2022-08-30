@@ -6,6 +6,7 @@ import { updateCategory } from 'store'
 import { API_URL } from 'utils/constants'
 import { fetcher } from 'utils/requests'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
 interface CategoryProps {
   id: string
@@ -13,7 +14,7 @@ interface CategoryProps {
   categoryName: string
 }
 
-export const Category = ({ id, value, categoryName }: CategoryProps) => {
+export const Category = memo(({ id, value, categoryName }: CategoryProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState(categoryName)
   const dispatch = useDispatch()
@@ -60,4 +61,4 @@ export const Category = ({ id, value, categoryName }: CategoryProps) => {
       )}
     </Flex>
   )
-}
+})

@@ -19,8 +19,9 @@ import { fetcher } from 'utils/requests'
 import { ProductButton, DeletePopover } from 'ui/components'
 import { Category } from './Category'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
-export const CategoryEdit = () => {
+export const CategoryEdit = memo(() => {
   const categories = useSelector(categoriesInfo).categories
   const colors = useColors()
   const [nameIsValid, setNameIsValid] = useState(true)
@@ -147,4 +148,4 @@ export const CategoryEdit = () => {
       </AccordionItem>
     </Accordion>
   )
-}
+})

@@ -11,8 +11,9 @@ import Router from 'next/router'
 import { StorageEdit } from './StorageEdit'
 import { useAddNewList } from 'utils/effects/useAddNewList'
 import { useColors } from 'ui/theme'
+import React, { memo } from 'react'
 
-export const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
+export const DesktopStorage = memo(({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()
   const colors = useColors()
   const storageCartData = useSelector(storageCartInfo)
@@ -81,4 +82,4 @@ export const DesktopStorage = ({ items, itemsCount }: MainViewProps) => {
       />
     </DesktopWrapper>
   )
-}
+})

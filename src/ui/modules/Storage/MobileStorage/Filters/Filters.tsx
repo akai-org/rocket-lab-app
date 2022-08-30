@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
   Flex,
   Icon,
@@ -22,7 +22,7 @@ interface Props {
   setIsFiltersOpen: (isOpen: boolean) => void
 }
 
-export const Filters: React.FC<Props> = (props) => {
+export const Filters: React.FC<Props> = memo((props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const colors = useColors()
   const {
@@ -171,4 +171,4 @@ export const Filters: React.FC<Props> = (props) => {
       </Flex>
     </Flex>
   )
-}
+})

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import { Button, Flex, Text, useDisclosure, useToast } from '@chakra-ui/react'
 import { Filters } from './Filters'
 import { Sorting } from './Sorting'
@@ -15,7 +15,7 @@ import { useAddNewList } from 'utils/effects/useAddNewList'
 import queryString from 'query-string'
 import { useColors } from 'ui/theme'
 
-export const MobileStorage = ({ itemsCount }: MainViewProps) => {
+export const MobileStorage = memo(({ itemsCount }: MainViewProps) => {
   const router = useRouter()
   const query = queryString.parseUrl(router.asPath).query
   const [listType, setListType] = useState<sortingType>('grid')
@@ -123,4 +123,4 @@ export const MobileStorage = ({ itemsCount }: MainViewProps) => {
       />
     </MobileWrapper>
   )
-}
+})
