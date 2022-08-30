@@ -35,19 +35,19 @@ export function useFilters(customFilters: string[] = []) {
   delete query.category
 
   const searchQuery: Query = {}
-  const [customQuery, setCustomQuery] = useState<{ [key: string]: string }>({})
+  const [customQuery, setCustomQuery] = useState<{ [key: string]: string }>(
+    () => {
+      const retrievedCustomQuery: { [key: string]: string } = {}
 
-  const retrievedCustomQuery: { [key: string]: string } = {}
-
-  customFilters.forEach((customFilter) => {
-    const val = query[customFilter] as string | undefined
-    if (val) {
-      retrievedCustomQuery[customFilter] = val
+      customFilters.forEach((customFilter) => {
+        const val = query[customFilter] as string | undefined
+        if (val) {
+          retrievedCustomQuery[customFilter] = val
+        }
+      })
+      return retrievedCustomQuery
     }
-  })
-  useEffect(() => {
-    setCustomQuery(retrievedCustomQuery)
-  }, [retrievedCustomQuery])
+  )
 
   if (category) {
     searchQuery.category = category
