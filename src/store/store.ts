@@ -16,7 +16,6 @@ import { categoriesReducer } from './Slices/categoriesSlice'
 import { itemsReducer } from './Slices/itemsSlice'
 import { schemasReducer } from './Slices/schemasSlice'
 import { historyReducer } from './Slices/historySlice'
-import { HistoryLog } from '../mongo/models/history'
 
 const reducers = combineReducers({
   authData: authReducer,
@@ -53,19 +52,4 @@ export const storageCartInfo = (state: RootState) => state.storageCartData
 export const categoriesInfo = (state: RootState) => state.categoriesData
 export const schemeInfo = (state: RootState) => state.schemeData
 export const itemsInfo = (state: RootState) => state.itemsData
-export const historyInfo = (state: RootState) => {
-  let tmp: Date | undefined
-  const futureState = new Map<string, HistoryLog[]>()
-
-  for (const log of state.historyData.logs) {
-    const logDate = new Date(log.createdAt)
-    if (!tmp || tmp?.toDateString() === logDate.toDateString()) tmp = logDate
-    if (!futureState.has(logDate.toDateString())) {
-      futureState.set(logDate.toDateString(), [])
-    }
-    futureState.get(logDate.toDateString())?.push(log)
-
-    tmp = logDate
-  }
-  return { ...state, logs: futureState }
-}
+export const historyInfo = (state: RootState) => state.historyData

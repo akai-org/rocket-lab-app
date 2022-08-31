@@ -1,18 +1,17 @@
 import { Badge, Box, Flex, Heading, Icon, Stack, Text } from '@chakra-ui/react'
 import { FC } from 'react'
 import { FaUserCircle } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
-import { historyInfo } from '../../../../../store/store'
+import { HistoryLog } from '../../../../../mongo/models/history'
 import { useColors } from '../../../../../theme/useColors'
 import HistoryListItemMessage from '../HistoryListItemMessage/HistoryListItemMessage'
 
 interface Props {
+  logs: HistoryLog[]
   groupDate: string
 }
 
-const HistoryListItem: FC<Props> = ({ groupDate }) => {
+const HistoryListItem: FC<Props> = ({ logs, groupDate }) => {
   const colors = useColors()
-  const logs = useSelector(historyInfo)?.logs.get(groupDate)
 
   return (
     <Flex

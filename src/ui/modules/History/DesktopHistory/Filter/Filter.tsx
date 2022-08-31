@@ -30,14 +30,26 @@ const Filter = () => {
                 return copiedState
               })
             }}
-            value={customQuery['from']}
+            value={customQuery['from'] || ''}
             type="data"
             placeholder="DD.MM.RRRR"
           ></Input>
         </Stack>
         <Stack direction="row" alignItems="center" w="185px" mr="15px">
           <Text color={colors.fontSecondary}>do:</Text>
-          <Input type="data" placeholder="DD.MM.RRRR"></Input>
+          <Input
+            onChange={(e) => {
+              const val = e.currentTarget.value
+              setCustomQuery((state) => {
+                const copiedState = { ...state }
+                copiedState['to'] = val
+                return copiedState
+              })
+            }}
+            value={customQuery['to'] || ''}
+            type="data"
+            placeholder="DD.MM.RRRR"
+          ></Input>
         </Stack>
         <Stack direction="row">
           <Text color={colors.fontSecondary}>sortuj:</Text>

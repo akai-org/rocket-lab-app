@@ -10,8 +10,7 @@ import { Credentials } from '../../utils/credentials'
 import { fetchLogs } from '../../services/historyService'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setLogs } from '../../store/Slices/historySlice'
-import { useFilters } from '../../utils/effects/useFilters'
+import { setFilters, setLogs } from '../../store/Slices/historySlice'
 
 export enum HistoryEvent {
   ADDED = 'ADDED',
@@ -22,32 +21,54 @@ export enum HistoryEvent {
 
 interface Props {
   logs: HistoryLog[]
+  fromFilter?: string
+  toFilter?: string
 }
 
-const Home: NextPage<Props> = ({ logs }) => {
+const Home: NextPage<Props> = ({ logs, fromFilter, toFilter }) => {
   const dispatch = useDispatch()
 
+  console.log({ logs })
 
   useEffect(() => {
     dispatch(setLogs(logs))
-  }, [logs, dispatch])
+  }, [logs])
+
+  // useEffect(() => {
+  //   dispatch(setFilters({ fromFilter, toFilter }))
+  // }, [toFilter, fromFilter])
 
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
-  const History = isDesktop ? <DesktopHistory /> : <MobileHistory />
+  const History = <DesktopHistory />
   return History
 }
 
 export default Home
 
 export const getServerSideProps = withPageAuthRequired({
-  getServerSideProps: async ({ req, res }): Promise<{ props: Props }> => {
+  getServerSideProps: async ({
+    req,
+    res,
+    query,
+  }): Promise<{ props: Props }> => {
     try {
       await connectDB()
       await Credentials.withEditor(req, res)
 
       const logs = await fetchLogs()
-      return { props: { logs: JSON.parse(JSON.stringify(logs)) } }
+
+      const fromFilter = query.from as string | undefined
+      const toFilter = query.to as string | undefined
+
+      return {
+        props: {
+          logs: JSON.parse(JSON.stringify(logs)),
+          fromFilter: JSON.parse(JSON.stringify('fromFilter')),
+          toFilter: JSON.parse(JSON.stringify('toFilter')),
+        },
+      }
     } catch (error) {
+      console.log(error)
       return { props: { logs: [] } }
     }
   },
