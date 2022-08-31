@@ -26,7 +26,11 @@ const Filter = () => {
               const val = e.currentTarget.value
               setCustomQuery((state) => {
                 const copiedState = { ...state }
-                copiedState['from'] = val
+                if (val && val.length !== 0) {
+                  copiedState['from'] = val
+                } else {
+                  delete copiedState['from']
+                }
                 return copiedState
               })
             }}
@@ -42,7 +46,11 @@ const Filter = () => {
               const val = e.currentTarget.value
               setCustomQuery((state) => {
                 const copiedState = { ...state }
-                copiedState['to'] = val
+                if (val && val.length !== 0) {
+                  copiedState['to'] = val
+                } else {
+                  delete copiedState['to']
+                }
                 return copiedState
               })
             }}

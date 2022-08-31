@@ -35,7 +35,15 @@ export function useFilters(customFilters: string[] = []) {
   delete query.category
 
   const searchQuery: Query = {}
-  const [customQuery, setCustomQuery] = useState<{ [key: string]: string }>({})
+  const [customQuery, setCustomQuery] = useState<{
+    [key: string]: string | undefined
+  }>(() => {
+    const tmp: { [key: string]: string | undefined } = {}
+    for (const custom of customFilters) {
+      tmp[custom] = query[custom] as string | undefined
+    }
+    return tmp
+  })
 
   if (category) {
     searchQuery.category = category
@@ -51,6 +59,12 @@ export function useFilters(customFilters: string[] = []) {
     delete searchQuery.category
   }
 
+  for (const key in query) {
+    if (!query[key] || !customQuery[key] || query[key]?.length === 0) {
+      delete query[key]
+    }
+  }
+
   useEffect(() => {
     fetcher(API_URL + '/api/categories')
       .then((newCategories) => {
@@ -61,6 +75,7 @@ export function useFilters(customFilters: string[] = []) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    console.log({ query, customQuery })
     router.push({ query: { ...query, ...searchQuery, ...customQuery } })
   }
 

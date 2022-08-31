@@ -21,25 +21,27 @@ export enum HistoryEvent {
 
 interface Props {
   logs: HistoryLog[]
-  fromFilter?: string
-  toFilter?: string
+  filters: {
+    fromFilter?: string
+    toFilter?: string
+  }
 }
 
-const Home: NextPage<Props> = ({ logs, fromFilter, toFilter }) => {
+const Home: NextPage<Props> = ({ logs, filters }) => {
   const dispatch = useDispatch()
 
-  console.log({ logs })
+  console.log({ filters })
 
   useEffect(() => {
     dispatch(setLogs(logs))
-  }, [logs])
+  }, [dispatch, logs])
 
-  // useEffect(() => {
-  //   dispatch(setFilters({ fromFilter, toFilter }))
-  // }, [toFilter, fromFilter])
+  useEffect(() => {
+    dispatch(setFilters(filters))
+  }, [filters, dispatch])
 
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
-  const History = <DesktopHistory />
+  const History = isDesktop ? <DesktopHistory /> : <MobileHistory />
   return History
 }
 
@@ -60,16 +62,17 @@ export const getServerSideProps = withPageAuthRequired({
       const fromFilter = query.from as string | undefined
       const toFilter = query.to as string | undefined
 
+      console.log({ fromFilter, toFilter })
+
       return {
         props: {
           logs: JSON.parse(JSON.stringify(logs)),
-          fromFilter: JSON.parse(JSON.stringify('fromFilter')),
-          toFilter: JSON.parse(JSON.stringify('toFilter')),
+          filters: JSON.parse(JSON.stringify({ fromFilter, toFilter })),
         },
       }
     } catch (error) {
       console.log(error)
-      return { props: { logs: [] } }
+      return { props: { logs: [], filters: {} } }
     }
   },
 })
