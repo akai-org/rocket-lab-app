@@ -10,7 +10,12 @@ import { Credentials } from '../../utils/credentials'
 import { fetchLogs } from '../../services/historyService'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setFilters, setLogs } from '../../store/Slices/historySlice'
+import {
+  setFilters,
+  setLogs,
+  setSorting,
+} from '../../store/Slices/historySlice'
+import { SortType } from '../../services/itemsService'
 
 export enum HistoryEvent {
   ADDED = 'ADDED',
@@ -25,12 +30,12 @@ interface Props {
     fromFilter?: string
     toFilter?: string
   }
+  sort?: SortType
 }
 
-const Home: NextPage<Props> = ({ logs, filters }) => {
+const Home: NextPage<Props> = ({ logs, filters, sort }) => {
   const dispatch = useDispatch()
-
-  console.log({ filters })
+  console.log(sort)
 
   useEffect(() => {
     dispatch(setLogs(logs))
@@ -39,6 +44,10 @@ const Home: NextPage<Props> = ({ logs, filters }) => {
   useEffect(() => {
     dispatch(setFilters(filters))
   }, [filters, dispatch])
+
+  useEffect(() => {
+    dispatch(setSorting(sort))
+  }, [dispatch, sort])
 
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
   const History = isDesktop ? <DesktopHistory /> : <MobileHistory />
@@ -61,13 +70,13 @@ export const getServerSideProps = withPageAuthRequired({
 
       const fromFilter = query.from as string | undefined
       const toFilter = query.to as string | undefined
-
-      console.log({ fromFilter, toFilter })
+      const sort = query.sort as SortType | undefined
 
       return {
         props: {
           logs: JSON.parse(JSON.stringify(logs)),
           filters: JSON.parse(JSON.stringify({ fromFilter, toFilter })),
+          sort: sort || 'newest',
         },
       }
     } catch (error) {

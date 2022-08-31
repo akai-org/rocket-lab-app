@@ -1,6 +1,10 @@
 import { Button, Flex, Input, Select, Stack, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useColors } from '../../../../../theme/useColors'
+import { validateSortParam } from '../../../../../utils/dataValidation/validateSortParam'
 import { useFilters } from '../../../../../utils/effects/useFilters'
+import queryString from 'query-string'
+import { SortType } from '../../../../../services/itemsService'
 
 const Filter = () => {
   const colors = useColors()
@@ -8,6 +12,24 @@ const Filter = () => {
     'from',
     'to',
   ])
+
+  const router = useRouter()
+  const query = queryString.parseUrl(router.asPath).query
+
+  let sort: SortType
+
+  if (!validateSortParam(query.sort as string | undefined)) {
+    sort = 'newest'
+  } else {
+    sort = query.sort as SortType
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value
+    if (value !== sort) {
+      router.push({ query: { ...query, sort: value } })
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -69,9 +91,10 @@ const Filter = () => {
             size="md"
             variant="unstyled"
             placeholder="wybierz"
+            onChange={handleChange}
           >
-            <option value="najnowsze">najnowsze</option>
-            <option value="najstarsze">najstarsze</option>
+            <option value="newest">najnowsze</option>
+            <option value="oldest">najstarsze</option>
           </Select>
           <Flex justifyContent="flex-end" p="25px 0 5px 0">
             <Button

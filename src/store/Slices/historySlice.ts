@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { HistoryLog } from '../../mongo/models/history'
+import { SortType } from '../../services/itemsService'
 import { StateWithSorting } from '../../utils/types/backendGeneral'
 
 interface Filters {
@@ -36,8 +37,6 @@ export const historySlice = createSlice({
       const fromFilter = getFilterDates(action.payload.fromFilter)
       const toFilter = getFilterDates(action.payload.toFilter, 24)
 
-      console.log({ fromFilter, toFilter })
-
       state.displayLogs = state.logs.filter((log) => {
         if (fromFilter && !toFilter) {
           return new Date(log.createdAt) >= fromFilter
@@ -51,7 +50,35 @@ export const historySlice = createSlice({
             new Date(log.createdAt) <= toFilter
           )
         }
-        return false
+        return true
+      })
+    },
+    setSorting: (state, action: PayloadAction<SortType | undefined>) => {
+      console.log({ action: action.payload })
+      state.sorting = action.payload || 'newest'
+
+      state.displayLogs = [...state.displayLogs].sort((a, b) => {
+        if (action.payload === 'newest') {
+          return (
+            new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+          )
+        } else {
+          return (
+            new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf()
+          )
+        }
+      })
+
+      state.logs = [...state.logs].sort((a, b) => {
+        if (action.payload === 'newest') {
+          return (
+            new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf()
+          )
+        } else {
+          return (
+            new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+          )
+        }
       })
     },
   },
@@ -59,7 +86,7 @@ export const historySlice = createSlice({
 
 export const historyReducer = historySlice.reducer
 
-export const { setLogs, setFilters } = historySlice.actions
+export const { setLogs, setFilters, setSorting } = historySlice.actions
 
 function getFilterDates(filterDate?: string, offset = 0) {
   if (!filterDate) return undefined
@@ -78,7 +105,7 @@ function getFilterDates(filterDate?: string, offset = 0) {
     new Date(
       new Date().setFullYear(
         +parsedFromFilter[2],
-        +parsedFromFilter[1] - 1,
+        +parsedFromFilter[1] - 1, // Months are from 0 to 11, thou minus to parse
         +parsedFromFilter[0]
       )
     ).setHours(0 + offset, 0, 0, 0)
