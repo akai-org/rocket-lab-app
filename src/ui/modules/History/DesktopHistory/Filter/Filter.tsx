@@ -92,6 +92,7 @@ const Filter = () => {
             variant="unstyled"
             placeholder="wybierz"
             onChange={handleChange}
+            defaultValue={sort}
           >
             <option value="newest">najnowsze</option>
             <option value="oldest">najstarsze</option>

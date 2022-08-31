@@ -60,6 +60,7 @@ export function useFilters(customFilters: string[] = []) {
   }
 
   for (const key in query) {
+    if (key === 'sort') continue
     if (!query[key] || !customQuery[key] || query[key]?.length === 0) {
       delete query[key]
     }
@@ -75,6 +76,13 @@ export function useFilters(customFilters: string[] = []) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    for (const custom in customQuery) {
+      if (!customQuery[custom]) {
+        delete customQuery[custom]
+      }
+    }
+
     console.log({ query, customQuery })
     router.push({ query: { ...query, ...searchQuery, ...customQuery } })
   }
