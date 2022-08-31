@@ -34,19 +34,24 @@ export const historySlice = createSlice({
       // filtering
 
       const fromFilter = getFilterDates(action.payload.fromFilter)
-      const toFilter = getFilterDates(action.payload.toFilter)
+      const toFilter = getFilterDates(action.payload.toFilter, 24)
 
-      console.log('FILTERING')
+      console.log({ fromFilter, toFilter })
 
       state.displayLogs = state.logs.filter((log) => {
-        let stopped = true
-        if (fromFilter) {
-          stopped = !(new Date(log.createdAt) >= fromFilter)
+        if (fromFilter && !toFilter) {
+          return new Date(log.createdAt) >= fromFilter
         }
-        if (toFilter) {
-          stopped = !(new Date(log.createdAt) <= toFilter)
+        if (toFilter && !fromFilter) {
+          return new Date(log.createdAt) <= toFilter
         }
-        return stopped
+        if (toFilter && fromFilter) {
+          return (
+            new Date(log.createdAt) >= fromFilter &&
+            new Date(log.createdAt) <= toFilter
+          )
+        }
+        return false
       })
     },
   },
@@ -56,7 +61,7 @@ export const historyReducer = historySlice.reducer
 
 export const { setLogs, setFilters } = historySlice.actions
 
-function getFilterDates(filterDate?: string) {
+function getFilterDates(filterDate?: string, offset = 0) {
   if (!filterDate) return undefined
 
   const parsedFromFilter = filterDate.split('.')
@@ -70,10 +75,12 @@ function getFilterDates(filterDate?: string) {
     return
   }
   return new Date(
-    new Date().setFullYear(
-      +parsedFromFilter[2],
-      +parsedFromFilter[1],
-      +parsedFromFilter[0]
-    )
+    new Date(
+      new Date().setFullYear(
+        +parsedFromFilter[2],
+        +parsedFromFilter[1] - 1,
+        +parsedFromFilter[0]
+      )
+    ).setHours(0 + offset, 0, 0, 0)
   )
 }

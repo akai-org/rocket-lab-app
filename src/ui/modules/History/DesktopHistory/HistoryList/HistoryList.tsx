@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { HistoryLog } from '../../../../../mongo/models/history'
 import { historyInfo } from '../../../../../store/store'
@@ -7,8 +7,14 @@ import { groupLogs } from '../../../../../utils/helpers'
 import HistoryListItem from '../HistoryListItem/HistoryListItem'
 
 const HistoryList = () => {
-  const logs = useSelector(historyInfo).logs
-  const [groupedLogs] = useState(groupLogs(logs))
+  const logs = useSelector(historyInfo).displayLogs
+  const [groupedLogs, setGroupedLogs] = useState(groupLogs(logs))
+
+  console.log()
+
+  useEffect(() => {
+    setGroupedLogs(groupLogs(logs))
+  }, [logs])
 
   const keys: string[] = []
   groupedLogs.forEach((value, key) => {
