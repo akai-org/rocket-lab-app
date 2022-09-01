@@ -104,9 +104,9 @@ function getFilterDates(filterDate?: string, offset = 0) {
   return new Date(
     new Date(
       new Date().setFullYear(
-        +parsedFromFilter[2],
+        +parsedFromFilter[0],
         +parsedFromFilter[1] - 1, // Months are from 0 to 11, thou minus to parse
-        +parsedFromFilter[0]
+        +parsedFromFilter[2]
       )
     ).setHours(0 + offset, 0, 0, 0)
   )
