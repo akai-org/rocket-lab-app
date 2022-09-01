@@ -4,7 +4,7 @@ import { createTypesMap } from '../../../../../utils/helpers'
 
 export const typesMap = createTypesMap()
 
-const HistoryListItemMessage = ({
+export const HistoryListItemMessage = ({
   name,
   changedQuantity,
   resourceType,
@@ -21,4 +21,3 @@ const HistoryListItemMessage = ({
     </Text>
   )
 }
-<<<<<<< HEAD
