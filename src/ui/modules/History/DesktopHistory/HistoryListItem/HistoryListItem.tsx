@@ -10,7 +10,7 @@ export interface Props {
   groupDate: string
 }
 
-const HistoryListItem: FC<Props> = ({ logs, groupDate }) => {
+export const HistoryListItem: FC<Props> = ({ logs, groupDate }) => {
   const colors = useColors()
 
   return (
