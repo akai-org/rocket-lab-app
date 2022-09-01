@@ -1,5 +1,5 @@
 import { Flex, Image, Td, Text, Tr, useDisclosure } from '@chakra-ui/react'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { CartItem } from 'mongo'
 import { ModalInfo } from 'ui/components'
 import { useColors } from 'ui/theme'

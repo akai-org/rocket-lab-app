@@ -1,5 +1,5 @@
 import { Text } from '@chakra-ui/react'
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 export const NameAndQuantityElement = memo(() => {
   return (

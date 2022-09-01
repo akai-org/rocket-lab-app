@@ -1,5 +1,5 @@
 import { Box, Flex, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react'
-import React, { useState, memo } from 'react'
+import { useState, memo } from 'react'
 import { ListItem, GridItem } from './Item'
 import { MainViewProps, sortingType } from 'utils'
 import { PaginationControlls } from './Pagination'

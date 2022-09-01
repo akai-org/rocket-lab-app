@@ -1,8 +1,7 @@
 import { Box, ButtonGroup, Checkbox, Flex, Input } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { AiOutlineCheck, AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
 
 interface CategoryProps {
   // FIXME: nie wolno używać key jako propsów

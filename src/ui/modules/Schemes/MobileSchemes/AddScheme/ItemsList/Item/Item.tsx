@@ -1,4 +1,4 @@
-import React, { useContext, memo } from 'react'
+import { useContext, memo } from 'react'
 import {
   Flex,
   NumberDecrementStepper,

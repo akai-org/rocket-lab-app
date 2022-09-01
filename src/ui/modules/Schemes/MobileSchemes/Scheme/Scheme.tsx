@@ -16,7 +16,7 @@ import {
 import { useDispatch } from 'react-redux'
 import { SchemeMenu, ModalInfoScheme } from 'ui/components'
 import { SchemeItem } from './SchemeItem'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { PopulatedSchema } from 'mongo'
 import { API_URL } from 'utils/constants'
 import { fetcher } from 'utils/requests'

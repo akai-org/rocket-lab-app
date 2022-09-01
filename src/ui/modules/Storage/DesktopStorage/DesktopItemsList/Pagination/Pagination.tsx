@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { sortingType } from 'utils'
 import { PaginationGeneral } from 'ui/components'
 import { PaginationControlls } from './PaginationControlls'

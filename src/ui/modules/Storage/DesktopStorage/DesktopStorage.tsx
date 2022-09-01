@@ -4,14 +4,13 @@ import { DesktopItemsList } from './DesktopItemsList'
 import { MainViewProps } from 'utils/types/frontendGeneral'
 import { useSelector } from 'react-redux'
 import { storageCartInfo } from 'store'
-import { useEffect } from 'react'
+import { useEffect, memo } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
 import { ModalAddToList, DesktopWrapper } from 'ui/components'
 import Router from 'next/router'
 import { StorageEdit } from './StorageEdit'
 import { useAddNewList } from 'utils/effects/useAddNewList'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
 
 export const DesktopStorage = memo(({ items, itemsCount }: MainViewProps) => {
   const toast = useToast()

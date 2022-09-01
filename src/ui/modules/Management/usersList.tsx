@@ -1,11 +1,10 @@
 import { Button, UnorderedList } from '@chakra-ui/react'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useState, memo } from 'react'
 import { User } from 'mongo'
 import { API_URL } from 'utils/constants'
 import { fetcher } from 'utils/requests'
 import { adminRoles } from 'utils/types/backendGeneral'
 import { UserItem } from './userItem'
-import React, { memo } from 'react'
 interface Props {
   users: User[]
   updateUsers: (users: User[]) => void

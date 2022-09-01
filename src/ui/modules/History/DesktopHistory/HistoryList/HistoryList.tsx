@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react'
 import { HistoryListItem } from '../HistoryListItem'
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 export const HistoryList = memo(() => {
   return (

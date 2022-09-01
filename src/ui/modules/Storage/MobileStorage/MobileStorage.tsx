@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react'
+import { useState, useEffect, memo } from 'react'
 import { Button, Flex, Text, useDisclosure, useToast } from '@chakra-ui/react'
 import { Filters } from './Filters'
 import { Sorting } from './Sorting'

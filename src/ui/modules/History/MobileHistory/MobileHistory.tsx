@@ -1,11 +1,10 @@
 import { Flex, Box, Text, Stack, Select, useDisclosure } from '@chakra-ui/react'
 import { IoMdFunnel } from 'react-icons/io'
 import { HistoryList } from './HistoryList'
-import { useRef } from 'react'
+import { useRef, memo } from 'react'
 import { FilterDrawer } from './FilterDrawer'
 import { MobileWrapper } from 'ui/components'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
 
 export const MobileHistory = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure()

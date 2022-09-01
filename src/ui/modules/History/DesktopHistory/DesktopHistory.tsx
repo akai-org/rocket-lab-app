@@ -3,7 +3,7 @@ import { Filter } from './Filter'
 import { HistoryList } from './HistoryList'
 import { useColors } from 'ui/theme'
 import { DesktopWrapper } from 'ui/components'
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 export const DesktopHistory = memo(() => {
   const colors = useColors()

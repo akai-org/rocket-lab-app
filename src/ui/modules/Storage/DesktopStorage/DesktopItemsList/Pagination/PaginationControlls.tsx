@@ -9,7 +9,7 @@ import { sortingType } from 'utils'
 import { PaginationSettings } from 'ui/components'
 import { Sorting } from '../Sorting'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 interface Props extends PaginationSettings {
   setListType: (type: sortingType) => void

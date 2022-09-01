@@ -1,5 +1,5 @@
 import { Button, Flex, Icon, Input, Select, Text } from '@chakra-ui/react'
-import React, { FC, memo } from 'react'
+import { FC, memo } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useFilters } from 'utils/effects'
 import { useColors } from 'ui/theme'

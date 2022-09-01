@@ -7,14 +7,13 @@ import {
   NumberInputStepper,
   Text,
 } from '@chakra-ui/react'
-import { useContext, useState } from 'react'
+import { useContext, useState, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { itemsInfo } from 'store'
 import { ProductButton, SearchSelect } from 'ui/components'
 import { SchemasContext } from 'pages/schemes'
 import * as _ from 'lodash'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
 
 interface SelectedType {
   value: string | null

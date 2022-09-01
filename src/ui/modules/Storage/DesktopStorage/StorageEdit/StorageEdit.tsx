@@ -9,7 +9,7 @@ import {
 import { CategoryEdit } from './CategoryEdit'
 import { ItemsEdit } from './ItemsEdit'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 export const StorageEdit = memo(() => {
   const colors = useColors()

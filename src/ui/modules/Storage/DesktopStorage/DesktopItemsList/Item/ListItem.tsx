@@ -5,7 +5,7 @@ import { PopulatedItem } from 'mongo'
 import { addToCart, removeFromCart, storageCartInfo } from 'store'
 import { ModalInfo, ModalEditItem, ProductButton } from 'ui/components'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 interface Props {
   item: PopulatedItem

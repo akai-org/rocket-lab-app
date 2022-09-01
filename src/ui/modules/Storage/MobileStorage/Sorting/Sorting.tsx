@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { Flex, ButtonGroup, Icon } from '@chakra-ui/react'

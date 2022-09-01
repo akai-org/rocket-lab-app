@@ -7,10 +7,9 @@ import {
   ColorModeSwitch,
 } from 'ui/components'
 import { Avatar, Flex, Text, useMediaQuery } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { Role } from 'utils/types/frontendGeneral'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
 
 export const Settings = memo(() => {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')

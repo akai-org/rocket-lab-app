@@ -14,10 +14,9 @@ import {
   Stack,
   Select,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
+import { useRef, useState, memo } from 'react'
 import { ProductButton } from 'ui/components'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
 
 export const AddItem = memo(() => {
   const name = useRef<HTMLInputElement>(null)

@@ -18,14 +18,13 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useRef, useState } from 'react'
+import { useRef, useState, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { categoriesInfo } from 'store'
 import { API_URL } from 'utils/constants'
 import { fetcher } from 'utils/requests'
 import { ProductButton } from 'ui/components'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
 
 export const ItemsEdit = memo(() => {
   const router = useRouter()

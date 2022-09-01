@@ -11,7 +11,7 @@ import {
   Input,
   Text,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
+import { useRef, useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCategory, removeCategories, categoriesInfo } from 'store'
 import { API_URL } from 'utils/constants'
@@ -19,7 +19,6 @@ import { fetcher } from 'utils/requests'
 import { ProductButton, DeletePopover } from 'ui/components'
 import { Category } from './Category'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
 
 export const CategoryEdit = memo(() => {
   const categories = useSelector(categoriesInfo).categories

@@ -16,7 +16,7 @@ import { removeExisitngCartList } from 'store'
 import { fetcher } from 'utils/requests'
 import { API_URL } from 'utils/constants'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 export interface Props extends PopulatedCartList {}
 

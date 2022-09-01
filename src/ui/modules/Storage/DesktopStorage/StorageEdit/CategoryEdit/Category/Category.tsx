@@ -1,12 +1,11 @@
 import { Box, ButtonGroup, Checkbox, Flex, Input } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { AiOutlineCheck, AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { updateCategory } from 'store'
 import { API_URL } from 'utils/constants'
 import { fetcher } from 'utils/requests'
 import { useColors } from 'ui/theme'
-import React, { memo } from 'react'
 
 interface CategoryProps {
   id: string

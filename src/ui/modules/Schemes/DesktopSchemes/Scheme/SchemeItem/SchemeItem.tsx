@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { Td, Text, Tr } from '@chakra-ui/react'
 import { QuantityBadge } from 'ui/components'
 
