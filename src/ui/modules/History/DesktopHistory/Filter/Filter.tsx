@@ -57,7 +57,7 @@ export const Filter = () => {
               })
             }}
             value={customQuery['from'] || ''}
-            type="data"
+            type="date"
             placeholder="DD.MM.RRRR"
           ></Input>
         </Stack>
@@ -77,7 +77,7 @@ export const Filter = () => {
               })
             }}
             value={customQuery['to'] || ''}
-            type="data"
+            type="date"
             placeholder="DD.MM.RRRR"
           ></Input>
         </Stack>

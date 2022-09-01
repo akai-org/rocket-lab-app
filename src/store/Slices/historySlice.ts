@@ -91,7 +91,7 @@ export const { setLogs, setFilters, setSorting } = historySlice.actions
 function getFilterDates(filterDate?: string, offset = 0) {
   if (!filterDate) return undefined
 
-  const parsedFromFilter = filterDate.split('.')
+  const parsedFromFilter = filterDate.split('-')
   if (
     !parsedFromFilter ||
     !Array.isArray(parsedFromFilter) ||
