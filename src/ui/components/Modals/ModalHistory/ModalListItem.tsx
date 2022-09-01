@@ -1,6 +1,7 @@
 import { Stack, Image, Text } from '@chakra-ui/react'
+import { memo } from 'react'
 
-const ElementInfo = () => {
+export const ElementInfo = memo(() => {
   return (
     <Stack
       direction="row"
@@ -23,6 +24,4 @@ const ElementInfo = () => {
       <Text fontSize="sm">1 szt.</Text>
     </Stack>
   )
-}
-
-export default ElementInfo
+})

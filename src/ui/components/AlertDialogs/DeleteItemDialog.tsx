@@ -5,18 +5,17 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogOverlay,
-  Button,
 } from '@chakra-ui/react'
-import React, { useRef } from 'react'
-import { useColors } from '../../../theme/useColors'
-import ProductButton from '../Custom Buttons/ProductButton/ProductButton'
+import React, { memo, useRef } from 'react'
+import { useColors } from 'ui/theme'
+import { ProductButton } from 'ui/components'
 
 interface DeleteItemDialogProps {
   isOpenDialog: boolean
   onCloseDialog: () => void
 }
 
-const DeleteItemDialog = (props: DeleteItemDialogProps) => {
+export const DeleteItemDialog = memo((props: DeleteItemDialogProps) => {
   const cancelRef = useRef(null)
   const colors = useColors()
 
@@ -60,6 +59,4 @@ const DeleteItemDialog = (props: DeleteItemDialogProps) => {
       </AlertDialogOverlay>
     </AlertDialog>
   )
-}
-
-export default DeleteItemDialog
+})

@@ -34,7 +34,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducers)
 
-const store = configureStore({
+export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -44,8 +44,6 @@ const store = configureStore({
     }),
 })
 
-export default store
-
 type RootState = ReturnType<typeof store.getState>
 export const authInfo = (state: RootState) => state.authData.data
 export const storageCartInfo = (state: RootState) => state.storageCartData
@@ -53,3 +51,5 @@ export const categoriesInfo = (state: RootState) => state.categoriesData
 export const schemeInfo = (state: RootState) => state.schemeData
 export const itemsInfo = (state: RootState) => state.itemsData
 export const historyInfo = (state: RootState) => state.historyData
+
+export default store

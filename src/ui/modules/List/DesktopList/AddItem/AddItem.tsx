@@ -15,10 +15,10 @@ import {
   Select,
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
-import ProductButton from '../../../../components/Custom Buttons/ProductButton/ProductButton'
-import { useColors } from '../../../../../theme/useColors'
+import { ProductButton } from 'ui/components'
+import { useColors } from 'ui/theme'
 
-const AddItem = () => {
+export const AddItem = () => {
   const name = useRef<HTMLInputElement>(null)
   const [nameIsValid, setNameIsValid] = useState(true)
   const [quantity, setQuantity] = useState(1)
@@ -117,5 +117,3 @@ const AddItem = () => {
     </Accordion>
   )
 }
-
-export default AddItem

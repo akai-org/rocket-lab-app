@@ -1,12 +1,12 @@
 import { Button, Flex, Input, Select, Stack, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useColors } from '../../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 import { validateSortParam } from '../../../../../utils/dataValidation/validateSortParam'
 import { useFilters } from '../../../../../utils/effects/useFilters'
 import queryString from 'query-string'
 import { SortType } from '../../../../../services/itemsService'
 
-const Filter = () => {
+export const Filter = () => {
   const colors = useColors()
   const { handleSubmit, customQuery, setCustomQuery } = useFilters([
     'from',
@@ -113,5 +113,3 @@ const Filter = () => {
     </form>
   )
 }
-
-export default Filter

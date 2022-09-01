@@ -2,10 +2,10 @@ import { Badge, Box, Flex, Heading, Icon, Stack, Text } from '@chakra-ui/react'
 import { FC } from 'react'
 import { FaUserCircle } from 'react-icons/fa'
 import { HistoryLog } from '../../../../../mongo/models/history'
-import { useColors } from '../../../../../theme/useColors'
-import HistoryListItemMessage from '../HistoryListItemMessage/HistoryListItemMessage'
+import { useColors } from 'ui/theme'
+import { HistoryListItemMessage } from '../HistoryListItemMessage'
 
-interface Props {
+export interface Props {
   logs: HistoryLog[]
   groupDate: string
 }
@@ -62,5 +62,3 @@ const HistoryListItem: FC<Props> = ({ logs, groupDate }) => {
     </Flex>
   )
 }
-
-export default HistoryListItem

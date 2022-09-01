@@ -20,13 +20,13 @@ import {
 import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { categoriesInfo } from '../../../../../../store/store'
-import { API_URL } from '../../../../../../utils/constants'
-import { fetcher } from '../../../../../../utils/requests'
-import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
-import { useColors } from '../../../../../../theme/useColors'
+import { categoriesInfo } from 'store'
+import { API_URL } from 'utils/constants'
+import { fetcher } from 'utils/requests'
+import { ProductButton } from 'ui/components'
+import { useColors } from 'ui/theme'
 
-const ItemsEdit = () => {
+export const ItemsEdit = () => {
   const router = useRouter()
   const colors = useColors()
   const categories = useSelector(categoriesInfo).categories
@@ -163,5 +163,3 @@ const ItemsEdit = () => {
     </Accordion>
   )
 }
-
-export default ItemsEdit

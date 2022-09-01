@@ -5,11 +5,10 @@ import {
 import { Box } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { useState } from 'react'
-import { UsersList } from '../../ui/modules/Management/usersList'
-import { connectDB } from '../../mongo/db'
-import { User } from '../../mongo/models/user'
-import { Credentials } from '../../utils/credentials'
-import * as userService from '../../services/userService'
+import { UsersList } from 'ui/modules'
+import { connectDB, User } from 'mongo'
+import { Credentials } from 'utils/credentials'
+import * as userService from 'services'
 
 export interface Error {
   message: string

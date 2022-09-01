@@ -15,24 +15,23 @@ import {
   Tbody,
   Input,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { PopulatedCartList } from '../../../../mongo/models/cart'
-import { updateExistingCartLists } from '../../../../store/Slices/storageCartSlice'
-import { API_URL } from '../../../../utils/constants'
-import { useDeleteCartList } from '../../../../utils/effects/useDeleteCartList'
-import { fetcher } from '../../../../utils/requests'
-import ProductButton from '../../Custom Buttons/ProductButton/ProductButton'
-import DeletePopover from '../../Popovers/DeletePopover'
-import ListItem from './ListItem/ListItem'
-import { useColors } from '../../../../theme/useColors'
+import { PopulatedCartList } from 'mongo'
+import { updateExistingCartLists } from 'store'
+import { API_URL } from 'utils/constants'
+import { useDeleteCartList } from 'utils/effects/useDeleteCartList'
+import { fetcher } from 'utils/requests'
+import { ProductButton, DeletePopover } from 'ui/components'
+import { ListItem } from './ListItem'
+import { useColors } from 'ui/theme'
 
 interface ModalEditListProps extends Omit<ModalProps, 'children'> {
   cartList: PopulatedCartList
   name: string
 }
 
-const ModalEditList = (props: ModalEditListProps) => {
+export const ModalEditList = memo((props: ModalEditListProps) => {
   const dispatch = useDispatch()
 
   const [cartList, setCartList] = useState(props.cartList)
@@ -147,6 +146,4 @@ const ModalEditList = (props: ModalEditListProps) => {
       </ModalContent>
     </Modal>
   )
-}
-
-export default ModalEditList
+})

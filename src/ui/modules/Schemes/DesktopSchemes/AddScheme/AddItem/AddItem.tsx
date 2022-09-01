@@ -9,12 +9,11 @@ import {
 } from '@chakra-ui/react'
 import { useContext, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { itemsInfo } from '../../../../../../store/store'
-import ProductButton from '../../../../../components/Custom Buttons/ProductButton/ProductButton'
-import SearchSelect from '../../../../../components/SearchSelect/SearchSelect'
-import { SchemasContext } from '../../../../../../pages/schemes'
+import { itemsInfo } from 'store'
+import { ProductButton, SearchSelect } from 'ui/components'
+import { SchemasContext } from 'pages/schemes'
 import * as _ from 'lodash'
-import { useColors } from '../../../../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
 interface SelectedType {
   value: string | null
@@ -32,7 +31,7 @@ const noOption = {
   id: null,
 }
 
-const AddItem = (props: AddItemProps) => {
+export const AddItem = (props: AddItemProps) => {
   const context = useContext(SchemasContext)
   const [quantity, setQuantity] = useState(1)
   const colors = useColors()
@@ -114,5 +113,3 @@ const AddItem = (props: AddItemProps) => {
     </Flex>
   )
 }
-
-export default AddItem

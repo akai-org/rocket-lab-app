@@ -2,7 +2,7 @@ import { Text } from '@chakra-ui/react'
 import { HistoryLogType } from '../../../../../mongo/models/history'
 import { createTypesMap } from '../../../../../utils/helpers'
 
-const typesMap = createTypesMap()
+export const typesMap = createTypesMap()
 
 const HistoryListItemMessage = ({
   name,
@@ -21,7 +21,4 @@ const HistoryListItemMessage = ({
     </Text>
   )
 }
-
-export default HistoryListItemMessage
-
-
+<<<<<<< HEAD

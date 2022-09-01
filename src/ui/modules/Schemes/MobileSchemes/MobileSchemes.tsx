@@ -1,10 +1,10 @@
-import AddScheme from './AddScheme/AddScheme'
-import MobileWrapper from '../../../components/Wrappers/MobileWrapper/MobileWrapper'
-import Scheme from './Scheme/Scheme'
+import { AddScheme } from './AddScheme'
+import { MobileWrapper } from 'ui/components'
+import { Scheme } from './Scheme'
 import { useSelector } from 'react-redux'
-import { schemeInfo } from '../../../../store/store'
+import { schemeInfo } from 'store'
 
-const MobileSchemes = () => {
+export const MobileSchemes = () => {
   const schemeData = useSelector(schemeInfo)
 
   return (
@@ -16,5 +16,3 @@ const MobileSchemes = () => {
     </MobileWrapper>
   )
 }
-
-export default MobileSchemes

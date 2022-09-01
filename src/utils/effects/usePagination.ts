@@ -74,6 +74,6 @@ export function usePagination(): {
     itemsCount,
     toDisplay,
     currentPage,
-    query
+    query,
   }
 }

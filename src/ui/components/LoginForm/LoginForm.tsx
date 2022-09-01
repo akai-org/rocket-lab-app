@@ -1,4 +1,4 @@
-import { useState, SyntheticEvent, useRef } from 'react'
+import { useState, SyntheticEvent, useRef, memo } from 'react'
 import {
   Flex,
   Heading,
@@ -17,9 +17,9 @@ import {
 } from '@chakra-ui/react'
 import { IoIosAt, IoIosLock } from 'react-icons/io'
 import { FcGoogle } from 'react-icons/fc'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from 'ui/theme'
 
-const LoginForm = () => {
+export const LoginForm = memo(() => {
   const [showPassword, setShowPassword] = useState(false)
   const [logIn, setLogIn] = useState(false)
   const [emailIsCorrect, setEmailIsCorrect] = useState(true)
@@ -187,6 +187,4 @@ const LoginForm = () => {
       </Stack>
     </Flex>
   )
-}
-
-export default LoginForm
+})

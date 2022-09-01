@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Select, { Props } from 'react-select'
-import { useColors } from '../../../theme/useColors'
+import { useColors } from '../../theme/useColors'
 
-const SearchSelect = ({ ...restProps }: Props) => {
+export const SearchSelect = memo(({ ...restProps }: Props) => {
   const colors = useColors()
 
   return (
@@ -43,6 +43,4 @@ const SearchSelect = ({ ...restProps }: Props) => {
       {...restProps}
     />
   )
-}
-
-export default SearchSelect
+})

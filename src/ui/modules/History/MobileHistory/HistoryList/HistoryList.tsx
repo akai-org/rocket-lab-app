@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux'
 import { HistoryLog } from '../../../../../mongo/models/history'
 import { historyInfo } from '../../../../../store/store'
 import { groupLogs } from '../../../../../utils/helpers'
-import HistoryListItem from '../HistoryListItem/HistoryListItem'
+import { HistoryListItem } from '../HistoryListItem'
 
-const HistoryList = () => {
+export const HistoryList = () => {
   const logs = useSelector(historyInfo).displayLogs
   const [groupedLogs, setGroupedLogs] = useState(groupLogs(logs))
 
@@ -40,5 +40,3 @@ const HistoryList = () => {
     </Flex>
   )
 }
-
-export default HistoryList

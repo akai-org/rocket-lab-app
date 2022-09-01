@@ -2,15 +2,15 @@ import { Flex, Stack, Heading, Text, Icon, Box } from '@chakra-ui/react'
 import { FC } from 'react'
 import { FaUserCircle } from 'react-icons/fa'
 import { HistoryLog } from '../../../../../mongo/models/history'
-import { useColors } from '../../../../../theme/useColors'
-import HistoryListItemMessage from '../../DesktopHistory/HistoryListItemMessage/HistoryListItemMessage'
+import { useColors } from 'ui/theme'
+import { HistoryListItemMessage } from '../../DesktopHistory/HistoryListItemMessage/HistoryListItemMessage'
 
 interface Props {
   logs: HistoryLog[]
   groupDate: string
 }
 
-const HistoryListItem: FC<Props> = ({ groupDate, logs }) => {
+export const HistoryListItem: FC<Props> = ({ groupDate, logs }) => {
   const colors = useColors()
 
   return (
@@ -55,5 +55,3 @@ const HistoryListItem: FC<Props> = ({ groupDate, logs }) => {
     </Flex>
   )
 }
-
-export default HistoryListItem
