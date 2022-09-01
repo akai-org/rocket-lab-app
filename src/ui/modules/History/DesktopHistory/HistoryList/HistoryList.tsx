@@ -10,8 +10,6 @@ const HistoryList = () => {
   const logs = useSelector(historyInfo).displayLogs
   const [groupedLogs, setGroupedLogs] = useState(groupLogs(logs))
 
-  console.log()
-
   useEffect(() => {
     setGroupedLogs(groupLogs(logs))
   }, [logs])

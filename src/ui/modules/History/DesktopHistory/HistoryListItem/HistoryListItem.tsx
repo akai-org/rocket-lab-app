@@ -28,6 +28,7 @@ const HistoryListItem: FC<Props> = ({ logs, groupDate }) => {
         {!logs
           ? null
           : logs.map((log) => {
+              const logDate = new Date(log.createdAt)
               return (
                 <Stack key={log.id} direction="row" mb="20px" w="100%">
                   <Icon
@@ -40,7 +41,7 @@ const HistoryListItem: FC<Props> = ({ logs, groupDate }) => {
                     <Stack direction="row">
                       <Heading size="sm">{log.author}</Heading>
                       <Text fontSize="sm">
-                        {new Date(log.createdAt).toDateString()}
+                        {`${logDate.getHours()}:${logDate.getMinutes()}`}
                       </Text>
                       <Badge variant="solid" colorScheme="orange" color="white">
                         {log.resource.type}

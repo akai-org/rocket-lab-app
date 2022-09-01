@@ -1,18 +1,16 @@
-import {
-  Flex,
-  Stack,
-  Heading,
-  Text,
-  useDisclosure,
-  Icon,
-} from '@chakra-ui/react'
+import { Flex, Stack, Heading, Text, Icon, Box } from '@chakra-ui/react'
+import { FC } from 'react'
 import { FaUserCircle } from 'react-icons/fa'
+import { HistoryLog } from '../../../../../mongo/models/history'
 import { useColors } from '../../../../../theme/useColors'
-import ModalHistory from '../../../../components/Modals/ModalHistory/ModalHistory'
-import NameAndQuantityElement from '../NameAndQuantityElement/NameAndQuantityElement'
+import HistoryListItemMessage from '../../DesktopHistory/HistoryListItemMessage/HistoryListItemMessage'
 
-const HistoryListItem = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+interface Props {
+  logs: HistoryLog[]
+  groupDate: string
+}
+
+const HistoryListItem: FC<Props> = ({ groupDate, logs }) => {
   const colors = useColors()
 
   return (
@@ -21,33 +19,39 @@ const HistoryListItem = () => {
       color={colors.fontPrimary}
       flexDirection="column"
     >
-      <Stack direction="row">
-        <Icon
-          as={FaUserCircle}
-          mr="5px"
-          color={colors.fontPrimary}
-          fontSize="50px"
-        />
-        <Stack direction="column" maxW="70vw">
-          <Stack direction="row">
-            <Heading size="sm">Rafał Walkowiak</Heading>
-            <Text fontSize="sm">21:37</Text>
-          </Stack>
-          <Text fontSize="sm" isTruncated>
-            Wyciągnięto z magazynu:
-          </Text>
-          <NameAndQuantityElement />
-          <Text
-            as="u"
-            color={colors.orangePrimary}
-            onClick={onOpen}
-            isTruncated
-          >
-            pokaż więcej
-          </Text>
-        </Stack>
-      </Stack>
-      <ModalHistory isOpen={isOpen} onClose={onClose} />
+      <Box m="10px 0 0 10px" w="100%">
+        <Text size="sm" fontWeight="normal" m="5px">
+          {groupDate}
+        </Text>
+        {!logs
+          ? null
+          : logs.map((log) => {
+              const logDate = new Date(log.createdAt)
+              return (
+                <Stack mb={2} key={log.id} direction="row">
+                  <Icon
+                    as={FaUserCircle}
+                    mr="5px"
+                    color={colors.fontPrimary}
+                    fontSize="50px"
+                  />
+                  <Stack direction="column" maxW="70vw">
+                    <Stack direction="row">
+                      <Heading size="sm">{log.author}</Heading>
+                      <Text fontSize="sm">
+                        {`${logDate.getHours()}:${logDate.getMinutes()}`}
+                      </Text>
+                    </Stack>
+                    <HistoryListItemMessage
+                      resourceType={log.type}
+                      changedQuantity={log.resource.changedQuantity}
+                      name={log.resource.name}
+                    />
+                  </Stack>
+                </Stack>
+              )
+            })}
+      </Box>
     </Flex>
   )
 }
