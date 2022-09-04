@@ -1,9 +1,15 @@
-import { Badge, Box, Flex, Heading, Icon, Stack, Text } from '@chakra-ui/react'
-import { FaUserCircle } from 'react-icons/fa'
+import { Box, Flex, Text } from '@chakra-ui/react'
+import { FC } from 'react'
+import { HistoryLog } from '../../../../../mongo/models/history'
 import { useColors } from 'ui/theme'
-import { HistoryListItemMessage } from '../HistoryListItemMessage'
+import { HistoryGroupItem } from '../HistoryGroupItem/HistoryGroupItem'
 
-export const HistoryListItem = () => {
+export interface Props {
+  logs: HistoryLog[]
+  groupDate: string
+}
+
+export const HistoryListItem: FC<Props> = ({ logs, groupDate }) => {
   const colors = useColors()
 
   return (
@@ -16,118 +22,11 @@ export const HistoryListItem = () => {
     >
       <Box m="10px 0 0 10px" w="100%">
         <Text size="sm" fontWeight="normal" m="5px">
-          22 luty, 2022
+          {groupDate}
         </Text>
-        <Stack direction="row" mb="20px" w="100%">
-          <Icon
-            as={FaUserCircle}
-            mr="5px"
-            color={colors.fontPrimary}
-            fontSize="50px"
-          />
-          <Stack direction="column" w="90%" maxW="1600px">
-            <Stack direction="row">
-              <Heading size="sm">Rafał Walkowiak</Heading>
-              <Text fontSize="sm">21:37</Text>
-              <Badge variant="solid" colorScheme="orange" color="white">
-                ITEM
-                {/* props type */}
-              </Badge>
-            </Stack>
-            <Stack direction="row">
-              <HistoryListItemMessage />
-            </Stack>
-          </Stack>
-        </Stack>
-        <Stack direction="row" mb="20px" w="100%">
-          <Icon
-            as={FaUserCircle}
-            mr="5px"
-            color={colors.fontPrimary}
-            fontSize="50px"
-          />
-          <Stack direction="column" w="90%" maxW="1600px">
-            <Stack direction="row">
-              <Heading size="sm">Rafał Walkowiak</Heading>
-              <Text fontSize="sm">21:37</Text>{' '}
-              <Badge variant="solid" colorScheme="orange" color="white">
-                ITEM
-                {/* props type */}
-              </Badge>
-            </Stack>
-            <Stack direction="row">
-              <HistoryListItemMessage />
-            </Stack>
-          </Stack>
-        </Stack>
-        <Stack direction="row" mb="20px" w="100%">
-          <Icon
-            as={FaUserCircle}
-            mr="5px"
-            color={colors.fontPrimary}
-            fontSize="50px"
-          />
-          <Stack direction="column" w="90%" maxW="1600px">
-            <Stack direction="row">
-              <Heading size="sm">Rafał Walkowiak</Heading>
-              <Text fontSize="sm">21:37</Text>{' '}
-              <Badge variant="solid" colorScheme="orange" color="white">
-                SCHEMA
-                {/* props type */}
-              </Badge>
-            </Stack>
-            <Stack direction="row">
-              <HistoryListItemMessage />
-            </Stack>
-          </Stack>
-        </Stack>
-        <Stack direction="row" mb="20px" w="100%">
-          <Icon
-            as={FaUserCircle}
-            mr="5px"
-            color={colors.fontPrimary}
-            fontSize="50px"
-          />
-          <Stack direction="column" w="90%" maxW="1600px">
-            <Stack direction="row">
-              <Heading size="sm">Rafał Walkowiak</Heading>
-              <Text fontSize="sm">21:37</Text>{' '}
-              <Badge variant="solid" colorScheme="orange" color="white">
-                LIST
-                {/* props type */}
-              </Badge>
-            </Stack>
-            <Stack direction="row">
-              <HistoryListItemMessage />
-            </Stack>
-          </Stack>
-        </Stack>
-      </Box>
-      <Box m="10px 0 0 10px" w="100%">
-        <Text size="sm" fontWeight="normal" m="5px">
-          22 luty, 2022
-        </Text>
-        <Stack direction="row" mb="20px" w="100%">
-          <Icon
-            as={FaUserCircle}
-            mr="5px"
-            color={colors.fontPrimary}
-            fontSize="50px"
-          />
-          <Stack direction="column" w="90%" maxW="1600px">
-            <Stack direction="row">
-              <Heading size="sm">Rafał Walkowiak</Heading>
-              <Text fontSize="sm">21:37</Text>{' '}
-              <Badge variant="solid" colorScheme="orange" color="white">
-                ITEM
-                {/* props type */}
-              </Badge>
-            </Stack>
-            <Stack direction="row">
-              <HistoryListItemMessage />
-            </Stack>
-          </Stack>
-        </Stack>
+        {!logs
+          ? null
+          : logs.map((log) => <HistoryGroupItem key={log.id} log={log} />)}
       </Box>
     </Flex>
   )
