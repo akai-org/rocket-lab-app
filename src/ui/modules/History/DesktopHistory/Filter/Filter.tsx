@@ -1,10 +1,10 @@
 import { Button, Flex, Input, Select, Stack, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useColors } from 'ui/theme'
-import { validateSortParam } from '../../../../../utils/dataValidation/validateSortParam'
-import { useFilters } from '../../../../../utils/effects/useFilters'
 import queryString from 'query-string'
-import { SortType } from '../../../../../services/itemsService'
+import { useFilters } from 'utils/effects'
+import { SortType } from 'services'
+import { validateSortParam } from 'utils/dataValidation'
 
 export const Filter = () => {
   const colors = useColors()

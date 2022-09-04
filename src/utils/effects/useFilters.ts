@@ -10,11 +10,6 @@ interface Query {
   searchTerm?: string | string[]
 }
 
-// interface CustomQueryFilter {
-//   paramName: string
-//   value: string | undefined
-// }
-
 export function useFilters(customFilters: string[] = []) {
   const router = useRouter()
   const query = queryString.parseUrl(router.asPath).query
@@ -82,8 +77,6 @@ export function useFilters(customFilters: string[] = []) {
         delete customQuery[custom]
       }
     }
-
-    console.log({ query, customQuery })
     router.push({ query: { ...query, ...searchQuery, ...customQuery } })
   }
 

@@ -17,7 +17,6 @@ const handler: NextApiHandler = async (req, res) => {
       const updatedItem = await itemsService.updateItem(body.id, body.item)
       if (!updatedItem) throw new Error('No item updated')
       if (!oldItem) throw new Error('No item found in DB')
-      console.log(Math.abs(oldItem.quantity - body.item.quantity) ?? undefined)
       if (oldItem.quantity > body.item.quantity) {
         await createHistoryLog(session.user.email, 'distributed', {
           name: updatedItem.name,

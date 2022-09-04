@@ -33,7 +33,6 @@ interface Props {
 
 const Home: NextPage<Props> = ({ logs, filters, sort }) => {
   const dispatch = useDispatch()
-  console.log(sort)
 
   useEffect(() => {
     dispatch(setLogs(logs))
