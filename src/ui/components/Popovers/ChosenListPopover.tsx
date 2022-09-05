@@ -31,6 +31,7 @@ export const ChosenListPopover = memo((props: ChosenListPopoverProps) => {
   const open = () => setIsOpen(!isOpen)
   const close = () => setIsOpen(false)
   const colors = useColors()
+  const valTest = ''
 
   return (
     <>
