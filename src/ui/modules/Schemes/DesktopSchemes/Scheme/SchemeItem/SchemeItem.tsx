@@ -8,21 +8,23 @@ interface SchemeItemProps {
   name: string
 }
 
-export const SchemeItem = memo(
-  ({ schemeQuantity, storageQuantity, name }: SchemeItemProps) => {
-    return (
-      <Tr fontSize="xs">
-        <Td>
-          <Text noOfLines={1}>{name}</Text>
-        </Td>
-        <Td>{schemeQuantity}</Td>
-        <Td textAlign="right">
-          <QuantityBadge
-            schemeQuantity={schemeQuantity}
-            storageQuantity={storageQuantity}
-          />
-        </Td>
-      </Tr>
-    )
-  }
-)
+export const SchemeItem = memo(function SchemeItem({
+  schemeQuantity,
+  storageQuantity,
+  name,
+}: SchemeItemProps) {
+  return (
+    <Tr fontSize="xs">
+      <Td>
+        <Text noOfLines={1}>{name}</Text>
+      </Td>
+      <Td>{schemeQuantity}</Td>
+      <Td textAlign="right">
+        <QuantityBadge
+          schemeQuantity={schemeQuantity}
+          storageQuantity={storageQuantity}
+        />
+      </Td>
+    </Tr>
+  )
+})

@@ -17,7 +17,7 @@ interface Props extends PaginationSettings {
 }
 
 export const PaginationControlls: React.FC<Props> = memo(
-  ({ listType, setListType }) => {
+  function PaginationControlls({ listType, setListType }) {
     const {
       maxPage,
       minPage,

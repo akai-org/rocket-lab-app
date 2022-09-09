@@ -9,7 +9,7 @@ import { useColors } from 'ui/theme'
 export const Sorting: React.FC<{
   setListType: (type: sortingType) => void
   listType: sortingType
-}> = memo((props) => {
+}> = memo(function Sorting(props) {
   const colors = useColors()
 
   return (

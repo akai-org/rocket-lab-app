@@ -19,7 +19,7 @@ import { addSchema } from 'store'
 import { SchemasContext } from 'pages/schemes'
 import { useColors } from 'ui/theme'
 
-export const AddScheme = memo(() => {
+export const AddScheme = memo(function AddScheme() {
   const context = useContext(SchemasContext)
 
   const dispatch = useDispatch()

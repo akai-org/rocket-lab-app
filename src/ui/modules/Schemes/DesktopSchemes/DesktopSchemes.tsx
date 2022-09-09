@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { schemeInfo } from 'store'
 import { memo } from 'react'
 
-export const DesktopSchemes = memo(() => {
+export const DesktopSchemes = memo(function DesktopSchemes() {
   const schemeData = useSelector(schemeInfo)
   return (
     <DesktopWrapper>

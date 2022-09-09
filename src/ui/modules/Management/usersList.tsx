@@ -10,7 +10,10 @@ interface Props {
   updateUsers: (users: User[]) => void
 }
 
-export const UsersList: React.FC<Props> = memo(({ users, updateUsers }) => {
+export const UsersList: React.FC<Props> = memo(function UsersList({
+  users,
+  updateUsers,
+}) {
   const [formUsers, setFormUsers] = useState(users)
 
   const handleSelectorChange = (id: string, role: adminRoles) => {

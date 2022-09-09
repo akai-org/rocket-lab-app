@@ -5,7 +5,7 @@ import { useColors } from 'ui/theme'
 import { DesktopWrapper } from 'ui/components'
 import { memo } from 'react'
 
-export const DesktopHistory = memo(() => {
+export const DesktopHistory = memo(function DesktopHistory() {
   const colors = useColors()
 
   return (

@@ -25,7 +25,7 @@ import { memo } from 'react'
 
 interface Props extends PopulatedCartList {}
 
-export const List = memo((props: Props) => {
+export const List = memo(function (props: Props) {
   const {
     isOpen: isOpenEditList,
     onOpen: onOpenEditList,

@@ -11,7 +11,7 @@ interface Props {
   item: PopulatedItem
 }
 
-export const GridItem = memo(({ item }: Props) => {
+export const GridItem = memo(function GridItem({ item }: Props) {
   const dispatch = useDispatch()
   const storageCartData = useSelector(storageCartInfo).newCartList
   const colors = useColors()

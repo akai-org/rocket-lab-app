@@ -6,7 +6,7 @@ import { List } from './List'
 import { DesktopWrapper } from 'ui/components'
 import { memo } from 'react'
 
-export const DesktopList = memo(() => {
+export const DesktopList = memo(function DesktopList() {
   const storageCartData = useSelector(storageCartInfo)
 
   return (

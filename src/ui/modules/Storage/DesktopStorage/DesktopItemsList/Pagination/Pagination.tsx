@@ -7,7 +7,7 @@ export const Pagination: React.FC<{
   setListType: (type: sortingType) => void
   listType: sortingType
   itemsCount?: number
-}> = memo((props) => {
+}> = memo(function Pagination(props) {
   return (
     <PaginationGeneral itemsCount={props.itemsCount}>
       {(controlls) => <PaginationControlls {...controlls} {...props} />}

@@ -20,7 +20,7 @@ import { useColors } from 'ui/theme'
 
 export type item = 'custom' | 'existing'
 
-export const AddItem = memo(() => {
+export const AddItem = memo(function AddItem() {
   const name = useRef<HTMLInputElement>(null)
   const [nameIsValid, setNameIsValid] = useState(true)
   const [quantity, setQuantity] = useState(1)

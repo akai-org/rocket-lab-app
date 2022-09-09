@@ -22,7 +22,7 @@ interface Props {
   setIsFiltersOpen: (isOpen: boolean) => void
 }
 
-export const Filters: React.FC<Props> = memo((props) => {
+export const Filters: React.FC<Props> = memo(function Filters(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const colors = useColors()
   const {

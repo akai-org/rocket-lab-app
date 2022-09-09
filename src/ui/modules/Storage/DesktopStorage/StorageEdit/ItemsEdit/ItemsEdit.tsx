@@ -24,7 +24,7 @@ import { fetcher } from 'utils/requests'
 import { ProductButton } from 'ui/components'
 import { useColors } from 'ui/theme'
 
-export const ItemsEdit = memo(() => {
+export const ItemsEdit = memo(function ItemsEdit() {
   const dispatch = useDispatch()
   const categories = useSelector(categoriesInfo).categories
   const colors = useColors()

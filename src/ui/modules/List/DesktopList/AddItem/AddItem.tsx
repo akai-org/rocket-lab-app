@@ -18,7 +18,7 @@ import { useRef, useState, memo } from 'react'
 import { ProductButton } from 'ui/components'
 import { useColors } from 'ui/theme'
 
-export const AddItem = memo(() => {
+export const AddItem = memo(function AddItem() {
   const name = useRef<HTMLInputElement>(null)
   const [nameIsValid, setNameIsValid] = useState(true)
   const [quantity, setQuantity] = useState(1)

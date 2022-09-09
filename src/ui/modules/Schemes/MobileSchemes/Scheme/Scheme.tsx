@@ -27,7 +27,7 @@ interface Props {
   schema: PopulatedSchema
 }
 
-export const Scheme = memo(({ schema }: Props) => {
+export const Scheme = memo(function Scheme({ schema }: Props) {
   const {
     isOpen: isOpenInfoScheme,
     onOpen: onOpenInfoScheme,

@@ -20,7 +20,7 @@ import { ProductButton, DeletePopover } from 'ui/components'
 import { Category } from './Category'
 import { useColors } from 'ui/theme'
 
-export const CategoryEdit = memo(() => {
+export const CategoryEdit = memo(function CategoryEdit() {
   const categories = useSelector(categoriesInfo).categories
   const colors = useColors()
   const [nameIsValid, setNameIsValid] = useState(true)

@@ -20,7 +20,7 @@ interface ItemProps {
   item: TmpSchemaItem
 }
 
-export const Item = memo(({ item: schemaItem }: ItemProps) => {
+export const Item = memo(function Item({ item: schemaItem }: ItemProps) {
   const context = useContext(SchemasContext)
   const colors = useColors()
 

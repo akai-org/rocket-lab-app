@@ -31,7 +31,7 @@ const noOption = {
   id: null,
 }
 
-export const AddItem = memo((props: AddItemProps) => {
+export const AddItem = memo(function AddItem(props: AddItemProps) {
   const context = useContext(SchemasContext)
   const [quantity, setQuantity] = useState(1)
   const colors = useColors()

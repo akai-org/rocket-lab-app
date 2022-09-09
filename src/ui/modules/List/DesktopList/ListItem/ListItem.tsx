@@ -6,7 +6,7 @@ import { useColors } from 'ui/theme'
 
 interface Props extends CartItem {}
 
-export const ListItem = memo((props: Props) => {
+export const ListItem = memo(function ListItem(props: Props) {
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,

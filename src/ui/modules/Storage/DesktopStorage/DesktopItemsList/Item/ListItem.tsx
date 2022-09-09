@@ -11,7 +11,7 @@ interface Props {
   item: PopulatedItem
 }
 
-export const ListItem = memo(({ item }: Props) => {
+export const ListItem = memo(function ListItem({ item }: Props) {
   const colors = useColors()
   const dispatch = useDispatch()
   const storageCartData = useSelector(storageCartInfo).newCartList

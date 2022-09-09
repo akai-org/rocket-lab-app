@@ -5,7 +5,9 @@ import { MainViewProps, sortingType } from 'utils'
 import { PaginationControlls } from './Pagination'
 import { useColors } from 'ui/theme'
 
-export const DesktopItemsList = memo(({ items }: MainViewProps) => {
+export const DesktopItemsList = memo(function DesktopItemsList({
+  items,
+}: MainViewProps) {
   const colors = useColors()
   const [listType, setListType] = useState<sortingType>('grid')
 

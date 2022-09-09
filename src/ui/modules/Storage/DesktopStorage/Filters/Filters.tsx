@@ -4,7 +4,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { useFilters } from 'utils/effects'
 import { useColors } from 'ui/theme'
 
-export const Filters: FC = memo(() => {
+export const Filters: FC = memo(function Filters() {
   const {
     categories,
     category,

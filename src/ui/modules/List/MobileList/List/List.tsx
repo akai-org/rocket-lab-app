@@ -20,7 +20,7 @@ import { memo } from 'react'
 
 export interface Props extends PopulatedCartList {}
 
-export const List = memo((props: Props) => {
+export const List = memo(function List(props: Props) {
   const dispatch = useDispatch()
   const colors = useColors()
 

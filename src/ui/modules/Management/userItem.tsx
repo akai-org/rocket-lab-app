@@ -10,7 +10,10 @@ interface Props {
   changeHandler: (id: string, value: adminRoles) => void
 }
 
-export const UserItem: React.FC<Props> = memo(({ user, changeHandler }) => {
+export const UserItem: React.FC<Props> = memo(function UserItem({
+  user,
+  changeHandler,
+}) {
   const displayOptions = options.map((option) => (
     <option key={option}>{option}</option>
   ))

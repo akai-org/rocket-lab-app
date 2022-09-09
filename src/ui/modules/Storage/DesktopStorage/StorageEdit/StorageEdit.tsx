@@ -11,7 +11,7 @@ import { ItemsEdit } from './ItemsEdit'
 import { useColors } from 'ui/theme'
 import { memo } from 'react'
 
-export const StorageEdit = memo(() => {
+export const StorageEdit = memo(function StorageEdit() {
   const colors = useColors()
 
   return (

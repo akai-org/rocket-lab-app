@@ -11,7 +11,7 @@ import { useState, memo } from 'react'
 import { Role } from 'utils/types/frontendGeneral'
 import { useColors } from 'ui/theme'
 
-export const Settings = memo(() => {
+export const Settings = memo(function Settings() {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
   const [selectedUser, setSelectedUser] = useState({ value: '', label: '' })
   const [selectedRole, setSelectedRole] = useState({})

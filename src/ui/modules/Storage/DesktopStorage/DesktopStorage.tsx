@@ -12,7 +12,10 @@ import { StorageEdit } from './StorageEdit'
 import { useAddNewList } from 'utils/effects/useAddNewList'
 import { useColors } from 'ui/theme'
 
-export const DesktopStorage = memo(({ items, itemsCount }: MainViewProps) => {
+export const DesktopStorage = memo(function DesktopStorage({
+  items,
+  itemsCount,
+}: MainViewProps) {
   const toast = useToast()
   const colors = useColors()
   const storageCartData = useSelector(storageCartInfo)

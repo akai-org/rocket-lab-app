@@ -4,7 +4,7 @@ import { useColors } from 'ui/theme'
 import { HistoryListItemMessage } from '../HistoryListItemMessage'
 import { memo } from 'react'
 
-export const HistoryListItem = memo(() => {
+export const HistoryListItem = memo(function HistoryListItem() {
   const colors = useColors()
 
   return (

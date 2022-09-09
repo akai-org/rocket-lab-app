@@ -12,7 +12,7 @@ import { ModalHistory } from 'ui/components'
 import { NameAndQuantityElement } from '../NameAndQuantityElement'
 import { memo } from 'react'
 
-export const HistoryListItem = memo(() => {
+export const HistoryListItem = memo(function HistoryListItem() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const colors = useColors()
 

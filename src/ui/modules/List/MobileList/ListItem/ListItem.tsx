@@ -4,7 +4,7 @@ import { ModalInfo } from 'ui/components'
 import { CartItem, Category } from 'mongo'
 import { useColors } from 'ui/theme'
 
-export const ListItem = memo((props: CartItem) => {
+export const ListItem = memo(function ListItem(props: CartItem) {
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,

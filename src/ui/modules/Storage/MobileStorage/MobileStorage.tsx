@@ -15,7 +15,9 @@ import { useAddNewList } from 'utils/effects/useAddNewList'
 import queryString from 'query-string'
 import { useColors } from 'ui/theme'
 
-export const MobileStorage = memo(({ itemsCount }: MainViewProps) => {
+export const MobileStorage = memo(function MobileStorage({
+  itemsCount,
+}: MainViewProps) {
   const router = useRouter()
   const query = queryString.parseUrl(router.asPath).query
   const [listType, setListType] = useState<sortingType>('grid')

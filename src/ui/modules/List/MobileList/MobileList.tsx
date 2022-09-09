@@ -6,7 +6,7 @@ import { List } from './List/List'
 import { MobileWrapper } from 'ui/components'
 import { memo } from 'react'
 
-export const MobileList = memo(() => {
+export const MobileList = memo(function MobileList() {
   const storageCartData = useSelector(storageCartInfo)
   return (
     <MobileWrapper pb="150px">

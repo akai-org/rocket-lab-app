@@ -19,7 +19,7 @@ import { useDispatch } from 'react-redux'
 import { addSchema } from 'store'
 import { useColors } from 'ui/theme'
 
-export const AddScheme = memo(() => {
+export const AddScheme = memo(function AddScheme() {
   const dispatch = useDispatch()
   const context = useContext(SchemasContext)
   const nameIsValid = context?.name.length !== 0 ? true : false

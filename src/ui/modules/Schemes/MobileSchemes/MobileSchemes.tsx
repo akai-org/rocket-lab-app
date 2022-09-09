@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { schemeInfo } from 'store'
 import { memo } from 'react'
 
-export const MobileSchemes = memo(() => {
+export const MobileSchemes = memo(function MobileSchemes() {
   const schemeData = useSelector(schemeInfo)
 
   return (

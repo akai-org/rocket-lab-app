@@ -26,7 +26,7 @@ import { fetcher } from 'utils/requests'
 import { ProductButton } from 'ui/components'
 import { useColors } from 'ui/theme'
 
-export const ItemsEdit = memo(() => {
+export const ItemsEdit = memo(function ItemsEdit() {
   const router = useRouter()
   const colors = useColors()
   const categories = useSelector(categoriesInfo).categories

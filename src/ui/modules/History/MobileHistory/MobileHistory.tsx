@@ -6,7 +6,7 @@ import { FilterDrawer } from './FilterDrawer'
 import { MobileWrapper } from 'ui/components'
 import { useColors } from 'ui/theme'
 
-export const MobileHistory = memo(() => {
+export const MobileHistory = memo(function MobileHistory() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const filterRef = useRef<HTMLDivElement>(null)
   const colors = useColors()
