@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { NextApiRequestCookies } from 'next/dist/server/api-utils'
+import { SortType } from '../../services/itemsService'
 
 export enum Permissions {
   reader = 1,
@@ -17,3 +18,12 @@ export type CredentialsReq =
   | NextApiRequest
 
 export type CredentialsRes = ServerResponse | NextApiResponse
+
+export interface StateWithSorting {
+  category?: string
+  sorting: SortType
+}
+
+export interface StateWithSearch {
+  searchTerm?: string
+}

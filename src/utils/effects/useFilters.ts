@@ -10,7 +10,7 @@ interface Query {
   searchTerm?: string | string[]
 }
 
-export function useFilters() {
+export function useFilters(customFilters: string[] = []) {
   const router = useRouter()
   const query = queryString.parseUrl(router.asPath).query
 
@@ -29,7 +29,16 @@ export function useFilters() {
 
   delete query.category
 
-  let searchQuery: Query = {}
+  const searchQuery: Query = {}
+  const [customQuery, setCustomQuery] = useState<{
+    [key: string]: string | undefined
+  }>(() => {
+    const tmp: { [key: string]: string | undefined } = {}
+    for (const custom of customFilters) {
+      tmp[custom] = query[custom] as string | undefined
+    }
+    return tmp
+  })
 
   if (category) {
     searchQuery.category = category
@@ -45,6 +54,13 @@ export function useFilters() {
     delete searchQuery.category
   }
 
+  for (const key in query) {
+    if (key === 'sort') continue
+    if (!query[key] || !customQuery[key] || query[key]?.length === 0) {
+      delete query[key]
+    }
+  }
+
   useEffect(() => {
     fetcher(API_URL + '/api/categories')
       .then((newCategories) => {
@@ -54,9 +70,14 @@ export function useFilters() {
   }, [])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log('Submitting form')
     e.preventDefault()
-    router.push({ query: { ...query, ...searchQuery } })
+
+    for (const custom in customQuery) {
+      if (!customQuery[custom]) {
+        delete customQuery[custom]
+      }
+    }
+    router.push({ query: { ...query, ...searchQuery, ...customQuery } })
   }
 
   return {
@@ -66,6 +87,8 @@ export function useFilters() {
     searchTerm,
     setSearchTerm,
     handleSubmit,
-    query
+    query,
+    customQuery,
+    setCustomQuery,
   }
 }

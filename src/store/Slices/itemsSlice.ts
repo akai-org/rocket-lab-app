@@ -28,7 +28,7 @@ export const itemsSlice = createSlice({
       state.items = action.payload
       state.displayItems = action.payload
     },
-    resetDisplayItems: (state, action: PayloadAction<PopulatedItem[]>) => {
+    resetDisplayItems: (state) => {
       state.displayItems = state.items
     },
     updateItem: (state, action: PayloadAction<PopulatedItem>) => {

@@ -1,19 +1,19 @@
-import {
-  Flex,
-  Stack,
-  Heading,
-  Text,
-  useDisclosure,
-  Icon,
-} from '@chakra-ui/react'
-import { FaUserCircle } from 'react-icons/fa'
+import { Flex, Text, Box } from '@chakra-ui/react'
+import { FC } from 'react'
+import { HistoryLog } from '../../../../../mongo/models/history'
 import { useColors } from 'ui/theme'
-import { ModalHistory } from 'ui/components'
-import { NameAndQuantityElement } from '../NameAndQuantityElement'
 import { memo } from 'react'
+import { HistoryGroupItem } from '../HistoryGroupItem'
 
-export const HistoryListItem = memo(function HistoryListItem() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+interface Props {
+  logs: HistoryLog[]
+  groupDate: string
+}
+
+export const HistoryListItem: FC<Props> = memo(function HistoryListItem({
+  groupDate,
+  logs,
+}) {
   const colors = useColors()
 
   return (
@@ -22,33 +22,14 @@ export const HistoryListItem = memo(function HistoryListItem() {
       color={colors.fontPrimary}
       flexDirection="column"
     >
-      <Stack direction="row">
-        <Icon
-          as={FaUserCircle}
-          mr="5px"
-          color={colors.fontPrimary}
-          fontSize="50px"
-        />
-        <Stack direction="column" maxW="70vw">
-          <Stack direction="row">
-            <Heading size="sm">Rafał Walkowiak</Heading>
-            <Text fontSize="sm">21:37</Text>
-          </Stack>
-          <Text fontSize="sm" isTruncated>
-            Wyciągnięto z magazynu:
-          </Text>
-          <NameAndQuantityElement />
-          <Text
-            as="u"
-            color={colors.orangePrimary}
-            onClick={onOpen}
-            isTruncated
-          >
-            pokaż więcej
-          </Text>
-        </Stack>
-      </Stack>
-      <ModalHistory isOpen={isOpen} onClose={onClose} />
+      <Box m="10px 0 0 10px" w="100%">
+        <Text size="sm" fontWeight="normal" m="5px">
+          {groupDate}
+        </Text>
+        {!logs
+          ? null
+          : logs.map((log) => <HistoryGroupItem log={log} key={log.id} />)}
+      </Box>
     </Flex>
   )
 })

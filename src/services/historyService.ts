@@ -15,3 +15,8 @@ export function validateSession(req: NextApiRequest, res: NextApiResponse) {
   if (!session) throw new Error('No valid user logged in')
   return session
 }
+
+export async function fetchLogs() {
+  const logs = await HistoryModel.find().populate('resource')
+  return logs
+}

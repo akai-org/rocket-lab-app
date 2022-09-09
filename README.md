@@ -38,6 +38,16 @@ Section dedicated to keeping schemas with elements that are needed for building 
 ### History
 ```IN PROGRESS```
 
+## Mobile
+Our app is available on mobile devices too!
+
+![img_10.png](assets/img_10.png)
+![img_11.png](assets/img_11.png)
+## Dark theme
+As in majority modern apps we implemented dark theme as well.
+
+![img_13.png](assets/img_13.png)
+![img_12.png](assets/img_12.png)
 ## Environment variables
 
 For the app to run correctly, specify proper environment variables you must. 

@@ -1,15 +1,36 @@
 import { Flex, Box, Text, Stack, Select, useDisclosure } from '@chakra-ui/react'
 import { IoMdFunnel } from 'react-icons/io'
 import { HistoryList } from './HistoryList'
-import { useRef, memo } from 'react'
+import { memo } from 'react'
 import { FilterDrawer } from './FilterDrawer'
 import { MobileWrapper } from 'ui/components'
 import { useColors } from 'ui/theme'
+import { useRouter } from 'next/router'
+import { SortType } from '../../../../services/itemsService'
+import { validateSortParam } from '../../../../utils/dataValidation/validateSortParam'
+import queryString from 'query-string'
 
 export const MobileHistory = memo(function MobileHistory() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const filterRef = useRef<HTMLDivElement>(null)
   const colors = useColors()
+
+  const router = useRouter()
+  const query = queryString.parseUrl(router.asPath).query
+
+  let sort: SortType
+
+  if (!validateSortParam(query.sort as string | undefined)) {
+    sort = 'newest'
+  } else {
+    sort = query.sort as SortType
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value
+    if (value !== sort) {
+      router.push({ query: { ...query, sort: value } })
+    }
+  }
 
   return (
     <MobileWrapper color={colors.fontPrimary}>
@@ -38,17 +59,14 @@ export const MobileHistory = memo(function MobileHistory() {
             size="md"
             variant="unstyled"
             placeholder="wybierz"
+            onChange={handleChange}
+            defaultValue={sort}
           >
-            <option value="najnowsze">najnowsze</option>
-            <option value="najstarsze">najstarsze</option>
+            <option value="newest">najnowsze</option>
+            <option value="oldest">najstarsze</option>
           </Select>
         </Stack>
-        <Stack
-          direction="row"
-          alignItems="center"
-          onClick={onOpen}
-          ref={filterRef}
-        >
+        <Stack direction="row" alignItems="center" onClick={onOpen}>
           <FilterDrawer isOpen={isOpen} onClose={onClose} />
           <Text color={colors.fontPrimary}>Filtry</Text>
           <IoMdFunnel color={colors.fontPrimary} />
