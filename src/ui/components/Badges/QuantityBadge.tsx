@@ -6,16 +6,18 @@ interface QuantityBadgeProps extends BadgeProps {
   storageQuantity: number
 }
 
-export const QuantityBadge = memo(
-  ({ schemeQuantity, storageQuantity, ...restProps }: QuantityBadgeProps) => {
-    let option = { text: 'Dostępne', color: 'green' }
-    if (storageQuantity > 0 && storageQuantity < schemeQuantity)
-      option = { text: 'Częściowo', color: 'yellow' }
-    else if (storageQuantity === 0) option = { text: 'Brak', color: 'red' }
-    return (
-      <Badge variant="solid" colorScheme={option.color} {...restProps}>
-        {option.text}
-      </Badge>
-    )
-  }
-)
+export const QuantityBadge = memo(function QuantityBadge({
+  schemeQuantity,
+  storageQuantity,
+  ...restProps
+}: QuantityBadgeProps) {
+  let option = { text: 'Dostępne', color: 'green' }
+  if (storageQuantity > 0 && storageQuantity < schemeQuantity)
+    option = { text: 'Częściowo', color: 'yellow' }
+  else if (storageQuantity === 0) option = { text: 'Brak', color: 'red' }
+  return (
+    <Badge variant="solid" colorScheme={option.color} {...restProps}>
+      {option.text}
+    </Badge>
+  )
+})

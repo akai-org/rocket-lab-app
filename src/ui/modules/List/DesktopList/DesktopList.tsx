@@ -4,8 +4,9 @@ import { IS_DEV } from 'utils/constants'
 import { AddItem } from './AddItem'
 import { List } from './List'
 import { DesktopWrapper } from 'ui/components'
+import { memo } from 'react'
 
-export const DesktopList = () => {
+export const DesktopList = memo(function DesktopList() {
   const storageCartData = useSelector(storageCartInfo)
 
   return (
@@ -16,4 +17,4 @@ export const DesktopList = () => {
       ))}
     </DesktopWrapper>
   )
-}
+})

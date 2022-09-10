@@ -11,7 +11,7 @@ import {
 import { ProductButton } from 'ui/components'
 import { AddItem } from '../../DesktopSchemes/AddScheme/AddItem'
 import { ItemsList } from './ItemsList'
-import { useContext, useState } from 'react'
+import { useContext, useState, memo } from 'react'
 import { SchemasContext } from 'pages/schemes'
 import { API_URL } from 'utils/constants'
 import { fetcher } from 'utils/requests'
@@ -19,7 +19,7 @@ import { useDispatch } from 'react-redux'
 import { addSchema } from 'store'
 import { useColors } from 'ui/theme'
 
-export const AddScheme = () => {
+export const AddScheme = memo(function AddScheme() {
   const dispatch = useDispatch()
   const context = useContext(SchemasContext)
   const nameIsValid = context?.name.length !== 0 ? true : false
@@ -110,4 +110,4 @@ export const AddScheme = () => {
       </AccordionItem>
     </Accordion>
   )
-}
+})

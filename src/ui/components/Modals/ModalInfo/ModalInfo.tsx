@@ -26,7 +26,7 @@ interface ModalInfoProps
   id: string
 }
 
-export const ModalInfo = memo((props: ModalInfoProps) => {
+export const ModalInfo = memo(function ModalInfo(props: ModalInfoProps) {
   const colors = useColors()
 
   return (

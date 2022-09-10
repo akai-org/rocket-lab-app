@@ -11,7 +11,7 @@ import {
   Input,
   Text,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
+import { useRef, useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCategory, removeCategories, categoriesInfo } from 'store'
 import { API_URL } from 'utils/constants'
@@ -20,7 +20,7 @@ import { ProductButton, DeletePopover } from 'ui/components'
 import { Category } from './Category'
 import { useColors } from 'ui/theme'
 
-export const CategoryEdit = () => {
+export const CategoryEdit = memo(function CategoryEdit() {
   const categories = useSelector(categoriesInfo).categories
   const colors = useColors()
   const [nameIsValid, setNameIsValid] = useState(true)
@@ -147,4 +147,4 @@ export const CategoryEdit = () => {
       </AccordionItem>
     </Accordion>
   )
-}
+})

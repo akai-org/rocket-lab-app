@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext, memo } from 'react'
 import {
   Flex,
   NumberDecrementStepper,
@@ -19,7 +19,7 @@ interface ItemProps {
   schemaItem: TmpSchemaItem
 }
 
-export const Item = ({ schemaItem }: ItemProps) => {
+export const Item = memo(function Item({ schemaItem }: ItemProps) {
   const context = useContext(SchemasContext)
   const colors = useColors()
 
@@ -66,4 +66,4 @@ export const Item = ({ schemaItem }: ItemProps) => {
       </Td>
     </Tr>
   )
-}
+})

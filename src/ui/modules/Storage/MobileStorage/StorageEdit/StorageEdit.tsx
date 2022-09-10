@@ -9,8 +9,9 @@ import {
 import { CategoryEdit } from './CategoryEdit'
 import { ItemsEdit } from './ItemsEdit'
 import { useColors } from 'ui/theme'
+import { memo } from 'react'
 
-export const StorageEdit = () => {
+export const StorageEdit = memo(function StorageEdit() {
   const colors = useColors()
 
   return (
@@ -41,4 +42,4 @@ export const StorageEdit = () => {
       </AccordionItem>
     </Accordion>
   )
-}
+})

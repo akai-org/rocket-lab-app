@@ -26,7 +26,9 @@ interface ChosenListPopoverProps extends PopoverProps {
   list: PopulatedCartList
 }
 
-export const ChosenListPopover = memo((props: ChosenListPopoverProps) => {
+export const ChosenListPopover = memo(function ChosenListPopover(
+  props: ChosenListPopoverProps
+) {
   const [isOpen, setIsOpen] = useState(false)
   const open = () => setIsOpen(!isOpen)
   const close = () => setIsOpen(false)

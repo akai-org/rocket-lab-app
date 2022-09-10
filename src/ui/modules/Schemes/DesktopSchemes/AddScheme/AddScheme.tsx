@@ -8,7 +8,7 @@ import {
   AccordionPanel,
   Flex,
 } from '@chakra-ui/react'
-import { useContext, useState } from 'react'
+import { useContext, useState, memo } from 'react'
 import { AddItem } from './AddItem'
 import { ProductButton } from 'ui/components'
 import { ItemsList } from './ItemsList'
@@ -19,7 +19,7 @@ import { addSchema } from 'store'
 import { SchemasContext } from 'pages/schemes'
 import { useColors } from 'ui/theme'
 
-export const AddScheme = () => {
+export const AddScheme = memo(function AddScheme() {
   const context = useContext(SchemasContext)
 
   const dispatch = useDispatch()
@@ -124,4 +124,4 @@ export const AddScheme = () => {
       </AccordionItem>
     </Accordion>
   )
-}
+})

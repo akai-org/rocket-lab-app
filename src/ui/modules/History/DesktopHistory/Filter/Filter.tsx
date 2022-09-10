@@ -1,12 +1,13 @@
 import { Button, Flex, Input, Select, Stack, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useColors } from 'ui/theme'
+import { memo } from 'react'
 import queryString from 'query-string'
 import { useFilters } from 'utils/effects'
 import { SortType } from 'services'
 import { validateSortParam } from 'utils/dataValidation'
 
-export const Filter = () => {
+export const Filter = memo(function Filter() {
   const colors = useColors()
   const { handleSubmit, customQuery, setCustomQuery } = useFilters([
     'from',
@@ -112,4 +113,4 @@ export const Filter = () => {
       </Flex>
     </form>
   )
-}
+})

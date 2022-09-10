@@ -1,10 +1,10 @@
 import { Button, Flex, Icon, Input, Select, Text } from '@chakra-ui/react'
-import React, { FC } from 'react'
+import { FC, memo } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useFilters } from 'utils/effects'
 import { useColors } from 'ui/theme'
 
-export const Filters: FC = () => {
+export const Filters: FC = memo(function Filters() {
   const {
     categories,
     category,
@@ -82,4 +82,4 @@ export const Filters: FC = () => {
       </Flex>
     </form>
   )
-}
+})

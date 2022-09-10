@@ -7,7 +7,7 @@ import { FIRST_PAGE } from 'utils/constants'
 import { useColors } from 'ui/theme'
 import { memo } from 'react'
 
-export const SortingGeneral = memo(() => {
+export const SortingGeneral = memo(function SortingGeneral() {
   const router = useRouter()
   const query = queryString.parseUrl(router.asPath).query
   const colors = useColors()

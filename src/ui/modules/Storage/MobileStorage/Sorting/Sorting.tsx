@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
 import { Flex, ButtonGroup, Icon } from '@chakra-ui/react'
@@ -9,7 +9,7 @@ import { useColors } from 'ui/theme'
 export const Sorting: React.FC<{
   setListType: (type: sortingType) => void
   listType: sortingType
-}> = (props) => {
+}> = memo(function Sorting(props) {
   const colors = useColors()
 
   return (
@@ -55,4 +55,4 @@ export const Sorting: React.FC<{
       </ButtonGroup>
     </Flex>
   )
-}
+})

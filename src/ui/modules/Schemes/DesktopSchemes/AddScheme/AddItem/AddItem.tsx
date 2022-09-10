@@ -7,7 +7,7 @@ import {
   NumberInputStepper,
   Text,
 } from '@chakra-ui/react'
-import { useContext, useState } from 'react'
+import { useContext, useState, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { itemsInfo } from 'store'
 import { ProductButton, SearchSelect } from 'ui/components'
@@ -31,7 +31,7 @@ const noOption = {
   id: null,
 }
 
-export const AddItem = (props: AddItemProps) => {
+export const AddItem = memo(function AddItem(props: AddItemProps) {
   const context = useContext(SchemasContext)
   const [quantity, setQuantity] = useState(1)
   const colors = useColors()
@@ -112,4 +112,4 @@ export const AddItem = (props: AddItemProps) => {
       </ProductButton>
     </Flex>
   )
-}
+})

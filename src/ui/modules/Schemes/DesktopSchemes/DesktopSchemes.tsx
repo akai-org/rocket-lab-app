@@ -4,8 +4,9 @@ import { Scheme } from './Scheme'
 import { DesktopWrapper } from 'ui/components'
 import { useSelector } from 'react-redux'
 import { schemeInfo } from 'store'
+import { memo } from 'react'
 
-export const DesktopSchemes = () => {
+export const DesktopSchemes = memo(function DesktopSchemes() {
   const schemeData = useSelector(schemeInfo)
   return (
     <DesktopWrapper>
@@ -17,4 +18,4 @@ export const DesktopSchemes = () => {
       </Flex>
     </DesktopWrapper>
   )
-}
+})

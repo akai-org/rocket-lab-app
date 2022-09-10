@@ -3,8 +3,9 @@ import { MobileWrapper } from 'ui/components'
 import { Scheme } from './Scheme'
 import { useSelector } from 'react-redux'
 import { schemeInfo } from 'store'
+import { memo } from 'react'
 
-export const MobileSchemes = () => {
+export const MobileSchemes = memo(function MobileSchemes() {
   const schemeData = useSelector(schemeInfo)
 
   return (
@@ -15,4 +16,4 @@ export const MobileSchemes = () => {
       ))}
     </MobileWrapper>
   )
-}
+})

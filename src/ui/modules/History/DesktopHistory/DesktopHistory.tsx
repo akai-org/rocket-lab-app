@@ -3,8 +3,9 @@ import { Filter } from './Filter'
 import { HistoryList } from './HistoryList'
 import { useColors } from 'ui/theme'
 import { DesktopWrapper } from 'ui/components'
+import { memo } from 'react'
 
-export const DesktopHistory = () => {
+export const DesktopHistory = memo(function DesktopHistory() {
   const colors = useColors()
 
   return (
@@ -28,4 +29,4 @@ export const DesktopHistory = () => {
       </Flex>
     </DesktopWrapper>
   )
-}
+})

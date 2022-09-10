@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import { Td, Text, Tr } from '@chakra-ui/react'
 import { QuantityBadge } from 'ui/components'
 
@@ -8,11 +8,11 @@ interface SchemeItemProps {
   name: string
 }
 
-export const SchemeItem = ({
+export const SchemeItem = memo(function SchemeItem({
   schemeQuantity,
   storageQuantity,
   name,
-}: SchemeItemProps) => {
+}: SchemeItemProps) {
   return (
     <Tr fontSize="xs">
       <Td>
@@ -27,4 +27,4 @@ export const SchemeItem = ({
       </Td>
     </Tr>
   )
-}
+})

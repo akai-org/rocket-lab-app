@@ -3,7 +3,9 @@ import { BsMoonFill, BsSunFill } from 'react-icons/bs'
 import { useColorMode } from '@chakra-ui/react'
 import { IconBaseProps } from 'react-icons'
 
-export const ColorModeSwitch = memo((props: IconBaseProps) => {
+export const ColorModeSwitch = memo(function ColorModeSwitch(
+  props: IconBaseProps
+) {
   const { toggleColorMode, colorMode } = useColorMode()
   const mergedProps = {
     fontSize: 'lg',

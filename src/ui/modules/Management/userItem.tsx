@@ -1,6 +1,7 @@
 import { ListItem, Select } from '@chakra-ui/react'
 import { User } from 'mongo'
 import { adminRoles } from 'utils/types/backendGeneral'
+import React, { memo } from 'react'
 
 const options: adminRoles[] = ['reader', 'editor', 'admin']
 
@@ -9,7 +10,10 @@ interface Props {
   changeHandler: (id: string, value: adminRoles) => void
 }
 
-export const UserItem: React.FC<Props> = ({ user, changeHandler }) => {
+export const UserItem: React.FC<Props> = memo(function UserItem({
+  user,
+  changeHandler,
+}) {
   const displayOptions = options.map((option) => (
     <option key={option}>{option}</option>
   ))
@@ -27,4 +31,4 @@ export const UserItem: React.FC<Props> = ({ user, changeHandler }) => {
       </Select>
     </ListItem>
   )
-}
+})
