@@ -18,7 +18,7 @@ import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
 import { IS_DEV } from 'utils/constants'
 import { useColors } from 'ui/theme'
 
-export const MobileSidebar = memo(() => {
+export const MobileSidebar = memo(function MobileSidebar() {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef(null)

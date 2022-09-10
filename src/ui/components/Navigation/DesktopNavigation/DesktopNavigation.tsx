@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
-import { Box, Image, Flex, Heading, Icon, Button } from '@chakra-ui/react'
+import { Box, Image, Flex, Heading, Icon } from '@chakra-ui/react'
 import { FaUserCircle } from 'react-icons/fa'
 import { DesktopSidebar } from './DesktopSidebar'
 import { useColors } from 'ui/theme'
 
-export const DesktopNavigation = memo(() => {
+export const DesktopNavigation = memo(function DesktopNavigation() {
   const colors = useColors()
 
   return (

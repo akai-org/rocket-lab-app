@@ -6,7 +6,10 @@ interface RoleBadgeProps extends BadgeProps {
   role: Role
 }
 
-export const RoleBadge = memo(({ role, ...restProps }: RoleBadgeProps) => {
+export const RoleBadge = memo(function RoleBadge({
+  role,
+  ...restProps
+}: RoleBadgeProps) {
   let option
   switch (role) {
     case 'ADMIN':

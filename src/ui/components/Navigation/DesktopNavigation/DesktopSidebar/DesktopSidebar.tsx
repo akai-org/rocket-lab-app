@@ -9,7 +9,7 @@ import s from './sidebar.module.scss'
 import { useColors } from '../../../../theme/useColors'
 import { memo } from 'react'
 
-export const DesktopSidebar = memo(() => {
+export const DesktopSidebar = memo(function DesktopSidebar() {
   const router = useRouter()
   const colors = useColors()
 

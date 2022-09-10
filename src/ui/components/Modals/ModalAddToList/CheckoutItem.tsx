@@ -21,7 +21,9 @@ export type CheckoutItemProps = {
   item: CartItem
 }
 
-export const CheckoutItem = memo(({ item: cartItem }: CheckoutItemProps) => {
+export const CheckoutItem = memo(function CheckoutItem({
+  item: cartItem,
+}: CheckoutItemProps) {
   const {
     isOpen: isOpenInfo,
     onOpen: onOpenInfo,

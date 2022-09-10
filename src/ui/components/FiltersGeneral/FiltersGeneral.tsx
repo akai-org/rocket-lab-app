@@ -22,7 +22,9 @@ interface Props {
   children: (controlls: FiltersControllsProps) => JSX.Element
 }
 
-export const FiltersGeneral: React.FC<Props> = memo(({ children }) => {
+export const FiltersGeneral: React.FC<Props> = memo(function FiltersGeneral({
+  children,
+}) {
   const router = useRouter()
   const query = router.query
 

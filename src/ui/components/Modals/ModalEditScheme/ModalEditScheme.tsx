@@ -32,7 +32,9 @@ interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
 }
 
-export const ModalEditScheme = memo((props: ModalEditSchemeProps) => {
+export const ModalEditScheme = memo(function ModalEditScheme(
+  props: ModalEditSchemeProps
+) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (

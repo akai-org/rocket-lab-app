@@ -19,7 +19,7 @@ import { IoIosAt, IoIosLock } from 'react-icons/io'
 import { FcGoogle } from 'react-icons/fc'
 import { useColors } from 'ui/theme'
 
-export const LoginForm = memo(() => {
+export const LoginForm = memo(function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [logIn, setLogIn] = useState(false)
   const [emailIsCorrect, setEmailIsCorrect] = useState(true)

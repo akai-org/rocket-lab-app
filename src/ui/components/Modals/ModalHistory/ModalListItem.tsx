@@ -1,7 +1,7 @@
 import { Stack, Image, Text } from '@chakra-ui/react'
 import { memo } from 'react'
 
-export const ElementInfo = memo(() => {
+export const ElementInfo = memo(function ElementInfo() {
   return (
     <Stack
       direction="row"

@@ -4,7 +4,7 @@ import { FaUserCircle } from 'react-icons/fa'
 import { MobileSidebar } from './MobileSidebar'
 import { useColors } from 'ui/theme'
 
-export const MobileNavigation = memo(() => {
+export const MobileNavigation = memo(function MobileNavigation() {
   const colors = useColors()
 
   return (

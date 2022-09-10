@@ -9,7 +9,7 @@ export interface ListMenuProps {
   onEdit: () => void
 }
 
-export const ListMenu = memo((props: ListMenuProps) => {
+export const ListMenu = memo(function ListMenu(props: ListMenuProps) {
   const colors = useColors()
 
   return (
