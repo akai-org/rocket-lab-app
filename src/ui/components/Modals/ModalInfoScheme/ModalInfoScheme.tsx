@@ -119,6 +119,7 @@ export const ModalInfoScheme = memo(
           onClose={onCloseEditScheme}
           isOpen={isOpenEditScheme}
           isCentered
+          schema={schema}
         />
       </Modal>
     )
