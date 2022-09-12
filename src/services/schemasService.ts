@@ -51,3 +51,11 @@ export const addSchemaItem = async (
     { new: true }
   ).populate('items.item')
 }
+
+export const deleteSchemaItem = async (schemaId: string, itemId: string) => {
+  return await SchemaModel.findByIdAndUpdate(
+    schemaId,
+    { $pull: { items: { _id: itemId } } },
+    { new: true }
+  ).populate('items.item')
+}

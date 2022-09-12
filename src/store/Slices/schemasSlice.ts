@@ -30,8 +30,6 @@ export const schemasSlice = createSlice({
 
       copiedSchemas.splice(schemaIndex, 1, action.payload)
 
-      console.log(action.payload)
-
       state.schemas = copiedSchemas
     },
   },
@@ -39,4 +37,5 @@ export const schemasSlice = createSlice({
 
 export const schemasReducer = schemasSlice.reducer
 
-export const { addSchema, setSchemas, deleteSchema, updateSchema } = schemasSlice.actions
+export const { addSchema, setSchemas, deleteSchema, updateSchema } =
+  schemasSlice.actions

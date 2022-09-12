@@ -32,7 +32,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { itemsInfo, updateSchema } from 'store'
 import { fetcher } from 'utils/requests'
 import { API_URL } from 'utils/constants'
-import * as _ from 'lodash'
 
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
@@ -45,6 +44,8 @@ export const ModalEditScheme = memo(
     const dispatch = useDispatch()
 
     const items = useSelector(itemsInfo).items
+
+    const [itemToDelete, setItemToDelete] = useState<string | undefined>()
 
     const filterItems = useCallback(() => {
       let itemsCopy = [...items]
@@ -62,19 +63,13 @@ export const ModalEditScheme = memo(
     const [copiedSchema, setCopiedSchema] = useState({ ...schema })
 
     useEffect(() => {
-      if (schema.items.length !== copiedSchema.items.length) {
-        const addedItems = _.differenceBy(
-          schema.items,
-          copiedSchema.items,
-          'id'
-        )
-        setCopiedSchema((state) => ({
-          ...state,
-          items: [...state.items, ...addedItems],
-        }))
+      if (schema.items.length === copiedSchema.items.length) return
+      setCopiedSchema((state) => ({
+        ...state,
+        items: [...schema.items],
+      }))
 
-        setFilteredItems(filterItems)
-      }
+      setFilteredItems(filterItems)
     }, [copiedSchema.items, filterItems, items, schema.items])
 
     const addItem = async (id: string) => {
@@ -184,7 +179,14 @@ export const ModalEditScheme = memo(
                   {/* <SchemeItem /> */}
                   {copiedSchema.items.map((item) => (
                     <Tr fontSize="xs" h="40px" key={item.id}>
-                      <Td w="80%" onClick={onOpen} cursor="pointer">
+                      <Td
+                        w="80%"
+                        onClick={() => {
+                          setItemToDelete(item.id)
+                          onOpen()
+                        }}
+                        cursor="pointer"
+                      >
                         {item.item.name}
                       </Td>
                       <Td w="1%" textAlign="right">
@@ -231,7 +233,13 @@ export const ModalEditScheme = memo(
             </ProductButton>
           </ModalFooter>
         </ModalContent>
-        <DeleteItemDialog isOpenDialog={isOpen} onCloseDialog={onClose} />
+        <DeleteItemDialog
+          schemaId={copiedSchema.id}
+          itemToDelete={itemToDelete}
+          setItemToDelete={setItemToDelete}
+          isOpenDialog={isOpen}
+          onCloseDialog={onClose}
+        />
       </Modal>
     )
   }
