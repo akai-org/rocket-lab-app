@@ -41,9 +41,13 @@ export const addSchemaItem = async (
   schemaId: string,
   schemaItem: SchemaItem
 ) => {
-  return await SchemaModel.findByIdAndUpdate(schemaId, {
-    $push: {
-      items: schemaItem,
+  return await SchemaModel.findByIdAndUpdate(
+    schemaId,
+    {
+      $push: {
+        items: schemaItem,
+      },
     },
-  }).populate('items.item')
+    { new: true }
+  ).populate('items.item')
 }

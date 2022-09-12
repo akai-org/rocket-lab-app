@@ -9,9 +9,8 @@ const handler: NextApiHandler = async (req, res) => {
     const schemaId = body.schemaId
     const schemaItem = body.schemaItem
     try {
-      const newItem = await addSchemaItem(schemaId, schemaItem)
-      console.log(newItem)
-      res.status(200).send('addedItem')
+      const updatedSchema = await addSchemaItem(schemaId, schemaItem)
+      res.status(200).send(updatedSchema)
     } catch (error) {
       console.log(error)
       res.status(400).send(error)

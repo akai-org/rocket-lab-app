@@ -21,9 +21,22 @@ export const schemasSlice = createSlice({
     deleteSchema: (state, action: PayloadAction<PopulatedSchema>) => {
       state.schemas = _.differenceBy(state.schemas, [action.payload], 'id')
     },
+    updateSchema: (state, action: PayloadAction<PopulatedSchema>) => {
+      const copiedSchemas = [...state.schemas]
+      const schemaIndex = copiedSchemas.findIndex(
+        (schema) => schema.id === action.payload.id
+      )
+      if (schemaIndex === -1) return
+
+      copiedSchemas.splice(schemaIndex, 1, action.payload)
+
+      console.log(action.payload)
+
+      state.schemas = copiedSchemas
+    },
   },
 })
 
 export const schemasReducer = schemasSlice.reducer
 
-export const { addSchema, setSchemas, deleteSchema } = schemasSlice.actions
+export const { addSchema, setSchemas, deleteSchema, updateSchema } = schemasSlice.actions

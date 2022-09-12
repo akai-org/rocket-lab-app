@@ -26,12 +26,13 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { DeleteItemDialog, QuantityBadge, ProductButton } from 'ui/components'
-import { memo, useState, useRef, useEffect } from 'react'
+import { memo, useState, useRef, useEffect, useCallback } from 'react'
 import { PopulatedSchema } from 'mongo'
-import { useSelector } from 'react-redux'
-import { itemsInfo } from 'store'
+import { useDispatch, useSelector } from 'react-redux'
+import { itemsInfo, updateSchema } from 'store'
 import { fetcher } from 'utils/requests'
 import { API_URL } from 'utils/constants'
+import * as _ from 'lodash'
 
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
@@ -41,32 +42,60 @@ interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
 export const ModalEditScheme = memo(
   ({ schema, ...props }: ModalEditSchemeProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const dispatch = useDispatch()
 
     const items = useSelector(itemsInfo).items
-    const [filteredItems, setFilteredItems] = useState(() => {
+
+    const filterItems = useCallback(() => {
       let itemsCopy = [...items]
       for (const schemaItem of schema.items) {
         itemsCopy = itemsCopy.filter((item) => item.id !== schemaItem.item.id)
       }
       return itemsCopy
-    })
+    }, [items, schema.items])
+
+    const [filteredItems, setFilteredItems] = useState(filterItems)
 
     const itemNumberInputRef = useRef<HTMLInputElement>(null)
     const itemInputRef = useRef<HTMLSelectElement>(null)
 
     const [copiedSchema, setCopiedSchema] = useState({ ...schema })
-    const [rawScehma, setRawSchema] = useState()
+
+    useEffect(() => {
+      if (schema.items.length !== copiedSchema.items.length) {
+        const addedItems = _.differenceBy(
+          schema.items,
+          copiedSchema.items,
+          'id'
+        )
+        setCopiedSchema((state) => ({
+          ...state,
+          items: [...state.items, ...addedItems],
+        }))
+
+        setFilteredItems(filterItems)
+      }
+    }, [copiedSchema.items, filterItems, items, schema.items])
 
     const addItem = async (id: string) => {
-      await fetcher(API_URL + '/api/schemas/addItem', {
-        body: {
-          schemaId: copiedSchema.id,
-          schemaItem: {
-            neededQuantity: itemNumberInputRef.current?.value || 1,
-            item: id,
+      try {
+        // TODO: Start loading spinner here
+        const updatedSchema = await fetcher(API_URL + '/api/schemas/addItem', {
+          body: {
+            schemaId: copiedSchema.id,
+            schemaItem: {
+              neededQuantity: itemNumberInputRef.current?.value || 1,
+              item: id,
+            },
           },
-        },
-      })
+        })
+
+        dispatch(updateSchema(updatedSchema))
+      } catch (error) {
+        console.log(error)
+      } finally {
+        // TODO: Stop loading spinner here
+      }
     }
 
     return (
@@ -82,13 +111,14 @@ export const ModalEditScheme = memo(
               overflowY="scroll"
               w="100%"
             >
-              <Text>{copiedSchema.name}</Text>
+              <Text>Nazwa Schematu</Text>
               <Input
                 h="30px"
                 p="6px"
                 mb="5px"
                 placeholder="Wprowadź nazwę schematu"
                 fontSize="sm"
+                defaultValue={copiedSchema.name}
               />
               <Text>Opis:</Text>
               <Textarea
