@@ -1,5 +1,6 @@
 import {
   PopulatedSchema,
+  PopulatedSchemaItem,
   SchemaItem,
   SchemaModel,
   TmpSchemaItem,
@@ -56,6 +57,24 @@ export const deleteSchemaItem = async (schemaId: string, itemId: string) => {
   return await SchemaModel.findByIdAndUpdate(
     schemaId,
     { $pull: { items: { _id: itemId } } },
+    { new: true }
+  ).populate('items.item')
+}
+
+export const updateSchema = async (
+  schemaId: string,
+  schemaItems: PopulatedSchemaItem[],
+  schemaName: string,
+  schemaDescription: string
+) => {
+  const parsedItems = schemaItems.map((item) => ({
+    ...item,
+    item: item.item.id,
+  }))
+
+  return await SchemaModel.findByIdAndUpdate(
+    schemaId,
+    { name: schemaName, description: schemaDescription, items: parsedItems },
     { new: true }
   ).populate('items.item')
 }

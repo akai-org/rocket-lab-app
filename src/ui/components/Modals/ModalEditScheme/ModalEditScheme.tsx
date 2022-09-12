@@ -112,6 +112,24 @@ export const ModalEditScheme = memo(
       }
     }
 
+    const saveEdition = async () => {
+      try {
+        const updatedSchema = await fetcher(API_URL + '/api/schemas/update', {
+          body: {
+            schemaId: copiedSchema.id,
+            schemaItems: copiedSchema.items,
+            schemaName: copiedSchema.name,
+            schemaDescription: copiedSchema.description,
+          },
+        })
+        console.log(updatedSchema)
+        dispatch(updateSchema(updatedSchema))
+      } catch (error) {
+      } finally {
+        props.onClose()
+      }
+    }
+
     return (
       <Modal {...props}>
         <ModalOverlay backdropFilter="blur(3px)" />
@@ -132,14 +150,26 @@ export const ModalEditScheme = memo(
                 mb="5px"
                 placeholder="Wprowadź nazwę schematu"
                 fontSize="sm"
-                defaultValue={copiedSchema.name}
+                value={copiedSchema.name}
+                onChange={(e) => {
+                  setCopiedSchema({
+                    ...copiedSchema,
+                    name: e.currentTarget.value,
+                  })
+                }}
               />
               <Text>Opis:</Text>
               <Textarea
                 fontSize="sm"
                 p="5px"
                 placeholder="Wprowadź opis"
-                defaultValue={copiedSchema.description}
+                value={copiedSchema.description}
+                onChange={(e) => {
+                  setCopiedSchema({
+                    ...copiedSchema,
+                    description: e.currentTarget.value,
+                  })
+                }}
               />
               <Text mt="10px">Przedmioty</Text>
               <Flex alignItems="center">
@@ -267,7 +297,12 @@ export const ModalEditScheme = memo(
             </Flex>
           </ModalBody>
           <ModalFooter>
-            <ProductButton fontSize="sm" w="80px" ml="10px">
+            <ProductButton
+              fontSize="sm"
+              w="80px"
+              ml="10px"
+              onClick={saveEdition}
+            >
               Zapisz
             </ProductButton>
             <ProductButton

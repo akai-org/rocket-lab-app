@@ -51,7 +51,12 @@ export const ModalInfoScheme = memo(
               overflowY="scroll"
               w="100%"
             >
-              <Text fontWeight="normal" noOfLines={2} fontSize="lg">
+              <Text
+                fontWeight="normal"
+                overflow="auto"
+                noOfLines={2}
+                fontSize="lg"
+              >
                 {schema.name}
               </Text>
               {schema.description && (
