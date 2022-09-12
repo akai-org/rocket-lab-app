@@ -32,6 +32,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { itemsInfo, updateSchema } from 'store'
 import { fetcher } from 'utils/requests'
 import { API_URL } from 'utils/constants'
+import * as _ from 'lodash'
 
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
@@ -64,15 +65,33 @@ export const ModalEditScheme = memo(
 
     useEffect(() => {
       if (schema.items.length === copiedSchema.items.length) return
-      setCopiedSchema((state) => ({
-        ...state,
-        items: [...schema.items],
-      }))
+      if (schema.items.length > copiedSchema.items.length) {
+        const addedItems = _.differenceBy(
+          schema.items,
+          copiedSchema.items,
+          'id'
+        )
+        setCopiedSchema((state) => ({
+          ...state,
+          items: [...state.items, ...addedItems],
+        }))
+      } else if (schema.items.length < copiedSchema.items.length) {
+        const deletedItem = _.differenceBy(
+          copiedSchema.items,
+          schema.items,
+          'id'
+        )
+        setCopiedSchema((state) => ({
+          ...state,
+          items: state.items.filter((item) => item.id !== deletedItem[0].id),
+        }))
+      }
 
       setFilteredItems(filterItems)
     }, [copiedSchema.items, filterItems, items, schema.items])
 
     const addItem = async (id: string) => {
+      console.log(itemNumberInputRef.current?.value)
       try {
         // TODO: Start loading spinner here
         const updatedSchema = await fetcher(API_URL + '/api/schemas/addItem', {
@@ -144,9 +163,13 @@ export const ModalEditScheme = memo(
                   ml="10px"
                   defaultValue={1}
                   min={1}
-                  ref={itemNumberInputRef}
                 >
-                  <NumberInputField h="30px" fontSize="sm" px="5px" />
+                  <NumberInputField
+                    ref={itemNumberInputRef}
+                    h="30px"
+                    fontSize="sm"
+                    px="5px"
+                  />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
                     <NumberDecrementStepper />
@@ -195,6 +218,7 @@ export const ModalEditScheme = memo(
                           display="inline"
                           h="30px"
                           min={1}
+                          defaultValue={item.neededQuantity}
                         >
                           <NumberInputField
                             h="30px"
