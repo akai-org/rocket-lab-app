@@ -27,7 +27,7 @@ import {
 } from '@chakra-ui/react'
 import { DeleteItemDialog, QuantityBadge, ProductButton } from 'ui/components'
 import { memo, useState, useRef, useEffect, useCallback } from 'react'
-import { PopulatedSchema } from 'mongo'
+import { PopulatedSchema, PopulatedSchemaItem } from 'mongo'
 import { useDispatch, useSelector } from 'react-redux'
 import { itemsInfo, updateSchema } from 'store'
 import { fetcher } from 'utils/requests'
@@ -218,7 +218,30 @@ export const ModalEditScheme = memo(
                           display="inline"
                           h="30px"
                           min={1}
-                          defaultValue={item.neededQuantity}
+                          onChange={(e) => {
+                            setCopiedSchema((schemaCopy) => {
+                              const itemsCopy = [...schemaCopy.items]
+                              const changedItemIndex = itemsCopy.findIndex(
+                                (copyItem) => copyItem.id === item.id
+                              )
+                              if (changedItemIndex === -1)
+                                return { ...schemaCopy }
+
+                              itemsCopy[changedItemIndex] = {
+                                ...itemsCopy[changedItemIndex],
+                                neededQuantity: +e,
+                              }
+
+                              return { ...schemaCopy, items: itemsCopy }
+                            })
+                          }}
+                          value={
+                            (
+                              copiedSchema.items.find(
+                                (schemaItem) => schemaItem.id === item.id
+                              ) as PopulatedSchemaItem
+                            ).neededQuantity
+                          }
                         >
                           <NumberInputField
                             h="30px"
