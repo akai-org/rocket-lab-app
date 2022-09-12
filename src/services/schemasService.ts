@@ -1,5 +1,6 @@
 import {
   PopulatedSchema,
+  SchemaItem,
   SchemaModel,
   TmpSchemaItem,
 } from '../mongo/models/schema'
@@ -34,4 +35,15 @@ export const deleteSchema = async (id: string) => {
     { _id: id },
     { new: true, populate: 'items.item' }
   )
+}
+
+export const addSchemaItem = async (
+  schemaId: string,
+  schemaItem: SchemaItem
+) => {
+  return await SchemaModel.findByIdAndUpdate(schemaId, {
+    $push: {
+      items: schemaItem,
+    },
+  }).populate('items.item')
 }

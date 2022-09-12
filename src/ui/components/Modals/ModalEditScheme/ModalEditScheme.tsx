@@ -26,8 +26,12 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { DeleteItemDialog, QuantityBadge, ProductButton } from 'ui/components'
-import { memo } from 'react'
+import { memo, useState, useRef, useEffect } from 'react'
 import { PopulatedSchema } from 'mongo'
+import { useSelector } from 'react-redux'
+import { itemsInfo } from 'store'
+import { fetcher } from 'utils/requests'
+import { API_URL } from 'utils/constants'
 
 interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
@@ -37,6 +41,33 @@ interface ModalEditSchemeProps extends Omit<ModalProps, 'children'> {
 export const ModalEditScheme = memo(
   ({ schema, ...props }: ModalEditSchemeProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const items = useSelector(itemsInfo).items
+    const [filteredItems, setFilteredItems] = useState(() => {
+      let itemsCopy = [...items]
+      for (const schemaItem of schema.items) {
+        itemsCopy = itemsCopy.filter((item) => item.id !== schemaItem.item.id)
+      }
+      return itemsCopy
+    })
+
+    const itemNumberInputRef = useRef<HTMLInputElement>(null)
+    const itemInputRef = useRef<HTMLSelectElement>(null)
+
+    const [copiedSchema, setCopiedSchema] = useState({ ...schema })
+    const [rawScehma, setRawSchema] = useState()
+
+    const addItem = async (id: string) => {
+      await fetcher(API_URL + '/api/schemas/addItem', {
+        body: {
+          schemaId: copiedSchema.id,
+          schemaItem: {
+            neededQuantity: itemNumberInputRef.current?.value || 1,
+            item: id,
+          },
+        },
+      })
+    }
 
     return (
       <Modal {...props}>
@@ -51,7 +82,7 @@ export const ModalEditScheme = memo(
               overflowY="scroll"
               w="100%"
             >
-              <Text>{schema.name}</Text>
+              <Text>{copiedSchema.name}</Text>
               <Input
                 h="30px"
                 p="6px"
@@ -64,14 +95,21 @@ export const ModalEditScheme = memo(
                 fontSize="sm"
                 p="5px"
                 placeholder="Wprowadź opis"
-                defaultValue={schema.description}
+                defaultValue={copiedSchema.description}
               />
               <Text mt="10px">Przedmioty</Text>
               <Flex alignItems="center">
-                <Select fontSize="sm" h="30px" placeholder="Wybierz przedmiot">
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                <Select
+                  ref={itemInputRef}
+                  fontSize="sm"
+                  h="30px"
+                  placeholder="Wybierz przedmiot"
+                >
+                  {filteredItems.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
                 </Select>
                 <NumberInput
                   allowMouseWheel
@@ -79,7 +117,9 @@ export const ModalEditScheme = memo(
                   maxW="100px"
                   minW="67px"
                   ml="10px"
+                  defaultValue={1}
                   min={1}
+                  ref={itemNumberInputRef}
                 >
                   <NumberInputField h="30px" fontSize="sm" px="5px" />
                   <NumberInputStepper>
@@ -92,7 +132,7 @@ export const ModalEditScheme = memo(
                 <ProductButton
                   m="20px 0 0 auto"
                   fontSize="sm"
-                  // onClick={}
+                  onClick={() => addItem(itemInputRef.current?.value as string)}
                   w="150px"
                 >
                   Dodaj przedmiot
@@ -112,28 +152,37 @@ export const ModalEditScheme = memo(
                 </Thead>
                 <Tbody>
                   {/* <SchemeItem /> */}
-                  <Tr fontSize="xs" h="40px">
-                    <Td w="80%" onClick={onOpen} cursor="pointer">
-                      Item 1
-                    </Td>
-                    <Td w="1%" textAlign="right">
-                      <NumberInput
-                        allowMouseWheel
-                        display="inline"
-                        h="30px"
-                        min={1}
-                      >
-                        <NumberInputField h="30px" fontSize="xs" maxW="100px" />
-                        <NumberInputStepper h="30px">
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </Td>
-                    <Td w="18%" textAlign="right">
-                      <QuantityBadge schemeQuantity={10} storageQuantity={50} />
-                    </Td>
-                  </Tr>
+                  {copiedSchema.items.map((item) => (
+                    <Tr fontSize="xs" h="40px" key={item.id}>
+                      <Td w="80%" onClick={onOpen} cursor="pointer">
+                        {item.item.name}
+                      </Td>
+                      <Td w="1%" textAlign="right">
+                        <NumberInput
+                          allowMouseWheel
+                          display="inline"
+                          h="30px"
+                          min={1}
+                        >
+                          <NumberInputField
+                            h="30px"
+                            fontSize="xs"
+                            maxW="100px"
+                          />
+                          <NumberInputStepper h="30px">
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </Td>
+                      <Td w="18%" textAlign="right">
+                        <QuantityBadge
+                          schemeQuantity={item.neededQuantity}
+                          storageQuantity={item.item.quantity}
+                        />
+                      </Td>
+                    </Tr>
+                  ))}
                 </Tbody>
               </Table>
             </Flex>
