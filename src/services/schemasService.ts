@@ -34,8 +34,8 @@ export const fetchSchemas = async () => {
 export const deleteSchema = async (id: string) => {
   return await SchemaModel.findOneAndDelete(
     { _id: id },
-    { new: true, populate: 'items.item' }
-  )
+    { new: true }
+  ).populate('items.item')
 }
 
 export const addSchemaItem = async (

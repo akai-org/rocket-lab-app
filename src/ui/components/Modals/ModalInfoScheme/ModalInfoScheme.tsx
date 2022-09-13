@@ -25,6 +25,10 @@ import {
 } from 'ui/components'
 import { memo } from 'react'
 import { PopulatedSchema } from 'mongo'
+import { useDispatch } from 'react-redux'
+import { deleteSchema } from 'store'
+import { fetcher } from 'utils/requests'
+import { API_URL } from 'utils/constants'
 
 interface ModalInfoSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
@@ -38,6 +42,22 @@ export const ModalInfoScheme = memo(
       onOpen: onOpenEditScheme,
       onClose: onCloseEditScheme,
     } = useDisclosure()
+    const dispatch = useDispatch()
+
+    const deleteSchemaLocal = async () => {
+      try {
+        const deletedSchema = await fetcher(API_URL + '/api/schemas/delete', {
+          method: 'DELETE',
+          body: { id: schema.id },
+        })
+        console.log(deletedSchema)
+        dispatch(deleteSchema(deletedSchema))
+        props.onClose()
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     return (
       <Modal {...props}>
         <ModalOverlay backdropFilter="blur(3px)" />
@@ -116,7 +136,7 @@ export const ModalInfoScheme = memo(
             </ProductButton>
             <DeletePopover
               label="Czy na pewno chcesz usunąć ten schemat?"
-              onClick={() => console.log('USUNIĘTO SCHEMAT')}
+              onClick={deleteSchemaLocal}
             />
           </ModalFooter>
         </ModalContent>
