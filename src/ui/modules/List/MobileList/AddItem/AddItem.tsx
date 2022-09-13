@@ -14,13 +14,13 @@ import {
   Stack,
   Select,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
+import { useRef, useState, memo } from 'react'
 import { ProductButton } from 'ui/components'
 import { useColors } from 'ui/theme'
 
 export type item = 'custom' | 'existing'
 
-export const AddItem = () => {
+export const AddItem = memo(function AddItem() {
   const name = useRef<HTMLInputElement>(null)
   const [nameIsValid, setNameIsValid] = useState(true)
   const [quantity, setQuantity] = useState(1)
@@ -124,4 +124,4 @@ export const AddItem = () => {
       </AccordionItem>
     </Accordion>
   )
-}
+})

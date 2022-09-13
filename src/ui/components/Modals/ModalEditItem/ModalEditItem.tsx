@@ -39,7 +39,9 @@ interface ModalEditItemProps extends Omit<ModalProps, 'children'> {
   categories: Category[]
 }
 
-export const ModalEditItem = memo((props: ModalEditItemProps) => {
+export const ModalEditItem = memo(function ModalEditItem(
+  props: ModalEditItemProps
+) {
   const dispatch = useDispatch()
   const categoriesData = useSelector(categoriesInfo)
   const [isEdit, setIsEdit] = useState(false)

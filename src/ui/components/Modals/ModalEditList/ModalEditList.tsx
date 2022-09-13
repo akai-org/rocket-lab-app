@@ -31,7 +31,9 @@ interface ModalEditListProps extends Omit<ModalProps, 'children'> {
   name: string
 }
 
-export const ModalEditList = memo((props: ModalEditListProps) => {
+export const ModalEditList = memo(function ModalEditList(
+  props: ModalEditListProps
+) {
   const dispatch = useDispatch()
 
   const [cartList, setCartList] = useState(props.cartList)

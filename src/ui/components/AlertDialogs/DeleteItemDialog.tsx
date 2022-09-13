@@ -22,7 +22,9 @@ interface DeleteItemDialogProps {
   schemaId: string
 }
 
-export const DeleteItemDialog = memo((props: DeleteItemDialogProps) => {
+export const DeleteItemDialog = memo(function DeleteItemDialog(
+  props: DeleteItemDialogProps
+) {
   const cancelRef = useRef(null)
   const colors = useColors()
   const dispatch = useDispatch()

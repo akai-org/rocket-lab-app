@@ -13,12 +13,13 @@ import {
 } from '@chakra-ui/react'
 import { useColors } from 'ui/theme'
 import { ProductButton } from 'ui/components'
+import { memo } from 'react'
 import { useFilters } from 'utils/effects'
 
-export const FilterDrawer = (props: {
+export const FilterDrawer = memo(function FilterDrawer(props: {
   isOpen: boolean
   onClose: () => void
-}) => {
+}) {
   const colors = useColors()
   const { handleSubmit, customQuery, setCustomQuery } = useFilters([
     'from',
@@ -93,4 +94,4 @@ export const FilterDrawer = (props: {
       </DrawerContent>
     </Drawer>
   )
-}
+})

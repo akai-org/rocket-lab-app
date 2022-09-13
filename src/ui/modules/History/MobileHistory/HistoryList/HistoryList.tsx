@@ -5,8 +5,9 @@ import { HistoryLog } from '../../../../../mongo/models/history'
 import { historyInfo } from '../../../../../store/store'
 import { groupLogs } from '../../../../../utils/helpers'
 import { HistoryListItem } from '../HistoryListItem'
+import { memo } from 'react'
 
-export const HistoryList = () => {
+export const HistoryList = memo(function HistoryList() {
   const logs = useSelector(historyInfo).displayLogs
   const [groupedLogs, setGroupedLogs] = useState(groupLogs(logs))
 
@@ -39,4 +40,4 @@ export const HistoryList = () => {
       })}
     </Flex>
   )
-}
+})

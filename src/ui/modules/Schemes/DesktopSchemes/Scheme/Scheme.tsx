@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import {
   Accordion,
   AccordionButton,
@@ -27,7 +27,7 @@ interface Props {
   schema: PopulatedSchema
 }
 
-export const Scheme = ({ schema }: Props) => {
+export const Scheme = memo(function Scheme({ schema }: Props) {
   const {
     isOpen: isOpenInfoScheme,
     onOpen: onOpenInfoScheme,
@@ -107,4 +107,4 @@ export const Scheme = ({ schema }: Props) => {
       />
     </Accordion>
   )
-}
+})

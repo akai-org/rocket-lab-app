@@ -2,7 +2,9 @@ import React, { memo } from 'react'
 import Select, { Props } from 'react-select'
 import { useColors } from '../../theme/useColors'
 
-export const SearchSelect = memo(({ ...restProps }: Props) => {
+export const SearchSelect = memo(function SearchSelect({
+  ...restProps
+}: Props) {
   const colors = useColors()
 
   return (

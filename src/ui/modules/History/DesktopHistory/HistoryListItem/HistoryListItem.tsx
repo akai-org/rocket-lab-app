@@ -2,6 +2,7 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import { FC } from 'react'
 import { HistoryLog } from '../../../../../mongo/models/history'
 import { useColors } from 'ui/theme'
+import { memo } from 'react'
 import { HistoryGroupItem } from '../HistoryGroupItem/HistoryGroupItem'
 
 export interface Props {
@@ -9,7 +10,10 @@ export interface Props {
   groupDate: string
 }
 
-export const HistoryListItem: FC<Props> = ({ logs, groupDate }) => {
+export const HistoryListItem: FC<Props> = memo(function HistoryListItem({
+  logs,
+  groupDate,
+}) {
   const colors = useColors()
 
   return (
@@ -30,4 +34,4 @@ export const HistoryListItem: FC<Props> = ({ logs, groupDate }) => {
       </Box>
     </Flex>
   )
-}
+})

@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import { Flex, Td, Text, Tr } from '@chakra-ui/react'
 import { QuantityBadge } from 'ui/components'
 import { useColors } from 'ui/theme'
@@ -9,11 +9,11 @@ interface SchemeItemProps {
   name: string
 }
 
-export const SchemeItem = ({
+export const SchemeItem = memo(function SchemeItem({
   schemeQuantity,
   storageQuantity,
   name,
-}: SchemeItemProps) => {
+}: SchemeItemProps) {
   const colors = useColors()
 
   return (
@@ -32,4 +32,4 @@ export const SchemeItem = ({
       </Td>
     </Tr>
   )
-}
+})

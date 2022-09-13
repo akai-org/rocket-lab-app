@@ -2,7 +2,7 @@ import { Flex, Text, Image } from '@chakra-ui/react'
 import { useColors } from 'ui/theme'
 import { memo } from 'react'
 
-export const Footer = memo(() => {
+export const Footer = memo(function Footer() {
   const colors = useColors()
 
   return (

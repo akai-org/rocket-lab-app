@@ -1,5 +1,5 @@
 import { Box, ButtonGroup, Checkbox, Flex, Input } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { AiOutlineCheck, AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { updateCategory } from 'store'
@@ -13,7 +13,11 @@ interface CategoryProps {
   categoryName: string
 }
 
-export const Category = ({ id, value, categoryName }: CategoryProps) => {
+export const Category = memo(function Category({
+  id,
+  value,
+  categoryName,
+}: CategoryProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState(categoryName)
   const dispatch = useDispatch()
@@ -60,4 +64,4 @@ export const Category = ({ id, value, categoryName }: CategoryProps) => {
       )}
     </Flex>
   )
-}
+})

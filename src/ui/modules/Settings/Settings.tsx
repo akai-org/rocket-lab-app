@@ -7,11 +7,11 @@ import {
   ColorModeSwitch,
 } from 'ui/components'
 import { Avatar, Flex, Text, useMediaQuery } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { Role } from 'utils/types/frontendGeneral'
 import { useColors } from 'ui/theme'
 
-export const Settings = () => {
+export const Settings = memo(function Settings() {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
   const [selectedUser, setSelectedUser] = useState({ value: '', label: '' })
   const [selectedRole, setSelectedRole] = useState({})
@@ -115,4 +115,4 @@ export const Settings = () => {
       </Flex>
     </Wrapper>
   )
-}
+})

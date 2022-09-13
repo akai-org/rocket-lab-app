@@ -1,6 +1,7 @@
 import { Flex, Box, Text, Stack, Select, useDisclosure } from '@chakra-ui/react'
 import { IoMdFunnel } from 'react-icons/io'
 import { HistoryList } from './HistoryList'
+import { memo } from 'react'
 import { FilterDrawer } from './FilterDrawer'
 import { MobileWrapper } from 'ui/components'
 import { useColors } from 'ui/theme'
@@ -9,7 +10,7 @@ import { SortType } from '../../../../services/itemsService'
 import { validateSortParam } from '../../../../utils/dataValidation/validateSortParam'
 import queryString from 'query-string'
 
-export const MobileHistory = () => {
+export const MobileHistory = memo(function MobileHistory() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const colors = useColors()
 
@@ -74,4 +75,4 @@ export const MobileHistory = () => {
       <HistoryList />
     </MobileWrapper>
   )
-}
+})

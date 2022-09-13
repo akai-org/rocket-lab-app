@@ -27,7 +27,9 @@ interface DeletePopoverProps extends PopoverProps {
   styles?: boolean
 }
 
-export const DeletePopover = memo((props: DeletePopoverProps) => {
+export const DeletePopover = memo(function DeletePopover(
+  props: DeletePopoverProps
+) {
   const [isOpen, setIsOpen] = useState(false)
   const open = () => setIsOpen(!isOpen)
   const close = () => setIsOpen(false)

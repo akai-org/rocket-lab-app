@@ -1,4 +1,5 @@
 import { Text } from '@chakra-ui/react'
+import { memo } from 'react'
 import { HistoryLogType } from '../../../../../mongo/models/history'
 
 export const typesMap: Record<HistoryLogType, string> = {
@@ -8,7 +9,7 @@ export const typesMap: Record<HistoryLogType, string> = {
   removed: 'Usunięto:'
 }
 
-export const HistoryListItemMessage = ({
+export const HistoryListItemMessage = memo(function HistoryListItemMessage({
   name,
   changedQuantity,
   resourceType,
@@ -16,7 +17,7 @@ export const HistoryListItemMessage = ({
   name: string
   changedQuantity?: number
   resourceType: HistoryLogType
-}) => {
+}) {
   return (
     <Text fontSize="sm" isTruncated>
       {`${typesMap[resourceType]} ${name} ${
@@ -24,4 +25,4 @@ export const HistoryListItemMessage = ({
       }`}
     </Text>
   )
-}
+})

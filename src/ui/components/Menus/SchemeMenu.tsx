@@ -9,7 +9,7 @@ export interface SchemeMenuProps {
   onOpenInfo: () => void
 }
 
-export const SchemeMenu = memo((props: SchemeMenuProps) => {
+export const SchemeMenu = memo(function SchemeMenu(props: SchemeMenuProps) {
   const colors = useColors()
 
   return (

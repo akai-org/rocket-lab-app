@@ -6,7 +6,7 @@ interface Props {
   children?: ReactNode
 }
 
-export const Layout = memo(({ children }: Props) => {
+export const Layout = memo(function Layout({ children }: Props) {
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
   return (
     <>

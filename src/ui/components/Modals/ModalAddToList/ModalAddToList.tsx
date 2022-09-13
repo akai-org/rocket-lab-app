@@ -33,7 +33,9 @@ interface ModalAddToListProps extends Omit<ModalProps, 'children'> {
   ) => Promise<void>
 }
 
-export const ModalAddToList = memo((props: ModalAddToListProps) => {
+export const ModalAddToList = memo(function ModalAddToList(
+  props: ModalAddToListProps
+) {
   // TODO: delete these hardcoded 'add_new'
 
   const [selectedList, setSelectedList] = useState('add_new')

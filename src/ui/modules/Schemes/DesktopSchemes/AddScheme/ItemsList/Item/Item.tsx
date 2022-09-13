@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import {
   Flex,
   Image,
@@ -20,7 +20,7 @@ interface ItemProps {
   item: TmpSchemaItem
 }
 
-export const Item = ({ item: schemaItem }: ItemProps) => {
+export const Item = memo(function Item({ item: schemaItem }: ItemProps) {
   const context = useContext(SchemasContext)
   const colors = useColors()
 
@@ -69,4 +69,4 @@ export const Item = ({ item: schemaItem }: ItemProps) => {
       </Td>
     </Tr>
   )
-}
+})
