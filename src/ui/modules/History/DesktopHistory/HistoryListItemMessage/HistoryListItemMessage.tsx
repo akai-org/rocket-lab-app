@@ -2,10 +2,10 @@ import { Text } from '@chakra-ui/react'
 import { HistoryLogType } from '../../../../../mongo/models/history'
 
 export const typesMap: Record<HistoryLogType, string> = {
-  added: 'Dodano do magazynu:',
-  distributed: 'Wyciągnięto z magazynu:',
-  modified: 'Zmodyfikowano w magazynie:',
-  removed: 'Usunięto z magazynu:'
+  added: 'Dodano:',
+  distributed: 'Wyciągnięto:',
+  modified: 'Zmodyfikowano:',
+  removed: 'Usunięto:'
 }
 
 export const HistoryListItemMessage = ({
