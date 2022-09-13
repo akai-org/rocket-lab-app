@@ -122,7 +122,6 @@ export const ModalEditScheme = memo(
             schemaDescription: copiedSchema.description,
           },
         })
-        console.log(updatedSchema)
         dispatch(updateSchema(updatedSchema))
       } catch (error) {
       } finally {

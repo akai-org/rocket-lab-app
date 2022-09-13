@@ -99,6 +99,7 @@ export const Scheme = ({ schema }: Props) => {
         </AccordionPanel>
       </AccordionItem>
       <ModalInfoScheme
+        schema={schema}
         onClose={onCloseInfoScheme}
         isOpen={isOpenInfoScheme}
         isCentered
