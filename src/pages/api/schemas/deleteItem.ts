@@ -1,6 +1,6 @@
 import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 import { NextApiHandler } from 'next'
-import { deleteSchemaItem } from 'services'
+import { createHistoryLog, deleteSchemaItem, validateSession } from 'services'
 import { withMiddleware } from '../../../utils/middlewares'
 
 const handler: NextApiHandler = async (req, res) => {
@@ -9,7 +9,13 @@ const handler: NextApiHandler = async (req, res) => {
     const schemaId = body.schemaId
     const itemId = body.itemId
     try {
+      const session = validateSession(req, res)
       const updatedSchema = await deleteSchemaItem(schemaId, itemId)
+      if (!updatedSchema) throw new Error('No updated Cart List')
+      await createHistoryLog(session.user.email, 'modified', {
+        name: updatedSchema.name,
+        type: 'schema',
+      })
       res.status(200).send(updatedSchema)
     } catch (error) {
       console.log(error)
