@@ -14,8 +14,6 @@ import { useColors } from 'ui/theme'
 import { ProductButton } from 'ui/components'
 import { useFilters } from 'utils/effects'
 import DatePicker, { DateObject } from 'react-multi-date-picker'
-import 'react-multi-date-picker/styles/backgrounds/bg-dark.css'
-import 'react-multi-date-picker/styles/layouts/prime.css'
 
 export const FilterDrawer = (props: {
   isOpen: boolean
@@ -59,7 +57,9 @@ export const FilterDrawer = (props: {
                   }}
                   value={customQuery['from'] || ''}
                   format="YYYY.MM.DD"
-                  className={`${colors.datePickerTheme} rmdp-prime`}
+                  className={`${
+                    colors.fontPrimary === 'black' ? '' : 'bg-dark'
+                  } rmdp-prime`}
                   placeholder="RRRR.MM.DD"
                   style={{
                     height: '40px',
@@ -95,7 +95,9 @@ export const FilterDrawer = (props: {
                   }}
                   value={customQuery['to'] || ''}
                   format="YYYY.MM.DD"
-                  className={`${colors.datePickerTheme} rmdp-prime`}
+                  className={`${
+                    colors.fontPrimary === 'black' ? '' : 'bg-dark'
+                  } rmdp-prime`}
                   placeholder="RRRR.MM.DD"
                   style={{
                     height: '40px',

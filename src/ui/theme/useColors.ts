@@ -28,7 +28,6 @@ export const useColors = () => {
   //others
   const orangePrimary = '#FF7700'
   const errorPrimary = 'red.500'
-  const datePickerTheme = mode ? '' : 'bg-dark'
 
   //logo AKAI
   const logoAkai = mode
@@ -46,7 +45,6 @@ export const useColors = () => {
     backgroundPrimary,
     orangePrimary,
     errorPrimary,
-    datePickerTheme,
     logoAkai,
   }
 }

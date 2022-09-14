@@ -63,7 +63,9 @@ export const Filter = () => {
             }}
             value={customQuery['from'] || ''}
             format="YYYY.MM.DD"
-            className={`${colors.datePickerTheme} rmdp-prime`}
+            className={`${
+              colors.fontPrimary === 'black' ? '' : 'bg-dark'
+            } rmdp-prime`}
             placeholder="RRRR.MM.DD"
             style={{
               height: '40px',
@@ -97,7 +99,9 @@ export const Filter = () => {
             }}
             value={customQuery['to'] || ''}
             format="YYYY.MM.DD"
-            className={`${colors.datePickerTheme} rmdp-prime`}
+            className={`${
+              colors.fontPrimary === 'black' ? '' : 'bg-dark'
+            } rmdp-prime`}
             placeholder="RRRR.MM.DD"
             style={{
               height: '40px',

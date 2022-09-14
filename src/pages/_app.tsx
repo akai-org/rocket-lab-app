@@ -9,6 +9,9 @@ import '../styles/globals.css'
 import { theme } from 'ui/theme'
 import { RouteGuard } from '../ui/routeGuard'
 import { Layout } from 'ui/components'
+import 'react-multi-date-picker/styles/backgrounds/bg-dark.css'
+import 'react-multi-date-picker/styles/layouts/prime.css'
+import '../styles/date-picker.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const persistor = persistStore(store)
