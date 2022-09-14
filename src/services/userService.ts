@@ -1,5 +1,5 @@
-import { User, userModel as UserModel } from '../mongo/models/user'
-import { ITEMS_QUERY_LIMIT } from '../utils/constants'
+import { User, UserModel } from 'mongo/models/user'
+import { ITEMS_QUERY_LIMIT } from 'utils/constants'
 
 export async function updateUsersRoles(users: User[]) {
   // updating users
@@ -11,14 +11,15 @@ export async function updateUsersRoles(users: User[]) {
   for (const role of arrayRoles) {
     const roleUsers = users.filter((user) => user.role === role)
     const usersIds = roleUsers.map(({ _id }) => _id)
-    await UserModel.updateMany({ _id: { $in: usersIds } }, { role })
+    await UserModel.updateMany(
+      { _id: { $in: usersIds } },
+      { role },
+      { new: true }
+    )
   }
+  return UserModel.find()
 }
 
 export async function fetchUsers(skip: number): Promise<User[]> {
-  const users = await UserModel.find()
-    .skip(skip)
-    .limit(ITEMS_QUERY_LIMIT)
-
-  return users
+  return UserModel.find().skip(skip).limit(ITEMS_QUERY_LIMIT)
 }

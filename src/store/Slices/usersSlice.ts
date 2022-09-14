@@ -8,7 +8,7 @@ interface State {
 
 const initialState: State = { users: [] }
 
-export const schemasSlice = createSlice({
+export const usersSlice = createSlice({
   name: 'usersSlice',
   initialState,
   reducers: {
@@ -18,20 +18,22 @@ export const schemasSlice = createSlice({
     deleteUser: (state, action: PayloadAction<User>) => {
       state.users = _.differenceBy(state.users, [action.payload], 'id')
     },
-    updateUser: (state, action: PayloadAction<User>) => {
+    updateUsers: (state, action: PayloadAction<User[]>) => {
       const copiedUsers = [...state.users]
-      const userIndex = copiedUsers.findIndex(
-        (user) => user.id === action.payload.id
-      )
-      if (userIndex === -1) return
+      for (const changedUser of action.payload) {
+        const userIndex = copiedUsers.findIndex(
+          (user) => user.id === changedUser.id
+        )
+        if (userIndex === -1) copiedUsers.push(changedUser)
 
-      copiedUsers.splice(userIndex, 1, action.payload)
+        copiedUsers.splice(userIndex, 1, changedUser)
+      }
 
       state.users = copiedUsers
     },
   },
 })
 
-export const schemasReducer = schemasSlice.reducer
+export const usersReducer = usersSlice.reducer
 
-export const { setUsers, deleteUser, updateUser } = schemasSlice.actions
+export const { setUsers, deleteUser, updateUsers } = usersSlice.actions

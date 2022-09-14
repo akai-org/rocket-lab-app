@@ -8,30 +8,76 @@ import {
 } from 'ui/components'
 import { Avatar, Flex, Text, useMediaQuery } from '@chakra-ui/react'
 import { useState, memo } from 'react'
-import { Role } from 'utils/types/frontendGeneral'
 import { useColors } from 'ui/theme'
+import { useDispatch, useSelector } from 'react-redux'
+import { usersInfo } from 'store'
+import { User } from 'mongo'
+import { setUsers } from 'store/Slices/usersSlice'
+import { adminRoles } from 'utils/types/backendGeneral'
+import { fetcher } from 'utils/requests'
+import { API_URL } from 'utils/constants'
+
+interface SelectableRole {
+  value: adminRoles
+  label: adminRoles
+}
+
+interface SelectableUser extends Omit<User, '_id' | 'role'> {
+  value: string
+  label: string
+  role: SelectableRole
+}
 
 export const Settings = memo(function Settings() {
+  const dispatch = useDispatch()
   const [isDesktop] = useMediaQuery('(min-width: 900px)')
-  const [selectedUser, setSelectedUser] = useState({ value: '', label: '' })
-  const [selectedRole, setSelectedRole] = useState({})
+
+  const [changedUsers, setChangedUsers] = useState<User[]>([])
+
+  const users = useSelector(usersInfo).users
+
+  const selectableUsers = users.map((user) => ({
+    value: user.id,
+    label: user.name,
+    id: user.id,
+    role: { value: user.role, label: user.role },
+    email: user.email,
+    name: user.name,
+  }))
+
+  const [selectedUser, setSelectedUser] = useState<SelectableUser>(
+    () => selectableUsers[0]
+  )
+  const [selectedRole, setSelectedRole] = useState<SelectableRole>(
+    () => selectableUsers[0].role
+  )
 
   const Wrapper = isDesktop ? DesktopWrapper : MobileWrapper
 
-  const mockUsersOptions = [
-    { value: 'Patryk Marczak', label: 'Patryk Marczak', role: 'ADMIN' },
-    { value: 'Alan Gradecki', label: 'Alan Gradecki', role: 'EDITOR' },
-    { value: 'Kacper Nowaczyk', label: 'Kacper Nowaczyk', role: 'READER' },
-  ]
-  const mockRolesOptions = [
-    { value: 'ADMIN', label: 'ADMIN' },
-    { value: 'EDITOR', label: 'EDITOR' },
-    { value: 'READER', label: 'READER' },
+  const rolesOptions: SelectableRole[] = [
+    { value: 'admin', label: 'admin' },
+    { value: 'editor', label: 'editor' },
+    { value: 'reader', label: 'reader' },
   ]
 
   const handleClear = () => {
     setSelectedRole({})
     setSelectedUser({ value: '', label: '' })
+  }
+
+  const onSave = async () => {
+    console.log('onSave called')
+    try {
+      const updatedUsers = await fetcher(API_URL + '/api/users/update', {
+        method: 'PUT',
+        body: {
+          users: changedUsers,
+        },
+      })
+      dispatch(setUsers(updatedUsers))
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const colors = useColors()
@@ -80,29 +126,38 @@ export const Settings = memo(function Settings() {
           <SearchSelect
             value={selectedUser}
             onChange={(e) => {
-              const b = e as { value: string; label: string; role: Role }
-              setSelectedUser({ ...b })
-              setSelectedRole({ value: b.role, label: b.role })
+              const user = e as SelectableUser
+              setSelectedUser(user)
+              setSelectedRole(user.role)
             }}
-            options={mockUsersOptions}
+            options={selectableUsers}
           />
-          {selectedUser.label && (
+          {selectedUser.name && (
             <Flex flexDirection="column">
-              <Text>{'Użytkownik: ' + selectedUser.label}</Text>
-              <Text>{'Email: ' + 'replaceme@gmail.com'}</Text>
+              <Text>{'Użytkownik: ' + selectedUser.name}</Text>
+              <Text>{'Email: ' + selectedUser.email}</Text>
               <Text>
                 Rola:
                 <SearchSelect
                   value={selectedRole}
                   onChange={(e) => {
-                    const b = e as { value: string; label: string }
-                    setSelectedRole({ ...b })
+                    const role = e as SelectableRole
+                    setSelectedRole(role)
+                    setChangedUsers((changedUsers) => {
+                      const dbUser = {
+                        ...(users.find(
+                          (user) => user.id === selectedUser.id
+                        ) as User),
+                      }
+                      dbUser.role = role.value
+                      return [...changedUsers, dbUser]
+                    })
                   }}
-                  options={mockRolesOptions}
+                  options={rolesOptions}
                 />
               </Text>
               <Flex justifyContent="flex-end" gap="10px" mt="15px">
-                <ProductButton fontSize="sm" w="70px">
+                <ProductButton onClick={onSave} fontSize="sm" w="70px">
                   Zapisz
                 </ProductButton>
                 <ProductButton onClick={handleClear} fontSize="sm" w="70px">
