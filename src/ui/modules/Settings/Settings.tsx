@@ -7,7 +7,7 @@ import {
   ColorModeSwitch,
 } from 'ui/components'
 import { Avatar, Flex, Text, useMediaQuery } from '@chakra-ui/react'
-import { useState, memo } from 'react'
+import { useState, memo, useEffect } from 'react'
 import { useColors } from 'ui/theme'
 import { useDispatch, useSelector } from 'react-redux'
 import { usersInfo } from 'store'
@@ -36,21 +36,27 @@ export const Settings = memo(function Settings() {
 
   const users = useSelector(usersInfo).users
 
-  const selectableUsers = users.map((user) => ({
-    value: user.id,
-    label: user.name,
-    id: user.id,
-    role: { value: user.role, label: user.role },
-    email: user.email,
-    name: user.name,
-  }))
+  const prepareSelectableUsers = () =>
+    users.map((user) => ({
+      value: user.id,
+      label: user.name,
+      id: user.id,
+      role: { value: user.role, label: user.role },
+      email: user.email,
+      name: user.name,
+    }))
+
+  const [selectableUsers, setSelectableUsers] = useState<SelectableUser[]>(
+    prepareSelectableUsers
+  )
 
   const [selectedUser, setSelectedUser] = useState<SelectableUser>(
-    () => selectableUsers[0]
+    selectableUsers[0]
   )
-  const [selectedRole, setSelectedRole] = useState<SelectableRole>(
-    () => selectableUsers[0].role
-  )
+
+  useEffect(() => {
+    setSelectedUser(selectableUsers[0])
+  }, [setSelectedUser, users])
 
   const Wrapper = isDesktop ? DesktopWrapper : MobileWrapper
 
@@ -61,8 +67,10 @@ export const Settings = memo(function Settings() {
   ]
 
   const handleClear = () => {
-    setSelectedRole({})
-    setSelectedUser({ value: '', label: '' })
+    setSelectableUsers(prepareSelectableUsers())
+    setSelectedUser(selectableUsers[0])
+
+    setChangedUsers([])
   }
 
   const onSave = async () => {
@@ -75,6 +83,8 @@ export const Settings = memo(function Settings() {
         },
       })
       dispatch(setUsers(updatedUsers))
+      setSelectedUser(selectableUsers[0])
+      setChangedUsers([])
     } catch (e) {
       console.log(e)
     }
@@ -128,7 +138,6 @@ export const Settings = memo(function Settings() {
             onChange={(e) => {
               const user = e as SelectableUser
               setSelectedUser(user)
-              setSelectedRole(user.role)
             }}
             options={selectableUsers}
           />
@@ -139,18 +148,45 @@ export const Settings = memo(function Settings() {
               <Text>
                 Rola:
                 <SearchSelect
-                  value={selectedRole}
+                  value={
+                    (
+                      selectableUsers.find(
+                        (user) => user.name === selectedUser.name
+                      ) as SelectableUser
+                    ).role
+                  }
                   onChange={(e) => {
                     const role = e as SelectableRole
-                    setSelectedRole(role)
+                    setSelectableUsers((selectables) => {
+                      const copy = [...selectables]
+                      const changedUserIndex = copy.findIndex(
+                        (user) => user.name === selectedUser.name
+                      )
+                      const userCopy = { ...copy[changedUserIndex] }
+                      userCopy.role = role
+                      copy.splice(changedUserIndex, 1, userCopy)
+                      return copy
+                    })
                     setChangedUsers((changedUsers) => {
-                      const dbUser = {
-                        ...(users.find(
-                          (user) => user.id === selectedUser.id
-                        ) as User),
+                      const userIndex = changedUsers.findIndex(
+                        (user) => user.id === selectedUser.id
+                      )
+
+                      if (userIndex !== -1) {
+                        const copyUser = { ...changedUsers[userIndex] }
+                        copyUser.role = role.value
+                        const copyUsers = [...changedUsers]
+                        copyUsers.splice(userIndex, 1, copyUser)
+                        return copyUsers
+                      } else {
+                        const copyUser = {
+                          ...(users.find(
+                            (user) => user.name === selectedUser.name
+                          ) as User),
+                        }
+                        copyUser.role = role.value
+                        return [...changedUsers, copyUser]
                       }
-                      dbUser.role = role.value
-                      return [...changedUsers, dbUser]
                     })
                   }}
                   options={rolesOptions}
