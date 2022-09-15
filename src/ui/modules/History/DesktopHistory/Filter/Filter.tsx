@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Select, Stack, Text } from '@chakra-ui/react'
+import { Button, Flex, Select, Stack, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useColors } from 'ui/theme'
 import { memo } from 'react'
@@ -6,6 +6,7 @@ import queryString from 'query-string'
 import { useFilters } from 'utils/effects'
 import { SortType } from 'services'
 import { validateSortParam } from 'utils/dataValidation'
+import DatePicker, { DateObject } from 'react-multi-date-picker'
 
 export const Filter = memo(function Filter() {
   const colors = useColors()
@@ -44,9 +45,13 @@ export const Filter = memo(function Filter() {
       >
         <Stack direction="row" alignItems="center" w="185px" mr="15px">
           <Text color={colors.fontSecondary}>od:</Text>
-          <Input
-            onChange={(e) => {
-              const val = e.currentTarget.value
+          <DatePicker
+            onChange={(e: DateObject) => {
+              const day = e.day < 10 ? `0${e.day}` : `${e.day}`
+              const month =
+                e.month.number < 10 ? `0${e.month.number}` : `${e.month.number}`
+              const year = e.year
+              const val = `${year}-${month}-${day}`
               setCustomQuery((state) => {
                 const copiedState = { ...state }
                 if (val && val.length !== 0) {
@@ -58,15 +63,31 @@ export const Filter = memo(function Filter() {
               })
             }}
             value={customQuery['from'] || ''}
-            type="date"
-            placeholder="DD.MM.RRRR"
-          ></Input>
+            format="YYYY.MM.DD"
+            className={`${
+              colors.fontPrimary === 'black' ? '' : 'bg-dark'
+            } rmdp-prime`}
+            placeholder="RRRR.MM.DD"
+            style={{
+              height: '40px',
+              width: '8rem',
+              borderRadius: '5px',
+              fontSize: 'sm',
+              padding: '3px 10px',
+              color: colors.fontPrimary,
+              backgroundColor: colors.backgroundPrimary,
+            }}
+          />
         </Stack>
         <Stack direction="row" alignItems="center" w="185px" mr="15px">
           <Text color={colors.fontSecondary}>do:</Text>
-          <Input
-            onChange={(e) => {
-              const val = e.currentTarget.value
+          <DatePicker
+            onChange={(e: DateObject) => {
+              const day = e.day < 10 ? `0${e.day}` : `${e.day}`
+              const month =
+                e.month.number < 10 ? `0${e.month.number}` : `${e.month.number}`
+              const year = e.year
+              const val = `${year}-${month}-${day}`
               setCustomQuery((state) => {
                 const copiedState = { ...state }
                 if (val && val.length !== 0) {
@@ -78,11 +99,23 @@ export const Filter = memo(function Filter() {
               })
             }}
             value={customQuery['to'] || ''}
-            type="date"
-            placeholder="DD.MM.RRRR"
-          ></Input>
+            format="YYYY.MM.DD"
+            className={`${
+              colors.fontPrimary === 'black' ? '' : 'bg-dark'
+            } rmdp-prime`}
+            placeholder="RRRR.MM.DD"
+            style={{
+              height: '40px',
+              width: '8rem',
+              borderRadius: '5px',
+              fontSize: 'sm',
+              padding: '3px 10px',
+              color: colors.fontPrimary,
+              backgroundColor: colors.backgroundPrimary,
+            }}
+          />
         </Stack>
-        <Stack direction="row">
+        <Stack direction="row" alignItems="center">
           <Text color={colors.fontSecondary}>sortuj:</Text>
           {
             // TODO: History sorting

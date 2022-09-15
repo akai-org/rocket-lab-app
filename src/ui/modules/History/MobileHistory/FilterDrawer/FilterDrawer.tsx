@@ -6,7 +6,6 @@ import {
   DrawerHeader,
   DrawerFooter,
   DrawerBody,
-  Input,
   Stack,
   Text,
   Flex,
@@ -15,6 +14,7 @@ import { useColors } from 'ui/theme'
 import { ProductButton } from 'ui/components'
 import { memo } from 'react'
 import { useFilters } from 'utils/effects'
+import DatePicker, { DateObject } from 'react-multi-date-picker'
 
 export const FilterDrawer = memo(function FilterDrawer(props: {
   isOpen: boolean
@@ -37,9 +37,15 @@ export const FilterDrawer = memo(function FilterDrawer(props: {
             <Flex flexDirection="row">
               <Stack direction="row" alignItems="center" w="185px" mr="15px">
                 <Text color={colors.fontSecondary}>od:</Text>
-                <Input
-                  onChange={(e) => {
-                    const val = e.currentTarget.value
+                <DatePicker
+                  onChange={(e: DateObject) => {
+                    const day = e.day < 10 ? `0${e.day}` : `${e.day}`
+                    const month =
+                      e.month.number < 10
+                        ? `0${e.month.number}`
+                        : `${e.month.number}`
+                    const year = e.year
+                    const val = `${year}-${month}-${day}`
                     setCustomQuery((state) => {
                       const copiedState = { ...state }
                       if (val && val.length !== 0) {
@@ -51,15 +57,33 @@ export const FilterDrawer = memo(function FilterDrawer(props: {
                     })
                   }}
                   value={customQuery['from'] || ''}
-                  type="date"
-                  placeholder="DD.MM.RRRR"
-                ></Input>
+                  format="YYYY.MM.DD"
+                  className={`${
+                    colors.fontPrimary === 'black' ? '' : 'bg-dark'
+                  } rmdp-prime`}
+                  placeholder="RRRR.MM.DD"
+                  style={{
+                    height: '40px',
+                    width: '8rem',
+                    borderRadius: '5px',
+                    fontSize: 'sm',
+                    padding: '3px 10px',
+                    color: colors.fontPrimary,
+                    backgroundColor: colors.backgroundPrimary,
+                  }}
+                />
               </Stack>
               <Stack direction="row" alignItems="center" w="185px" mr="15px">
                 <Text color={colors.fontSecondary}>do:</Text>
-                <Input
-                  onChange={(e) => {
-                    const val = e.currentTarget.value
+                <DatePicker
+                  onChange={(e: DateObject) => {
+                    const day = e.day < 10 ? `0${e.day}` : `${e.day}`
+                    const month =
+                      e.month.number < 10
+                        ? `0${e.month.number}`
+                        : `${e.month.number}`
+                    const year = e.year
+                    const val = `${year}-${month}-${day}`
                     setCustomQuery((state) => {
                       const copiedState = { ...state }
                       if (val && val.length !== 0) {
@@ -71,9 +95,21 @@ export const FilterDrawer = memo(function FilterDrawer(props: {
                     })
                   }}
                   value={customQuery['to'] || ''}
-                  type="date"
-                  placeholder="DD.MM.RRRR"
-                ></Input>
+                  format="YYYY.MM.DD"
+                  className={`${
+                    colors.fontPrimary === 'black' ? '' : 'bg-dark'
+                  } rmdp-prime`}
+                  placeholder="RRRR.MM.DD"
+                  style={{
+                    height: '40px',
+                    width: '8rem',
+                    borderRadius: '5px',
+                    fontSize: 'sm',
+                    padding: '3px 10px',
+                    color: colors.fontPrimary,
+                    backgroundColor: colors.backgroundPrimary,
+                  }}
+                />
               </Stack>
             </Flex>
           </DrawerBody>

@@ -1,0 +1,42 @@
+.bg-dark.rmdp-day span,
+.bg-dark.rmdp-header-values {
+  color: #ffffff !important;
+}
+
+.rmdp-week-day {
+  color: #ff7700 !important;
+}
+
+.rmdp-arrow {
+  border: solid #ff7700 !important;
+  border-width: 0 2px 2px 0 !important;
+}
+
+.rmdp-arrow-container:hover {
+  background-color: #ffffff !important;
+}
+
+.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+  background-color: #ff7700 !important;
+  color: #ffffff !important;
+}
+
+.rmdp-day.rmdp-selected span:not(.highlight) {
+  background-color: #ff7700 !important;
+  box-shadow: 0 0 3px #ff9900 !important;
+  color: #ffffff !important;
+}
+
+.bg-dark.rmdp-wrapper {
+  background-color: #1a202c !important;
+}
+
+.rmdp-day.rmdp-today span {
+  background-color: #ff9900 !important;
+  color: #ffffff !important;
+}
+
+.bg-dark .rmdp-month-picker,
+.bg-dark .rmdp-year-picker {
+  background-color: #1a202c !important;
+}
