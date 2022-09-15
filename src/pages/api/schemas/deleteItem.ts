@@ -1,13 +1,12 @@
 import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 import { NextApiHandler } from 'next'
 import { createHistoryLog, deleteSchemaItem, validateSession } from 'services'
-import { withMiddleware } from '../../../utils/middlewares'
+import { withMiddleware } from 'utils/middlewares'
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.method === 'POST') {
     const body = req.body
-    const schemaId = body.schemaId
-    const itemId = body.itemId
+    const { schemaId, itemId } = body
     try {
       const session = validateSession(req, res)
       const updatedSchema = await deleteSchemaItem(schemaId, itemId)

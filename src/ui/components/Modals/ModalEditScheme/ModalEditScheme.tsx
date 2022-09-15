@@ -85,7 +85,6 @@ export const ModalEditScheme = memo(function ModalEditScheme({
   }, [copiedSchema.items, filterItems, items, schema.items])
 
   const addItem = async (id: string) => {
-    console.log(itemNumberInputRef.current?.value)
     try {
       // TODO: Start loading spinner here
       const updatedSchema = await fetcher(API_URL + '/api/schemas/addItem', {
@@ -242,8 +241,7 @@ export const ModalEditScheme = memo(function ModalEditScheme({
                             const changedItemIndex = itemsCopy.findIndex(
                               (copyItem) => copyItem.id === item.id
                             )
-                            if (changedItemIndex === -1)
-                              return { ...schemaCopy }
+                            if (changedItemIndex === -1) return schemaCopy
 
                             itemsCopy[changedItemIndex] = {
                               ...itemsCopy[changedItemIndex],
