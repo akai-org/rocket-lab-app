@@ -1,7 +1,7 @@
-import { CartListModel } from '../mongo/models/cart'
-import { Item, ItemModel } from '../mongo/models/item'
-import { ITEMS_QUERY_LIMIT } from '../utils/constants'
-import { validateSortParam } from '../utils/dataValidation/validateSortParam'
+import { CartListModel } from 'mongo'
+import { Item, ItemModel } from 'mongo/models/item'
+import { ITEMS_QUERY_LIMIT } from 'utils/constants'
+import { validateSortParam } from 'utils/dataValidation/validateSortParam'
 
 export type SortType = 'newest' | 'oldest' | 'alphabetically'
 
@@ -90,16 +90,11 @@ export async function fetchItems(
 }
 
 export async function fetchItemsCount(): Promise<number> {
-  const itemsCount = await ItemModel.count()
-  return itemsCount
+  return ItemModel.count()
 }
 
 export async function updateItem(id: string, item: Partial<Item>) {
-  return await ItemModel.findOneAndUpdate(
-    { _id: id },
-    { ...item },
-    { new: true }
-  )
+  return ItemModel.findOneAndUpdate({ _id: id }, { ...item }, { new: true })
 }
 
 export async function deleteItem(id: string) {
@@ -113,24 +108,17 @@ export async function deleteItem(id: string) {
       },
     }
   )
-  return await ItemModel.findOneAndDelete({ _id: id }, { new: true })
+  return ItemModel.findOneAndDelete({ _id: id }, { new: true })
 }
 
 export async function addItem(item: Item) {
-  const createdItem = await (
-    await ItemModel.create(item)
-  ).populate('categories')
-
-  return createdItem
+  return await (await ItemModel.create(item)).populate('categories')
 }
 
 export async function fetchAllItems() {
-  const items = await ItemModel.find({})
-    .sort({ updatedAt: -1 })
-    .populate('categories')
-  return items
+  return ItemModel.find({}).sort({ updatedAt: -1 }).populate('categories')
 }
 
 export async function fetchItem(id: string) {
-  return await ItemModel.findById(id)
+  return ItemModel.findById(id)
 }

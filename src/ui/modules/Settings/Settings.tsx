@@ -5,6 +5,7 @@ import {
   MobileWrapper,
   RoleBadge,
   ColorModeSwitch,
+  DeletePopover,
 } from 'ui/components'
 import { Avatar, Flex, Text, useMediaQuery } from '@chakra-ui/react'
 import { useState, memo, useEffect } from 'react'
@@ -12,7 +13,7 @@ import { useColors } from 'ui/theme'
 import { useDispatch, useSelector } from 'react-redux'
 import { usersInfo } from 'store'
 import { User } from 'mongo'
-import { setUsers } from 'store/Slices/usersSlice'
+import { deleteUser, setUsers } from 'store/Slices/usersSlice'
 import { adminRoles } from 'utils/types/backendGeneral'
 import { fetcher } from 'utils/requests'
 import { API_URL } from 'utils/constants'
@@ -55,8 +56,12 @@ export const Settings = memo(function Settings() {
   )
 
   useEffect(() => {
+    setSelectableUsers(prepareSelectableUsers)
+  }, [users])
+
+  useEffect(() => {
     setSelectedUser(selectableUsers[0])
-  }, [setSelectedUser, users])
+  }, [selectableUsers])
 
   const Wrapper = isDesktop ? DesktopWrapper : MobileWrapper
 
@@ -85,6 +90,18 @@ export const Settings = memo(function Settings() {
       dispatch(setUsers(updatedUsers))
       setSelectedUser(selectableUsers[0])
       setChangedUsers([])
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const deleteUserLocal = async () => {
+    try {
+      const deletedUser = await fetcher(API_URL + '/api/users/delete', {
+        method: 'DELETE',
+        body: { userId: selectedUser.id },
+      })
+      dispatch(deleteUser(deletedUser))
     } catch (e) {
       console.log(e)
     }
@@ -149,11 +166,9 @@ export const Settings = memo(function Settings() {
                 Rola:
                 <SearchSelect
                   value={
-                    (
-                      selectableUsers.find(
-                        (user) => user.name === selectedUser.name
-                      ) as SelectableUser
-                    ).role
+                    selectableUsers.find(
+                      (user) => user.name === selectedUser.name
+                    )?.role
                   }
                   onChange={(e) => {
                     const role = e as SelectableRole
@@ -199,6 +214,10 @@ export const Settings = memo(function Settings() {
                 <ProductButton onClick={handleClear} fontSize="sm" w="70px">
                   Anuluj
                 </ProductButton>
+                <DeletePopover
+                  label="Czy na pewno chcesz usunąć tego użytkownika?"
+                  onClick={deleteUserLocal}
+                />
               </Flex>
             </Flex>
           )}
