@@ -94,7 +94,7 @@ export async function fetchItemsCount(): Promise<number> {
 }
 
 export async function updateItem(id: string, item: Partial<Item>) {
-  return ItemModel.findOneAndUpdate({ _id: id }, { ...item }, { new: true })
+  return ItemModel.findOneAndUpdate({ _id: id }, item, { new: true })
 }
 
 export async function deleteItem(id: string) {
@@ -116,7 +116,7 @@ export async function addItem(item: Item) {
 }
 
 export async function fetchAllItems() {
-  return ItemModel.find({}).sort({ updatedAt: -1 }).populate('categories')
+  return ItemModel.find().sort({ updatedAt: -1 }).populate('categories')
 }
 
 export async function fetchItem(id: string) {

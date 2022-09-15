@@ -79,7 +79,6 @@ export const Settings = memo(function Settings() {
   }
 
   const onSave = async () => {
-    console.log('onSave called')
     try {
       const updatedUsers = await fetcher(API_URL + '/api/users/update', {
         method: 'PUT',
