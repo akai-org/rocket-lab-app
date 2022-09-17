@@ -24,19 +24,42 @@ import {
   ModalEditScheme,
 } from 'ui/components'
 import { memo } from 'react'
+import { PopulatedSchema } from 'mongo'
+import { useDispatch } from 'react-redux'
+import { deleteSchema } from 'store'
+import { fetcher } from 'utils/requests'
+import { API_URL } from 'utils/constants'
 
 interface ModalInfoSchemeProps extends Omit<ModalProps, 'children'> {
   onClose: () => void
+  schema: PopulatedSchema
 }
 
-export const ModalInfoScheme = memo(function ModalInfoScheme(
-  props: ModalInfoSchemeProps
-) {
+export const ModalInfoScheme = memo(function ModalInfoScheme({
+  schema,
+  ...props
+}: ModalInfoSchemeProps) {
   const {
     isOpen: isOpenEditScheme,
     onOpen: onOpenEditScheme,
     onClose: onCloseEditScheme,
   } = useDisclosure()
+  const dispatch = useDispatch()
+
+  const deleteSchemaLocal = async () => {
+    try {
+      const deletedSchema = await fetcher(API_URL + '/api/schemas/delete', {
+        method: 'DELETE',
+        body: { id: schema.id },
+      })
+      console.log(deletedSchema)
+      dispatch(deleteSchema(deletedSchema))
+      props.onClose()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Modal {...props}>
       <ModalOverlay backdropFilter="blur(3px)" />
@@ -45,13 +68,20 @@ export const ModalInfoScheme = memo(function ModalInfoScheme(
         <ModalCloseButton />
         <ModalBody>
           <Flex flexDirection="column" maxH="350px" overflowY="scroll" w="100%">
-            <Text fontWeight="normal" noOfLines={2} fontSize="lg">
-              Schemat nr 1 - nazwa schematu
+            <Text
+              fontWeight="normal"
+              overflow="auto"
+              noOfLines={2}
+              fontSize="lg"
+            >
+              {schema.name}
             </Text>
-            <Text m="5px 0 15px 0">
-              Opis:
-              <br /> Tutaj jest opis schematu.
-            </Text>
+            {schema.description && (
+              <Text m="5px 0 15px 0">
+                Opis:
+                <br /> {schema.description}
+              </Text>
+            )}
             <Table>
               <Thead>
                 <Tr fontSize="16px" fontWeight="700">
@@ -66,24 +96,20 @@ export const ModalInfoScheme = memo(function ModalInfoScheme(
               </Thead>
               <Tbody>
                 {/* <SchemeItem /> */}
-                <Tr fontSize="xs" h="40px">
-                  <Td>Item 1</Td>
-                  <Td w="1%" minW="120px" textAlign="right">
-                    55
-                  </Td>
-                  <Td w="18%" textAlign="right">
-                    <QuantityBadge schemeQuantity={101} storageQuantity={100} />
-                  </Td>
-                </Tr>
-                <Tr fontSize="xs" h="40px">
-                  <Td>Item 2</Td>
-                  <Td w="1%" minW="120px" textAlign="right">
-                    1255
-                  </Td>
-                  <Td w="18%" textAlign="right">
-                    <QuantityBadge schemeQuantity={10} storageQuantity={50} />
-                  </Td>
-                </Tr>
+                {schema.items.map((item) => (
+                  <Tr key={item.id} fontSize="xs" h="40px">
+                    <Td>{item.item.name}</Td>
+                    <Td w="1%" minW="120px" textAlign="right">
+                      {item.neededQuantity}
+                    </Td>
+                    <Td w="18%" textAlign="right">
+                      <QuantityBadge
+                        schemeQuantity={item.neededQuantity}
+                        storageQuantity={item.item.quantity}
+                      />
+                    </Td>
+                  </Tr>
+                ))}
               </Tbody>
             </Table>
           </Flex>
@@ -107,7 +133,7 @@ export const ModalInfoScheme = memo(function ModalInfoScheme(
           </ProductButton>
           <DeletePopover
             label="Czy na pewno chcesz usunąć ten schemat?"
-            onClick={() => console.log('USUNIĘTO SCHEMAT')}
+            onClick={deleteSchemaLocal}
           />
         </ModalFooter>
       </ModalContent>
@@ -115,6 +141,7 @@ export const ModalInfoScheme = memo(function ModalInfoScheme(
         onClose={onCloseEditScheme}
         isOpen={isOpenEditScheme}
         isCentered
+        schema={schema}
       />
     </Modal>
   )

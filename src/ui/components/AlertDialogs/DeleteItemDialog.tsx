@@ -6,13 +6,20 @@ import {
   AlertDialogHeader,
   AlertDialogOverlay,
 } from '@chakra-ui/react'
-import React, { memo, useRef } from 'react'
+import React, { Dispatch, memo, SetStateAction, useRef } from 'react'
 import { useColors } from 'ui/theme'
 import { ProductButton } from 'ui/components'
+import { fetcher } from 'utils/requests'
+import { API_URL } from 'utils/constants'
+import { useDispatch } from 'react-redux'
+import { updateSchema } from 'store/Slices/schemasSlice'
 
 interface DeleteItemDialogProps {
   isOpenDialog: boolean
   onCloseDialog: () => void
+  itemToDelete: string | undefined
+  setItemToDelete: Dispatch<SetStateAction<string | undefined>>
+  schemaId: string
 }
 
 export const DeleteItemDialog = memo(function DeleteItemDialog(
@@ -20,6 +27,7 @@ export const DeleteItemDialog = memo(function DeleteItemDialog(
 ) {
   const cancelRef = useRef(null)
   const colors = useColors()
+  const dispatch = useDispatch()
 
   return (
     <AlertDialog
@@ -47,8 +55,24 @@ export const DeleteItemDialog = memo(function DeleteItemDialog(
             </ProductButton>
             <ProductButton
               backgroundColor={colors.errorPrimary}
-              onClick={() => {
-                /*USUWANIE*/
+              onClick={async () => {
+                try {
+                  const updatedSchema = await fetcher(
+                    API_URL + '/api/schemas/deleteItem',
+                    {
+                      body: {
+                        schemaId: props.schemaId,
+                        itemId: props.itemToDelete,
+                      },
+                    }
+                  )
+                  dispatch(updateSchema(updatedSchema))
+                } catch (error) {
+                  console.log(error)
+                } finally {
+                  props.setItemToDelete(undefined)
+                  props.onCloseDialog()
+                }
               }}
               fontSize="sm"
               w="80px"
