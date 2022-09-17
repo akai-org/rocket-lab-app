@@ -1,13 +1,13 @@
 import { getSession } from '@auth0/nextjs-auth0'
 import { IncomingMessage, ServerResponse } from 'http'
 import { NextApiRequestCookies } from 'next/dist/server/api-utils'
-import { User, userModel as UserModel } from '../mongo/models/user'
+import { User, UserModel } from 'mongo/models/user'
 import {
   adminRoles,
   CredentialsReq,
   CredentialsRes,
   Permissions,
-} from './types/backendGeneral'
+} from './types'
 
 export class Credentials {
   private static enumToUsersMap = new Map<adminRoles, Permissions>([
@@ -52,7 +52,7 @@ export class Credentials {
 
     // TODO: restore to normal auth flow after initial tests
 
-    if(!permission) {
+    if (!permission) {
       throw new Error('User has no role assigned - contact DB Manager')
     }
 
@@ -88,13 +88,13 @@ export class Credentials {
     return Credentials.enumToUsersMap.get(userRole)
   }
 
-  private static checkPermission(
-    userPermission: Permissions | undefined,
-    demandedPermission: Permissions
-  ) {
-    if (!userPermission)
-      throw new Error('Unauthorized access. User permission is not valid')
-    if (userPermission < demandedPermission)
-      throw new Error('Unauthorized access')
-  }
+  // private static checkPermission(
+  //   userPermission: Permissions | undefined,
+  //   demandedPermission: Permissions
+  // ) {
+  //   if (!userPermission)
+  //     throw new Error('Unauthorized access. User permission is not valid')
+  //   if (userPermission < demandedPermission)
+  //     throw new Error('Unauthorized access')
+  // }
 }

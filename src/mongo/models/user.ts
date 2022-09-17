@@ -19,5 +19,5 @@ const userSchema = new Schema<User>(
   { _id: false }
 )
 
-export const userModel =
+export const UserModel =
   (models.User as Model<User>) || model('User', userSchema)
