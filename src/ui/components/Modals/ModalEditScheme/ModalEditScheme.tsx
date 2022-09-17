@@ -25,7 +25,12 @@ import {
   Select,
   useDisclosure,
 } from '@chakra-ui/react'
-import { DeleteItemDialog, QuantityBadge, ProductButton } from 'ui/components'
+import {
+  DeleteItemDialog,
+  QuantityBadge,
+  ProductButton,
+  Loader,
+} from 'ui/components'
 import { memo, useState, useRef, useEffect, useCallback } from 'react'
 import { PopulatedSchema, PopulatedSchemaItem } from 'mongo'
 import { useDispatch, useSelector } from 'react-redux'
@@ -45,6 +50,7 @@ export const ModalEditScheme = memo(function ModalEditScheme({
 }: ModalEditSchemeProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const items = useSelector(itemsInfo).items
 
@@ -86,7 +92,7 @@ export const ModalEditScheme = memo(function ModalEditScheme({
 
   const addItem = async (id: string) => {
     try {
-      // TODO: Start loading spinner here
+      setIsLoading(true)
       const updatedSchema = await fetcher(API_URL + '/api/schemas/addItem', {
         body: {
           schemaId: copiedSchema.id,
@@ -100,8 +106,9 @@ export const ModalEditScheme = memo(function ModalEditScheme({
       dispatch(updateSchema(updatedSchema))
     } catch (error) {
       console.log(error)
+      setIsLoading(false)
     } finally {
-      // TODO: Stop loading spinner here
+      setIsLoading(false)
     }
   }
 
@@ -117,6 +124,7 @@ export const ModalEditScheme = memo(function ModalEditScheme({
       })
       dispatch(updateSchema(updatedSchema))
     } catch (error) {
+      console.log(error)
     } finally {
       props.onClose()
     }
@@ -203,79 +211,87 @@ export const ModalEditScheme = memo(function ModalEditScheme({
                 Dodaj przedmiot
               </ProductButton>
             </Flex>
-            <Table w="100%">
-              <Thead>
-                <Tr fontSize="sm" fontWeight="bold">
-                  <Th w="80%">NAZWA</Th>
-                  <Th w="1%" minW="120px" textAlign="right">
-                    ILOŚĆ SZTUK
-                  </Th>
-                  <Th w="18%" textAlign="right">
-                    DOSTĘPNOŚĆ
-                  </Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {/* <SchemeItem /> */}
-                {copiedSchema.items.map((item) => (
-                  <Tr fontSize="xs" h="40px" key={item.id}>
-                    <Td
-                      w="80%"
-                      onClick={() => {
-                        setItemToDelete(item.id)
-                        onOpen()
-                      }}
-                      cursor="pointer"
-                    >
-                      {item.item.name}
-                    </Td>
-                    <Td w="1%" textAlign="right">
-                      <NumberInput
-                        allowMouseWheel
-                        display="inline"
-                        h="30px"
-                        min={1}
-                        onChange={(e) => {
-                          setCopiedSchema((schemaCopy) => {
-                            const itemsCopy = [...schemaCopy.items]
-                            const changedItemIndex = itemsCopy.findIndex(
-                              (copyItem) => copyItem.id === item.id
-                            )
-                            if (changedItemIndex === -1) return schemaCopy
-
-                            itemsCopy[changedItemIndex] = {
-                              ...itemsCopy[changedItemIndex],
-                              neededQuantity: +e,
-                            }
-
-                            return { ...schemaCopy, items: itemsCopy }
-                          })
-                        }}
-                        value={
-                          (
-                            copiedSchema.items.find(
-                              (schemaItem) => schemaItem.id === item.id
-                            ) as PopulatedSchemaItem
-                          ).neededQuantity
-                        }
-                      >
-                        <NumberInputField h="30px" fontSize="xs" maxW="100px" />
-                        <NumberInputStepper h="30px">
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </Td>
-                    <Td w="18%" textAlign="right">
-                      <QuantityBadge
-                        schemeQuantity={item.neededQuantity}
-                        storageQuantity={item.item.quantity}
-                      />
-                    </Td>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <Table w="100%">
+                <Thead>
+                  <Tr fontSize="sm" fontWeight="bold">
+                    <Th w="80%">NAZWA</Th>
+                    <Th w="1%" minW="120px" textAlign="right">
+                      ILOŚĆ SZTUK
+                    </Th>
+                    <Th w="18%" textAlign="right">
+                      DOSTĘPNOŚĆ
+                    </Th>
                   </Tr>
-                ))}
-              </Tbody>
-            </Table>
+                </Thead>
+                <Tbody>
+                  {/* <SchemeItem /> */}
+                  {copiedSchema.items.map((item) => (
+                    <Tr fontSize="xs" h="40px" key={item.id}>
+                      <Td
+                        w="80%"
+                        onClick={() => {
+                          setItemToDelete(item.id)
+                          onOpen()
+                        }}
+                        cursor="pointer"
+                      >
+                        {item.item.name}
+                      </Td>
+                      <Td w="1%" textAlign="right">
+                        <NumberInput
+                          allowMouseWheel
+                          display="inline"
+                          h="30px"
+                          min={1}
+                          onChange={(e) => {
+                            setCopiedSchema((schemaCopy) => {
+                              const itemsCopy = [...schemaCopy.items]
+                              const changedItemIndex = itemsCopy.findIndex(
+                                (copyItem) => copyItem.id === item.id
+                              )
+                              if (changedItemIndex === -1) return schemaCopy
+
+                              itemsCopy[changedItemIndex] = {
+                                ...itemsCopy[changedItemIndex],
+                                neededQuantity: +e,
+                              }
+
+                              return { ...schemaCopy, items: itemsCopy }
+                            })
+                          }}
+                          value={
+                            (
+                              copiedSchema.items.find(
+                                (schemaItem) => schemaItem.id === item.id
+                              ) as PopulatedSchemaItem
+                            ).neededQuantity
+                          }
+                        >
+                          <NumberInputField
+                            h="30px"
+                            fontSize="xs"
+                            maxW="100px"
+                          />
+                          <NumberInputStepper h="30px">
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </Td>
+                      <Td w="18%" textAlign="right">
+                        <QuantityBadge
+                          schemeQuantity={item.neededQuantity}
+                          storageQuantity={item.item.quantity}
+                        />
+                      </Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            )}
           </Flex>
         </ModalBody>
         <ModalFooter>
