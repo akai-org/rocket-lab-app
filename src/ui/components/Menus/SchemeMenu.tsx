@@ -29,6 +29,12 @@ export const SchemeMenu = memo(function SchemeMenu(props: SchemeMenuProps) {
         <MenuItem onClick={props.onOpenInfo} closeOnSelect>
           Więcej
         </MenuItem>
+        <MenuItem
+          onClick={() => console.log('Generating pdf in progess...')}
+          closeOnSelect
+        >
+          Pobierz pdf
+        </MenuItem>
         <MenuItem>
           <DeletePopover
             label="Czy na pewno chcesz usunąć ten schemat?"
