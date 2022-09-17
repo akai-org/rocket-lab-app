@@ -157,7 +157,7 @@ export const Settings = memo(function Settings() {
             }}
             options={selectableUsers}
           />
-          {selectedUser.name && (
+          {selectedUser?.name && (
             <Flex flexDirection="column">
               <Text>{'Użytkownik: ' + selectedUser.name}</Text>
               <Text>{'Email: ' + selectedUser.email}</Text>
