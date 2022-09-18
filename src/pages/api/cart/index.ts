@@ -1,8 +1,7 @@
 import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 import { NextApiHandler } from 'next/types'
-import { CartListModel } from '../../../mongo/models/cart'
-import { createNewCartList, fetchCartLists } from '../../../services/cartService'
-import { withMiddleware } from '../../../utils/middlewares'
+import { fetchCartLists } from 'services'
+import { withMiddleware } from 'utils/middlewares'
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.method === 'GET') {

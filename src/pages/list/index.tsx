@@ -13,10 +13,10 @@ import { setExistingCartLists, setItems } from 'store'
 interface Props {
   items: PopulatedItem[]
   cartLists: PopulatedCartList[]
-  error?: {}
+  error?: object
 }
 
-export interface CartListsProps extends Pick<Props, 'cartLists'> {}
+export type CartListsProps = Pick<Props, 'cartLists'>
 
 const Home: NextPage<Props> = ({ cartLists, items }) => {
   const dispatch = useDispatch()
@@ -37,7 +37,6 @@ export const getServerSideProps = withPageAuthRequired({
   getServerSideProps: async ({
     req,
     res,
-    query,
   }): Promise<{ props: Props }> => {
     try {
       await connectDB()
