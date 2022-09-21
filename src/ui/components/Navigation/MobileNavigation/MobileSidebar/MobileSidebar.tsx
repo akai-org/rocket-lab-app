@@ -15,7 +15,6 @@ import { FiSettings, FiLogOut } from 'react-icons/fi'
 import { AiOutlineTool } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { RiDraftLine, RiHistoryLine } from 'react-icons/ri'
-import { IS_DEV } from 'utils/constants'
 import { useColors } from 'ui/theme'
 
 export const MobileSidebar = memo(function MobileSidebar() {
@@ -68,38 +67,33 @@ export const MobileSidebar = memo(function MobileSidebar() {
                 <BsCardChecklist size={30} />
                 <Text ml="10px">Listy</Text>
               </Flex>
-              {IS_DEV && (
-                <>
-                  <Flex
-                    lineHeight="30px"
-                    onClick={() => {
-                      if (router.asPath !== '/history') router.push('/history')
-                    }}
-                  >
-                    <RiHistoryLine size={30} />
-                    <Text ml="10px">Historia</Text>
-                  </Flex>
-                  <Flex
-                    lineHeight="30px"
-                    onClick={() => {
-                      if (router.asPath !== '/schemes') router.push('/schemes')
-                    }}
-                  >
-                    <RiDraftLine size={30} />
-                    <Text ml="10px">Schematy</Text>
-                  </Flex>
-                  <Flex
-                    lineHeight="30px"
-                    onClick={() => {
-                      if (router.asPath !== '/settings')
-                        router.push('/settings')
-                    }}
-                  >
-                    <FiSettings size={30} />
-                    <Text ml="10px">Ustawienia</Text>
-                  </Flex>
-                </>
-              )}
+              <Flex
+                lineHeight="30px"
+                onClick={() => {
+                  if (router.asPath !== '/history') router.push('/history')
+                }}
+              >
+                <RiHistoryLine size={30} />
+                <Text ml="10px">Historia</Text>
+              </Flex>
+              <Flex
+                lineHeight="30px"
+                onClick={() => {
+                  if (router.asPath !== '/schemes') router.push('/schemes')
+                }}
+              >
+                <RiDraftLine size={30} />
+                <Text ml="10px">Schematy</Text>
+              </Flex>
+              <Flex
+                lineHeight="30px"
+                onClick={() => {
+                  if (router.asPath !== '/settings') router.push('/settings')
+                }}
+              >
+                <FiSettings size={30} />
+                <Text ml="10px">Ustawienia</Text>
+              </Flex>
               <Flex
                 lineHeight="30px"
                 onClick={() => {
